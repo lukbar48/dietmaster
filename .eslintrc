@@ -1,0 +1,27 @@
+{
+  "extends": ["react-app", "react-app/jest"], //, "plugin:prettier/recommended"
+  "plugins": ["prettier"],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "rules": {
+    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "no-unused-vars": "warn",
+    "react/prop-types": "off",
+    "no-mixed-operators": "off"
+    // "prefer-const": "warn",
+    // "react/self-closing-comp": "off",
+    // "jsx-a11y/label-has-associated-control": "off",
+    // "arrow-body-style": 0,
+    // "no-alert": "off",
+    // "no-else-return": "off",
+    // "global-require": "off",
+    // "import/no-dynamic-require": "off",
+    // "react/jsx-props-no-spreading": "off",
+    // "no-shadow": "off",
+    // "no-param-reassign": "off"
+  },
+  "parser": "babel-eslint"
+}
