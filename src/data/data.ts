@@ -28,5 +28,5 @@ const patients = [
     sex: 'Female',
   },
 ];
-
+export type PatientsState = typeof patients
 export default patients;

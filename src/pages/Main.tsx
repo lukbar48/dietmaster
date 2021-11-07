@@ -4,6 +4,8 @@ import TopBar from 'components/organisms/TopBar';
 import React from 'react';
 import styled from 'styled-components';
 import data from '../data/data'
+import { useGlobalContext } from 'contexts/context';
+
 
 const Wrapper = styled.ul`
   display: flex;
@@ -17,6 +19,9 @@ const Wrapper = styled.ul`
 `;
 
 const Main = () => {
+  const patientsList = useGlobalContext()
+  console.log(patientsList)
+  
   return (
     <>
       <TopBar />

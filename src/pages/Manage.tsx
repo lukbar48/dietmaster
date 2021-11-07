@@ -29,9 +29,9 @@ const Manage = () => {
       <Wrapper>
         <ManageTop>
           <Button backgroundColor="#505050" padding="6px 18px" fontSize="12px">
-            Close and reject
+            Reject and close
           </Button>
-          <Button backgroundColor="#00a3d9" padding="6px 18px" fontSize="12px">
+          <Button backgroundColor="#00A3D9" padding="6px 18px" fontSize="12px">
             Save changes
           </Button>
         </ManageTop>
