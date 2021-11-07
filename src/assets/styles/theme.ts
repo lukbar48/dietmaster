@@ -10,9 +10,10 @@ export const theme = {
     blue1: '#50D4FF',
     blue2: '#16C6FF',
     blue3: '#00BEFC',
+    blue4: '#00A3D9',
     red: '#FF4343'
   },
-  fontSize: {
+  fontSizes: {
     xxl: '34px',
     xl: '24px',
     l: '17px',

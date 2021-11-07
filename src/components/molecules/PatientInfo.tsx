@@ -1,5 +1,5 @@
-import { Button } from 'components/atoms/Button/Button';
 import React from 'react';
+import Button from 'components/atoms/Button/Button';
 import styled from 'styled-components';
 
 const Wrapper = styled.li`
@@ -25,7 +25,6 @@ const Wrapper = styled.li`
     align-content: center;
     justify-content: space-evenly;
     height: 100%;
-    /* width: 100%; */
   }
 `;
 
@@ -45,7 +44,7 @@ const PatientInfo = ({ name, surname, age, id }: IPatientInfo) => {
       <div>{age}</div>
       <div className="buttons">
         <Button>Manage</Button>
-        <Button color='#FF4343'>Delete</Button>
+        <Button backgroundColor="#FF4343" onClick={()=>console.log('ello')}>Delete</Button>
       </div>
     </Wrapper>
   );

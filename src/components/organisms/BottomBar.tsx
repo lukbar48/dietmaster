@@ -1,5 +1,5 @@
-import { Button } from 'components/atoms/Button/Button';
 import React from 'react';
+import Button from 'components/atoms/Button/Button';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`

@@ -1,5 +1,5 @@
 import BottomBar from 'components/organisms/BottomBar';
-import PatientInfo from 'components/organisms/PatientInfo';
+import PatientInfo from 'components/molecules/PatientInfo';
 import TopBar from 'components/organisms/TopBar';
 import React from 'react';
 import styled from 'styled-components';
