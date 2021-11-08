@@ -1,6 +1,6 @@
-import BottomBar from 'components/organisms/BottomBar';
-import PatientInfo from 'components/molecules/PatientInfo';
-import TopBar from 'components/organisms/TopBar';
+import BottomBar from 'components/organisms/MainBottomBar';
+import PatientInfo from 'components/molecules/MainPatientInfo';
+import TopBar from 'components/organisms/MainTopBar';
 import React from 'react';
 import styled from 'styled-components';
 import data from '../data/data'
@@ -27,9 +27,9 @@ const Main = () => {
       <TopBar />
       <BottomBar />
       <Wrapper>
-        {data.map(patient=> {
+        {data.map((patient, index)=> {
           return (
-            <PatientInfo key={patient.id} {...patient}/>
+            <PatientInfo index={index} key={patient.id} {...patient}/>
           )
         })}
       </Wrapper>

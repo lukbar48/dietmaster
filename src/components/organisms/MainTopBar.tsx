@@ -24,11 +24,11 @@ const Wrapper = styled.div`
   }
 `;
 
-const TopBar = () => {
+const MainTopBar = () => {
   const navigate = useNavigate()
 
   const handleClick = () => {
-    navigate('/patient')
+    navigate('/patient/about')
   }
 
   return (
@@ -45,4 +45,4 @@ const TopBar = () => {
   );
 };
 
-export default TopBar;
+export default MainTopBar;

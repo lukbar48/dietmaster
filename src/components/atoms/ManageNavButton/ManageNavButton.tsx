@@ -5,9 +5,10 @@ import styled from 'styled-components';
 interface IManageNavButton {
   children: string;
   to: string;
+  exact?: boolean;
 }
 
-const StyledButton = styled(NavLink).attrs({activeClassName: 'active-link'})`
+const StyledButton = styled(NavLink)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,8 +24,8 @@ const StyledButton = styled(NavLink).attrs({activeClassName: 'active-link'})`
     box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
   }
 
-  &.active-link {
-    background-color: ${({ theme }) => theme.colors.blue1};
+  &.active {
+    background-color: ${({ theme }) => theme.colors.blue3};
   }
 `;
 

@@ -33,12 +33,13 @@ interface IPatientInfo {
   surname: string;
   age: number;
   id: number;
+  index: number;
 }
 
-const PatientInfo = ({ name, surname, age, id }: IPatientInfo) => {
+const PatientInfo = ({ name, surname, age, id, index }: IPatientInfo) => {
   return (
     <Wrapper>
-      <div>{id}</div>
+      <div>{index+1}</div>
       <div>{name}</div>
       <div>{surname}</div>
       <div>{age}</div>

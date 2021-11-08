@@ -30,7 +30,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const BottomBar = () => {
+const MainBottomBar = () => {
   return (
     <Wrapper>
       <div className="filterSex">
@@ -51,4 +51,4 @@ const BottomBar = () => {
   );
 };
 
-export default BottomBar;
+export default MainBottomBar;

@@ -5,7 +5,8 @@ import { GlobalStyle } from 'assets/styles/GlobalStyle';
 import { theme } from 'assets/styles/theme';
 import { Wrapper } from './Root.styles';
 import Main from './Main';
-import Manage from './Manage';
+import Manage from './About';
+import ManageDiet from './Diet';
 
 const Root = () => (
   <Router>
@@ -13,7 +14,11 @@ const Root = () => (
       <GlobalStyle />
       <Routes>
         <Wrapper>
-          <Route path="/patient" element={<Manage />} />
+          <Route path="/patient/appointments" element={<ManageDiet />} />
+          <Route path="/patient/blood-tests" element={<ManageDiet />} />
+          <Route path="/patient/allergens" element={<ManageDiet />} />
+          <Route path="/patient/diet" element={<ManageDiet />} />
+          <Route path="/patient/about" element={<Manage />} />
           <Route path="/" element={<Main />} />
         </Wrapper>
       </Routes>
