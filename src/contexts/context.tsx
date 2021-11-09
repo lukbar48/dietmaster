@@ -1,34 +1,48 @@
-import React, { useReducer, createContext, useEffect, useState, ReactNode } from 'react';
-import patients, { PatientsState } from '../data/data';
+import React, { useReducer, createContext, useEffect, useState, ReactNode, useContext } from 'react';
+import patients from '../data/data';
 
-// const initialState = {
-//   name: '',
-//   surname: '',
-//   age: 0,
-//   id: 0,
-//   sex: '',
-// };
+interface IPatientsState {
+  id: number;
+  name: string;
+  surname: string;
+  age: number;
+  sex: string;
+  email: string;
+  telephone: number;
+  bodymass: number;
+  weight: number;
+  // deletePatient?: (id: number) => void;
+}
 
-const AppContext = createContext<PatientsState>(patients);
+// type ContextType = {
+//   patientsList: IPatientsState[]
+//   deletePatient: (id: number) => void
+// }
 
-const AppProvider = ({ children }: {children: ReactNode}) => {
-  const [patientsList, setPatientsList] = useState<PatientsState>(patients);
-  // console.log(patientsList)
+export const PatientContext = createContext<{ patientsList?: IPatientsState[]; deletePatient?: (id: number) => void }>({ patientsList: patients });
 
-  // const [state, dispatch] = useReducer(reducer, initialState);
+const PatientProvider = ({ children }: { children: ReactNode }) => {
+  const [patientsList, setPatientsList] = useState(patients);
 
-  // const changeName = () => {
-  //   dispatch({ type: 'CLEAR_CART' });
-  // };
+  const deletePatient = (id: number) => {
+    const filteredPatients = patientsList.filter((patient) => patient.id !== id);
+    setPatientsList(filteredPatients);
+  };
 
-  return <AppContext.Provider value={patientsList}>{children}</AppContext.Provider>;
+  return <PatientContext.Provider value={{ deletePatient, patientsList }}>{children}</PatientContext.Provider>;
 };
 
-export { AppContext, AppProvider };
-export const useGlobalContext = () => {
-  return createContext(AppContext);
-};
+export default PatientProvider;
+export const useGlobalContext = () => useContext(PatientContext)
 
 // const actionTypes = {
 //   changeName = 'CHANGE_NAME',
+// };
+
+// console.log(patientsList)
+
+// const [state, dispatch] = useReducer(reducer, initialState);
+
+// const changeName = () => {
+//   dispatch({ type: 'CLEAR_CART' });
 // };

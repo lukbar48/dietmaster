@@ -13,11 +13,11 @@ const Wrapper = styled.div`
 
 const ManageNavBar = () => {
   return <Wrapper>
-    <ManageNavButton exact to='/patient/about'>About</ManageNavButton>
+    <ManageNavButton to='/patient/about'>About</ManageNavButton>
     <ManageNavButton to='/patient/diet'>Diet</ManageNavButton>
-    <ManageNavButton exact to='/patient/allergens'>Allergens</ManageNavButton>
-    <ManageNavButton exact to='/patient/blood-tests'>Blood tests</ManageNavButton>
-    <ManageNavButton exact to='/patient/appointments'>Appointments</ManageNavButton>
+    <ManageNavButton to='/patient/allergens'>Allergens</ManageNavButton>
+    <ManageNavButton to='/patient/blood-tests'>Blood tests</ManageNavButton>
+    <ManageNavButton to='/patient/appointments'>Appointments</ManageNavButton>
   </Wrapper>;
 };
 

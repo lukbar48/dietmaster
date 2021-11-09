@@ -2,7 +2,6 @@ import AboutInput from 'components/atoms/AboutInput/AboutInput';
 import SexButton from 'components/molecules/SexButton';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { PatientsState } from 'data/data';
 
 const Wrapper = styled.form`
   display: grid;
@@ -26,7 +25,7 @@ const InitialValues = {
   age: 0,
   sex: 'Male',
   email: '',
-  telephone: 0,
+  telephone: null,
   bodymass: 0,
   weight: 0,
 };

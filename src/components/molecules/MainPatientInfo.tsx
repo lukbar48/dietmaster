@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from 'components/atoms/Button/Button';
 import styled from 'styled-components';
+import { useGlobalContext } from 'contexts/context';
 
 const Wrapper = styled.li`
   display: grid;
@@ -37,15 +38,21 @@ interface IPatientInfo {
 }
 
 const PatientInfo = ({ name, surname, age, id, index }: IPatientInfo) => {
+  // const { deletePatient } = useGlobalContext()
+  // console.log(useGlobalContext())
+
+
   return (
     <Wrapper>
-      <div>{index+1}</div>
+      <div>{index + 1}</div>
       <div>{name}</div>
       <div>{surname}</div>
       <div>{age}</div>
       <div className="buttons">
         <Button>Manage</Button>
-        <Button backgroundColor="#FF4343" onClick={()=>console.log('ello')}>Delete</Button>
+        <Button backgroundColor="#FF4343" onClick={() => console.log('1')}>
+          Delete
+        </Button>
       </div>
     </Wrapper>
   );
