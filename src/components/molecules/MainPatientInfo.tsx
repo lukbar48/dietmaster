@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import Button from 'components/atoms/Button/Button';
 import styled from 'styled-components';
-import { useGlobalContext } from 'contexts/context';
+import { PatientContext } from 'contexts/context';
+import { useNavigate } from 'react-router-dom';
 
 const Wrapper = styled.li`
   display: grid;
@@ -38,9 +39,13 @@ interface IPatientInfo {
 }
 
 const PatientInfo = ({ name, surname, age, id, index }: IPatientInfo) => {
-  // const { deletePatient } = useGlobalContext()
-  // console.log(useGlobalContext())
+  const { deletePatient, managePatient } = useContext(PatientContext);
+  const navigate = useNavigate();
 
+  const handleManageClick = (id: number) => {
+    managePatient(id);
+    navigate(`/patient/about/${id}`);
+  };
 
   return (
     <Wrapper>
@@ -49,8 +54,8 @@ const PatientInfo = ({ name, surname, age, id, index }: IPatientInfo) => {
       <div>{surname}</div>
       <div>{age}</div>
       <div className="buttons">
-        <Button>Manage</Button>
-        <Button backgroundColor="#FF4343" onClick={() => console.log('1')}>
+        <Button onClick={() => handleManageClick(id)}>Manage</Button>
+        <Button backgroundColor="#FF4343" onClick={() => deletePatient(id)}>
           Delete
         </Button>
       </div>

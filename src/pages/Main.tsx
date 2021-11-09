@@ -1,10 +1,10 @@
 import BottomBar from 'components/organisms/MainBottomBar';
 import PatientInfo from 'components/molecules/MainPatientInfo';
 import TopBar from 'components/organisms/MainTopBar';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import data from '../data/data';
-import { useGlobalContext } from 'contexts/context';
+import { PatientContext } from 'contexts/context';
 
 const Wrapper = styled.ul`
   display: flex;
@@ -18,16 +18,14 @@ const Wrapper = styled.ul`
 `;
 
 const Main = () => {
-  // const patientsList = useContext(PatientContext);
-//   const { patientsList } = useGlobalContext()
-// console.log(patientsList)
+  const { patientsList } = useContext(PatientContext);
 
   return (
     <>
       <TopBar />
       <BottomBar />
       <Wrapper>
-        {data.map((patient, index) => {
+        {patientsList.map((patient, index) => {
           return <PatientInfo index={index} key={patient.id} {...patient} />;
         })}
       </Wrapper>

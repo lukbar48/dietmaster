@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from 'components/atoms/Button/Button';
 import styled from 'styled-components';
+import { PatientContext } from 'contexts/context';
+
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,18 +33,20 @@ const Wrapper = styled.div`
 `;
 
 const MainBottomBar = () => {
+  const { sortPatientsList } = useContext(PatientContext);
+
   return (
     <Wrapper>
       <div className="filterSex">
-        <p>Sex</p>
+        <p>Sort</p>
         <div className="buttons">
-          <Button padding="6px 20px" borderRadius="6px 0 0 6px">
+          <Button onClick={()=>sortPatientsList('off')} padding="6px 20px" borderRadius="6px 0 0 6px">
             off
           </Button>
-          <Button padding="6px 20px" borderRadius="0">
+          <Button onClick={()=>sortPatientsList('female')} padding="6px 20px" borderRadius="0">
             female
           </Button>
-          <Button padding="6px 20px" borderRadius="0 6px 6px 0">
+          <Button onClick={()=>sortPatientsList('male')} padding="6px 20px" borderRadius="0 6px 6px 0">
             male
           </Button>
         </div>

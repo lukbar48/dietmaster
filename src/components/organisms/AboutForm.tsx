@@ -1,7 +1,8 @@
 import AboutInput from 'components/atoms/AboutInput/AboutInput';
 import SexButton from 'components/molecules/SexButton';
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { PatientContext } from 'contexts/context';
 
 const Wrapper = styled.form`
   display: grid;
@@ -31,13 +32,14 @@ const InitialValues = {
 };
 
 const AboutForm = () => {
-  const [patient, setPatient] = useState<typeof InitialValues>(InitialValues);
-  console.log(patient);
+  // const [patient, setPatient] = useState<typeof InitialValues>(InitialValues);
+  const { patient, setPatient } = useContext(PatientContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
+    console.log(e)
     // e.preventDefault();
     setPatient({ ...patient, [e.target.name]: e.target.value });
-    console.log(patient);
+    // console.log(patient);
   };
 
   return (

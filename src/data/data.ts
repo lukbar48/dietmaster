@@ -44,5 +44,5 @@ const patients = [
     weight: 168,
   },
 ];
-export type PatientsState = typeof patients
+export type PatientState = typeof patients[0]
 export default patients;
