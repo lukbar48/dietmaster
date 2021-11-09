@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 export const Input = styled.input`
   padding: 8px;
   border: 1px solid ${({ theme }) => theme.colors.white};
@@ -10,3 +9,12 @@ export const Input = styled.input`
   color: ${({ theme }) => theme.colors.white};
 `;
 
+interface IInput {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder: string;
+}
+const InputMain = ({...props}: IInput) => {
+  return <Input {...props}></Input>;
+};
+
+export default InputMain;

@@ -1,8 +1,9 @@
-import React from 'react';
-import { useNavigate } from "react-router-dom";
-import { Input } from 'components/atoms/Input/Input';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import InputMain from 'components/atoms/InputMain/InputMain';
 import Button from 'components/atoms/Button/Button';
 import styled from 'styled-components';
+import { PatientContext } from 'contexts/context';
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,18 +26,26 @@ const Wrapper = styled.div`
 `;
 
 const MainTopBar = () => {
-  const navigate = useNavigate()
+  const { searchByInputValue } = useContext(PatientContext);
+  const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/patient/about')
-  }
+    navigate('/patient/about');
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    function capitalizeFirstLetter(term: string) {
+      return term.charAt(0).toUpperCase() + term.slice(1);
+    }
+    searchByInputValue(capitalizeFirstLetter(e.currentTarget.value))
+  };
 
   return (
     <Wrapper>
       <div>
         <h2>Patients record</h2>
       </div>
-      <Input placeholder="Search patient" />
+      <InputMain placeholder="Search patient" onChange={handleChange} />
       <Button onClick={handleClick}>New patient</Button>
       <Button backgroundColor="#505050" marginLeft="auto">
         Log Out

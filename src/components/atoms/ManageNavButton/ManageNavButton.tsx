@@ -12,6 +12,7 @@ const StyledButton = styled(NavLink)`
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 8px;
   height: 30px;
   cursor: pointer;
   background-color: ${({ color, theme: { colors } }) => (color ? color : colors.grey4)};
