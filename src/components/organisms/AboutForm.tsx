@@ -3,6 +3,7 @@ import SexButton from 'components/molecules/SexButton';
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { PatientContext } from 'contexts/context';
+import { useParams } from 'react-router';
 
 const Wrapper = styled.form`
   display: grid;
@@ -19,27 +20,14 @@ const Wrapper = styled.form`
   }
 `;
 
-const InitialValues = {
-  id: 0,
-  name: '',
-  surname: '',
-  age: 0,
-  sex: 'Male',
-  email: '',
-  telephone: null,
-  bodymass: 0,
-  weight: 0,
-};
-
 const AboutForm = () => {
-  // const [patient, setPatient] = useState<typeof InitialValues>(InitialValues);
+  const {id} = useParams();
   const { patient, setPatient } = useContext(PatientContext);
+  console.log(id)
 
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
-    console.log(e)
-    // e.preventDefault();
     setPatient({ ...patient, [e.target.name]: e.target.value });
-    // console.log(patient);
+    console.log(patient)
   };
 
   return (

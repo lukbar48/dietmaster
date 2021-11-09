@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface IManageNavButton {
-  children: string;
+  children: ReactNode;
   to: string;
   exact?: boolean;
 }
