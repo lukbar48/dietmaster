@@ -33,12 +33,12 @@ const Wrapper = styled.li`
 interface IPatientInfo {
   name: string;
   surname: string;
-  age: number;
+  age: string;
   id: number;
   index: number;
 }
 
-const PatientInfo = ({ name, surname, age, id, index }: IPatientInfo) => {
+const MainPatientInfo = ({ name, surname, age, id, index }: IPatientInfo) => {
   const { deletePatient, managePatient } = useContext(PatientContext);
   const navigate = useNavigate();
 
@@ -63,4 +63,4 @@ const PatientInfo = ({ name, surname, age, id, index }: IPatientInfo) => {
   );
 };
 
-export default PatientInfo;
+export default MainPatientInfo;

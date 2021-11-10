@@ -6,12 +6,12 @@ const InitialPatientValues = {
   id: 0,
   name: '',
   surname: '',
-  age: 0,
+  age: '',
   sex: 'Male',
   email: '',
-  telephone: 0,
-  bodymass: 0,
-  weight: 0,
+  telephone: '',
+  bodymass: '',
+  height: '',
 };
 
 export type ContextType = {
@@ -19,6 +19,7 @@ export type ContextType = {
   deletePatient: (id: number) => void;
   managePatient: (id: number) => void;
   setPatient: (obj: PatientState) => void;
+  setPatientsList: (arr: PatientState[]) => void;
   sortPatientsList: (sex: string) => void;
   patient: PatientState;
   searchByInputValue: (term: string) => void;
@@ -29,6 +30,7 @@ export const PatientContext = createContext<ContextType>({
   deletePatient() {},
   managePatient() {},
   setPatient() {},
+  setPatientsList() {},
   sortPatientsList() {},
   searchByInputValue() {},
   patient: InitialPatientValues,
@@ -37,7 +39,6 @@ export const PatientContext = createContext<ContextType>({
 const PatientProvider = ({ children }: { children: ReactNode }) => {
   const [patientsList, setPatientsList] = useState(patients);
   const [patient, setPatient] = useState<typeof InitialPatientValues>(InitialPatientValues);
-  const [searchTerm, setSearchTerm] = useState('');
 
   const deletePatient = (id: number) => {
     const filteredPatients = patientsList.filter((patient) => patient.id !== id);
@@ -56,7 +57,7 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
     } else if (sex === 'male') {
       sortedPatientsList = patientsList.sort((a, b) => (a.sex > b.sex ? -1 : b.sex > a.sex ? 1 : 0));
     } else if (sex === 'off') {
-      sortedPatientsList = patientsList.sort((a, b) => (a.id > b.id ? 1 : b.id > a.id ? -1 : 0));
+      sortedPatientsList = patientsList.sort((a, b) => (a.id > b.id ? -1 : b.id > a.id ? 1 : 0));
     }
     setPatientsList([...sortedPatientsList]);
   };
@@ -69,7 +70,7 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <PatientContext.Provider value={{ managePatient, deletePatient, patientsList, patient, setPatient, sortPatientsList, searchByInputValue }}>
+    <PatientContext.Provider value={{ managePatient, deletePatient, setPatientsList, patientsList, patient, setPatient, sortPatientsList, searchByInputValue }}>
       {children}
     </PatientContext.Provider>
   );

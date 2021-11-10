@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -22,18 +22,32 @@ const Wrapper = styled.div`
   }
 `;
 
-interface IAboutInput {
+interface IInput {
   label: string;
   type: string;
   name: string;
 }
 
-const AboutInput = ({label, type, name}:IAboutInput) => {
+interface IRef {
+  nameValue?: any;
+  surnameValue?: any;
+  ageValue?: any;
+  telephoneValue?: any;
+  emailValue?: any;
+  bodymassValue?: any;
+  heightValue?: any;
+}
+
+type IInputRef = IInput & IRef;
+
+const AboutInput = ({ label, type, name, nameValue, surnameValue, ageValue, telephoneValue, emailValue, bodymassValue, heightValue }: IInputRef) => {
+  
+
   return (
-    <Wrapper>
+    <InputWrapper>
       <label htmlFor={name}>{label}</label>
-      <input id={name} name={name} type={type} />
-    </Wrapper>
+      <input ref={nameValue} id={name} name={name} type={type} />
+    </InputWrapper>
   );
 };
 

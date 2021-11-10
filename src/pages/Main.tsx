@@ -1,5 +1,5 @@
 import BottomBar from 'components/organisms/MainBottomBar';
-import PatientInfo from 'components/molecules/MainPatientInfo';
+import MainPatientInfo from 'components/molecules/MainPatientInfo';
 import TopBar from 'components/organisms/MainTopBar';
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -26,7 +26,7 @@ const Main = () => {
       <BottomBar />
       <Wrapper>
         {patientsList.map((patient, index) => {
-          return <PatientInfo index={index} key={patient.id} {...patient} />;
+          return <MainPatientInfo index={index} key={patient.id} {...patient} />;
         })}
       </Wrapper>
     </>

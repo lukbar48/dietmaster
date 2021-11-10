@@ -14,11 +14,10 @@ const Root = () => (
       <GlobalStyle />
       <Routes>
         <Wrapper>
-          <Route path="/patient/appointments" element={<ManageDiet />} />
-          <Route path="/patient/blood-tests" element={<ManageDiet />} />
-          <Route path="/patient/allergens" element={<ManageDiet />} />
-          <Route path="/patient/diet" element={<ManageDiet />} />
-          <Route path="/patient/about" element={<About />} />
+          <Route path="/patient/appointments/:id" element={<ManageDiet />} />
+          <Route path="/patient/blood-tests/:id" element={<ManageDiet />} />
+          <Route path="/patient/allergens/:id" element={<ManageDiet />} />
+          <Route path="/patient/diet/:id" element={<ManageDiet />} />
           <Route path="/patient/about/:id" element={<About />} />
           <Route path="/" element={<Main />} />
         </Wrapper>

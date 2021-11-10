@@ -26,18 +26,29 @@ const Wrapper = styled.div`
 `;
 
 const MainTopBar = () => {
-  const { searchByInputValue } = useContext(PatientContext);
+  const { searchByInputValue, setPatient, patient } = useContext(PatientContext);
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/patient/about');
+    setPatient({
+      id: new Date().getTime(),
+      name: '',
+      surname: '',
+      age: '',
+      sex: 'Male',
+      email: '',
+      telephone: '',
+      bodymass: '',
+      height: '',
+    });
+    navigate(`/patient/about/${patient.id}`);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     function capitalizeFirstLetter(term: string) {
       return term.charAt(0).toUpperCase() + term.slice(1);
     }
-    searchByInputValue(capitalizeFirstLetter(e.currentTarget.value))
+    searchByInputValue(capitalizeFirstLetter(e.currentTarget.value));
   };
 
   return (
