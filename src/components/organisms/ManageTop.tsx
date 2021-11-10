@@ -4,6 +4,8 @@ import Button from 'components/atoms/Button/Button';
 import styled from 'styled-components';
 import { PatientContext } from 'contexts/context';
 import { useParams } from 'react-router';
+import { InitialPatientValues } from '../../data/data'
+
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,17 +27,7 @@ const ManageTop = () => {
       const filteredPatients = patientsList.filter((patient) => patient.id !== Number(id));
       console.log(patientsList);
       setPatientsList([...filteredPatients, patient]);
-      setPatient({
-        id: 0,
-        name: '',
-        surname: '',
-        age: '',
-        sex: 'Male',
-        email: '',
-        telephone: '',
-        bodymass: '',
-        height: '',
-      });
+      setPatient(InitialPatientValues);
     }
   };
 

@@ -1,18 +1,8 @@
 import React, { useReducer, createContext, useEffect, useState, ReactNode, useContext } from 'react';
 import patients from '../data/data';
 import { PatientState } from '../data/data';
+import { InitialPatientValues } from '../data/data';
 
-const InitialPatientValues = {
-  id: 0,
-  name: '',
-  surname: '',
-  age: '',
-  sex: 'Male',
-  email: '',
-  telephone: '',
-  bodymass: '',
-  height: '',
-};
 
 export type ContextType = {
   patientsList: PatientState[];

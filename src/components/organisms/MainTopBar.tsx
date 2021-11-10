@@ -40,6 +40,8 @@ const MainTopBar = () => {
       telephone: '',
       bodymass: '',
       height: '',
+      notes: '',
+      activity: '1.2'
     });
     navigate(`/patient/about/${patient.id}`);
   };
