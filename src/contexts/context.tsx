@@ -2,7 +2,7 @@ import React, { useReducer, createContext, useEffect, useState, ReactNode, useCo
 import patients from '../data/data';
 import { PatientState } from '../data/data';
 import { InitialPatientValues } from '../data/data';
-
+import reducer from './reducer'
 
 export type ContextType = {
   patientsList: PatientState[];
@@ -13,6 +13,10 @@ export type ContextType = {
   sortPatientsList: (sex: string) => void;
   patient: PatientState;
   searchByInputValue: (term: string) => void;
+  calculateBMI: () => string;
+  BMIdescription: () => string;
+  calculateRisk: () => string;
+  calculateIdealWeight: () => string;
 };
 
 export const PatientContext = createContext<ContextType>({
@@ -23,12 +27,29 @@ export const PatientContext = createContext<ContextType>({
   setPatientsList() {},
   sortPatientsList() {},
   searchByInputValue() {},
+  calculateBMI() {
+    return '';
+  },
+  BMIdescription() {
+    return '';
+  },
+  calculateRisk() {
+    return '';
+  },
+  calculateIdealWeight() {
+    return '';
+  },
   patient: InitialPatientValues,
 });
 
 const PatientProvider = ({ children }: { children: ReactNode }) => {
   const [patientsList, setPatientsList] = useState(patients);
   const [patient, setPatient] = useState<typeof InitialPatientValues>(InitialPatientValues);
+
+
+  // const [state, dispatch] = useReducer(reducer, patients);
+
+
 
   const deletePatient = (id: number) => {
     const filteredPatients = patientsList.filter((patient) => patient.id !== id);
@@ -54,13 +75,79 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
 
   const searchByInputValue = (term: string) => {
     const search = patientsList.filter((patient) => {
-      return (patient.name.includes(term) || patient.surname.includes(term));
+      return patient.name.includes(term) || patient.surname.includes(term);
     });
-    setPatientsList(search)
+    setPatientsList(search);
   };
 
+  const calculateBMI = () => {
+    const height = Number(patient.height) / 100;
+    const BMI = (Number(patient.bodymass) / Math.pow(height, 2)).toFixed(2).toString();
+    return BMI;
+  };
+
+  const BMIdescription = () => {
+    const height = Number(patient.height) / 100;
+    let BMI = Number((Number(patient.bodymass) / Math.pow(height, 2)).toFixed(2));
+    if (BMI < 25 && BMI > 18.5) {
+      return 'Normal';
+    } else if (BMI >= 25) {
+      return 'Obesity';
+    } else if (BMI <= 18.5) {
+      return 'Underweight';
+    } else {
+      return 'OK';
+    }
+  };
+
+  const calculateRisk = () => {
+    const height = Number(patient.height) / 100;
+    let BMI = Number((Number(patient.bodymass) / Math.pow(height, 2)).toFixed(2));
+    if (BMI < 25 && BMI > 18.5) {
+      return 'Lowest';
+    } else if (BMI >= 25 && BMI <= 35) {
+      return 'High';
+    } else if (BMI >= 35) {
+      return 'Very high';
+    } else if (BMI <= 18.5) {
+      return 'High';
+    } else {
+      return 'OK';
+    }
+  }
+
+  const calculateIdealWeight = () => {
+    const height = Number(patient.height)
+    let idealWeightMin = ''
+    let idealWeightMax = ''
+    if (patient.sex === 'Male') {
+      idealWeightMin = (height - 100 - ((height - 138)/4)).toString()
+      idealWeightMax = (height - 100 - ((height - 162)/4)).toString()
+    } else {
+      idealWeightMin = (height - 100 - ((height - 138)/2)).toString()
+      idealWeightMax = (height - 100 - ((height - 162)/2)).toString()
+    }
+
+    return `${idealWeightMin} - ${idealWeightMax} kg`
+  }
+
   return (
-    <PatientContext.Provider value={{ managePatient, deletePatient, setPatientsList, patientsList, patient, setPatient, sortPatientsList, searchByInputValue }}>
+    <PatientContext.Provider
+      value={{
+        managePatient,
+        deletePatient,
+        setPatientsList,
+        patientsList,
+        patient,
+        setPatient,
+        sortPatientsList,
+        searchByInputValue,
+        calculateBMI,
+        BMIdescription,
+        calculateRisk,
+        calculateIdealWeight
+      }}
+    >
       {children}
     </PatientContext.Provider>
   );
@@ -72,9 +159,6 @@ export default PatientProvider;
 //   changeName = 'CHANGE_NAME',
 // };
 
-// console.log(patientsList)
-
-// const [state, dispatch] = useReducer(reducer, initialState);
 
 // const changeName = () => {
 //   dispatch({ type: 'CLEAR_CART' });

@@ -63,7 +63,7 @@ const Input = styled.div`
 
 const TextArea = styled.div`
   width: 100%;
-  grid-area: 3/1/4/4;
+  grid-area: 3/1/4/5;
 
   label {
     font-size: 0.8rem;

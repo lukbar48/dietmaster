@@ -1,6 +1,8 @@
 import AboutBottomBarBox from 'components/atoms/AboutBottomBarBox/AboutBottomBarBox';
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { PatientContext } from 'contexts/context';
+
 
 const Wrapper = styled.div`
   display: grid;
@@ -24,6 +26,7 @@ const CalculationsWrapper = styled.div`
   grid-template-columns: 1fr 2fr 2fr 2fr;
   gap: 10px;
 `;
+
 const Calc = styled.div`
   display: flex;
   flex-direction: column;
@@ -36,25 +39,27 @@ const Calc = styled.div`
 `;
 
 const AboutBottomBar = () => {
+  const { BMIdescription, calculateBMI,calculateRisk, patient, calculateIdealWeight } = useContext(PatientContext);
+
   return (
     <Wrapper>
       <div className="text">Body weight assessment</div>
       <CalculationsWrapper>
         <Calc>
           <p>BMI</p>
-          <AboutBottomBarBox>34.34</AboutBottomBarBox>
+          <AboutBottomBarBox>{ patient.bodymass && patient.height ? calculateBMI() : ''}</AboutBottomBarBox>
         </Calc>
         <Calc>
-          <p></p>
-          <AboutBottomBarBox>1st degree of obesity</AboutBottomBarBox>
+          <p>Description</p>
+          <AboutBottomBarBox>{ patient.bodymass && patient.height ? BMIdescription() : ''}</AboutBottomBarBox>
         </Calc>
         <Calc>
           <p>Risk of cardiovascular disease</p>
-          <AboutBottomBarBox>Low</AboutBottomBarBox>
+          <AboutBottomBarBox>{ patient.bodymass && patient.height ? calculateRisk() : ''}</AboutBottomBarBox>
         </Calc>
         <Calc>
           <p>Ideal body weight</p>
-          <AboutBottomBarBox>60 - 70</AboutBottomBarBox>
+          <AboutBottomBarBox>{ patient.bodymass && patient.height ? calculateIdealWeight() : ''}</AboutBottomBarBox>
         </Calc>
       </CalculationsWrapper>
     </Wrapper>

@@ -39,7 +39,6 @@ const patients = [
     height: '194',
     notes: 'Too fat',
     activity: '1.9'
-
   },
   {
     id: 1636551908165,

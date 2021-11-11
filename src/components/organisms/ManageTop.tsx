@@ -4,8 +4,7 @@ import Button from 'components/atoms/Button/Button';
 import styled from 'styled-components';
 import { PatientContext } from 'contexts/context';
 import { useParams } from 'react-router';
-import { InitialPatientValues } from '../../data/data'
-
+import { InitialPatientValues } from '../../data/data';
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,9 +24,30 @@ const ManageTop = () => {
   const handleClick = () => {
     if (id) {
       const filteredPatients = patientsList.filter((patient) => patient.id !== Number(id));
-      console.log(patientsList);
-      setPatientsList([...filteredPatients, patient]);
+
+      // setPatientsList(
+      //   patientsList.map((patientList) => {
+      //     if (patientList.id === Number(id)) {
+      //       return {
+      //         ...patientList,
+      //         name: patient.name,
+      //         surname: patient.surname,
+      //         age: patient.age,
+      //         sex: patient.sex,
+      //         email: patient.email,
+      //         telephone: patient.telephone,
+      //         bodymass: patient.bodymass,
+      //         height: patient.height,
+      //         notes: patient.notes,
+      //         activity: patient.activity,
+      //       };
+      //     }
+      //     return patientList;
+      //   }),
+      // );
+      setPatientsList([patient, ...filteredPatients])
       setPatient(InitialPatientValues);
+      navigate('/');
     }
   };
 
