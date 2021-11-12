@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/dietmaster/static/js/main.019bcd41.chunk.js",
-    "main.js.map": "/dietmaster/static/js/main.019bcd41.chunk.js.map",
+    "main.js": "/dietmaster/static/js/main.fb5af292.chunk.js",
+    "main.js.map": "/dietmaster/static/js/main.fb5af292.chunk.js.map",
     "runtime-main.js": "/dietmaster/static/js/runtime-main.72c42240.js",
     "runtime-main.js.map": "/dietmaster/static/js/runtime-main.72c42240.js.map",
     "static/js/2.2fd09753.chunk.js": "/dietmaster/static/js/2.2fd09753.chunk.js",
@@ -12,6 +12,6 @@
   "entrypoints": [
     "static/js/runtime-main.72c42240.js",
     "static/js/2.2fd09753.chunk.js",
-    "static/js/main.019bcd41.chunk.js"
+    "static/js/main.fb5af292.chunk.js"
   ]
 }
