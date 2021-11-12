@@ -9,7 +9,7 @@ import About from './About';
 import ManageDiet from './Diet';
 
 const Root = () => (
-  <Router>
+  <Router basename={process.env.PUBLIC_URL}>
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Routes>
@@ -20,6 +20,7 @@ const Root = () => (
           <Route path="/patient/diet/:id" element={<ManageDiet />} />
           <Route path="/patient/about/:id" element={<About />} />
           <Route path="/" element={<Main />} />
+          <Route path="*" element={<Main />} />
         </Wrapper>
       </Routes>
     </ThemeProvider>
