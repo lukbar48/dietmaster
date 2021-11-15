@@ -19,11 +19,13 @@ const Wrapper = styled.div`
 const ManageTop = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { patientsList, setPatientsList, patient, setPatient } = useContext(PatientContext);
+  const { patient, setPatient, deletePatient, addPatient } = useContext(PatientContext);
 
   const handleClick = () => {
     if (id) {
-      const filteredPatients = patientsList.filter((patient) => patient.id !== Number(id));
+      deletePatient(Number(id))
+      addPatient(patient)
+      // const filteredPatients = patientsList.filter((patient) => patient.id !== Number(id));
 
       // setPatientsList(
       //   patientsList.map((patientList) => {
@@ -45,7 +47,7 @@ const ManageTop = () => {
       //     return patientList;
       //   }),
       // );
-      setPatientsList([patient, ...filteredPatients])
+      // setPatientsList([patient, ...filteredPatients])
       setPatient(InitialPatientValues);
       navigate('/');
     }

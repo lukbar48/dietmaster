@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import data from '../data/data';
 import { PatientContext } from 'contexts/context';
 
+
 const Wrapper = styled.ul`
   display: flex;
   flex-direction: column;

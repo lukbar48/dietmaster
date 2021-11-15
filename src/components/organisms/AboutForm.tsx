@@ -11,8 +11,9 @@ const Wrapper = styled.form`
   gap: 10px;
   padding: 15px;
   width: 100%;
-  height: calc(100vh - 165px);
+  min-height: calc(100vh - 165px);
   background-color: ${({ theme }) => theme.colors.grey1};
+  overflow-y:scroll; 
 
   div:nth-child(1) {
     grid-area: 1/1/2/3;
