@@ -1,4 +1,5 @@
 import React, { useReducer, createContext, useEffect, useState, ReactNode, useContext } from 'react';
+import axios from 'axios';
 import patients from '../data/data';
 import { PatientState } from '../data/data';
 import { InitialPatientValues } from '../data/data';
@@ -43,9 +44,15 @@ export const PatientContext = createContext<ContextType>({
 });
 
 const PatientProvider = ({ children }: { children: ReactNode }) => {
-  // const [patientsLis, setPatientsList] = useState(patients);
   const [patient, setPatient] = useState<typeof InitialPatientValues>(InitialPatientValues);
-  const [patientsList, dispatch] = useReducer(PatientsReducer, patients);
+  const [patientsList, dispatch] = useReducer(PatientsReducer, [InitialPatientValues]);
+
+  useEffect(() => {
+    axios
+      .get('/dietmaster')
+      .then(({ data }) => dispatch({ type: 'ADD_PATIENTS_LIST', payload: data }))
+      .catch((err) => console.log(err));
+  }, []);
 
   const deletePatient = (id: number) => {
     dispatch({ type: 'DELETE_PATIENT', payload: id });
@@ -55,17 +62,17 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
     dispatch({ type: 'ADD_PATIENT', payload: obj });
   };
 
-  const managePatient = (id: number) => {
-    const findPatient = patientsList.filter((patient) => patient.id === id);
-    setPatient(findPatient[0]);
-  };
-
   const sortPatientsList = (sex: string) => {
     dispatch({ type: 'SORT_PATIENTS_LIST', payload: sex });
   };
 
   const searchByInputValue = (term: string) => {
-    dispatch({ type: 'SEARCH_IN_LIST', payload: term })
+    dispatch({ type: 'SEARCH_IN_LIST', payload: term });
+  };
+
+  const managePatient = (id: number) => {
+    const findPatient = patientsList.filter((patient) => patient.id === id);
+    setPatient(findPatient[0]);
   };
 
   const calculateBMI = () => {
@@ -133,7 +140,7 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
         BMIdescription,
         calculateRisk,
         calculateIdealWeight,
-        addPatient
+        addPatient,
       }}
     >
       {children}
@@ -145,8 +152,4 @@ export default PatientProvider;
 
 // const actionTypes = {
 //   changeName = 'CHANGE_NAME',
-// };
-
-// const changeName = () => {
-//   dispatch({ type: 'CLEAR_CART' });
 // };

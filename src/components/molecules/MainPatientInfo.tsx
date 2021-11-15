@@ -19,7 +19,7 @@ const Wrapper = styled.li`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 1px;
+    /* margin: 0 1px; */
   }
   .buttons {
     grid-column: 6/7;

@@ -5,7 +5,8 @@ type ACTIONTYPES =
   | { type: 'DELETE_PATIENT'; payload: number }
   | { type: 'SORT_PATIENTS_LIST'; payload: string }
   | { type: 'ADD_PATIENT'; payload: PatientState }
-  | { type: 'SEARCH_IN_LIST'; payload: string };
+  | { type: 'SEARCH_IN_LIST'; payload: string }
+  | { type: 'ADD_PATIENTS_LIST'; payload: PatientState[] };
 
 function PatientsReducer(state: typeof patients, action: ACTIONTYPES) {
   switch (action.type) {
@@ -33,8 +34,10 @@ function PatientsReducer(state: typeof patients, action: ACTIONTYPES) {
       const searchInList = state.filter((patient) => {
         return patient.name.includes(action.payload) || patient.surname.includes(action.payload);
       });
-
       return searchInList;
+    }
+    case 'ADD_PATIENTS_LIST': {
+      return action.payload;
     }
 
     default:
