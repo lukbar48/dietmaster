@@ -50,13 +50,16 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     axios
       .get('/dietmaster')
-      .then(({ data }) => dispatch({ type: 'ADD_PATIENTS_LIST', payload: data }))
+      .then(({ data }) => {
+        dispatch({ type: 'ADD_PATIENTS_LIST', payload: data })
+      })
       .catch((err) => console.log(err));
   }, []);
 
   const deletePatient = (id: number) => {
     dispatch({ type: 'DELETE_PATIENT', payload: id });
   };
+
 
   const addPatient = (obj: PatientState) => {
     dispatch({ type: 'ADD_PATIENT', payload: obj });
@@ -67,7 +70,8 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const searchByInputValue = (term: string) => {
-    dispatch({ type: 'SEARCH_IN_LIST', payload: term });
+    // dispatch({ type: 'SEARCH_IN_LIST', payload: term });
+    
   };
 
   const managePatient = (id: number) => {

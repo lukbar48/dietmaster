@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { PatientContext } from 'contexts/context';
 import { useParams } from 'react-router';
 import { InitialPatientValues } from '../../data/data';
+import axios from 'axios';
 
 const Wrapper = styled.div`
   display: flex;
@@ -19,35 +20,16 @@ const Wrapper = styled.div`
 const ManageTop = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { patient, setPatient, deletePatient, addPatient } = useContext(PatientContext);
+  const { patient, setPatient, addPatient} = useContext(PatientContext);
 
   const handleClick = () => {
     if (id) {
-      deletePatient(Number(id))
-      addPatient(patient)
-      // const filteredPatients = patientsList.filter((patient) => patient.id !== Number(id));
-
-      // setPatientsList(
-      //   patientsList.map((patientList) => {
-      //     if (patientList.id === Number(id)) {
-      //       return {
-      //         ...patientList,
-      //         name: patient.name,
-      //         surname: patient.surname,
-      //         age: patient.age,
-      //         sex: patient.sex,
-      //         email: patient.email,
-      //         telephone: patient.telephone,
-      //         bodymass: patient.bodymass,
-      //         height: patient.height,
-      //         notes: patient.notes,
-      //         activity: patient.activity,
-      //       };
-      //     }
-      //     return patientList;
-      //   }),
-      // );
-      // setPatientsList([patient, ...filteredPatients])
+      axios
+        .post(`/dietmaster/patient/about/${id}`, patient)
+        .then(({data}) => {
+          addPatient(data)
+        })
+        .catch((err) => console.log(err));
       setPatient(InitialPatientValues);
       navigate('/');
     }

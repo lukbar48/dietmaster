@@ -1,11 +1,10 @@
-import BottomBar from 'components/organisms/MainBottomBar';
+import MainBottomBar from 'components/organisms/MainBottomBar';
 import MainPatientInfo from 'components/molecules/MainPatientInfo';
-import TopBar from 'components/organisms/MainTopBar';
+import MainTopBar from 'components/organisms/MainTopBar';
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import data from '../data/data';
 import { PatientContext } from 'contexts/context';
-
 
 const Wrapper = styled.ul`
   display: flex;
@@ -23,8 +22,8 @@ const Main = () => {
 
   return (
     <>
-      <TopBar />
-      <BottomBar />
+      <MainTopBar />
+      <MainBottomBar />
       <Wrapper>
         {patientsList.map((patient, index) => {
           return <MainPatientInfo index={index} key={patient.id} {...patient} />;
