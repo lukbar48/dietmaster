@@ -5,7 +5,6 @@ import { Wrapper } from './About.styles';
 import AboutBottomBar from 'components/organisms/AboutBottomBar';
 import AboutForm from 'components/organisms/AboutForm';
 
-
 const About = () => {
   return (
       <Wrapper>

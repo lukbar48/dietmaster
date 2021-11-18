@@ -18,14 +18,18 @@ const Wrapper = styled.ul`
 `;
 
 const Main = () => {
-  const { patientsList } = useContext(PatientContext);
+  const { patientsList, searchResults, searchTerm } = useContext(PatientContext);
 
   return (
     <>
       <MainTopBar />
       <MainBottomBar />
       <Wrapper>
-        {patientsList.map((patient, index) => {
+
+        {searchTerm && searchResults.map((patient, index) => {
+          return <MainPatientInfo index={index} key={patient.id} {...patient} />;
+        })}
+        {!searchTerm && patientsList.map((patient, index) => {
           return <MainPatientInfo index={index} key={patient.id} {...patient} />;
         })}
       </Wrapper>

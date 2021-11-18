@@ -4,6 +4,7 @@ import patients from '../data/data';
 import { PatientState } from '../data/data';
 import { InitialPatientValues } from '../data/data';
 import PatientsReducer from './PatientsReducer';
+import { db } from 'mocks/db';
 
 export type ContextType = {
   patientsList: PatientState[];
@@ -11,9 +12,11 @@ export type ContextType = {
   addPatient: (obj: PatientState) => void;
   managePatient: (id: number) => void;
   setPatient: (obj: PatientState) => void;
+  searchResults: PatientState[];
   sortPatientsList: (sex: string) => void;
   patient: PatientState;
-  searchByInputValue: (term: string) => void;
+  searchTerm: string;
+  setSearchTerm: (term: string) => void;
   calculateBMI: () => string;
   BMIdescription: () => string;
   calculateRisk: () => string;
@@ -26,8 +29,10 @@ export const PatientContext = createContext<ContextType>({
   addPatient() {},
   managePatient() {},
   setPatient() {},
+  searchResults: patients,
+  searchTerm: '',
+  setSearchTerm() {},
   sortPatientsList() {},
-  searchByInputValue() {},
   calculateBMI() {
     return '';
   },
@@ -46,20 +51,52 @@ export const PatientContext = createContext<ContextType>({
 const PatientProvider = ({ children }: { children: ReactNode }) => {
   const [patient, setPatient] = useState<typeof InitialPatientValues>(InitialPatientValues);
   const [patientsList, dispatch] = useReducer(PatientsReducer, [InitialPatientValues]);
+  const [searchResults, setSearchResults] = useState<typeof InitialPatientValues[]>([] as typeof InitialPatientValues[]);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    axios
+      .post('/dietmaster', searchTerm)
+      .then(({ data }) => {
+        setSearchResults(data);
+      })
+      .catch((err) => console.log(err));
+  }, [searchTerm]);
+
+  useEffect(() => {
+    // console.log(patientsList)
+  }, [patientsList]);
 
   useEffect(() => {
     axios
       .get('/dietmaster')
       .then(({ data }) => {
-        dispatch({ type: 'ADD_PATIENTS_LIST', payload: data })
+        dispatch({ type: 'ADD_PATIENTS_LIST', payload: data });
       })
       .catch((err) => console.log(err));
   }, []);
 
   const deletePatient = (id: number) => {
-    dispatch({ type: 'DELETE_PATIENT', payload: id });
-  };
+    console.log(db.patient.getAll());
+    const findPatient = db.patient.findFirst({
+      where: {
+        id: {
+          equals: Number(id),
+        },
+      },
+    });
+    console.log(findPatient);
+    if (findPatient) {
+      axios
+        .delete('/dietmaster')
+        .then(({ data }) => {
+          console.log(data);
+        })
+        .catch((err) => console.log(err));
+    }
 
+    // dispatch({ type: 'DELETE_PATIENT', payload: id });
+  };
 
   const addPatient = (obj: PatientState) => {
     dispatch({ type: 'ADD_PATIENT', payload: obj });
@@ -67,11 +104,6 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
 
   const sortPatientsList = (sex: string) => {
     dispatch({ type: 'SORT_PATIENTS_LIST', payload: sex });
-  };
-
-  const searchByInputValue = (term: string) => {
-    // dispatch({ type: 'SEARCH_IN_LIST', payload: term });
-    
   };
 
   const managePatient = (id: number) => {
@@ -139,12 +171,14 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
         patient,
         setPatient,
         sortPatientsList,
-        searchByInputValue,
         calculateBMI,
         BMIdescription,
         calculateRisk,
         calculateIdealWeight,
         addPatient,
+        searchResults,
+        searchTerm,
+        setSearchTerm,
       }}
     >
       {children}

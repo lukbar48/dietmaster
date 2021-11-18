@@ -12,6 +12,7 @@ export const Input = styled.input`
 interface IInput {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
+  value: string;
 }
 const InputMain = ({...props}: IInput) => {
   return <Input {...props}></Input>;

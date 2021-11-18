@@ -6,6 +6,7 @@ import { PatientContext } from 'contexts/context';
 import { useParams } from 'react-router';
 import { InitialPatientValues } from '../../data/data';
 import axios from 'axios';
+import { db } from 'mocks/db';
 
 const Wrapper = styled.div`
   display: flex;
@@ -20,19 +21,37 @@ const Wrapper = styled.div`
 const ManageTop = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { patient, setPatient, addPatient} = useContext(PatientContext);
+  const { patient, setPatient, addPatient, patientsList } = useContext(PatientContext);
 
   const handleClick = () => {
-    if (id) {
+    const findPatient = db.patient.findFirst({
+      where: {
+        id: {
+          equals: Number(id),
+        },
+      },
+    });
+    console.log(findPatient);
+    console.log(db.patient.getAll())
+
+    if (id && !findPatient) {
       axios
-        .post(`/dietmaster/patient/about/${id}`, patient)
-        .then(({data}) => {
-          addPatient(data)
+        .post(`dietmaster/`, patient)
+        .then(({ data }) => {
+          console.log(db.patient.getAll())
+          addPatient(data);
         })
         .catch((err) => console.log(err));
-      setPatient(InitialPatientValues);
-      navigate('/');
+    } else if (id && findPatient) {
+      axios
+        .put(`/dietmaster/patient/about/${id}`, findPatient)
+        .then(({ data }) => {
+          addPatient(data);
+        })
+        .catch((err) => console.log(err));
     }
+    setPatient(InitialPatientValues);
+    navigate('/');
   };
 
   const handleExitClick = () => {

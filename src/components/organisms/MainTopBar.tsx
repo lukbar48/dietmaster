@@ -26,7 +26,7 @@ const Wrapper = styled.div`
 `;
 
 const MainTopBar = () => {
-  const { searchByInputValue, setPatient, patient } = useContext(PatientContext);
+  const { setPatient, patient, searchTerm, setSearchTerm } = useContext(PatientContext);
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -47,10 +47,7 @@ const MainTopBar = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    function capitalizeFirstLetter(term: string) {
-      return term.charAt(0).toUpperCase() + term.slice(1);
-    }
-    searchByInputValue(capitalizeFirstLetter(e.currentTarget.value));
+    setSearchTerm(e.currentTarget.value.toLowerCase())
   };
 
   return (
@@ -58,7 +55,7 @@ const MainTopBar = () => {
       <div>
         <h2>Patients record</h2>
       </div>
-      <InputMain placeholder="Search patient" onChange={handleChange} />
+      <InputMain placeholder="Search patient" value={searchTerm} onChange={handleChange} />
       <Button onClick={handleClick}>New patient</Button>
       <Button backgroundColor="#505050" marginLeft="auto">
         Log Out

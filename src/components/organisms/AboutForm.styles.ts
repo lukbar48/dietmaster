@@ -9,7 +9,6 @@ export const Wrapper = styled.form`
   width: 100%;
   min-height: calc(100vh - 165px);
   background-color: ${({ theme }) => theme.colors.grey1};
-  overflow-y: scroll;
 
   div:nth-child(1) {
     grid-area: 1/1/2/3;
@@ -82,7 +81,7 @@ export const Slider = styled.div`
   flex-direction: column;
   width: 100%;
   grid-area: 4/1/5/7;
-
+ 
   p {
     font-size: 0.8rem;
     padding: 5px 0;

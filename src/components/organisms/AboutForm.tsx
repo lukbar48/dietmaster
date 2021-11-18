@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { PatientContext } from 'contexts/context';
 import { useParams } from 'react-router';
 import axios from 'axios';
-import { InitialPatientValues } from 'mocks/data/patients';
+import { InitialPatientValues } from 'mocks/data/patientsList';
 // import { useForm } from 'react-hook-form';
 import { Input, Slider, TextArea, Wrapper } from './AboutForm.styles';
 
@@ -23,7 +23,7 @@ const newPatient = {
 
 const AboutForm = () => {
   const { id } = useParams();
-  const { patient, setPatient, patientsList } = useContext(PatientContext);
+  const { patient, setPatient } = useContext(PatientContext);
   const nameValue = useRef<HTMLInputElement>(null);
   const surnameValue = useRef<HTMLInputElement>(null);
   const ageValue = useRef<HTMLInputElement>(null);

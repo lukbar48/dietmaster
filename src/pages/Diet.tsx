@@ -2,14 +2,17 @@ import React from 'react';
 import ManageNavBar from 'components/organisms/ManageNavBar';
 import ManageTop from 'components/organisms/ManageTop';
 import { Wrapper } from './About.styles';
+import styled from 'styled-components';
+import DietForm from 'components/organisms/DietForm';
 
 const Diet = () => {
   return (
     <Wrapper>
-        <ManageTop />
-        <ManageNavBar />
-      </Wrapper>
-  )
-}
+      <ManageTop />
+      <ManageNavBar />
+      <DietForm />
+    </Wrapper>
+  );
+};
 
-export default Diet
+export default Diet;

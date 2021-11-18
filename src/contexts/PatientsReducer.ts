@@ -30,12 +30,6 @@ function PatientsReducer(state: typeof patients, action: ACTIONTYPES) {
       });
       return [...sortedList];
     }
-    case 'SEARCH_IN_LIST': {
-      const searchInList = state.filter((patient) => {
-        return patient.name.includes(action.payload) || patient.surname.includes(action.payload);
-      });
-      return searchInList;
-    }
     case 'ADD_PATIENTS_LIST': {
       return action.payload;
     }
