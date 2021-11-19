@@ -3,10 +3,10 @@ import axios from 'axios';
 import patients from '../data/data';
 import { PatientState } from '../data/data';
 import { InitialPatientValues } from '../data/data';
-import PatientsReducer from './PatientsReducer';
+import PatientsReducer from '../reducers/PatientsReducer';
 import { db } from 'mocks/db';
 
-export type ContextType = {
+export type PatientContextType = {
   patientsList: PatientState[];
   deletePatient: (id: number) => void;
   addPatient: (obj: PatientState) => void;
@@ -23,7 +23,7 @@ export type ContextType = {
   calculateIdealWeight: () => string;
 };
 
-export const PatientContext = createContext<ContextType>({
+export const PatientContext = createContext<PatientContextType>({
   patientsList: patients,
   deletePatient() {},
   addPatient() {},

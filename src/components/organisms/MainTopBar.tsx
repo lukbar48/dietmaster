@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import InputMain from 'components/atoms/InputMain/InputMain';
 import Button from 'components/atoms/Button/Button';
 import styled from 'styled-components';
-import { PatientContext } from 'contexts/context';
+import { PatientContext } from 'contexts/PatientContext';
+import { useAuth } from 'hooks/useAuth';
 
 const Wrapper = styled.div`
   display: flex;
@@ -29,7 +30,9 @@ const MainTopBar = () => {
   const { setPatient, patient, searchTerm, setSearchTerm } = useContext(PatientContext);
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const { signOut } = useAuth();
+
+  const handleClickNewPatient = () => {
     setPatient({
       id: new Date().getTime(),
       name: '',
@@ -41,13 +44,13 @@ const MainTopBar = () => {
       bodymass: '',
       height: '',
       notes: '',
-      activity: '1.2'
+      activity: '1.2',
     });
     navigate(`/patient/about/${patient.id}`);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.currentTarget.value.toLowerCase())
+    setSearchTerm(e.currentTarget.value.toLowerCase());
   };
 
   return (
@@ -56,8 +59,8 @@ const MainTopBar = () => {
         <h2>Patients record</h2>
       </div>
       <InputMain placeholder="Search patient" value={searchTerm} onChange={handleChange} />
-      <Button onClick={handleClick}>New patient</Button>
-      <Button backgroundColor="#505050" marginLeft="auto">
+      <Button onClick={handleClickNewPatient}>New patient</Button>
+      <Button onClick={signOut} backgroundColor="#505050" marginLeft="auto">
         Log Out
       </Button>
     </Wrapper>

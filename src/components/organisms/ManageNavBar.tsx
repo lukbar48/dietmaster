@@ -5,7 +5,7 @@ import { BsFillPersonFill, BsExclamationDiamond } from "react-icons/bs";
 import { ImSpoonKnife } from "react-icons/im";
 import { BiTestTube } from "react-icons/bi";
 import { AiTwotoneCalendar } from "react-icons/ai";
-import { PatientContext } from 'contexts/context';
+import { PatientContext } from 'contexts/PatientContext';
 
 const Wrapper = styled.div`
   display: grid;

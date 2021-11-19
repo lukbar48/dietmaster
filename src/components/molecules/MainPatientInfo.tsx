@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Button from 'components/atoms/Button/Button';
 import styled from 'styled-components';
-import { PatientContext } from 'contexts/context';
+import { PatientContext } from 'contexts/PatientContext';
 import { useNavigate } from 'react-router-dom';
 
 const Wrapper = styled.li`

@@ -4,7 +4,7 @@ import MainTopBar from 'components/organisms/MainTopBar';
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import data from '../data/data';
-import { PatientContext } from 'contexts/context';
+import { PatientContext } from 'contexts/PatientContext';
 
 const Wrapper = styled.ul`
   display: flex;

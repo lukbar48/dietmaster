@@ -1,7 +1,7 @@
 import AboutBottomBarBox from 'components/atoms/AboutBottomBarBox/AboutBottomBarBox';
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { PatientContext } from 'contexts/context';
+import { PatientContext } from 'contexts/PatientContext';
 import { CalculationsWrapper, Calc, Wrapper } from './AboutBottomBar.styles';
 const AboutBottomBar = () => {
   const { BMIdescription, calculateBMI, calculateRisk, patient, calculateIdealWeight } = useContext(PatientContext);

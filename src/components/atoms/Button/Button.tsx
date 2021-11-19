@@ -9,6 +9,7 @@ interface IButton {
   borderRadius?: string;
   fontSize?: string;
   onClick?: () => void;
+  type?: 'submit' | 'reset' | 'button';
 }
 
 const StyledButton = styled.button<IButton>`

@@ -4,7 +4,6 @@ import { db } from 'mocks/db';
 
 export const patients = [
   rest.get('/dietmaster', (req, res, ctx) => {
-    console.log(db.patient.getAll());
     return res(ctx.status(200), ctx.json(db.patient.getAll()));
   }),
 

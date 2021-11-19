@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from 'assets/styles/GlobalStyle';
 import { theme } from 'assets/styles/theme';
@@ -8,15 +8,16 @@ import Main from './Main';
 import About from './About';
 import ManageDiet from './Diet';
 import Login from './Login';
+import { useAuth } from 'hooks/useAuth';
 
 const Root = () => {
-  const user = 0;
+  const { user } = useAuth();
+
   return (
     <Router basename={process.env.PUBLIC_URL}>
-      <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Routes>
-          {user ? (
+          {user.login ? (
             <Wrapper>
               <Route path="/patient/appointments/:id" element={<ManageDiet />} />
               <Route path="/patient/blood-tests/:id" element={<ManageDiet />} />
@@ -24,13 +25,15 @@ const Root = () => {
               <Route path="/patient/diet/:id" element={<ManageDiet />} />
               <Route path="/patient/about/:id" element={<About />} />
               <Route path="/" element={<Main />} />
-              <Route path="*" element={<Main />} />
+              <Route path="*" element={<Navigate to="/" />} />
             </Wrapper>
           ) : (
-            <Route path="*" element={<Login />} />
+            <>
+              <Route path="*" element={<Navigate to="/login" />} />
+              <Route path="/login" element={<Login />} />
+            </>
           )}
         </Routes>
-      </ThemeProvider>
     </Router>
   );
 };

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 15px;
   width: 100%;
 `;
 const Input = styled.input`
@@ -21,19 +20,22 @@ const Label = styled.label`
   font-size: ${({ theme }) => theme.fontSizes.m};
 `;
 
-const LoginInput = () => {
+interface ILoginInput {
+  label: string;
+  name: string;
+  id: string;
+  type: string;
+  value?: string;
+  onChange?: (data: any) => void;
+}
+
+const LoginInput = React.forwardRef(({ label, name, id, type, value, onChange, ...props }:ILoginInput, ref: any) => {
   return (
     <Wrapper>
-      <Label>
-        Login
-        <Input />
-      </Label>
-      <Label>
-        Password
-        <Input />
-      </Label>
+      <Label htmlFor={id}>{label}</Label>
+      <Input name={name} type={type} id={id} onChange={onChange} value={value} {...props} ref={ref} />
     </Wrapper>
   );
-};
+}) 
 
 export default LoginInput;

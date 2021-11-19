@@ -23,6 +23,6 @@ export const db = factory({
     id: primaryKey(() => '1'),
     name: () => 'Jacek Placek',
     login: () => 'jacek123',
-    password: () => '12345',
+    password: () => '123',
   },
 });

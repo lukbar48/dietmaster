@@ -1,6 +1,6 @@
 import SexButton from 'components/molecules/SexButton';
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { PatientContext } from 'contexts/context';
+import { PatientContext } from 'contexts/PatientContext';
 import { useParams } from 'react-router';
 import axios from 'axios';
 import { InitialPatientValues } from 'mocks/data/patientsList';

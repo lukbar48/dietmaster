@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from 'components/atoms/Button/Button';
 import styled from 'styled-components';
-import { PatientContext } from 'contexts/context';
+import { PatientContext } from 'contexts/PatientContext';
 import { useParams } from 'react-router';
 import { InitialPatientValues } from '../../data/data';
 import axios from 'axios';
