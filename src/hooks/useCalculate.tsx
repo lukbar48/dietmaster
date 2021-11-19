@@ -52,7 +52,12 @@ const useCalculate = (patient: PatientState) => {
     return `${idealWeightMin} - ${idealWeightMax} kg`;
   };
 
-  return { calculateBMI, BMIdescription, calculateRisk, idealWeight };
+  const calculateCPM = () => {
+    const CPM = (66.5 + (13.75 * Number(patient.bodymass)) + (5.003 * Number(patient.height)) - (6.775 * Number(patient.age)))*Number(patient.activity);
+    return CPM.toFixed().toString();
+  };
+
+  return { calculateBMI, BMIdescription, calculateRisk, idealWeight, calculateCPM };
 };
 
 export default useCalculate;

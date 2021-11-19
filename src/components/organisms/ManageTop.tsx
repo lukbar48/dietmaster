@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   gap: 20px;
   align-items: center;
   justify-content: flex-end;
-  height: 45px;
+  height: 40px;
   padding: 0 30px;
   background-color: ${({ theme }) => theme.colors.blue3};
 `;

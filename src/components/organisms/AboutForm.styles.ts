@@ -7,7 +7,7 @@ export const Wrapper = styled.form`
   gap: 10px;
   padding: 15px;
   width: 100%;
-  min-height: calc(100vh - 185px);
+  min-height: calc(100vh - 175px);
   background-color: ${({ theme }) => theme.colors.grey1};
 
   div:nth-child(1) {
@@ -73,6 +73,7 @@ export const TextArea = styled.div`
     padding: 10px;
     height: 100px;
     font-family: 'Montserrat', sans-serif;
+    margin-top: 5px;
   }
 `;
 

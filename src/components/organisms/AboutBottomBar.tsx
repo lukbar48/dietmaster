@@ -1,6 +1,5 @@
 import AboutBottomBarBox from 'components/atoms/AboutBottomBarBox/AboutBottomBarBox';
 import React, { useContext } from 'react';
-import styled from 'styled-components';
 import { PatientContext } from 'contexts/PatientContext';
 import { CalculationsWrapper, Calc, Wrapper } from './AboutBottomBar.styles';
 import useCalculate from 'hooks/useCalculate';
