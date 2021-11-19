@@ -6,7 +6,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   padding: 15px;
   width: 100%;
-  min-height: calc(100vh - 65px);
+  min-height: calc(100vh - 85px);
   background-color: ${({ theme }) => theme.colors.grey1};
 `;
 const Sliders = styled.div`

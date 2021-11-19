@@ -3,8 +3,11 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { PatientContext } from 'contexts/PatientContext';
 import { CalculationsWrapper, Calc, Wrapper } from './AboutBottomBar.styles';
+import useCalculate from 'hooks/useCalculate';
+
 const AboutBottomBar = () => {
-  const { BMIdescription, calculateBMI, calculateRisk, patient, calculateIdealWeight } = useContext(PatientContext);
+  const { patient } = useContext(PatientContext);
+  const { BMIdescription, calculateBMI, calculateRisk, idealWeight } = useCalculate(patient);
 
   return (
     <Wrapper>
@@ -24,7 +27,7 @@ const AboutBottomBar = () => {
         </Calc>
         <Calc>
           <p>Ideal body weight</p>
-          <AboutBottomBarBox>{patient.bodymass && patient.height ? calculateIdealWeight() : ''}</AboutBottomBarBox>
+          <AboutBottomBarBox>{patient.bodymass && patient.height ? idealWeight() : ''}</AboutBottomBarBox>
         </Calc>
       </CalculationsWrapper>
     </Wrapper>

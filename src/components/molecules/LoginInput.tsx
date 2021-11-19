@@ -17,7 +17,7 @@ const Input = styled.input`
 `;
 const Label = styled.label`
   width: 100%;
-  font-size: ${({ theme }) => theme.fontSizes.m};
+  font-size: ${({ theme }) => theme.fontSizes.xm};
 `;
 
 interface ILoginInput {
@@ -25,8 +25,9 @@ interface ILoginInput {
   name: string;
   id: string;
   type: string;
+  placeholder?: string;
+  onChange: (data: any) => void;
   value?: string;
-  onChange?: (data: any) => void;
 }
 
 const LoginInput = React.forwardRef(({ label, name, id, type, value, onChange, ...props }:ILoginInput, ref: any) => {

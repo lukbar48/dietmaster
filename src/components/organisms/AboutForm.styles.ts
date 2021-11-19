@@ -7,7 +7,7 @@ export const Wrapper = styled.form`
   gap: 10px;
   padding: 15px;
   width: 100%;
-  min-height: calc(100vh - 165px);
+  min-height: calc(100vh - 185px);
   background-color: ${({ theme }) => theme.colors.grey1};
 
   div:nth-child(1) {

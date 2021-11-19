@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from 'assets/styles/GlobalStyle';
-import { theme } from 'assets/styles/theme';
 import { Wrapper } from './Root.styles';
 import Main from './Main';
 import About from './About';

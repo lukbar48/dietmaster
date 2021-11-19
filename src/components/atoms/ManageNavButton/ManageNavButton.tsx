@@ -13,7 +13,7 @@ const StyledButton = styled(NavLink)`
   justify-content: center;
   align-items: center;
   gap: 8px;
-  height: 30px;
+  height: 100%;
   cursor: pointer;
   background-color: ${({ color, theme: { colors } }) => (color ? color : colors.grey4)};
   border: none;

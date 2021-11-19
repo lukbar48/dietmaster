@@ -22,7 +22,7 @@ export const db = factory({
   dietitian: {
     id: primaryKey(() => '1'),
     name: () => 'Jacek Placek',
-    login: () => 'jacek123',
-    password: () => '123',
+    login: () => 'jack123',
+    password: () => 'Pass123',
   },
 });

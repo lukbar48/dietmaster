@@ -12,8 +12,7 @@ const Wrapper = styled.div`
   align-items: center;
   grid-template-columns: repeat(5, 1fr);
   width: 100%;
-  height: 100%;
-  background-color: ${({ theme }) => theme.colors.red};
+  height: 40px;
 `;
 
 const ManageNavBar = () => {

@@ -11,12 +11,13 @@ export const theme = {
     blue2: '#16C6FF',
     blue3: '#00BEFC',
     blue4: '#00A3D9',
-    red: '#FF4343'
+    red: '#FF4343',
   },
   fontSizes: {
     xxl: '34px',
     xl: '24px',
     l: '17px',
+    xm: '14px',
     m: '12px',
     s: '11px',
   },
