@@ -61,7 +61,6 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const deletePatient = (id: number) => {
-
     const findPatient = db.patient.findFirst({
       where: {
         id: {
@@ -77,8 +76,6 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
         })
         .catch((err) => console.log(err));
     }
-
-    // dispatch({ type: 'DELETE_PATIENT', payload: id });
   };
 
   const addPatient = (obj: PatientState) => {

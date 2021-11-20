@@ -27,10 +27,10 @@ export const patients = [
     return res(ctx.status(200), ctx.json(patient));
   }),
   rest.put('/dietmaster/patient/about/:id', (req, res, ctx) => {
-    const patient = req.body;
+    console.log(req.body)
 
-    return res(ctx.status(200), ctx.json(patient));
-  }), 
+    return res(ctx.status(200), ctx.json(req.body));
+  }),
   rest.delete('/dietmaster', (req, res, ctx) => {
     if (req.body) {
       const removedPatient = db.patient.delete({

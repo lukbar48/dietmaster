@@ -46,8 +46,14 @@ const MainBottomBar = () => {
           <Button onClick={()=>sortPatientsList('female')} padding="6px 20px" borderRadius="0">
             female
           </Button>
-          <Button onClick={()=>sortPatientsList('male')} padding="6px 20px" borderRadius="0 6px 6px 0">
+          <Button onClick={()=>sortPatientsList('male')} padding="6px 20px" borderRadius="0">
             male
+          </Button>
+          <Button onClick={()=>sortPatientsList('a-z')} padding="6px 20px" borderRadius="0">
+            a-z
+          </Button>
+          <Button onClick={()=>sortPatientsList('z-a')} padding="6px 20px" borderRadius="0 6px 6px 0">
+            z-a
           </Button>
         </div>
       </div>
