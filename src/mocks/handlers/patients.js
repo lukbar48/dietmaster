@@ -30,17 +30,16 @@ export const patients = [
     const patient = req.body;
 
     return res(ctx.status(200), ctx.json(patient));
-  }),
+  }), 
   rest.delete('/dietmaster', (req, res, ctx) => {
     if (req.body) {
       const removedPatient = db.patient.delete({
         where: {
           id: {
-            equals: req.body,
+            equals: req.body.id,
           },
         },
       });
-
       return res(
         ctx.status(200),
         ctx.json({

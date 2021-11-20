@@ -61,7 +61,7 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const deletePatient = (id: number) => {
-    console.log(db.patient.getAll());
+
     const findPatient = db.patient.findFirst({
       where: {
         id: {
@@ -69,12 +69,11 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
         },
       },
     });
-    console.log(findPatient);
     if (findPatient) {
       axios
-        .delete('/dietmaster')
+        .delete('/dietmaster',{ data: findPatient })
         .then(({ data }) => {
-          console.log(data);
+          dispatch({ type: 'ADD_PATIENTS_LIST', payload: db.patient.getAll() })
         })
         .catch((err) => console.log(err));
     }

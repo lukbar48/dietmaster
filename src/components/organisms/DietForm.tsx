@@ -69,7 +69,7 @@ const DietForm = () => {
   const [establishCPM, setEstablishCPM] = useState(calculateCPM());
   const [protein, setProtein] = useState(5);
   const [fat, setFat] = useState(22);
-  const [carbs, setCarbs] = useState(18);
+  const [carbs, setCarbs] = useState(57);
 
   const handleCPMInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEstablishCPM(e.currentTarget.value);
