@@ -21,15 +21,22 @@ export const patients = [
     }
   }),
 
-  rest.post('/dietmaster/patient/about/:id', (req, res, ctx) => {
+  rest.post('/dietmaster/add', (req, res, ctx) => {
     const patient = req.body;
-
+    db.patient.create(patient)
     return res(ctx.status(200), ctx.json(patient));
   }),
-  rest.put('/dietmaster/patient/about/:id', (req, res, ctx) => {
+  rest.put('/dietmaster/add', (req, res, ctx) => {
     console.log(req.body)
-
-    return res(ctx.status(200), ctx.json(req.body));
+    let updatePatient = db.patient.findFirst({
+      where: {
+        id: {
+          equals: req.body.id,
+        },
+      },
+    }).update(req.body)
+    
+    return res(ctx.status(200), ctx.json(updatePatient));
   }),
   rest.delete('/dietmaster', (req, res, ctx) => {
     if (req.body) {

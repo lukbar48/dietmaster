@@ -31,20 +31,18 @@ const ManageTop = () => {
         },
       },
     });
-    console.log(findPatient);
-    console.log(db.patient.getAll())
 
-    if (id && !findPatient) {
+    if (!findPatient) {
       axios
-        .post(`dietmaster/`, patient)
+        .post(`/dietmaster/add`, patient)
         .then(({ data }) => {
-          console.log(db.patient.getAll())
+          
           addPatient(data);
         })
         .catch((err) => console.log(err));
-    } else if (id && findPatient) {
+    } else if (findPatient) {
       axios
-        .put(`/dietmaster/patient/about/${id}`, findPatient)
+        .put(`/dietmaster/add`, patient)
         .then(({ data }) => {
           addPatient(data);
         })
