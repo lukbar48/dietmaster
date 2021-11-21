@@ -1,53 +1,19 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from 'components/atoms/Button/Button';
-import styled from 'styled-components';
 import { PatientContext } from 'contexts/PatientContext';
 import { useParams } from 'react-router';
 import { InitialPatientValues } from '../../data/data';
 import axios from 'axios';
 import { db } from 'mocks/db';
-
-const Wrapper = styled.div`
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  justify-content: flex-end;
-  height: 40px;
-  padding: 0 30px;
-  background-color: ${({ theme }) => theme.colors.blue3};
-`;
+import { Wrapper } from './ManageTop.styles';
 
 const ManageTop = () => {
-  const { id } = useParams();
   const navigate = useNavigate();
   const { patient, setPatient, addPatient, patientsList } = useContext(PatientContext);
 
   const handleClick = () => {
-    const findPatient = db.patient.findFirst({
-      where: {
-        id: {
-          equals: Number(id),
-        },
-      },
-    });
-
-    if (!findPatient) {
-      axios
-        .post(`/dietmaster/add`, patient)
-        .then(({ data }) => {
-          
-          addPatient(data);
-        })
-        .catch((err) => console.log(err));
-    } else if (findPatient) {
-      axios
-        .put(`/dietmaster/add`, patient)
-        .then(({ data }) => {
-          addPatient(data);
-        })
-        .catch((err) => console.log(err));
-    }
+    addPatient(patient)
     setPatient(InitialPatientValues);
     navigate('/');
   };

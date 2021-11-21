@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@mswjs/data": "^0.8.0",
+    "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -20,9 +21,11 @@
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.19.5",
     "react-icons": "^4.3.1",
+    "react-redux": "^7.2.6",
     "react-router": "^6.0.0",
     "react-router-dom": "^6.0.0",
     "react-scripts": "4.0.3",
+    "redux": "^4.1.2",
     "styled-components": "^5.3.3",
     "web-vitals": "^1.0.1"
   },

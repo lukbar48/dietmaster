@@ -40,25 +40,21 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     axios
-      .post('/dietmaster', searchTerm)
-      .then(({ data }) => {
-        setSearchResults(data);
-      })
-      .catch((err) => console.log(err));
-  }, [searchTerm]);
-
-  useEffect(() => {
-    // console.log(patientsList)
-  }, [patientsList]);
-
-  useEffect(() => {
-    axios
       .get('/dietmaster')
       .then(({ data }) => {
         dispatch({ type: 'ADD_PATIENTS_LIST', payload: data });
       })
       .catch((err) => console.log(err));
   }, []);
+
+  useEffect(() => {
+    axios
+      .post('/dietmaster', searchTerm)
+      .then(({ data }) => {
+        setSearchResults(data);
+      })
+      .catch((err) => console.log(err));
+  }, [searchTerm]);
 
   const deletePatient = (id: number) => {
     const findPatient = db.patient.findFirst({
@@ -70,16 +66,35 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
     });
     if (findPatient) {
       axios
-        .delete('/dietmaster',{ data: findPatient })
+        .delete('/dietmaster', { data: findPatient })
         .then(({ data }) => {
-          dispatch({ type: 'ADD_PATIENTS_LIST', payload: db.patient.getAll() })
+          dispatch({ type: 'DELETE_PATIENT', payload: data.removedPatient });
         })
         .catch((err) => console.log(err));
     }
   };
 
-  const addPatient = (obj: PatientState) => {
-    dispatch({ type: 'ADD_PATIENT', payload: obj });
+  const addPatient = (newPatient: PatientState) => {
+    const findPatient = db.patient.findFirst({
+      where: {
+        id: {
+          equals: Number(newPatient.id),
+        },
+      },
+    });
+
+    if (!findPatient) {
+      axios
+        .post(`/dietmaster/add`, patient)
+        .then(({ data }) => {})
+        .catch((err) => console.log(err));
+    } else if (findPatient) {
+      axios
+        .put(`/dietmaster/add`, patient)
+        .then(({ data }) => {})
+        .catch((err) => console.log(err));
+    }
+    dispatch({ type: 'ADD_PATIENT', payload: newPatient });
   };
 
   const sortPatientsList = (sex: string) => {

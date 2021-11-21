@@ -3,13 +3,13 @@ import { db } from 'mocks/db';
 import { PatientState } from '../data/data';
 
 type ACTIONTYPES =
-  | { type: 'DELETE_PATIENT'; payload: number }
+  | { type: 'DELETE_PATIENT'; payload: PatientState }
   | { type: 'SORT_PATIENTS_LIST'; payload: string }
   | { type: 'ADD_PATIENT'; payload: PatientState }
   | { type: 'SEARCH_IN_LIST'; payload: string }
   | { type: 'ADD_PATIENTS_LIST'; payload: PatientState[] };
 
-function PatientsReducer(state: typeof patients, action: ACTIONTYPES) {
+const PatientsReducer = (state: typeof patients, action: ACTIONTYPES) => {
   switch (action.type) {
     case 'ADD_PATIENTS_LIST': {
       return action.payload;
@@ -21,6 +21,7 @@ function PatientsReducer(state: typeof patients, action: ACTIONTYPES) {
     case 'SORT_PATIENTS_LIST': {
       console.log('api ', db.patient.getAll());
       console.log('state ', state);
+      // eslint-disable-next-line array-callback-return
       const sortedList = state.sort((a, b): any => {
         if (action.payload === 'female') {
           return a.sex > b.sex ? 1 : b.sex > a.sex ? -1 : 0;
@@ -35,9 +36,9 @@ function PatientsReducer(state: typeof patients, action: ACTIONTYPES) {
         }
       });
       return [...sortedList];
-    }
+    } 
     case 'DELETE_PATIENT': {
-      const deletePatientsList = state.filter((patient) => patient.id !== action.payload);
+      const deletePatientsList = state.filter((patient) => patient.id !== action.payload.id);
       return deletePatientsList;
     }
     default:
