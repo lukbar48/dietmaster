@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 import Button from 'components/atoms/Button/Button';
-import LoginInput from 'components/molecules/LoginInput';
 import logo from '../assets/images/logo.png'
 import { useAuth } from 'hooks/useAuth';
 import { Wrapper, Form, Image } from './Login.styles';
+import LoginInput from 'components/molecules/LoginInput';
 
 
 const Login = () => {

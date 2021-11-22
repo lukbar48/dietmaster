@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from 'pages/Root';
-import PatientProvider from 'contexts/PatientContext';
-import { AuthProvider } from 'hooks/useAuth';
 import AppProviders from 'contexts/AppProviders';
 
 async function main() {

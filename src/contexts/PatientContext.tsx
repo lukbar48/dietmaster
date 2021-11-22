@@ -3,8 +3,10 @@ import axios from 'axios';
 import patients from '../data/data';
 import { PatientState } from '../data/data';
 import { InitialPatientValues } from '../data/data';
-import PatientsReducer from '../reducers/PatientsReducer';
 import { db } from 'mocks/db';
+import PatientsReducer from 'reducers/PatientsReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPatientsList, selectPatients, addPatient } from 'store/store';
 
 export type PatientContextType = {
   patientsList: PatientState[];
@@ -38,11 +40,14 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
   const [searchResults, setSearchResults] = useState<typeof InitialPatientValues[]>([] as typeof InitialPatientValues[]);
   const [searchTerm, setSearchTerm] = useState('');
 
+  const patientsRedux = useSelector((state: any) => state.patients);
+  const dispatchRedux = useDispatch();
+
   useEffect(() => {
     axios
       .get('/dietmaster')
       .then(({ data }) => {
-        dispatch({ type: 'ADD_PATIENTS_LIST', payload: data });
+        dispatchRedux(getPatientsList(data));
       })
       .catch((err) => console.log(err));
   }, []);
@@ -94,7 +99,8 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
         .then(({ data }) => {})
         .catch((err) => console.log(err));
     }
-    dispatch({ type: 'ADD_PATIENT', payload: newPatient });
+    // dispatch({ type: 'ADD_PATIENT', payload: newPatient });
+    dispatchRedux(addPatient(newPatient))
   };
 
   const sortPatientsList = (sex: string) => {

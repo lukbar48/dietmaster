@@ -36,7 +36,7 @@ const PatientsReducer = (state: typeof patients, action: ACTIONTYPES) => {
         }
       });
       return [...sortedList];
-    } 
+    }
     case 'DELETE_PATIENT': {
       const deletePatientsList = state.filter((patient) => patient.id !== action.payload.id);
       return deletePatientsList;
@@ -44,6 +44,8 @@ const PatientsReducer = (state: typeof patients, action: ACTIONTYPES) => {
     default:
       throw new Error('wrong operation');
   }
-}
+};
+
 
 export default PatientsReducer;
+

@@ -1,3 +1,4 @@
+import { IInput } from 'interfaces';
 import styled from 'styled-components';
 
 export const Input = styled.input`
@@ -9,11 +10,6 @@ export const Input = styled.input`
   color: ${({ theme }) => theme.colors.white};
 `;
 
-interface IInput {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  placeholder: string;
-  value: string;
-}
 const InputMain = ({...props}: IInput) => {
   return <Input {...props}></Input>;
 };
