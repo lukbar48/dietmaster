@@ -27,16 +27,31 @@ export const patients = [
     return res(ctx.status(200), ctx.json(patient));
   }),
   rest.put('/dietmaster/add', (req, res, ctx) => {
-    console.log(req.body)
-    let updatePatient = db.patient.findFirst({
+    const updatedPatient = db.patient.update({
+      // Query for the entity to modify.
       where: {
         id: {
           equals: req.body.id,
         },
       },
-    }).update(req.body)
-    
-    return res(ctx.status(200), ctx.json(updatePatient));
+      // Provide partial next data to be
+      // merged with the existing properties.
+      data: {
+        // Specify the exact next value.
+        name: '',
+        surname: '',
+        age: '',
+        sex: 'Male',
+        email: '',
+        telephone: '',
+        bodymass: '',
+        height: '',
+        notes: '',
+        activity: '1.2',
+      },
+    })
+    console.log(updatedPatient)
+    return res(ctx.status(200), ctx.json(updatedPatient));
   }),
   rest.delete('/dietmaster', (req, res, ctx) => {
     if (req.body) {

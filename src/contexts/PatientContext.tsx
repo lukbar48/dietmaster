@@ -15,7 +15,6 @@ export type PatientContextType = {
   managePatient: (id: number) => void;
   setPatient: (obj: PatientState) => void;
   searchResults: PatientState[];
-  sortPatientsList: (sex: string) => void;
   patient: PatientState;
   searchTerm: string;
   setSearchTerm: (term: string) => void;
@@ -30,7 +29,6 @@ export const PatientContext = createContext<PatientContextType>({
   searchResults: patients,
   searchTerm: '',
   setSearchTerm() {},
-  sortPatientsList() {},
   patient: InitialPatientValues,
 });
 
@@ -62,21 +60,21 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
   }, [searchTerm]);
 
   const deletePatient = (id: number) => {
-    const findPatient = db.patient.findFirst({
-      where: {
-        id: {
-          equals: Number(id),
-        },
-      },
-    });
-    if (findPatient) {
-      axios
-        .delete('/dietmaster', { data: findPatient })
-        .then(({ data }) => {
-          dispatch({ type: 'DELETE_PATIENT', payload: data.removedPatient });
-        })
-        .catch((err) => console.log(err));
-    }
+    // const findPatient = db.patient.findFirst({
+    //   where: {
+    //     id: {
+    //       equals: Number(id),
+    //     },
+    //   },
+    // });
+    // if (findPatient) {
+    //   axios
+    //     .delete('/dietmaster', { data: findPatient })
+    //     .then(({ data }) => {
+    //       dispatch({ type: 'DELETE_PATIENT', payload: data.removedPatient });
+    //     })
+    //     .catch((err) => console.log(err));
+    // }
   };
 
   const addPatient = (newPatient: PatientState) => {
@@ -100,15 +98,12 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
         .catch((err) => console.log(err));
     }
     // dispatch({ type: 'ADD_PATIENT', payload: newPatient });
-    dispatchRedux(addPatient(newPatient))
+    dispatchRedux(addPatient(newPatient));
   };
 
-  const sortPatientsList = (sex: string) => {
-    dispatch({ type: 'SORT_PATIENTS_LIST', payload: sex });
-  };
 
   const managePatient = (id: number) => {
-    const findPatient = patientsList.filter((patient) => patient.id === id);
+    const findPatient = patientsRedux.filter((patient: any) => patient.id === id);
     setPatient(findPatient[0]);
   };
 
@@ -120,7 +115,6 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
         patientsList,
         patient,
         setPatient,
-        sortPatientsList,
         addPatient,
         searchResults,
         searchTerm,
@@ -133,7 +127,3 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export default PatientProvider;
-
-// const actionTypes = {
-//   changeName = 'CHANGE_NAME',
-// };

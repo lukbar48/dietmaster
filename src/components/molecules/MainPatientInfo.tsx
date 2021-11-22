@@ -4,7 +4,7 @@ import { PatientContext } from 'contexts/PatientContext';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Wrapper } from './MainPatientInfo.styles';
-import { removePatient, RootState, selectPatients } from 'store/store';
+import { removePatient } from 'store/store';
 import { IPatientInfo } from 'interfaces';
 
 
@@ -21,8 +21,6 @@ const MainPatientInfo = ({ name, surname, age, id, index }: IPatientInfo) => {
   };
   const handleDeleteClick = (id: number) => {
     dispatch(removePatient(id))
-    // deletePatient(id);
-    // console.log(patients)
   };
 
   return (
