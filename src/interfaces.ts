@@ -48,3 +48,19 @@ export interface IPatientInfo {
   id: number;
   index: number;
 }
+
+const initialPatientValues = {
+  id: 0,
+  name: '',
+  surname: '',
+  age: '',
+  sex: 'Male',
+  email: '',
+  telephone: '',
+  bodymass: '',
+  height: '',
+  notes: '',
+  activity: '1.2'
+}
+
+export type InitialPatientType = typeof initialPatientValues

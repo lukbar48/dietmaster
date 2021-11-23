@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from 'components/atoms/Button/Button';
-import { PatientContext } from 'contexts/PatientContext';
+import { initialPatient, PatientContext } from 'contexts/PatientContext';
 // import { useParams } from 'react-router';
-import { InitialPatientValues } from '../../data/data';
 import { Wrapper } from './ManageTop.styles';
 import { addPatient, addPatientState } from 'store/store';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 
 const ManageTop = () => {
@@ -18,13 +17,13 @@ const ManageTop = () => {
   const handleSaveClick = () => {
     dispatch(addPatient(patient));
     dispatch(addPatientState(patient));
-    setPatient(InitialPatientValues);
+    setPatient(initialPatient);
     navigate('/');
   };
 
   const handleExitClick = () => {
     navigate('/');
-    setPatient(InitialPatientValues);
+    setPatient(initialPatient);
   };
 
   return (

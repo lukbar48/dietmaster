@@ -1,10 +1,8 @@
 import SexButton from 'components/molecules/SexButton';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { PatientContext } from 'contexts/PatientContext';
 import { useParams } from 'react-router';
 import axios from 'axios';
-import { InitialPatientValues } from 'mocks/data/patientsList';
-// import { useForm } from 'react-hook-form';
 import { Input, Slider, TextArea, Wrapper } from './AboutForm.styles';
 
 const newPatient = {

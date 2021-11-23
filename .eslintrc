@@ -8,7 +8,7 @@
   },
   "rules": {
     "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
     "react/prop-types": "off",
     "no-mixed-operators": "off"
     // "prefer-const": "warn",

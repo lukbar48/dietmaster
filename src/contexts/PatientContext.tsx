@@ -1,47 +1,54 @@
-import React, { useReducer, createContext, useEffect, useState, ReactNode, useContext } from 'react';
+import { createContext, useEffect, useState, ReactNode } from 'react';
 import axios from 'axios';
-import patients from '../data/data';
-import { PatientState } from '../data/data';
-import { InitialPatientValues } from '../data/data';
-import { db } from 'mocks/db';
-import PatientsReducer from 'reducers/PatientsReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPatientsList, selectPatients, addPatient } from 'store/store';
+import { getPatientsList } from 'store/store';
+import { InitialPatientType } from 'interfaces';
+
+export const initialPatient = {
+  id: 0,
+  name: '',
+  surname: '',
+  age: '',
+  sex: 'Male',
+  email: '',
+  telephone: '',
+  bodymass: '',
+  height: '',
+  notes: '',
+  activity: '1.2'
+}
 
 export type PatientContextType = {
-  patientsList: PatientState[];
   managePatient: (id: number) => void;
-  setPatient: (obj: PatientState) => void;
-  searchResults: PatientState[];
-  patient: PatientState;
+  setPatient: (obj: InitialPatientType) => void;
+  searchResults: InitialPatientType[];
+  patient: InitialPatientType;
   searchTerm: string;
   setSearchTerm: (term: string) => void;
 };
 
 export const PatientContext = createContext<PatientContextType>({
-  patientsList: patients,
   managePatient() {},
   setPatient() {},
-  searchResults: patients,
+  searchResults: [initialPatient],
   searchTerm: '',
   setSearchTerm() {},
-  patient: InitialPatientValues,
+  patient: initialPatient,
 });
 
 const PatientProvider = ({ children }: { children: ReactNode }) => {
-  const [patient, setPatient] = useState<typeof InitialPatientValues>(InitialPatientValues);
-  const [patientsList, dispatch] = useReducer(PatientsReducer, [InitialPatientValues]);
-  const [searchResults, setSearchResults] = useState<typeof InitialPatientValues[]>([] as typeof InitialPatientValues[]);
+  const [patient, setPatient] = useState<InitialPatientType>(initialPatient);
+  const [searchResults, setSearchResults] = useState<InitialPatientType[]>([] as InitialPatientType[]);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const patientsRedux = useSelector((state: any) => state.patients);
-  const dispatchRedux = useDispatch();
+  const patientsList = useSelector((state: any) => state.patients);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios
       .get('/dietmaster')
       .then(({ data }) => {
-        dispatchRedux(getPatientsList(data));
+        dispatch(getPatientsList(data));
       })
       .catch((err) => console.log(err));
   }, []);
@@ -56,7 +63,7 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
   }, [searchTerm]);
 
   const managePatient = (id: number) => {
-    const findPatient = patientsRedux.filter((patient: any) => patient.id === id);
+    const findPatient = patientsList.filter((patient: any) => patient.id === id);
     setPatient(findPatient[0]);
   };
 
@@ -64,7 +71,6 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
     <PatientContext.Provider
       value={{
         managePatient,
-        patientsList,
         patient,
         setPatient,
         searchResults,

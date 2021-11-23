@@ -54,7 +54,9 @@ export const Input = styled.div`
     border-radius: 6px;
     background-color: ${({ theme }) => theme.colors.white};
     padding: 0 10px;
+    -webkit-appearance: none;
   }
+  
 `;
 
 export const TextArea = styled.div`
@@ -89,10 +91,29 @@ export const Slider = styled.div`
   }
   input {
     width: 100%;
+    -webkit-appearance: none;
+    margin: 7px 0;
   }
   .minmax {
     display: flex;
     justify-content: space-between;
     width: 100%;
+  }
+  input::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+    background: ${({ theme }) => theme.colors.blue3};
+    border-radius: 3px;
+  }
+
+  input::-webkit-slider-thumb {
+    height: 22px;
+    width: 15px;
+    border-radius: 5px;
+    background-color: ${({ theme }) => theme.colors.grey4};
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -6.5px;
   }
 `;

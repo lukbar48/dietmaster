@@ -2,7 +2,7 @@ import { createSlice, configureStore } from '@reduxjs/toolkit';
 import { db } from 'mocks/db';
 import axios from 'axios';
 
-const obj = {
+const initialPatient = {
   id: 0,
   name: '',
   surname: '',
@@ -16,7 +16,7 @@ const obj = {
   activity: '1.2',
 };
 
-const initialState: typeof obj[] = [];
+const initialState: typeof initialPatient[] = [];
 
 const patientsSlice = createSlice({
   name: 'patients',
@@ -44,8 +44,7 @@ const patientsSlice = createSlice({
           .put(`/dietmaster/add`, action.payload)
           .catch((err) => console.log(err));
         }
-        const newState = state.filter((patient) => patient.id !== action.payload.id);
-        return newState
+        return state.filter((patient) => patient.id !== action.payload.id)
     },
     addPatientState(state,action) {
       state.unshift(action.payload)
@@ -61,11 +60,9 @@ const patientsSlice = createSlice({
       if (findPatient) {
         axios
           .delete('/dietmaster', { data: findPatient })
-          .then(({ data }) => {
-            // dispatch({ type: 'DELETE_PATIENT', payload: data.removedPatient });
-          })
           .catch((err) => console.log(err));
-      }
+        }
+        return state.filter((patient) => patient.id !== action.payload)
     },
     sortPatientsList(state, action) {
       // eslint-disable-next-line array-callback-return

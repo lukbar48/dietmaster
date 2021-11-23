@@ -1,14 +1,13 @@
-import patients from 'data/data';
-import { PatientState } from '../data/data';
+import { InitialPatientType } from 'interfaces';
 
 type ACTIONTYPES =
-  | { type: 'DELETE_PATIENT'; payload: PatientState }
+  | { type: 'DELETE_PATIENT'; payload: InitialPatientType }
   | { type: 'SORT_PATIENTS_LIST'; payload: string }
-  | { type: 'ADD_PATIENT'; payload: PatientState }
+  | { type: 'ADD_PATIENT'; payload: InitialPatientType }
   | { type: 'SEARCH_IN_LIST'; payload: string }
-  | { type: 'ADD_PATIENTS_LIST'; payload: PatientState[] };
+  | { type: 'ADD_PATIENTS_LIST'; payload: InitialPatientType[] };
 
-const PatientsReducer = (state: typeof patients, action: ACTIONTYPES) => {
+const PatientsReducer = (state: InitialPatientType[], action: ACTIONTYPES) => {
   switch (action.type) {
     case 'ADD_PATIENTS_LIST': {
       return action.payload;

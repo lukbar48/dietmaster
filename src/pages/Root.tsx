@@ -14,7 +14,7 @@ const Root = () => {
     <Router basename={process.env.PUBLIC_URL}>
         <GlobalStyle />
         <Routes>
-          {user.login ? (
+          {1 ? (
             <Wrapper>
               <Route path="/patient/appointments/:id" element={<ManageDiet />} />
               <Route path="/patient/blood-tests/:id" element={<ManageDiet />} />

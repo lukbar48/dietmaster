@@ -1,6 +1,6 @@
-import { PatientState } from '../data/data';
+import { InitialPatientType } from 'interfaces';
 
-const useCalculate = (patient: PatientState) => {
+const useCalculate = (patient: InitialPatientType) => {
   const calculateBMI = () => {
     const height = Number(patient.height) / 100;
     const BMI = (Number(patient.bodymass) / Math.pow(height, 2)).toFixed(2).toString();
@@ -53,9 +53,11 @@ const useCalculate = (patient: PatientState) => {
   };
 
   const calculateCPM = () => {
-    const CPM = (66.5 + (13.75 * Number(patient.bodymass)) + (5.003 * Number(patient.height)) - (6.775 * Number(patient.age)))*Number(patient.activity);
+    const CPM = (66.5 + 13.75 * Number(patient.bodymass) + 5.003 * Number(patient.height) - 6.775 * Number(patient.age)) * Number(patient.activity);
     return CPM.toFixed().toString();
   };
+
+
 
   return { calculateBMI, BMIdescription, calculateRisk, idealWeight, calculateCPM };
 };
