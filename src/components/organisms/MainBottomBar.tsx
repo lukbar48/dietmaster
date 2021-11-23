@@ -1,7 +1,5 @@
-import React, { useContext } from 'react';
 import Button from 'components/atoms/Button/Button';
 import styled from 'styled-components';
-import { PatientContext } from 'contexts/PatientContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { sortPatientsList } from 'store/store';
 import { db } from 'mocks/db';

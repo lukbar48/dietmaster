@@ -9,7 +9,7 @@ import { IPatientInfo } from 'interfaces';
 
 
 const MainPatientInfo = ({ name, surname, age, id, index }: IPatientInfo) => {
-  const { deletePatient, managePatient } = useContext(PatientContext);
+  const { managePatient } = useContext(PatientContext);
   const navigate = useNavigate();
 
   const patients = useSelector((state: any) => state.patients);

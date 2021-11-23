@@ -1,15 +1,14 @@
 import MainBottomBar from 'components/organisms/MainBottomBar';
 import MainPatientInfo from 'components/molecules/MainPatientInfo';
 import MainTopBar from 'components/organisms/MainTopBar';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { PatientContext } from 'contexts/PatientContext';
 import { Wrapper } from './Main.styles';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const Main = () => {
-  const { patientsList, searchResults, searchTerm } = useContext(PatientContext);
+  const { searchResults, searchTerm } = useContext(PatientContext);
   const patients = useSelector((state: any) => state.patients);
-  const dispatch = useDispatch();
 
   return (
     <>

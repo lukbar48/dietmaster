@@ -10,8 +10,6 @@ import { getPatientsList, selectPatients, addPatient } from 'store/store';
 
 export type PatientContextType = {
   patientsList: PatientState[];
-  deletePatient: (id: number) => void;
-  addPatient: (obj: PatientState) => void;
   managePatient: (id: number) => void;
   setPatient: (obj: PatientState) => void;
   searchResults: PatientState[];
@@ -22,8 +20,6 @@ export type PatientContextType = {
 
 export const PatientContext = createContext<PatientContextType>({
   patientsList: patients,
-  deletePatient() {},
-  addPatient() {},
   managePatient() {},
   setPatient() {},
   searchResults: patients,
@@ -59,49 +55,6 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
       .catch((err) => console.log(err));
   }, [searchTerm]);
 
-  const deletePatient = (id: number) => {
-    // const findPatient = db.patient.findFirst({
-    //   where: {
-    //     id: {
-    //       equals: Number(id),
-    //     },
-    //   },
-    // });
-    // if (findPatient) {
-    //   axios
-    //     .delete('/dietmaster', { data: findPatient })
-    //     .then(({ data }) => {
-    //       dispatch({ type: 'DELETE_PATIENT', payload: data.removedPatient });
-    //     })
-    //     .catch((err) => console.log(err));
-    // }
-  };
-
-  const addPatient = (newPatient: PatientState) => {
-    const findPatient = db.patient.findFirst({
-      where: {
-        id: {
-          equals: Number(newPatient.id),
-        },
-      },
-    });
-
-    if (!findPatient) {
-      axios
-        .post(`/dietmaster/add`, patient)
-        .then(({ data }) => {})
-        .catch((err) => console.log(err));
-    } else if (findPatient) {
-      axios
-        .put(`/dietmaster/add`, patient)
-        .then(({ data }) => {})
-        .catch((err) => console.log(err));
-    }
-    // dispatch({ type: 'ADD_PATIENT', payload: newPatient });
-    dispatchRedux(addPatient(newPatient));
-  };
-
-
   const managePatient = (id: number) => {
     const findPatient = patientsRedux.filter((patient: any) => patient.id === id);
     setPatient(findPatient[0]);
@@ -111,11 +64,9 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
     <PatientContext.Provider
       value={{
         managePatient,
-        deletePatient,
         patientsList,
         patient,
         setPatient,
-        addPatient,
         searchResults,
         searchTerm,
         setSearchTerm,

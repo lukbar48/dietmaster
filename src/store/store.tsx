@@ -28,7 +28,6 @@ const patientsSlice = createSlice({
       }
     },
     addPatient(state, action) {
-      console.log(action.payload.id)
       const findPatient = db.patient.findFirst({
         where: {
           id: {
@@ -36,22 +35,20 @@ const patientsSlice = createSlice({
           },
         },
       });
-
       if (!findPatient) {
-        state.push(action.payload)
         axios
           .post(`/dietmaster/add`, action.payload)
-          // .then(({ data }) => )
           .catch((err) => console.log(err));
       } else if (findPatient) {
-        state.filter((patient) => patient.id !== action.payload.id)
-        
         axios
           .put(`/dietmaster/add`, action.payload)
-          // .then(({ data }) => console.log('x',data))
           .catch((err) => console.log(err));
-      }
-      
+        }
+        const newState = state.filter((patient) => patient.id !== action.payload.id);
+        return newState
+    },
+    addPatientState(state,action) {
+      state.unshift(action.payload)
     },
     removePatient(state, action) {
       const findPatient = db.patient.findFirst({
@@ -68,7 +65,6 @@ const patientsSlice = createSlice({
             // dispatch({ type: 'DELETE_PATIENT', payload: data.removedPatient });
           })
           .catch((err) => console.log(err));
-        return state.filter((patient) => patient.id !== action.payload);
       }
     },
     sortPatientsList(state, action) {
@@ -90,7 +86,7 @@ const patientsSlice = createSlice({
   },
 });
 
-export const { addPatient, removePatient, getPatientsList, sortPatientsList } = patientsSlice.actions;
+export const { addPatient, addPatientState, removePatient, getPatientsList, sortPatientsList } = patientsSlice.actions;
 export const selectPatients = (state: any) => state.patients;
 
 export const store = configureStore({

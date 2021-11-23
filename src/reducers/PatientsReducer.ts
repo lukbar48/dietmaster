@@ -1,5 +1,4 @@
 import patients from 'data/data';
-import { db } from 'mocks/db';
 import { PatientState } from '../data/data';
 
 type ACTIONTYPES =
@@ -19,8 +18,6 @@ const PatientsReducer = (state: typeof patients, action: ACTIONTYPES) => {
       return [newPatient, ...state];
     }
     case 'SORT_PATIENTS_LIST': {
-      // console.log('api ', db.patient.getAll());
-      // console.log('state ', state);
       // eslint-disable-next-line array-callback-return
       const sortedList = state.sort((a, b): any => {
         if (action.payload === 'female') {

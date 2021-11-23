@@ -28,27 +28,12 @@ export const patients = [
   }),
   rest.put('/dietmaster/add', (req, res, ctx) => {
     const updatedPatient = db.patient.update({
-      // Query for the entity to modify.
       where: {
         id: {
           equals: req.body.id,
         },
       },
-      // Provide partial next data to be
-      // merged with the existing properties.
-      data: {
-        // Specify the exact next value.
-        name: '',
-        surname: '',
-        age: '',
-        sex: 'Male',
-        email: '',
-        telephone: '',
-        bodymass: '',
-        height: '',
-        notes: '',
-        activity: '1.2',
-      },
+      data: req.body,
     })
     console.log(updatedPatient)
     return res(ctx.status(200), ctx.json(updatedPatient));
