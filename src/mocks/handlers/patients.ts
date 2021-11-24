@@ -1,5 +1,5 @@
+// @ts-nocheck
 import { rest } from 'msw';
-// import patients from '../data/patientsList';
 import { db } from 'mocks/db';
 
 export const patients = [
@@ -23,7 +23,7 @@ export const patients = [
 
   rest.post('/dietmaster/add', (req, res, ctx) => {
     const patient = req.body;
-    db.patient.create(patient)
+    db.patient.create(patient);
     return res(ctx.status(200), ctx.json(patient));
   }),
   rest.put('/dietmaster/add', (req, res, ctx) => {
@@ -34,8 +34,8 @@ export const patients = [
         },
       },
       data: req.body,
-    })
-    console.log(updatedPatient)
+    });
+    console.log(updatedPatient);
     return res(ctx.status(200), ctx.json(updatedPatient));
   }),
   rest.delete('/dietmaster', (req, res, ctx) => {

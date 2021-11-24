@@ -3,9 +3,12 @@ import { GlobalStyle } from 'assets/styles/GlobalStyle';
 import { Wrapper } from './Root.styles';
 import Main from './Main';
 import About from './About';
-import ManageDiet from './Diet';
+import Diet from './Diet';
 import Login from './Login';
 import { useAuth } from 'hooks/useAuth';
+import Allergens from './Allergens';
+import BloodTests from './BloodTests';
+import Appointments from './Appointments';
 
 const Root = () => {
   const { user } = useAuth();
@@ -16,10 +19,10 @@ const Root = () => {
         <Routes>
           {user.login ? (
             <Wrapper>
-              <Route path="/patient/appointments/:id" element={<ManageDiet />} />
-              <Route path="/patient/blood-tests/:id" element={<ManageDiet />} />
-              <Route path="/patient/allergens/:id" element={<ManageDiet />} />
-              <Route path="/patient/diet/:id" element={<ManageDiet />} />
+              <Route path="/patient/appointments/:id" element={<Appointments />} />
+              <Route path="/patient/blood-tests/:id" element={<BloodTests />} />
+              <Route path="/patient/allergens/:id" element={<Allergens />} />
+              <Route path="/patient/diet/:id" element={<Diet />} />
               <Route path="/patient/about/:id" element={<About />} />
               <Route path="/" element={<Main />} />
               <Route path="*" element={<Navigate to="/" />} />

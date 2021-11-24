@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { rest } from 'msw';
 import { db } from 'mocks/db';
 import { authenticateRequest } from 'mocks/helpers';
@@ -25,7 +26,7 @@ export const auth = [
       ctx.status(403),
       ctx.json({
         error: 'Invalid user data',
-      })
+      }),
     );
   }),
   rest.get('/me', (req, res, ctx) => {

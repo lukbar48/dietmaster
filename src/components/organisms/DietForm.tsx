@@ -27,10 +27,6 @@ const DietForm = () => {
     setEstablishCPM(e.currentTarget.value);
   };
 
-  const handleSliderChange = (e: React.FormEvent<HTMLFormElement>) => {
-    // console.log(e.target);
-  };
-
   return (
     <Wrapper>
       <CPMWrapper>
@@ -43,7 +39,7 @@ const DietForm = () => {
           <input type="text" value={establishCPM} onChange={(e) => handleCPMInputChange(e)} />
         </ShowCPM>
       </CPMWrapper>
-      <Sliders onChange={(e) => handleSliderChange(e)}>
+      <Sliders>
         <SliderWrapper>
           <h4>Protein</h4>
           <SliderInput>

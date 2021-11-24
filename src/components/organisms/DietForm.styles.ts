@@ -29,6 +29,7 @@ export const SliderWrapper = styled.div`
 
   h4 {
     margin: 2px 0 5px;
+    font-weight: 400;
   }
 `;
 
@@ -58,7 +59,7 @@ export const SliderInput = styled.div`
 
   input::-webkit-slider-runnable-track {
     width: 100%;
-    height: 12px;
+    height: 10px;
     cursor: pointer;
     background: ${({ theme }) => theme.colors.blue3};
     border-radius: 3px;
@@ -127,7 +128,7 @@ export const MicronutrientsWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   width: 100%;
-  margin: 10px 0;
+  margin: 5px 0;
 `;
 
 export const MicronutrientsColumn = styled.div`

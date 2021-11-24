@@ -9,7 +9,7 @@ export interface IInitialState {
 }
 
 export interface IButton {
-  children: string;
+  children: any;
   backgroundColor?: string;
   marginLeft?: string;
   padding?: string;
