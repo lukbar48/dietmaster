@@ -124,8 +124,8 @@ export const ShowCPM = styled.div`
 `;
 
 export const MicronutrientsWrapper = styled.div`
-display: flex;
-justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
   width: 100%;
   margin: 10px 0;
 `;

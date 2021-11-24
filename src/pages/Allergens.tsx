@@ -1,9 +1,9 @@
 import ManageNavBar from 'components/organisms/ManageNavBar';
 import ManageTop from 'components/organisms/ManageTop';
-import { Wrapper } from './About.styles';
 import DietForm from 'components/organisms/DietForm';
+import { Wrapper } from './About.styles';
 
-const Diet = () => {
+const Allergens = () => {
   return (
     <Wrapper>
       <ManageTop />
@@ -13,4 +13,4 @@ const Diet = () => {
   );
 };
 
-export default Diet;
+export default Allergens;
