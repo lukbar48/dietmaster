@@ -1,4 +1,4 @@
-import SexButton from 'components/molecules/SexButton';
+import SexButton from 'components/molecules/SexButton/SexButton';
 import React, { useContext, useEffect, useRef } from 'react';
 import { PatientContext } from 'contexts/PatientContext';
 import { useParams } from 'react-router';

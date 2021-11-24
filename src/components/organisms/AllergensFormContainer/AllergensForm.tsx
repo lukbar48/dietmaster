@@ -1,5 +1,6 @@
-import AllergensInput from 'components/molecules/AllergensInput';
-import AllergensList from 'components/molecules/AllergensList';
+
+import AllergensInput from 'components/molecules/AllergensInput/AllergensInput';
+import AllergensList from 'components/molecules/AllergensList/AllergensList';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 

@@ -1,5 +1,4 @@
 import AllergensListButton from 'components/atoms/AllergensListButton/AllergensListButton';
-import Button from 'components/atoms/Button/Button';
 import React, { useState } from 'react';
 import { MdAddCircle } from 'react-icons/md';
 import styled from 'styled-components';

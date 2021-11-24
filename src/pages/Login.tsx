@@ -3,7 +3,7 @@ import Button from 'components/atoms/Button/Button';
 import logo from '../assets/images/logo.png'
 import { useAuth } from 'hooks/useAuth';
 import { Wrapper, Form, Image } from './Login.styles';
-import LoginInput from 'components/molecules/LoginInput';
+import LoginInput from 'components/molecules/LoginInput/LoginInput';
 
 
 const Login = () => {

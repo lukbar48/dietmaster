@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import AllergensForm from './AllergensForm';
+import PreferencesForm from './PreferencesForm';
 
 const Wrapper = styled.div`
   display: grid;
@@ -12,12 +13,13 @@ const Wrapper = styled.div`
 `;
 
 const AllergensFormContainer = () => {
-  return <Wrapper>
-<AllergensForm />
-<AllergensForm />
-<AllergensForm />
-
-  </Wrapper>;
+  return (
+    <Wrapper>
+      <AllergensForm />
+      <PreferencesForm />
+      <AllergensForm />
+    </Wrapper>
+  );
 };
 
 export default AllergensFormContainer;

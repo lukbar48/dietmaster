@@ -1,6 +1,6 @@
-import MainBottomBar from 'components/organisms/MainBottomBar';
-import MainPatientInfo from 'components/molecules/MainPatientInfo';
-import MainTopBar from 'components/organisms/MainTopBar';
+import MainBottomBar from 'components/organisms/MainBottomBar/MainBottomBar';
+import MainPatientInfo from 'components/molecules/MainPatientInfo/MainPatientInfo';
+import MainTopBar from 'components/organisms/MainTopBar/MainTopBar';
 import React, { useContext } from 'react';
 import { PatientContext } from 'contexts/PatientContext';
 import { Wrapper } from './Main.styles';

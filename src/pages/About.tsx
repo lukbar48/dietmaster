@@ -1,9 +1,9 @@
 import React from 'react';
-import ManageNavBar from 'components/organisms/ManageNavBar';
-import ManageTop from 'components/organisms/ManageTop';
+import ManageNavBar from 'components/organisms/ManageNavBar/ManageNavBar';
+import ManageTop from 'components/organisms/ManageTop/ManageTop';
 import { Wrapper } from './About.styles';
-import AboutBottomBar from 'components/organisms/AboutBottomBar';
-import AboutForm from 'components/organisms/AboutForm';
+import AboutBottomBar from 'components/organisms/AboutBottomBar/AboutBottomBar';
+import AboutForm from 'components/organisms/AboutForm/AboutForm';
 
 const About = () => {
   return (
