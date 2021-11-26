@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState, ReactNode } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
+import { addPatient, addPatientState } from 'store/store';
 import { getPatientsList } from 'store/store';
 import { InitialPatientType } from 'interfaces';
 
@@ -15,8 +16,30 @@ export const initialPatient = {
   bodymass: '',
   height: '',
   notes: '',
-  activity: '1.2'
-}
+  activity: '1.2',
+  CPM: '0',
+  protein: '30',
+  fat: '20',
+  carbs: '50',
+};
+
+export const newPatient = {
+  id: new Date().getTime(),
+  name: '',
+  surname: '',
+  age: '',
+  sex: 'Male',
+  email: '',
+  telephone: '',
+  bodymass: '',
+  height: '',
+  notes: '',
+  activity: '1.2',
+  CPM: '0',
+  protein: '30',
+  fat: '20',
+  carbs: '50',
+};
 
 export type PatientContextType = {
   managePatient: (id: number) => void;

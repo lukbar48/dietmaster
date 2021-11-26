@@ -3,6 +3,7 @@ import faker from 'faker';
 
 const sex = ['Male', 'Female'];
 const note = ['Too fat', 'Too skinny'];
+const products = ['soya', 'apple', 'strawberries', 'avocado', 'eggs', 'coffee', 'oats', 'fish', 'milk', 'rice'];
 const getRandomValue = (array: any, index: any) => array[index];
 
 export const db = factory({
@@ -18,6 +19,26 @@ export const db = factory({
     height: (): string => `${faker.datatype.number({ min: 160, max: 200 })}`,
     notes: (): string => getRandomValue(note, faker.datatype.number({ min: 0, max: 1 })),
     activity: (): string => `${faker.datatype.number({ min: 1.2, max: 2.4, precision: 0.1 })}`,
+    CPM: (): string => '1000',
+    protein: (): string => '30',
+    fat: (): string => '20',
+    carbs: (): string => '50',
+    // details: {
+    //   energyTab: {
+    //     street: String,
+    //   },
+    //   allergensTab: {
+    //     alergens: String,
+    //     preferences: String,
+    //     diseases: ['a'],
+    //   },
+    //   testsTab: {
+    //     street: String,
+    //   },
+    //   appointmentsTab: {
+    //     street: String,
+    //   },
+    // },
   },
   dietitian: {
     id: primaryKey(() => '1'),

@@ -14,6 +14,10 @@ const initialPatient = {
   height: '',
   notes: '',
   activity: '1.2',
+  CPM: '0',
+  protein: '5',
+  fat: '15',
+  carbs: '10',
 };
 
 const initialState: typeof initialPatient[] = [];
@@ -36,18 +40,14 @@ const patientsSlice = createSlice({
         },
       });
       if (!findPatient) {
-        axios
-          .post(`/dietmaster/add`, action.payload)
-          .catch((err) => console.log(err));
+        axios.post(`/dietmaster/add`, action.payload).catch((err) => console.log(err));
       } else if (findPatient) {
-        axios
-          .put(`/dietmaster/add`, action.payload)
-          .catch((err) => console.log(err));
-        }
-        return state.filter((patient) => patient.id !== action.payload.id)
+        axios.put(`/dietmaster/add`, action.payload).catch((err) => console.log(err));
+        return state.filter((patient) => patient.id !== action.payload.id);
+      }
     },
-    addPatientState(state,action) {
-      state.unshift(action.payload)
+    addPatientState(state, action) {
+      state.unshift(action.payload);
     },
     removePatient(state, action) {
       const findPatient = db.patient.findFirst({
@@ -58,11 +58,15 @@ const patientsSlice = createSlice({
         },
       });
       if (findPatient) {
-        axios
-          .delete('/dietmaster', { data: findPatient })
-          .catch((err) => console.log(err));
-        }
-        return state.filter((patient) => patient.id !== action.payload)
+        axios.delete('/dietmaster', { data: findPatient }).catch((err) => console.log(err));
+      }
+      return state.filter((patient) => patient.id !== action.payload);
+    },
+    showPatients(state, action) {
+      if (action.payload === 'show') {
+        console.log(state);
+        return state;
+      }
     },
     sortPatientsList(state, action) {
       // eslint-disable-next-line array-callback-return
@@ -83,7 +87,7 @@ const patientsSlice = createSlice({
   },
 });
 
-export const { addPatient, addPatientState, removePatient, getPatientsList, sortPatientsList } = patientsSlice.actions;
+export const { addPatient, addPatientState, removePatient, getPatientsList, sortPatientsList, showPatients } = patientsSlice.actions;
 export const selectPatients = (state: any) => state.patients;
 
 export const store = configureStore({

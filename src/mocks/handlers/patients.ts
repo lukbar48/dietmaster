@@ -35,7 +35,6 @@ export const patients = [
       },
       data: req.body,
     });
-    console.log(updatedPatient);
     return res(ctx.status(200), ctx.json(updatedPatient));
   }),
   rest.delete('/dietmaster', (req, res, ctx) => {

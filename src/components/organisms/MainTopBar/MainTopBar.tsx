@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import InputMain from 'components/atoms/InputMain/InputMain';
 import Button from 'components/atoms/Button/Button';
 import styled from 'styled-components';
-import { PatientContext } from 'contexts/PatientContext';
+import { newPatient, PatientContext } from 'contexts/PatientContext';
 import { useAuth } from 'hooks/useAuth';
 
 const Wrapper = styled.div`
@@ -33,19 +33,7 @@ const MainTopBar = () => {
   const { signOut } = useAuth();
 
   const handleClickNewPatient = () => {
-    setPatient({
-      id: new Date().getTime(),
-      name: '',
-      surname: '',
-      age: '',
-      sex: 'Male',
-      email: '',
-      telephone: '',
-      bodymass: '',
-      height: '',
-      notes: '',
-      activity: '1.2',
-    });
+    setPatient(newPatient);
     navigate(`/patient/about/${patient.id}`);
   };
 

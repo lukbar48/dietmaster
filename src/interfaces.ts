@@ -17,6 +17,7 @@ export interface IButton {
   fontSize?: string;
   onClick?: () => void;
   type?: 'submit' | 'reset' | 'button';
+  color?: string;
 }
 
 export interface IInput {
@@ -60,7 +61,11 @@ const initialPatientValues = {
   bodymass: '',
   height: '',
   notes: '',
-  activity: '1.2'
+  activity: '1.2',
+  CPM: '0',
+  protein: '5',
+  fat: '15',
+  carbs: '10',
 }
 
 export type InitialPatientType = typeof initialPatientValues

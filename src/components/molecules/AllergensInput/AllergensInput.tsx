@@ -35,23 +35,19 @@ const Form = styled.form`
 `;
 
 interface IAllergensInput {
-  // name: string;
-  // setName: (value: string) => void;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-  // setCategory: (value: string) => void;
-  // editing: boolean;
   placeholder: string;
+  setItem: React.Dispatch<React.SetStateAction<string>>;
+  item: string;
+  color?: string;
 }
 
-const AllergensInput = ({ placeholder, handleSubmit }: IAllergensInput) => {
-  const [item, setItem] = useState('');
+const AllergensInput = ({ placeholder, handleSubmit, setItem, item, color }: IAllergensInput) => {
   return (
-    <Form
-    onSubmit={handleSubmit}
-    >
-      <input value={item} onChange={(e) => setItem(e.target.value)} type="text" placeholder={placeholder} />
+    <Form onSubmit={handleSubmit}>
+      <input value={item} onChange={(e) => setItem(e.target.value)} maxLength={20} type="text" placeholder={placeholder} />
       <div>
-        <AllergensListButton>
+        <AllergensListButton color={color}>
           <MdAddCircle />
         </AllergensListButton>
       </div>

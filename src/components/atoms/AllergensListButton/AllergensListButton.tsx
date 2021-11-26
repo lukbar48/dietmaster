@@ -12,7 +12,7 @@ export const StyledButton = styled.button<IButton>`
   background-color: transparent;
   border: none;
   font-size: ${({ fontSize, theme: { fontSizes } }) => (fontSize ? fontSize : fontSizes.xl)};
-  color: ${({ theme }) => theme.colors.blue3};
+  color: ${({ color, theme: { colors } }) => (color ? color : colors.blue3)};
 `;
 
 const AllergensListButton = ({ ...props }: IButton) => {

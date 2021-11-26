@@ -1,6 +1,9 @@
 import { PatientContext } from 'contexts/PatientContext';
 import useCalculate from 'hooks/useCalculate';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { addPatient, addPatientState } from 'store/store';
 import {
   Nutrient,
   CPMWrapper,
@@ -16,19 +19,51 @@ import {
 } from './DietForm.styles';
 
 const DietForm = () => {
-  const { patient } = useContext(PatientContext);
+  const { id } = useParams();
+  const { patient, setPatient } = useContext(PatientContext);
   const { calculateCPM } = useCalculate(patient);
   const [establishCPM, setEstablishCPM] = useState(calculateCPM());
-  const [protein, setProtein] = useState(22);
-  const [fat, setFat] = useState(18);
-  const [carbs, setCarbs] = useState(56);
+  const CPMValue = useRef<HTMLInputElement>(null);
+  const proteinValue = useRef<HTMLInputElement>(null);
+  const fatValue = useRef<HTMLInputElement>(null);
+  const carbsValue = useRef<HTMLInputElement>(null);
 
-  const handleCPMInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEstablishCPM(e.currentTarget.value);
+  const patientsList = useSelector((state: any) => state.patients);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (id) {
+      const getPatient = patientsList.filter((patient: any) => patient.id === Number(id));
+      setPatient(getPatient[0]);
+
+      if (proteinValue.current) {
+        proteinValue.current.value = patient.protein;
+      }
+      if (carbsValue.current) {
+        carbsValue.current.value = patient.carbs;
+      }
+      if (fatValue.current) {
+        fatValue.current.value = patient.fat;
+      }
+    }
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
+    setPatient({
+      ...patient,
+      [e.target.name]: e.target.value,
+    });
   };
 
+  useEffect(() => {
+    dispatch(addPatient(patient));
+    dispatch(addPatientState(patient));
+    console.log('change');
+    console.log(patient)
+  }, [patient]);
+
   return (
-    <Wrapper>
+    <Wrapper onChange={handleChange}>
       <CPMWrapper>
         <ShowCPM>
           <p>Recommended CPM</p>
@@ -36,14 +71,19 @@ const DietForm = () => {
         </ShowCPM>
         <ShowCPM>
           <p>Established CPM</p>
-          <input type="text" value={establishCPM} onChange={(e) => handleCPMInputChange(e)} />
+          <input
+            id="CPM"
+            name="CPM"
+            type="text"
+            value={establishCPM}
+          />
         </ShowCPM>
       </CPMWrapper>
       <Sliders>
         <SliderWrapper>
           <h4>Protein</h4>
           <SliderInput>
-            <div>{`${((Number(establishCPM) * protein) / 400).toFixed()}g`}</div>
+            <div>{`${((Number(establishCPM) * Number(patient.protein)) / 400).toFixed()}g`}</div>
             <input
               className="red"
               id="protein"
@@ -52,15 +92,14 @@ const DietForm = () => {
               min="1"
               max="100"
               step="1"
-              value={protein}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setProtein(Number(e.currentTarget.value))}
+              ref={proteinValue}
             />
           </SliderInput>
         </SliderWrapper>
         <SliderWrapper>
           <h4>Fat</h4>
           <SliderInput>
-            <div>{`${((Number(establishCPM) * fat) / 900).toFixed()}g`}</div>
+            <div>{`${((Number(establishCPM) * Number(patient.fat)) / 900).toFixed()}g`}</div>
             <input
               className="yellow"
               id="fat"
@@ -69,15 +108,14 @@ const DietForm = () => {
               min="1"
               max="100"
               step="1"
-              value={fat}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFat(Number(e.currentTarget.value))}
+              ref={fatValue}
             />
           </SliderInput>
         </SliderWrapper>
         <SliderWrapper>
           <h4>Carbohydrates</h4>
           <SliderInput>
-            <div>{`${((Number(establishCPM) * carbs) / 400).toFixed()}g`}</div>
+            <div>{`${((Number(establishCPM) * Number(patient.carbs)) / 400).toFixed()}g`}</div>
             <Input
               className="blue"
               id="carbs"
@@ -86,8 +124,7 @@ const DietForm = () => {
               min="1"
               max="100"
               step="1"
-              value={carbs}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCarbs(Number(e.currentTarget.value))}
+              ref={carbsValue}
             />
           </SliderInput>
         </SliderWrapper>
@@ -100,103 +137,103 @@ const DietForm = () => {
         <MicronutrientsColumn>
           <Nutrient>
             <p>fiber [g]</p>
-            <input type="text" value="20" />
+            <input type="text" value="20" readOnly />
           </Nutrient>
           <Nutrient>
             <p>sugar [g]</p>
-            <input type="text" value="42.5" />
+            <input type="text" value="42.5" readOnly />
           </Nutrient>
           <Nutrient>
             <p>SFA [g]</p>
-            <input type="text" value="9.8" />
+            <input type="text" value="9.8" readOnly />
           </Nutrient>
           <Nutrient>
             <p>MUFA [g]</p>
-            <input type="text" value="29" />
+            <input type="text" value="29" readOnly />
           </Nutrient>
           <Nutrient>
             <p>PUFA [g]</p>
-            <input type="text" value="16.1" />
+            <input type="text" value="16.1" readOnly />
           </Nutrient>
           <Nutrient>
             <p>omega-3 [g]</p>
-            <input type="text" value="1.9" />
+            <input type="text" value="1.9" readOnly />
           </Nutrient>
           <Nutrient>
             <p>omega-6 [g]</p>
-            <input type="text" value="4.6" />
+            <input type="text" value="4.6" readOnly />
           </Nutrient>
           <Nutrient>
             <p>cholesterol [mg]</p>
-            <input type="text" value="300" />
+            <input type="text" value="300" readOnly />
           </Nutrient>
         </MicronutrientsColumn>
         <MicronutrientsColumn>
           <Nutrient>
             <p>sodium [mg]</p>
-            <input type="text" value="1300" />
+            <input type="text" value="1300" readOnly />
           </Nutrient>
           <Nutrient>
             <p>potassium [mg]</p>
-            <input type="text" value="3500" />
+            <input type="text" value="3500" readOnly />
           </Nutrient>
           <Nutrient>
             <p>calcium [mg]</p>
-            <input type="text" value="1200" />
+            <input type="text" value="1200" readOnly />
           </Nutrient>
           <Nutrient>
             <p>phosphorus [mg]</p>
-            <input type="text" value="700" />
+            <input type="text" value="700" readOnly />
           </Nutrient>
           <Nutrient>
             <p>magnesium [mg]</p>
-            <input type="text" value="320" />
+            <input type="text" value="320" readOnly />
           </Nutrient>
           <Nutrient>
             <p>iron [mg]</p>
-            <input type="text" value="10" />
+            <input type="text" value="10" readOnly />
           </Nutrient>
           <Nutrient>
             <p>zinc [mg]</p>
-            <input type="text" value="8" />
+            <input type="text" value="8" readOnly />
           </Nutrient>
           <Nutrient>
             <p>copper [mg]</p>
-            <input type="text" value="0.9" />
+            <input type="text" value="0.9" readOnly />
           </Nutrient>
         </MicronutrientsColumn>
         <MicronutrientsColumn>
           <Nutrient>
             <p>vit. A [µg]</p>
-            <input type="text" value="700" />
+            <input type="text" value="700" readOnly />
           </Nutrient>
           <Nutrient>
             <p>vit. D [µg]</p>
-            <input type="text" value="15" />
+            <input type="text" value="15" readOnly />
           </Nutrient>
           <Nutrient>
             <p>vit. E [mg]</p>
-            <input type="text" value="8" />
+            <input type="text" value="8" readOnly />
           </Nutrient>
           <Nutrient>
             <p>vit. K [µg]</p>
-            <input type="text" value="90" />
+            <input type="text" value="90" readOnly />
           </Nutrient>
           <Nutrient>
             <p>vit. B1 [mg]</p>
-            <input type="text" value="1.1" />
+            <input type="text" value="1.1" readOnly />
           </Nutrient>
           <Nutrient>
             <p>vit. B6 [mg]</p>
-            <input type="text" value="1.5" />
+            <input type="text" value="1.5" readOnly />
           </Nutrient>
           <Nutrient>
             <p>vit. B12 [mg]</p>
-            <input type="text" value="2.4" />
+            <input type="text" value="2.4" readOnly />
           </Nutrient>
           <Nutrient>
             <p>vit. C [mg]</p>
-            <input type='text' value='75' />
+            <input type="text" value="75" readOnly />
           </Nutrient>
         </MicronutrientsColumn>
       </MicronutrientsWrapper>

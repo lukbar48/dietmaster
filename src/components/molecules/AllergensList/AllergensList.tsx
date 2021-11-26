@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 interface IAllergensList {
   allergensList: string[];
+  deleteItem: (choosedItem: string) => void;
+  color?: string;
 }
 
 const Wrapper = styled.div`
@@ -18,12 +20,12 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 5px 8px;
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-size: 1.1rem;
+    font-weight: 400;
   }
 `;
 
-const AllergensList = ({ allergensList }: IAllergensList) => {
+const AllergensList = ({ allergensList, deleteItem, color }: IAllergensList) => {
   return (
     <Wrapper>
       <ul>
@@ -32,7 +34,7 @@ const AllergensList = ({ allergensList }: IAllergensList) => {
             <li key={item}>
               {item}
               <div>
-                <AllergensListButton>
+                <AllergensListButton color={color} onClick={() => deleteItem(item)}>
                   <MdRemoveCircle />
                 </AllergensListButton>
               </div>

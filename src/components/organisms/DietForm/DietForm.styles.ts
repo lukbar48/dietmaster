@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.form`
   display: flex;
   flex-direction: column;
   padding: 15px;
@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   min-height: calc(100vh - 75px);
   background-color: ${({ theme }) => theme.colors.grey1};
 `;
-export const Sliders = styled.form`
+export const Sliders = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
