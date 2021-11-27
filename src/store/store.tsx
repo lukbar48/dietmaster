@@ -1,4 +1,4 @@
-import { createSlice, configureStore } from '@reduxjs/toolkit';
+import { createSlice, configureStore, createAsyncThunk } from '@reduxjs/toolkit';
 import { db } from 'mocks/db';
 import axios from 'axios';
 
@@ -18,56 +18,72 @@ const initialPatient = {
   protein: '5',
   fat: '15',
   carbs: '10',
+  allergens: [],
+  preferences: [],
+  diseases: [],
 };
 
 const initialState: typeof initialPatient[] = [];
+
+export const fetchPatients = createAsyncThunk('patients/getPatients', async () => {
+  try {
+    const response = await axios.get('/dietmaster');
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+let patientFound = false;
+export const addNewPatient = createAsyncThunk('patients/addPatient', async (patient: typeof initialPatient) => {
+  patientFound = false;
+  const findPatient = db.patient.findFirst({
+    where: {
+      id: {
+        equals: patient.id,
+      },
+    },
+  });
+  if (!findPatient) {
+    try {
+      const response = await axios.post('/dietmaster/add', patient);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  } else if (findPatient) {
+    patientFound = true;
+    try {
+      const response = await axios.put('/dietmaster/add', patient);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});
+
+export const removePatient = createAsyncThunk('patients/removePatient', async (patient: any) => {
+  const findPatient = db.patient.findFirst({
+    where: {
+      id: {
+        equals: patient,
+      },
+    },
+  });
+  if (findPatient) {
+    try {
+      const response = await axios.delete('/dietmaster', { data: findPatient });
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});
 
 const patientsSlice = createSlice({
   name: 'patients',
   initialState,
   reducers: {
-    getPatientsList(state, action) {
-      for (let i = 0; i < action.payload.length; i++) {
-        state.push(action.payload[i]);
-      }
-    },
-    addPatient(state, action) {
-      const findPatient = db.patient.findFirst({
-        where: {
-          id: {
-            equals: Number(action.payload.id),
-          },
-        },
-      });
-      if (!findPatient) {
-        axios.post(`/dietmaster/add`, action.payload).catch((err) => console.log(err));
-      } else if (findPatient) {
-        axios.put(`/dietmaster/add`, action.payload).catch((err) => console.log(err));
-        return state.filter((patient) => patient.id !== action.payload.id);
-      }
-    },
-    addPatientState(state, action) {
-      state.unshift(action.payload);
-    },
-    removePatient(state, action) {
-      const findPatient = db.patient.findFirst({
-        where: {
-          id: {
-            equals: Number(action.payload),
-          },
-        },
-      });
-      if (findPatient) {
-        axios.delete('/dietmaster', { data: findPatient }).catch((err) => console.log(err));
-      }
-      return state.filter((patient) => patient.id !== action.payload);
-    },
-    showPatients(state, action) {
-      if (action.payload === 'show') {
-        console.log(state);
-        return state;
-      }
-    },
     sortPatientsList(state, action) {
       // eslint-disable-next-line array-callback-return
       return state.sort((a, b): any => {
@@ -85,15 +101,37 @@ const patientsSlice = createSlice({
       });
     },
   },
+  extraReducers(builder) {
+    builder.addCase(fetchPatients.fulfilled, (state, action) => {
+      return action.payload;
+    });
+    builder.addCase(addNewPatient.fulfilled, (state, action) => {
+      if (!patientFound) {
+        state.push(action.payload);
+      } else if (patientFound) {
+        const findIndex = state.findIndex((patient) => patient.id === action.payload.id);
+        state[findIndex] = action.payload;
+      }
+    });
+    builder.addCase(addNewPatient.rejected, (state, action) => {
+      console.log('rejected');
+    });
+    builder.addCase(removePatient.fulfilled, (state, action) => {
+      return state.filter((patient) => patient.id !== action.payload.removedPatient.id);
+    });
+  },
 });
 
-export const { addPatient, addPatientState, removePatient, getPatientsList, sortPatientsList, showPatients } = patientsSlice.actions;
-export const selectPatients = (state: any) => state.patients;
+export const { sortPatientsList } = patientsSlice.actions;
 
 export const store = configureStore({
   reducer: {
     patients: patientsSlice.reducer,
   },
+  // middleware: (getDefaultMiddleware) =>
+  //   getDefaultMiddleware({
+  //     serializableCheck: false,
+  //   }),
 });
 
-export type RootState = ReturnType<typeof store.getState>;
+// export type RootState = ReturnType<typeof store.getState>;

@@ -66,6 +66,9 @@ const initialPatientValues = {
   protein: '5',
   fat: '15',
   carbs: '10',
+  allergens: [],
+  preferences: [],
+  diseases: [],
 }
 
 export type InitialPatientType = typeof initialPatientValues

@@ -1,4 +1,4 @@
-import { IInput } from 'interfaces';
+import { IInput } from 'types/interfaces';
 import styled from 'styled-components';
 
 export const Input = styled.input`

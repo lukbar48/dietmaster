@@ -4,7 +4,6 @@ import Button from 'components/atoms/Button/Button';
 import { initialPatient, PatientContext } from 'contexts/PatientContext';
 // import { useParams } from 'react-router';
 import { Wrapper } from './ManageTop.styles';
-import { addPatient, addPatientState, showPatients } from 'store/store';
 import { useDispatch } from 'react-redux';
 
 const ManageTop = () => {
@@ -28,9 +27,6 @@ const ManageTop = () => {
 
   return (
     <Wrapper>
-      {/* <Button onClick={handleSaveClick} backgroundColor="#00A3D9" padding="6px 18px" fontSize="12px">
-        Save changes
-      </Button> */}
       <Button onClick={handleExitClick} backgroundColor="#505050" padding="6px 28px" fontSize="12px">
         Back
       </Button>

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Wrapper } from './MainPatientInfo.styles';
 import { removePatient } from 'store/store';
-import { IPatientInfo } from 'interfaces';
+import { IPatientInfo } from 'types/interfaces';
 
 
 const MainPatientInfo = ({ name, surname, age, id, index }: IPatientInfo) => {

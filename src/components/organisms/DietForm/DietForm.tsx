@@ -3,7 +3,7 @@ import useCalculate from 'hooks/useCalculate';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPatient, addPatientState } from 'store/store';
+import { addNewPatient } from 'store/store';
 import {
   Nutrient,
   CPMWrapper,
@@ -56,10 +56,7 @@ const DietForm = () => {
   };
 
   useEffect(() => {
-    dispatch(addPatient(patient));
-    dispatch(addPatientState(patient));
-    console.log('change');
-    console.log(patient)
+    dispatch(addNewPatient(patient));
   }, [patient]);
 
   return (
@@ -71,12 +68,7 @@ const DietForm = () => {
         </ShowCPM>
         <ShowCPM>
           <p>Established CPM</p>
-          <input
-            id="CPM"
-            name="CPM"
-            type="text"
-            value={establishCPM}
-          />
+          <input id="CPM" name="CPM" type="text" value={establishCPM} />
         </ShowCPM>
       </CPMWrapper>
       <Sliders>
@@ -84,48 +76,21 @@ const DietForm = () => {
           <h4>Protein</h4>
           <SliderInput>
             <div>{`${((Number(establishCPM) * Number(patient.protein)) / 400).toFixed()}g`}</div>
-            <input
-              className="red"
-              id="protein"
-              name="protein"
-              type="range"
-              min="1"
-              max="100"
-              step="1"
-              ref={proteinValue}
-            />
+            <input className="red" id="protein" name="protein" type="range" min="1" max="100" step="1" ref={proteinValue} />
           </SliderInput>
         </SliderWrapper>
         <SliderWrapper>
           <h4>Fat</h4>
           <SliderInput>
             <div>{`${((Number(establishCPM) * Number(patient.fat)) / 900).toFixed()}g`}</div>
-            <input
-              className="yellow"
-              id="fat"
-              name="fat"
-              type="range"
-              min="1"
-              max="100"
-              step="1"
-              ref={fatValue}
-            />
+            <input className="yellow" id="fat" name="fat" type="range" min="1" max="100" step="1" ref={fatValue} />
           </SliderInput>
         </SliderWrapper>
         <SliderWrapper>
           <h4>Carbohydrates</h4>
           <SliderInput>
             <div>{`${((Number(establishCPM) * Number(patient.carbs)) / 400).toFixed()}g`}</div>
-            <Input
-              className="blue"
-              id="carbs"
-              name="carbs"
-              type="range"
-              min="1"
-              max="100"
-              step="1"
-              ref={carbsValue}
-            />
+            <Input className="blue" id="carbs" name="carbs" type="range" min="1" max="100" step="1" ref={carbsValue} />
           </SliderInput>
         </SliderWrapper>
         <SliderDesc>

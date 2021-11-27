@@ -1,4 +1,4 @@
-import { InitialPatientType } from 'interfaces';
+import { InitialPatientType } from 'types/interfaces';
 
 type ACTIONTYPES =
   | { type: 'DELETE_PATIENT'; payload: InitialPatientType }

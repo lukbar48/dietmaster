@@ -1,4 +1,4 @@
-import { InitialPatientType } from 'interfaces';
+import { InitialPatientType } from 'types/interfaces';
 
 const useCalculate = (patient: InitialPatientType) => {
   const calculateBMI = () => {

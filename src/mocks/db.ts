@@ -8,7 +8,7 @@ const getRandomValue = (array: any, index: any) => array[index];
 
 export const db = factory({
   patient: {
-    id: primaryKey(() => faker.datatype.number({ min: 111655094926240, max: 163655094926240 })),
+    id: primaryKey(() => faker.datatype.number({ min: 1116550949262, max: 1636550949262 })),
     name: () => faker.fake('{{name.firstName}}'),
     surname: (): string => faker.fake('{{name.lastName}}'),
     age: (): string => `${faker.datatype.number({ min: 20, max: 70 })}`,
@@ -23,6 +23,9 @@ export const db = factory({
     protein: (): string => '30',
     fat: (): string => '20',
     carbs: (): string => '50',
+    allergens: (): string[] => [],
+    preferences: (): string[] => [],
+    diseases: (): string[] => [],
     // details: {
     //   energyTab: {
     //     street: String,

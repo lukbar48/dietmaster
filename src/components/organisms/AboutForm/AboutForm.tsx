@@ -4,22 +4,9 @@ import { PatientContext } from 'contexts/PatientContext';
 import { useParams } from 'react-router';
 import axios from 'axios';
 import { Input, Slider, TextArea, Wrapper } from './AboutForm.styles';
-import { addPatient, addPatientState } from 'store/store';
+import { addNewPatient } from 'store/store';
 import { useDispatch } from 'react-redux';
 
-const newPatient = {
-  id: new Date().getTime(),
-  name: '',
-  surname: '',
-  age: '',
-  sex: 'Male',
-  email: '',
-  telephone: '',
-  bodymass: '',
-  height: '',
-  notes: '',
-  activity: '1.2',
-};
 
 const AboutForm = () => {
   const { id } = useParams();
@@ -76,8 +63,7 @@ const AboutForm = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(addPatient(patient));
-    dispatch(addPatientState(patient));
+    dispatch(addNewPatient(patient))
   }, [patient]);
 
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
