@@ -20,8 +20,7 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 5px 8px;
-    font-size: 1.1rem;
-    font-weight: 400;
+    font-size: 1rem;
   }
 `;
 

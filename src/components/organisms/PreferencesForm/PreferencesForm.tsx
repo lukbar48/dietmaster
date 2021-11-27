@@ -1,27 +1,19 @@
 import AllergensInput from 'components/molecules/AllergensInput/AllergensInput';
 import AllergensList from 'components/molecules/AllergensList/AllergensList';
-import React, { useState } from 'react';
-import styled from 'styled-components';
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 10px 20px;
-
-  h3 {
-    text-align: center;
-    margin: 5px 0;
-  }
-  p {
-    text-align: center;
-    margin: 10px 0;
-    font-size: ${({ theme }) => theme.fontSizes.xm};
-  }
-`;
+import React, { useContext, useEffect, useState } from 'react';
+import { Wrapper } from '../AllergensForm/AllergensForm.styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { addNewPatient } from 'store/store';
+import { useParams } from 'react-router-dom';
+import { PatientContext } from 'contexts/PatientContext';
 
 const PreferencesForm = () => {
+  const { id } = useParams();
   const [preferencesList, setPreferencesList] = useState<string[]>(['rice', 'sausage', 'avocado']);
   const [item, setItem] = useState('');
+  const patientsList = useSelector((state: any) => state.patientsList);
+  const dispatch = useDispatch();
+  const { patient, setPatient } = useContext(PatientContext);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -38,6 +30,14 @@ const PreferencesForm = () => {
     console.log(choosedItem);
     setPreferencesList(preferencesList.filter((item) => item !== choosedItem));
   };
+  useEffect(() => {
+    const getList = patientsList.filter((item: typeof patient) => item.id === Number(id));
+    setPreferencesList(getList[0].preferences);
+  }, []);
+  useEffect(() => {
+    setPatient({ ...patient, preferences: preferencesList })
+    dispatch(addNewPatient({ ...patient, preferences: preferencesList }));
+  }, [preferencesList]);
   return (
     <Wrapper>
       <h3>Doesn't like</h3>

@@ -3,8 +3,8 @@ import faker from 'faker';
 
 const sex = ['Male', 'Female'];
 const note = ['Too fat', 'Too skinny'];
-const products = ['soya', 'apple', 'strawberries', 'avocado', 'eggs', 'coffee', 'oats', 'fish', 'milk', 'rice'];
-const getRandomValue = (array: any, index: any) => array[index];
+const products = ['soya', 'apple', 'strawberries', 'avocado', 'eggs', 'coffee', 'oats', 'fish', 'milk', 'rice', 'peanuts'];
+const getRandomValue = (array: string[], index: number) => array[index];
 
 export const db = factory({
   patient: {
@@ -23,8 +23,8 @@ export const db = factory({
     protein: (): string => '30',
     fat: (): string => '20',
     carbs: (): string => '50',
-    allergens: (): string[] => [],
-    preferences: (): string[] => [],
+    allergens: (): string[] => [getRandomValue(products, faker.datatype.number({ min: 0, max: 10 }))],
+    preferences: (): string[] => [getRandomValue(products, faker.datatype.number({ min: 0, max: 10 }))],
     diseases: (): string[] => [],
     // details: {
     //   energyTab: {

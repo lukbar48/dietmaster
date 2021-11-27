@@ -18,9 +18,9 @@ export const initialPatient = {
   protein: '5',
   fat: '15',
   carbs: '10',
-  allergens: [],
-  preferences: [],
-  diseases: [],
+  allergens: [''],
+  preferences: [''],
+  diseases: [''],
 };
 
 const initialState: typeof initialPatient[] = [];
@@ -100,6 +100,12 @@ const patientsListSlice = createSlice({
         }
       });
     },
+    addAlergens(state,action) {
+      if (action.payload.type === 'allergens') {
+        console.log('aaaaaaaaal')
+      }
+    }
+
   },
   extraReducers(builder) {
     builder.addCase(fetchPatients.fulfilled, (state, action) => {
@@ -119,7 +125,7 @@ const patientsListSlice = createSlice({
   },
 });
 
-export const { sortPatientsList } = patientsListSlice.actions;
+export const { sortPatientsList, addAlergens } = patientsListSlice.actions;
 
 export const store = configureStore({
   reducer: {

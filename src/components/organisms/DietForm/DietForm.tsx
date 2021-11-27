@@ -22,7 +22,6 @@ const DietForm = () => {
   const { id } = useParams();
   const { patient, setPatient } = useContext(PatientContext);
   const { calculateCPM } = useCalculate(patient);
-  const [establishCPM, setEstablishCPM] = useState(calculateCPM());
   const caloriesValue = useRef<HTMLInputElement>(null);
   const proteinValue = useRef<HTMLInputElement>(null);
   const fatValue = useRef<HTMLInputElement>(null);
