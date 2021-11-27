@@ -28,9 +28,9 @@ const AllergensList = ({ allergensList, deleteItem, color }: IAllergensList) => 
   return (
     <Wrapper>
       <ul>
-        {allergensList.map((item) => {
+        {allergensList.map((item, index) => {
           return (
-            <li key={item}>
+            <li key={index}>
               {item}
               <div>
                 <AllergensListButton color={color} onClick={() => deleteItem(item)}>
