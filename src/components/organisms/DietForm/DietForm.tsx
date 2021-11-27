@@ -23,12 +23,12 @@ const DietForm = () => {
   const { patient, setPatient } = useContext(PatientContext);
   const { calculateCPM } = useCalculate(patient);
   const [establishCPM, setEstablishCPM] = useState(calculateCPM());
-  const CPMValue = useRef<HTMLInputElement>(null);
+  const caloriesValue = useRef<HTMLInputElement>(null);
   const proteinValue = useRef<HTMLInputElement>(null);
   const fatValue = useRef<HTMLInputElement>(null);
   const carbsValue = useRef<HTMLInputElement>(null);
 
-  const patientsList = useSelector((state: any) => state.patients);
+  const patientsList = useSelector((state: any) => state.patientsList);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -44,6 +44,9 @@ const DietForm = () => {
       }
       if (fatValue.current) {
         fatValue.current.value = patient.fat;
+      }
+      if (caloriesValue.current) {
+        caloriesValue.current.value = patient.calories;
       }
     }
   }, []);
@@ -64,32 +67,36 @@ const DietForm = () => {
       <CPMWrapper>
         <ShowCPM>
           <p>Recommended CPM</p>
-          <div>{calculateCPM()}</div>
+          <div>{`${calculateCPM()} kcal`}</div>
+        </ShowCPM>
+        <ShowCPM>
+          <p>Energy deficit / surplus</p>
+          <input id="calories" name="calories" type="number" ref={caloriesValue} />
         </ShowCPM>
         <ShowCPM>
           <p>Established CPM</p>
-          <input id="CPM" name="CPM" type="text" value={establishCPM} />
+          <div>{`${Number(calculateCPM()) + Number(patient.calories)} kcal`}</div>
         </ShowCPM>
       </CPMWrapper>
       <Sliders>
         <SliderWrapper>
           <h4>Protein</h4>
           <SliderInput>
-            <div>{`${((Number(establishCPM) * Number(patient.protein)) / 400).toFixed()}g`}</div>
+            <div>{`${(((Number(calculateCPM()) + Number(patient.calories)) * Number(patient.protein)) / 400).toFixed()}g`}</div>
             <input className="red" id="protein" name="protein" type="range" min="1" max="100" step="1" ref={proteinValue} />
           </SliderInput>
         </SliderWrapper>
         <SliderWrapper>
           <h4>Fat</h4>
           <SliderInput>
-            <div>{`${((Number(establishCPM) * Number(patient.fat)) / 900).toFixed()}g`}</div>
+            <div>{`${(((Number(calculateCPM()) + Number(patient.calories)) * Number(patient.fat)) / 900).toFixed()}g`}</div>
             <input className="yellow" id="fat" name="fat" type="range" min="1" max="100" step="1" ref={fatValue} />
           </SliderInput>
         </SliderWrapper>
         <SliderWrapper>
           <h4>Carbohydrates</h4>
           <SliderInput>
-            <div>{`${((Number(establishCPM) * Number(patient.carbs)) / 400).toFixed()}g`}</div>
+            <div>{`${(((Number(calculateCPM()) + Number(patient.calories)) * Number(patient.carbs)) / 400).toFixed()}g`}</div>
             <Input className="blue" id="carbs" name="carbs" type="range" min="1" max="100" step="1" ref={carbsValue} />
           </SliderInput>
         </SliderWrapper>

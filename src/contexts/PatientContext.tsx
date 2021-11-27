@@ -16,7 +16,7 @@ export const initialPatient = {
   height: '',
   notes: '',
   activity: '1.2',
-  CPM: '0',
+  calories: '0',
   protein: '30',
   fat: '20',
   carbs: '50',
@@ -48,7 +48,7 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
   const [searchResults, setSearchResults] = useState<InitialPatientType[]>([] as InitialPatientType[]);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const patientsList = useSelector((state: any) => state.patients);
+  const patientsList = useSelector((state: any) => state.patientsList);
   const dispatch = useDispatch();
 
   useEffect(() => {

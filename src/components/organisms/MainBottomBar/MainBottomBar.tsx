@@ -33,7 +33,7 @@ const Wrapper = styled.div`
 `;
 
 const MainBottomBar = () => {
-  const patients = useSelector((state: any) => state.patients);
+  const patientsList = useSelector((state: any) => state.patientsList);
   const dispatch = useDispatch();
 
   return (
@@ -44,7 +44,7 @@ const MainBottomBar = () => {
           <Button
             onClick={() => {
               dispatch(sortPatientsList('off'));
-              console.log('state ', patients);
+              console.log('state ', patientsList);
               console.log('api', db.patient.getAll());
             }}
             padding="6px 20px"

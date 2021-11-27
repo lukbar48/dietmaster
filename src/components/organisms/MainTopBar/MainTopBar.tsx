@@ -45,7 +45,7 @@ const MainTopBar = () => {
       height: '',
       notes: '',
       activity: '1.2',
-      CPM: '0',
+      calories: '0',
       protein: '30',
       fat: '20',
       carbs: '50',

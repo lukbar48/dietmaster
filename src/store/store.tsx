@@ -2,7 +2,7 @@ import { createSlice, configureStore, createAsyncThunk } from '@reduxjs/toolkit'
 import { db } from 'mocks/db';
 import axios from 'axios';
 
-const initialPatient = {
+export const initialPatient = {
   id: 0,
   name: '',
   surname: '',
@@ -14,7 +14,7 @@ const initialPatient = {
   height: '',
   notes: '',
   activity: '1.2',
-  CPM: '0',
+  calories: '0',
   protein: '5',
   fat: '15',
   carbs: '10',
@@ -62,7 +62,7 @@ export const addNewPatient = createAsyncThunk('patients/addPatient', async (pati
   }
 });
 
-export const removePatient = createAsyncThunk('patients/removePatient', async (patient: any) => {
+export const removePatient = createAsyncThunk('patients/removePatient', async (patient: number) => {
   const findPatient = db.patient.findFirst({
     where: {
       id: {
@@ -80,8 +80,8 @@ export const removePatient = createAsyncThunk('patients/removePatient', async (p
   }
 });
 
-const patientsSlice = createSlice({
-  name: 'patients',
+const patientsListSlice = createSlice({
+  name: 'patientsList',
   initialState,
   reducers: {
     sortPatientsList(state, action) {
@@ -113,25 +113,16 @@ const patientsSlice = createSlice({
         state[findIndex] = action.payload;
       }
     });
-    builder.addCase(addNewPatient.rejected, (state, action) => {
-      console.log('rejected');
-    });
     builder.addCase(removePatient.fulfilled, (state, action) => {
       return state.filter((patient) => patient.id !== action.payload.removedPatient.id);
     });
   },
 });
 
-export const { sortPatientsList } = patientsSlice.actions;
+export const { sortPatientsList } = patientsListSlice.actions;
 
 export const store = configureStore({
   reducer: {
-    patients: patientsSlice.reducer,
+    patientsList: patientsListSlice.reducer,
   },
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware({
-  //     serializableCheck: false,
-  //   }),
 });
-
-// export type RootState = ReturnType<typeof store.getState>;

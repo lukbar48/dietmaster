@@ -62,7 +62,7 @@ const initialPatientValues = {
   height: '',
   notes: '',
   activity: '1.2',
-  CPM: '0',
+  calories: '0',
   protein: '5',
   fat: '15',
   carbs: '10',

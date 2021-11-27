@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 const Main = () => {
   const { searchResults, searchTerm } = useContext(PatientContext);
-  const patients = useSelector((state: any) => state.patients);
+  const patients = useSelector((state: any) => state.patientsList);
 
   return (
     <>
