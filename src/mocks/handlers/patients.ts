@@ -4,10 +4,11 @@ import { db } from 'mocks/db';
 
 export const patients = [
   rest.get('/dietmaster', (req, res, ctx) => {
+    console.log('pobieranie pacjentów...', db.patient.getAll());
     return res(ctx.status(200), ctx.json(db.patient.getAll()));
   }),
 
-  rest.post('/dietmaster', (req, res, ctx) => {
+  rest.post('/dietmaster/search', (req, res, ctx) => {
     const searchInList = db.patient.getAll().filter((patient) => {
       return patient.name.toLowerCase().includes(`${req.body}`) || patient.surname.toLowerCase().includes(`${req.body}`);
     });
@@ -22,6 +23,7 @@ export const patients = [
   }),
 
   rest.post('/dietmaster/add', (req, res, ctx) => {
+    console.log('dodawanie pacjenta...', req.body);
     const patient = req.body;
     db.patient.create(patient);
     return res(ctx.status(200), ctx.json(patient));

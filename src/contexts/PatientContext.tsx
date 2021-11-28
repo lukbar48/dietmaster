@@ -1,29 +1,8 @@
 import { createContext, useEffect, useState, ReactNode } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { InitialPatientType } from 'types/interfaces';
-import { fetchPatients } from 'store/store';
-
-export const initialPatient = {
-  id: 0,
-  name: '',
-  surname: '',
-  age: '',
-  sex: 'Male',
-  email: '',
-  telephone: '',
-  bodymass: '',
-  height: '',
-  notes: '',
-  activity: '1.2',
-  calories: '0',
-  protein: '30',
-  fat: '20',
-  carbs: '50',
-  allergens: [],
-  preferences: [],
-  diseases: [],
-};
+import { InitialPatientType, initialPatientValues } from 'types/interfaces';
+import { fetchPatients, useGetPatientsQuery } from 'store/store';
 
 export type PatientContextType = {
   managePatient: (id: number) => void;
@@ -37,27 +16,34 @@ export type PatientContextType = {
 export const PatientContext = createContext<PatientContextType>({
   managePatient() {},
   setPatient() {},
-  searchResults: [initialPatient],
+  searchResults: [initialPatientValues],
   searchTerm: '',
   setSearchTerm() {},
-  patient: initialPatient,
+  patient: initialPatientValues,
 });
 
 const PatientProvider = ({ children }: { children: ReactNode }) => {
-  const [patient, setPatient] = useState<InitialPatientType>(initialPatient);
+  const [patient, setPatient] = useState<InitialPatientType>(initialPatientValues);
   const [searchResults, setSearchResults] = useState<InitialPatientType[]>([] as InitialPatientType[]);
   const [searchTerm, setSearchTerm] = useState('');
 
   const patientsList = useSelector((state: any) => state.patientsList);
   const dispatch = useDispatch();
 
+  const data = useGetPatientsQuery();
   useEffect(() => {
-    dispatch(fetchPatients())
+    console.log(data);
+  }, [data]);
+
+  useEffect(() => {
+    // console.log(data);
+    // getPatients(data)
+    // dispatch(fetchPatients());
   }, []);
 
   useEffect(() => {
     axios
-      .post('/dietmaster', searchTerm)
+      .post('/dietmaster/search', searchTerm)
       .then(({ data }) => {
         setSearchResults(data);
       })

@@ -1,29 +1,37 @@
 import { createSlice, configureStore, createAsyncThunk } from '@reduxjs/toolkit';
 import { db } from 'mocks/db';
 import axios from 'axios';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
+import { InitialPatientType, initialPatientValues } from 'types/interfaces';
 
-export const initialPatient = {
-  id: 0,
-  name: '',
-  surname: '',
-  age: '',
-  sex: 'Male',
-  email: '',
-  telephone: '',
-  bodymass: '',
-  height: '',
-  notes: '',
-  activity: '1.2',
-  calories: '0',
-  protein: '5',
-  fat: '15',
-  carbs: '10',
-  allergens: [''],
-  preferences: [''],
-  diseases: [''],
-};
+const initialState = [] as InitialPatientType[];
 
-const initialState: typeof initialPatient[] = [];
+export const patientsListApi = createApi({
+  reducerPath: 'patientsListApi',
+  baseQuery: fetchBaseQuery({
+    baseUrl: '/dietmaster',
+  }),
+  tagTypes: ['Patients'],
+  endpoints: (builder) => ({
+    getPatients: builder.query<InitialPatientType[], void>({
+      query: () => 'getPatients',
+      providesTags: ['Patients'],
+    }),
+    addPatient: builder.mutation<any, any>({
+      query: (body) => ({
+        url: '/dietmaster/add',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['Patients'],
+    }),
+  }),
+});
+
+
+
+
+export const { useGetPatientsQuery, useAddPatientMutation } = patientsListApi;
 
 export const fetchPatients = createAsyncThunk('patients/getPatients', async () => {
   try {
@@ -35,7 +43,7 @@ export const fetchPatients = createAsyncThunk('patients/getPatients', async () =
 });
 
 let patientFound = false;
-export const addNewPatient = createAsyncThunk('patients/addPatient', async (patient: typeof initialPatient) => {
+export const addNewPatient = createAsyncThunk('patients/addPatient', async (patient: InitialPatientType) => {
   patientFound = false;
   const findPatient = db.patient.findFirst({
     where: {
@@ -100,12 +108,6 @@ const patientsListSlice = createSlice({
         }
       });
     },
-    addAlergens(state,action) {
-      if (action.payload.type === 'allergens') {
-        console.log('aaaaaaaaal')
-      }
-    }
-
   },
   extraReducers(builder) {
     builder.addCase(fetchPatients.fulfilled, (state, action) => {
@@ -125,10 +127,12 @@ const patientsListSlice = createSlice({
   },
 });
 
-export const { sortPatientsList, addAlergens } = patientsListSlice.actions;
+export const { sortPatientsList } = patientsListSlice.actions;
 
 export const store = configureStore({
   reducer: {
+    [patientsListApi.reducerPath]: patientsListApi.reducer,
     patientsList: patientsListSlice.reducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(patientsListApi.middleware),
 });

@@ -50,7 +50,7 @@ export interface IPatientInfo {
   index: number;
 }
 
-const initialPatientValues = {
+export const initialPatientValues = {
   id: 0,
   name: '',
   surname: '',
