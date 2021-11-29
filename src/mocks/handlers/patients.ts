@@ -8,7 +8,7 @@ export const patients = [
     return res(ctx.status(200), ctx.json(db.patient.getAll()));
   }),
 
-  rest.post('/dietmaster/search', (req, res, ctx) => {
+  rest.post('/dietmaster', (req, res, ctx) => {
     const searchInList = db.patient.getAll().filter((patient) => {
       return patient.name.toLowerCase().includes(`${req.body}`) || patient.surname.toLowerCase().includes(`${req.body}`);
     });

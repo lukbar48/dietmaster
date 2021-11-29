@@ -65,8 +65,8 @@ const AboutForm = () => {
 
   useEffect(() => {
     console.log(rest)
-    addPatient(patient)
-    // dispatch(addNewPatient(patient));
+    // addPatient(patient)
+    dispatch(addNewPatient(patient));
   }, [patient]);
 
   useEffect(() => {

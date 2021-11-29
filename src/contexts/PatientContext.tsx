@@ -30,20 +30,20 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
   const patientsList = useSelector((state: any) => state.patientsList);
   const dispatch = useDispatch();
 
-  const data = useGetPatientsQuery();
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  // const data = useGetPatientsQuery();
+  // useEffect(() => {
+    // console.log(data);
+  // }, [data]);
 
   useEffect(() => {
     // console.log(data);
     // getPatients(data)
-    // dispatch(fetchPatients());
+    dispatch(fetchPatients());
   }, []);
 
   useEffect(() => {
     axios
-      .post('/dietmaster/search', searchTerm)
+      .post('/dietmaster', searchTerm)
       .then(({ data }) => {
         setSearchResults(data);
       })

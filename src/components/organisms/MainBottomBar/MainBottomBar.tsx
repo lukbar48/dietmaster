@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { sortPatientsList } from 'store/store';
 import { db } from 'mocks/db';
 
-const Wrapper = styled.div`
+const Wrapper = styled.div` 
   display: flex;
   align-items: center;
   position: fixed;

@@ -22,7 +22,7 @@ const ManageNavBar = () => {
     <ManageNavButton to={`/patient/about/${patient.id}`}><BsFillPersonFill />About</ManageNavButton>
     <ManageNavButton to={`/patient/diet/${patient.id}`}><ImSpoonKnife />Diet</ManageNavButton>
     <ManageNavButton to={`/patient/allergens/${patient.id}`}><BsExclamationDiamond />Allergens</ManageNavButton>
-    <ManageNavButton to={`/patient/blood-tests/${patient.id}`}><BiTestTube />Blood tests</ManageNavButton>
+    <ManageNavButton to={`/patient/blood-tests/${patient.id}`}><BiTestTube />Tests</ManageNavButton>
     <ManageNavButton to={`/patient/appointments/${patient.id}`}><AiTwotoneCalendar />Appointments</ManageNavButton>
   </Wrapper>;
 };

@@ -1,17 +1,13 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from 'components/atoms/Button/Button';
 import { PatientContext } from 'contexts/PatientContext';
-// import { useParams } from 'react-router';
 import { Wrapper } from './ManageTop.styles';
-import { useDispatch } from 'react-redux';
 import { initialPatientValues } from 'types/interfaces';
-
 
 const ManageTop = () => {
   const navigate = useNavigate();
-  const { patient, setPatient } = useContext(PatientContext);
-  const dispatch = useDispatch();
+  const { setPatient } = useContext(PatientContext);
 
   const handleExitClick = () => {
     navigate('/');
@@ -28,4 +24,3 @@ const ManageTop = () => {
 };
 
 export default ManageTop;
-
