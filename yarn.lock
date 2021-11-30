@@ -2074,7 +2074,7 @@
   "resolved" "https://registry.npmjs.org/@types/tapable/-/tapable-1.0.6.tgz"
   "version" "1.0.6"
 
-"@types/testing-library__jest-dom@^5.9.1":
+"@types/testing-library__jest-dom@^5.14.1", "@types/testing-library__jest-dom@^5.9.1":
   "integrity" "sha512-Gk9vaXfbzc5zCXI9eYE9BI5BNHEp4D3FWjgqBE/ePGYElLAP+KvxBcsdkwfIVvezs605oiyd/VrpiHe3Oeg+Aw=="
   "resolved" "https://registry.npmjs.org/@types/testing-library__jest-dom/-/testing-library__jest-dom-5.14.1.tgz"
   "version" "5.14.1"

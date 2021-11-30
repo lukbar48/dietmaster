@@ -1,37 +1,39 @@
 import { createSlice, configureStore, createAsyncThunk } from '@reduxjs/toolkit';
 import { db } from 'mocks/db';
 import axios from 'axios';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 import { InitialPatientType, initialPatientValues } from 'types/interfaces';
 
 const initialState = [] as InitialPatientType[];
 
-export const patientsListApi = createApi({
-  reducerPath: 'patientsListApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: '/dietmaster',
-  }),
-  tagTypes: ['Patients'],
-  endpoints: (builder) => ({
-    getPatients: builder.query<InitialPatientType[], void>({
-      query: () => 'getPatients',
-      providesTags: ['Patients'],
-    }),
-    addPatient: builder.mutation<any, any>({
-      query: (body) => ({
-        url: '/dietmaster/add',
-        method: 'POST',
-        body,
-      }),
-      invalidatesTags: ['Patients'],
-    }),
-  }),
-});
-
-
-
-
-export const { useGetPatientsQuery, useAddPatientMutation } = patientsListApi;
+// export const patientsListApi = createApi({
+//   reducerPath: 'patientsListApi',
+//   baseQuery: fetchBaseQuery({
+//     baseUrl: '/dietmaster',
+//   }),
+//   tagTypes: ['Patients'],
+//   endpoints: (builder) => ({
+//     getPatients: builder.query<InitialPatientType[], void>({
+//       query: () => '/',
+//       providesTags: ['Patients'],
+//     }),
+//     addPatient: builder.mutation<any, any>({
+//       query: (body) => ({
+//         url: '/add',
+//         method: 'POST',
+//         body,
+//       }),
+//       invalidatesTags: ['Patients'],
+//     }),
+//     deletePatient: builder.mutation<any, any>({
+//       query: (body) => ({
+//         url: '/',
+//         method: 'DELETE',
+//         body,
+//       }),
+//     }),
+//   }),
+// });
+// export const { useGetPatientsQuery, useAddPatientMutation } = patientsListApi;
 
 export const fetchPatients = createAsyncThunk('patients/getPatients', async () => {
   try {
@@ -131,8 +133,6 @@ export const { sortPatientsList } = patientsListSlice.actions;
 
 export const store = configureStore({
   reducer: {
-    [patientsListApi.reducerPath]: patientsListApi.reducer,
     patientsList: patientsListSlice.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(patientsListApi.middleware),
 });

@@ -23,7 +23,7 @@ export interface IButton {
 export interface IInput {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
-  value: string;
+  value: string; 
 }
 
 export interface IManageNavButton {

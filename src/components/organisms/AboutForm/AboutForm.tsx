@@ -6,7 +6,6 @@ import axios from 'axios';
 import { Input, Slider, TextArea, Wrapper } from './AboutForm.styles';
 import { addNewPatient } from 'store/store';
 import { useDispatch } from 'react-redux';
-import { useAddPatientMutation } from 'store/store';
 
 const AboutForm = () => {
   const { id } = useParams();
@@ -61,17 +60,12 @@ const AboutForm = () => {
   }, []);
 
   const dispatch = useDispatch();
-  const [addPatient, rest] = useAddPatientMutation();
 
   useEffect(() => {
-    console.log(rest)
-    // addPatient(patient)
     dispatch(addNewPatient(patient));
   }, [patient]);
 
-  useEffect(() => {
-    console.log(rest)
-  }, [rest]);
+
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
     setPatient({
       ...patient,

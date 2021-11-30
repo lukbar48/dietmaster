@@ -9,7 +9,7 @@ import { PatientContext } from 'contexts/PatientContext';
 
 const PreferencesForm = () => {
   const { id } = useParams();
-  const [preferencesList, setPreferencesList] = useState<string[]>(['rice', 'sausage', 'avocado']);
+  const [preferencesList, setPreferencesList] = useState<string[]>(['']);
   const [item, setItem] = useState('');
   const patientsList = useSelector((state: any) => state.patientsList);
   const dispatch = useDispatch();

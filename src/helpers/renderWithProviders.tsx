@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import PatientProvider from 'contexts/PatientContext';
 import { store } from 'store/store';
 
-export const renderWithProviders = ({ children }: { children: ReactNode }) => {
+export const renderWithProviders = (children: ReactNode) => {
   return render(
     <Provider store={store}>
       <ThemeProvider theme={theme}>

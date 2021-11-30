@@ -13,5 +13,7 @@ export const Input = styled.input`
 const InputMain = ({...props}: IInput) => {
   return <Input {...props}></Input>;
 };
+ 
+
 
 export default InputMain;
