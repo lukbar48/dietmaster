@@ -29,7 +29,6 @@ const Wrapper = styled.div`
 const MainTopBar = () => {
   const { setPatient, patient, searchTerm, setSearchTerm } = useContext(PatientContext);
   const navigate = useNavigate();
-
   const { signOut } = useAuth();
 
   const handleClickNewPatient = () => {
