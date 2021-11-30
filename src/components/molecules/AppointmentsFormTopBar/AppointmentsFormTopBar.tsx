@@ -3,18 +3,14 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 5fr 4.5fr 4.5fr 5fr;
+  grid-template-columns: 1fr 3fr 2fr 2fr 2fr 2fr 3fr;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 45px;
   background-color: ${({ theme }) => theme.colors.blue3};
   color: white;
   text-align: center;
-  border: 1px solid white;
 
   div {
     display: flex;
@@ -22,7 +18,6 @@ const Wrapper = styled.div`
     justify-content: center;
     width: 100%;
     height: 100%;
-    border: 1px solid white;
   }
 `;
 
@@ -33,6 +28,8 @@ const AppointmentsFormTopBar = () => {
       <div>Date</div>
       <div>Body mass (kg)</div>
       <div>BMI</div>
+      <div>Hips (cm)</div>
+      <div>Waist (cm)</div>
       <div>Manage</div>
     </Wrapper>
   );

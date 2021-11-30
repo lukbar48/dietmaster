@@ -23,7 +23,7 @@ export interface IButton {
 export interface IInput {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
-  value: string; 
+  value: string;
 }
 
 export interface IManageNavButton {
@@ -69,6 +69,16 @@ export const initialPatientValues = {
   allergens: [''],
   preferences: [''],
   diseases: [''],
-}
+  tests: [{ date: '2021-01-26', type: 'Red blood cells', value: '75mg' }],
+  appointments: [
+    {
+      date: '2021-06-05',
+      bodymass: '82',
+      BMI: '28',
+      hips: '113',
+      waist: '98',
+    },
+  ],
+};
 
-export type InitialPatientType = typeof initialPatientValues
+export type InitialPatientType = typeof initialPatientValues;

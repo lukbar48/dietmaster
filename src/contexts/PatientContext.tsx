@@ -2,7 +2,7 @@ import { createContext, useEffect, useState, ReactNode } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { InitialPatientType, initialPatientValues } from 'types/interfaces';
-import { fetchPatients} from 'store/store';
+import { fetchPatients } from 'store/store';
 
 export type PatientContextType = {
   managePatient: (id: number) => void;
@@ -17,7 +17,7 @@ export const PatientContext = createContext<PatientContextType>({
   managePatient() {},
   setPatient() {},
   searchResults: [initialPatientValues],
-  searchTerm: '', 
+  searchTerm: '',
   setSearchTerm() {},
   patient: initialPatientValues,
 });

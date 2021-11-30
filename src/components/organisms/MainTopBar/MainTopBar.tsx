@@ -52,6 +52,8 @@ const MainTopBar = () => {
       allergens: [],
       preferences: [],
       diseases: [],
+      tests: [],
+      appointments: [],
     });
     navigate(`/patient/about/${patient.id}`);
   };

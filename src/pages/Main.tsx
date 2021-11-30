@@ -5,6 +5,8 @@ import React, { useContext } from 'react';
 import { PatientContext } from 'contexts/PatientContext';
 import { Wrapper } from './Main.styles';
 import { useSelector } from 'react-redux';
+import { InitialPatientType } from 'types/interfaces';
+
 
 const Main = () => {
   const { searchResults, searchTerm } = useContext(PatientContext);
@@ -16,11 +18,11 @@ const Main = () => {
       <MainBottomBar />
       <Wrapper>
         {searchTerm &&
-          searchResults.map((patient, index) => {
+          searchResults.map((patient: InitialPatientType, index: number) => {
             return <MainPatientInfo index={index} key={patient.id} {...patient} />;
           })}
         {!searchTerm &&
-          patients.map((patient: any, index: any) => {
+          patients.map((patient: InitialPatientType, index: number) => {
             return <MainPatientInfo index={index} key={patient.id} {...patient} />;
           })}
       </Wrapper>

@@ -5,36 +5,6 @@ import { InitialPatientType, initialPatientValues } from 'types/interfaces';
 
 const initialState = [] as InitialPatientType[];
 
-// export const patientsListApi = createApi({
-//   reducerPath: 'patientsListApi',
-//   baseQuery: fetchBaseQuery({
-//     baseUrl: '/dietmaster',
-//   }),
-//   tagTypes: ['Patients'],
-//   endpoints: (builder) => ({
-//     getPatients: builder.query<InitialPatientType[], void>({
-//       query: () => '/',
-//       providesTags: ['Patients'],
-//     }),
-//     addPatient: builder.mutation<any, any>({
-//       query: (body) => ({
-//         url: '/add',
-//         method: 'POST',
-//         body,
-//       }),
-//       invalidatesTags: ['Patients'],
-//     }),
-//     deletePatient: builder.mutation<any, any>({
-//       query: (body) => ({
-//         url: '/',
-//         method: 'DELETE',
-//         body,
-//       }),
-//     }),
-//   }),
-// });
-// export const { useGetPatientsQuery, useAddPatientMutation } = patientsListApi;
-
 export const fetchPatients = createAsyncThunk('patients/getPatients', async () => {
   try {
     const response = await axios.get('/dietmaster');
@@ -136,3 +106,33 @@ export const store = configureStore({
     patientsList: patientsListSlice.reducer,
   },
 });
+
+// export const patientsListApi = createApi({
+//   reducerPath: 'patientsListApi',
+//   baseQuery: fetchBaseQuery({
+//     baseUrl: '/dietmaster',
+//   }),
+//   tagTypes: ['Patients'],
+//   endpoints: (builder) => ({
+//     getPatients: builder.query<InitialPatientType[], void>({
+//       query: () => '/',
+//       providesTags: ['Patients'],
+//     }),
+//     addPatient: builder.mutation<any, any>({
+//       query: (body) => ({
+//         url: '/add',
+//         method: 'POST',
+//         body,
+//       }),
+//       invalidatesTags: ['Patients'],
+//     }),
+//     deletePatient: builder.mutation<any, any>({
+//       query: (body) => ({
+//         url: '/',
+//         method: 'DELETE',
+//         body,
+//       }),
+//     }),
+//   }),
+// });
+// export const { useGetPatientsQuery, useAddPatientMutation } = patientsListApi;

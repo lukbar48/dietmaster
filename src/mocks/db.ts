@@ -26,22 +26,39 @@ export const db = factory({
     allergens: (): string[] => [getRandomValue(products, faker.datatype.number({ min: 0, max: 10 }))],
     preferences: (): string[] => [getRandomValue(products, faker.datatype.number({ min: 0, max: 10 }))],
     diseases: (): string[] => [],
-    // details: {
-    //   energyTab: {
-    //     street: String,
-    //   },
-    //   allergensTab: {
-    //     alergens: String,
-    //     preferences: String,
-    //     diseases: ['a'],
-    //   },
-    //   testsTab: {
-    //     street: String,
-    //   },
-    //   appointmentsTab: {
-    //     street: String,
-    //   },
-    // },
+    tests: (): any[] => [
+      {
+        date: '2021-11-26',
+        type: 'Red blood cells',
+        value: '75mg',
+      },
+      {
+        date: '2021-11-26',
+        type: 'Cholesterol',
+        value: '420mg',
+      },
+      {
+        date: '2021-11-26',
+        type: 'Glucose',
+        value: '102mg',
+      },
+    ],
+    appointments: (): any[] => [
+      {
+        date: '2021-11-26',
+        bodymass: '82',
+        BMI: '28',
+        hips: '113',
+        waist: '98',
+      },
+      {
+        date: '2021-11-26',
+        bodymass: '80',
+        BMI: '24',
+        hips: '107',
+        waist: '94',
+      },
+    ],
   },
   dietitian: {
     id: primaryKey(() => '1'),

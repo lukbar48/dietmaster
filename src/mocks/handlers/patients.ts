@@ -4,7 +4,6 @@ import { db } from 'mocks/db';
 
 export const patients = [
   rest.get('/dietmaster', (req, res, ctx) => {
-    console.log('pobieranie pacjentów...', db.patient.getAll());
     return res(ctx.status(200), ctx.json(db.patient.getAll()));
   }),
 
@@ -23,7 +22,6 @@ export const patients = [
   }),
 
   rest.post('/dietmaster/add', (req, res, ctx) => {
-    console.log('dodawanie pacjenta...', req.body);
     const patient = req.body;
     db.patient.create(patient);
     return res(ctx.status(200), ctx.json(patient));
