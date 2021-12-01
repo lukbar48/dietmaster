@@ -1,6 +1,6 @@
 import { PatientContext } from 'contexts/PatientContext';
 import useCalculate from 'hooks/useCalculate';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewPatient } from 'store/store';

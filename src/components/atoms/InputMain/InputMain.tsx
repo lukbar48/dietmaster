@@ -10,10 +10,8 @@ export const Input = styled.input`
   color: ${({ theme }) => theme.colors.white};
 `;
 
-const InputMain = ({...props}: IInput) => {
+const InputMain = ({ ...props }: IInput) => {
   return <Input {...props}></Input>;
 };
- 
-
 
 export default InputMain;

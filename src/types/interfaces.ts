@@ -82,3 +82,17 @@ export const initialPatientValues = {
 };
 
 export type InitialPatientType = typeof initialPatientValues;
+
+export interface IAllergensInput {
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  placeholder: string;
+  setItem: React.Dispatch<React.SetStateAction<string>>;
+  item: string;
+  color?: string;
+}
+
+export interface IAllergensList {
+  allergensList: string[];
+  deleteItem: (choosedItem: string) => void;
+  color?: string;
+}

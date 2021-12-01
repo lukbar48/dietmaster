@@ -21,7 +21,6 @@ const BloodTestsForm = () => {
   const { id } = useParams();
   const { patient, setPatient } = useContext(PatientContext);
   const patientsList = useSelector((state: any) => state.patientsList);
-  const dispatch = useDispatch();
 
 useEffect(() => {
   if (id) {
