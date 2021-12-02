@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../Modal/Modal';
 import useModal from '../Modal/useModal';
+import TestsModal from '../Modal/TestsModal';
 
 const Wrapper = styled.div`
   display: flex;
@@ -23,7 +24,7 @@ const BloodTestsForm = () => {
   const { patient, setPatient } = useContext(PatientContext);
   const patientsList = useSelector((state: any) => state.patientsList);
 
-  const { Modal, isOpen, handleCloseModal, handleOpenModal } = useModal();
+  const { isOpen, handleCloseModal, handleOpenModal } = useModal();
 
   // useEffect(() => {
   //   if (id) {
@@ -40,7 +41,12 @@ const BloodTestsForm = () => {
         patient.tests.map((patient, index) => {
           return <BloodTestPatientInfo index={index + 1} key={patient.type} {...patient} />;
         })}
-      {isOpen ? <Modal handleCloseModal={handleCloseModal} /> : null}
+
+
+      <Modal handleCloseModal={handleCloseModal} isOpen={isOpen}>
+        <TestsModal handleCloseModal={handleCloseModal} />
+      </Modal>
+
     </Wrapper>
   );
 };
