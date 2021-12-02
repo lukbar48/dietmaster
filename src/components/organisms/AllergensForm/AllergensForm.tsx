@@ -33,6 +33,7 @@ const AllergensForm = () => {
     const getList = patientsList.filter((item: typeof patient) => item.id === Number(id));
     setAllergensList(getList[0].allergens);
   }, []);
+  
   useEffect(() => {
     setPatient({ ...patient, allergens: allergensList })
     dispatch(addNewPatient({...patient, allergens: allergensList}))

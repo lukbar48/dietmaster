@@ -8,7 +8,7 @@ const BloodTests = () => {
     <Wrapper>
       <ManageTop />
       <ManageNavBar />
-      <BloodTestsForm /> 
+      <BloodTestsForm />
     </Wrapper>
   );
 };

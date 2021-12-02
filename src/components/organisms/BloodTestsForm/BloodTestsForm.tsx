@@ -4,9 +4,10 @@ import BloodTestPatientInfo from 'components/molecules/BloodTestPatientInfo/Bloo
 import styled from 'styled-components';
 import { useParams } from 'react-router';
 import { PatientContext } from 'contexts/PatientContext';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import Modal from '../Modal/Modal';
+import useModal from '../Modal/useModal';
 
 const Wrapper = styled.div`
   display: flex;
@@ -22,22 +23,24 @@ const BloodTestsForm = () => {
   const { patient, setPatient } = useContext(PatientContext);
   const patientsList = useSelector((state: any) => state.patientsList);
 
-useEffect(() => {
-  if (id) {
-    const getPatient = patientsList.filter((patient: any) => patient.id === Number(id));
-    setPatient(getPatient[0]);
-  }
-}, [])
+  const { Modal, isOpen, handleCloseModal, handleOpenModal } = useModal();
+
+  // useEffect(() => {
+  //   if (id) {
+  //     const getPatient = patientsList.filter((patient: any) => patient.id === Number(id));
+  //     setPatient(getPatient[0]);
+  //   }
+  // }, [])
 
   return (
     <Wrapper>
       <BloodTestsFormTopBar />
-      <BloodTestsFormBottomBar />
-      {patient.tests && patient.tests.map((patient, index) => {
-        return (
-          <BloodTestPatientInfo index={index + 1} key={patient.type} {...patient} />
-        )
-      })}
+      <BloodTestsFormBottomBar handleOpenModal={handleOpenModal} />
+      {patient.tests &&
+        patient.tests.map((patient, index) => {
+          return <BloodTestPatientInfo index={index + 1} key={patient.type} {...patient} />;
+        })}
+      {isOpen ? <Modal handleCloseModal={handleCloseModal} /> : null}
     </Wrapper>
   );
 };

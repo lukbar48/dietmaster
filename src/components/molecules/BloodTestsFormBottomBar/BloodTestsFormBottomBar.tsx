@@ -13,10 +13,10 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.grey4};
 `;
 
-const BloodTestsFormBottomBar = () => {
+const BloodTestsFormBottomBar = ({ handleOpenModal }: { handleOpenModal: () => void }) => {
   return (
     <Wrapper>
-      <Button>Add test</Button>
+      <Button onClick={handleOpenModal}>Add test</Button>
     </Wrapper>
   );
 };
