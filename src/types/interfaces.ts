@@ -96,3 +96,8 @@ export interface IAllergensList {
   deleteItem: (choosedItem: string) => void;
   color?: string;
 }
+
+export interface IDeleteModal {
+  handleCloseModal: () => void;
+  patientID: number;
+}

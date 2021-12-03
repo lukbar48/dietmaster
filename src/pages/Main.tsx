@@ -7,7 +7,6 @@ import { Wrapper } from './Main.styles';
 import { useSelector } from 'react-redux';
 import { InitialPatientType } from 'types/interfaces';
 
-
 const Main = () => {
   const { searchResults, searchTerm } = useContext(PatientContext);
   const patients = useSelector((state: any) => state.patientsList);

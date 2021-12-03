@@ -2,7 +2,6 @@ import BloodTestsFormBottomBar from 'components/molecules/BloodTestsFormBottomBa
 import BloodTestsFormTopBar from 'components/molecules/BloodTestsFormTopBar/BloodTestsFormTopBar';
 import BloodTestPatientInfo from 'components/molecules/BloodTestPatientInfo/BloodTestPatientInfo';
 import styled from 'styled-components';
-import { useParams } from 'react-router';
 import { PatientContext } from 'contexts/PatientContext';
 import { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,18 +19,9 @@ const Wrapper = styled.div`
 `;
 
 const BloodTestsForm = () => {
-  const { id } = useParams();
   const { patient, setPatient } = useContext(PatientContext);
   const patientsList = useSelector((state: any) => state.patientsList);
-
   const { isOpen, handleCloseModal, handleOpenModal } = useModal();
-
-  // useEffect(() => {
-  //   if (id) {
-  //     const getPatient = patientsList.filter((patient: any) => patient.id === Number(id));
-  //     setPatient(getPatient[0]);
-  //   }
-  // }, [])
 
   return (
     <Wrapper>

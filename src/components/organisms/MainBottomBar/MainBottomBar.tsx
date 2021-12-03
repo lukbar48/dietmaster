@@ -10,7 +10,6 @@ const Wrapper = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
-  z-index: 1000;
   width: 100vw;
   height: 60px;
   background-color: ${({ theme }) => theme.colors.grey4};

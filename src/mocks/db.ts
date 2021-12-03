@@ -30,17 +30,17 @@ export const db = factory({
       {
         date: '2021-11-26',
         type: 'Red blood cells',
-        value: '75mg',
+        value: '75 mln',
       },
       {
         date: '2021-11-26',
         type: 'Cholesterol',
-        value: '420mg',
+        value: '420 mg',
       },
       {
         date: '2021-11-26',
         type: 'Glucose',
-        value: '102mg',
+        value: '102 mg',
       },
     ],
     appointments: (): any[] => [
