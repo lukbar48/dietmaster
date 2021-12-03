@@ -3,7 +3,7 @@ import faker from 'faker';
 
 const sex = ['Male', 'Female'];
 const note = ['Too fat', 'Too skinny'];
-const products = ['soya', 'apple', 'strawberries', 'avocado', 'eggs', 'coffee', 'oats', 'fish', 'milk', 'rice', 'peanuts'];
+const products = ['soya', 'apple', 'strawberries', 'avocado', 'eggs', 'coffee', 'oats', 'fish', 'milk', 'rice', 'peanuts', 'onion', 'carrot', 'tomato', 'potato', 'cucumber', 'radish', 'beef', 'tofu', 'garlic'];
 const getRandomValue = (array: string[], index: number) => array[index];
 
 export const db = factory({
@@ -23,8 +23,14 @@ export const db = factory({
     protein: (): string => '30',
     fat: (): string => '20',
     carbs: (): string => '50',
-    allergens: (): string[] => [getRandomValue(products, faker.datatype.number({ min: 0, max: 10 }))],
-    preferences: (): string[] => [getRandomValue(products, faker.datatype.number({ min: 0, max: 10 }))],
+    allergens: (): string[] => [
+      getRandomValue(products, faker.datatype.number({ min: 0, max: 20 })),
+      getRandomValue(products, faker.datatype.number({ min: 0, max: 20 })),
+    ],
+    preferences: (): string[] => [
+      getRandomValue(products, faker.datatype.number({ min: 0, max: 20 })),
+      getRandomValue(products, faker.datatype.number({ min: 0, max: 20 })),
+    ],
     diseases: (): string[] => [],
     tests: (): any[] => [
       {
@@ -47,14 +53,14 @@ export const db = factory({
       {
         date: '2021-11-26',
         bodymass: '82',
-        BMI: '28',
+        BMI: '26.1',
         hips: '113',
         waist: '98',
       },
       {
         date: '2021-11-26',
         bodymass: '80',
-        BMI: '24',
+        BMI: '25.2',
         hips: '107',
         waist: '94',
       },

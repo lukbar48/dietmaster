@@ -4,18 +4,15 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Wrapper } from './AllergensForm.styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewPatient } from 'store/store';
-import { useParams } from 'react-router-dom';
 import { PatientContext } from 'contexts/PatientContext';
 
 const AllergensForm = () => {
-  const { id } = useParams();
-  const [allergensList, setAllergensList] = useState<string[]>([]);
-  const [item, setItem] = useState('');
-  const patientsList = useSelector((state: any) => state.patientsList);
-  const dispatch = useDispatch();
   const { patient, setPatient } = useContext(PatientContext);
+  const [allergensList, setAllergensList] = useState<string[]>(patient.allergens);
+  const [item, setItem] = useState('');
+  const dispatch = useDispatch();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (item) {
       setAllergensList([...allergensList, item]);
@@ -28,14 +25,10 @@ const AllergensForm = () => {
   const deleteItem = (choosedItem: string) => {
     setAllergensList(allergensList.filter((item) => item !== choosedItem));
   };
+
   useEffect(() => {
-    const getList = patientsList.filter((item: typeof patient) => item.id === Number(id));
-    setAllergensList(getList[0].allergens);
-  }, []);
-  
-  useEffect(() => {
-    setPatient({ ...patient, allergens: allergensList })
-    dispatch(addNewPatient({...patient, allergens: allergensList}))
+    setPatient({ ...patient, allergens: allergensList });
+    dispatch(addNewPatient({ ...patient, allergens: allergensList }));
   }, [allergensList]);
 
   return (
