@@ -13,9 +13,9 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.grey4};
 `;
 
-const AppointmentsFormBottomBar = () => {
+const AppointmentsFormBottomBar = ({ handleOpenModal }: { handleOpenModal: () => void }) => {
   return <Wrapper>
-    <Button>Add appointment</Button>
+    <Button onClick={handleOpenModal}>Add appointment</Button>
   </Wrapper>;
 };
 

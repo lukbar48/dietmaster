@@ -41,8 +41,6 @@ const BloodTestsForm = () => {
         patient.tests.map((patient, index) => {
           return <BloodTestPatientInfo index={index + 1} key={patient.type} {...patient} />;
         })}
-
-
       <Modal handleCloseModal={handleCloseModal} isOpen={isOpen}>
         <TestsModal handleCloseModal={handleCloseModal} />
       </Modal>

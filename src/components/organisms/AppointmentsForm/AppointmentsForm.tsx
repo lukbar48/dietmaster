@@ -7,6 +7,9 @@ import { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import BloodTestPatientInfo from 'components/molecules/BloodTestPatientInfo/BloodTestPatientInfo';
 import AppointmentsPatientInfo from 'components/molecules/AppointmentsPatientInfo/AppointmentsPatientInfo';
+import Modal from '../Modal/Modal';
+import AppointmentsModal from '../Modal/AppointmentsModal';
+import useModal from '../Modal/useModal';
 
 const Wrapper = styled.div`
   display: flex;
@@ -22,22 +25,26 @@ const AppointmentsForm = () => {
   const patientsList = useSelector((state: any) => state.patientsList);
   const dispatch = useDispatch();
 
+  const { isOpen, handleCloseModal, handleOpenModal } = useModal();
+
   useEffect(() => {
     if (id) {
       const getPatient = patientsList.filter((patient: any) => patient.id === Number(id));
       setPatient(getPatient[0]);
     }
-  }, [])
+  }, []);
 
   return (
     <Wrapper>
       <AppointmentsFormTopBar />
-      <AppointmentsFormBottomBar />
-      {patient.appointments && patient.appointments.map((patient, index) => {
-        return (
-          <AppointmentsPatientInfo index={index + 1} key={patient.bodymass} {...patient} />
-        )
-      })}
+      <AppointmentsFormBottomBar handleOpenModal={handleOpenModal} />
+      {patient.appointments &&
+        patient.appointments.map((patient, index) => {
+          return <AppointmentsPatientInfo index={index + 1} key={patient.bodymass} {...patient} />;
+        })}
+      <Modal handleCloseModal={handleCloseModal} isOpen={isOpen}>
+        <AppointmentsModal handleCloseModal={handleCloseModal} />
+      </Modal>
     </Wrapper>
   );
 };
