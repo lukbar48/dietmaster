@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.js": "/dietmaster/static/js/main.56cd9f32.chunk.js",
-    "main.js.map": "/dietmaster/static/js/main.56cd9f32.chunk.js.map",
+    "main.js": "/dietmaster/static/js/main.70fa5bbd.chunk.js",
+    "main.js.map": "/dietmaster/static/js/main.70fa5bbd.chunk.js.map",
     "runtime-main.js": "/dietmaster/static/js/runtime-main.72c42240.js",
     "runtime-main.js.map": "/dietmaster/static/js/runtime-main.72c42240.js.map",
-    "static/js/2.e1fe544a.chunk.js": "/dietmaster/static/js/2.e1fe544a.chunk.js",
-    "static/js/2.e1fe544a.chunk.js.map": "/dietmaster/static/js/2.e1fe544a.chunk.js.map",
+    "static/js/2.2e3c9e93.chunk.js": "/dietmaster/static/js/2.2e3c9e93.chunk.js",
+    "static/js/2.2e3c9e93.chunk.js.map": "/dietmaster/static/js/2.2e3c9e93.chunk.js.map",
     "index.html": "/dietmaster/index.html",
-    "static/js/2.e1fe544a.chunk.js.LICENSE.txt": "/dietmaster/static/js/2.e1fe544a.chunk.js.LICENSE.txt",
+    "static/js/2.2e3c9e93.chunk.js.LICENSE.txt": "/dietmaster/static/js/2.2e3c9e93.chunk.js.LICENSE.txt",
     "static/media/logo.8af3b97f.png": "/dietmaster/static/media/logo.8af3b97f.png"
   },
   "entrypoints": [
     "static/js/runtime-main.72c42240.js",
-    "static/js/2.e1fe544a.chunk.js",
-    "static/js/main.56cd9f32.chunk.js"
+    "static/js/2.2e3c9e93.chunk.js",
+    "static/js/main.70fa5bbd.chunk.js"
   ]
 }
