@@ -3,7 +3,7 @@ import faker from 'faker';
 
 const sex = ['Male', 'Female'];
 const note = ['Too fat', 'Too skinny'];
-const products = ['soya', 'apple', 'strawberries', 'avocado', 'eggs', 'coffee', 'oats', 'fish', 'milk', 'rice', 'peanuts', 'onion', 'carrot', 'tomato', 'potato', 'cucumber', 'radish', 'beef', 'tofu', 'garlic'];
+const products = ['soya', 'apple', 'strawberries', 'avocado', 'eggs', 'coffee', 'oats', 'fish', 'milk', 'rice', 'peanuts', 'onion', 'carrot', 'tomato', 'potato', 'cucumber', 'radish', 'beef', 'tofu', 'garlic', 'corn'];
 const getRandomValue = (array: string[], index: number) => array[index];
 
 export const db = factory({

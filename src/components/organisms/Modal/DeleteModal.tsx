@@ -19,7 +19,7 @@ const DeleteModal = ({ handleCloseModal, patientID }: IDeleteModal) => {
   return (
     <Wrapper>
       <ModalTop>
-        Danger!
+        Message
         <Button backgroundColor="#505050" padding="6px 28px" fontSize="12px" onClick={handleCloseModal}>
           Close
         </Button>
@@ -27,10 +27,10 @@ const DeleteModal = ({ handleCloseModal, patientID }: IDeleteModal) => {
       <ModalForm>
         <h3>Do you want to remove selected patient?</h3>
         <ButtonsWrapper>
-          <Button type="button" onClick={() => handleDelete(patientID)}>
+          <Button backgroundColor="#FF4343" type="button" onClick={() => handleDelete(patientID)} >
             Yes
           </Button>
-          <Button type="button" onClick={handleRefuse}>
+          <Button backgroundColor="#505050" type="button" onClick={handleRefuse}>
             No
           </Button>
         </ButtonsWrapper>

@@ -117,3 +117,8 @@ export interface IAppointmentsPatientInfo {
   hips: string;
   waist: string;
 }
+
+export interface IInfoModal {
+  handleCloseModal: () => void;
+  patientID: number;
+}

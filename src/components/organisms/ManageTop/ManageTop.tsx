@@ -5,16 +5,22 @@ import { PatientContext } from 'contexts/PatientContext';
 import { Wrapper } from './ManageTop.styles';
 import { initialPatientValues } from 'types/interfaces';
 import { IoIosReturnLeft } from 'react-icons/io';
+import Modal from 'components/organisms/Modal/Modal';
+import useModal from '../Modal/useModal';
+import InfoModal from '../Modal/InfoModal';
 
 const ManageTop = () => {
   const navigate = useNavigate();
   const { setPatient, patient } = useContext(PatientContext);
+  const { isOpen, handleCloseModal, handleOpenModal } = useModal();
 
   const handleExitClick = () => {
     if (patient.name && patient.surname && patient.bodymass && patient.height && patient.age) {
       navigate('/');
       setPatient(initialPatientValues);
-    } else (alert('Please provide essential informations: name, surname, body mass, height, age'))
+    } else {
+      handleOpenModal();
+    };
   };
 
   return (
@@ -23,6 +29,9 @@ const ManageTop = () => {
         <IoIosReturnLeft style={{ fontSize: '1.4rem', margin: '-5px 3px -5px -5px' }} />
         Save and return
       </Button>
+      <Modal handleCloseModal={handleCloseModal} isOpen={isOpen}>
+        <InfoModal handleCloseModal={handleCloseModal} patientID={patient.id} />
+      </Modal>
     </Wrapper>
   );
 };

@@ -36,7 +36,7 @@ export const ModalForm = styled.form`
   }
 
   button {
-    margin-top: 15px;
+    margin-top: 8px;
     width: 200px;
     align-self: center;
   }

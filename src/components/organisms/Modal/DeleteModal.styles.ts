@@ -6,7 +6,6 @@ export const ButtonsWrapper = styled.div`
   width: 100%;
 
   button {
-    width: 100px;
-    background-color: ${({ theme }) => theme.colors.grey4};
+    width: 170px;
   }
 `;
