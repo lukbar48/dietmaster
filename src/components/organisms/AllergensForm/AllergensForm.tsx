@@ -15,9 +15,8 @@ const AllergensForm = () => {
   const dispatch = useDispatch();
   const { patient, setPatient } = useContext(PatientContext);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
     if (item) {
       setAllergensList([...allergensList, item]);
       setItem('');
