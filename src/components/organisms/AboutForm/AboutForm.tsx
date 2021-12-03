@@ -65,7 +65,6 @@ const AboutForm = () => {
     dispatch(addNewPatient(patient));
   }, [patient]);
 
-
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
     setPatient({
       ...patient,
@@ -77,24 +76,24 @@ const AboutForm = () => {
     <Wrapper onChange={handleChange}>
       <Input>
         <label htmlFor="Name">Name</label>
-        <input ref={nameValue} id="name" name="name" type="text" />
+        <input ref={nameValue} id="name" name="name" type="text" required />
       </Input>
       <Input>
         <label htmlFor="Surname">Surname</label>
-        <input ref={surnameValue} id="surname" name="surname" type="text" />
+        <input ref={surnameValue} id="surname" name="surname" required type="text" />
       </Input>
       <Input>
         <label htmlFor="Age">Age</label>
-        <input ref={ageValue} id="age" name="age" type="number" />
+        <input ref={ageValue} id="age" name="age" type="number" required />
       </Input>
       <SexButton />
       <Input>
         <label htmlFor="Body mass (kg)">Body mass (kg)</label>
-        <input ref={bodymassValue} id="bodymass" name="bodymass" type="number" />
+        <input ref={bodymassValue} id="bodymass" name="bodymass" type="number" required />
       </Input>
       <Input>
         <label htmlFor="Height (cm)">Height (cm)</label>
-        <input ref={heightValue} id="height" name="height" type="number" />
+        <input ref={heightValue} id="height" name="height" type="number" required />
       </Input>
       <Input>
         <label htmlFor="Telephone">Telephone</label>

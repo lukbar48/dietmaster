@@ -108,3 +108,12 @@ export interface IBloodTestPatientInfo {
   value: string;
   date: string;
 }
+
+export interface IAppointmentsPatientInfo {
+  index: number;
+  date: string;
+  BMI: string;
+  bodymass: string;
+  hips: string;
+  waist: string;
+}

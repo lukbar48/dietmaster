@@ -8,18 +8,20 @@ import { IoIosReturnLeft } from 'react-icons/io';
 
 const ManageTop = () => {
   const navigate = useNavigate();
-  const { setPatient } = useContext(PatientContext);
+  const { setPatient, patient } = useContext(PatientContext);
 
   const handleExitClick = () => {
-    navigate('/');
-    setPatient(initialPatientValues);
+    if (patient.name && patient.surname && patient.bodymass && patient.height && patient.age) {
+      navigate('/');
+      setPatient(initialPatientValues);
+    } else (alert('Please provide essential informations: name, surname, body mass, height, age'))
   };
 
   return (
     <Wrapper>
       <Button onClick={handleExitClick} backgroundColor="#505050" padding="6px 28px" fontSize="12px">
         <IoIosReturnLeft style={{ fontSize: '1.4rem', margin: '-5px 3px -5px -5px' }} />
-        Back
+        Save and return
       </Button>
     </Wrapper>
   );

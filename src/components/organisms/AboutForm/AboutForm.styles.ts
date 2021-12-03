@@ -56,7 +56,9 @@ export const Input = styled.div`
     padding: 0 10px;
     -webkit-appearance: none;
   }
-  
+  input:invalid {
+    border: 2px red solid;
+  }
 `;
 
 export const TextArea = styled.div`
@@ -84,7 +86,7 @@ export const Slider = styled.div`
   flex-direction: column;
   width: 100%;
   grid-area: 4/1/5/7;
- 
+
   p {
     font-size: 0.8rem;
     padding: 5px 0;
