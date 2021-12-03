@@ -101,3 +101,10 @@ export interface IDeleteModal {
   handleCloseModal: () => void;
   patientID: number;
 }
+
+export interface IBloodTestPatientInfo {
+  index: number;
+  type: string;
+  value: string;
+  date: string;
+}

@@ -2,6 +2,9 @@ import { IButton } from 'types/interfaces';
 import styled from 'styled-components';
 
 export const StyledButton = styled.button<IButton>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   margin-left: ${({ marginLeft }) => (marginLeft ? marginLeft : 'none')};
   padding: ${({ padding }) => (padding ? padding : '8px 20px')};

@@ -1,5 +1,6 @@
 import Button from 'components/atoms/Button/Button';
 import styled from 'styled-components';
+import { IoMdAdd } from "react-icons/io";
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,7 +17,10 @@ const Wrapper = styled.div`
 const BloodTestsFormBottomBar = ({ handleOpenModal }: { handleOpenModal: () => void }) => {
   return (
     <Wrapper>
-      <Button onClick={handleOpenModal}>Add test</Button>
+      <Button onClick={handleOpenModal}>
+        <IoMdAdd style={{ fontSize: '1.4rem', margin: '0px 3px 0px -5px' }} />
+        Add test
+      </Button>
     </Wrapper>
   );
 };

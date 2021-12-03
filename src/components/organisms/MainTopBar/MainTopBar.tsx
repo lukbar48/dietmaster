@@ -2,28 +2,11 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import InputMain from 'components/atoms/InputMain/InputMain';
 import Button from 'components/atoms/Button/Button';
-import styled from 'styled-components';
 import { PatientContext } from 'contexts/PatientContext';
 import { useAuth } from 'hooks/useAuth';
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 60px;
-  padding: 10px;
-  background-color: ${({ theme }) => theme.colors.lightBlack};
-
-  h2 {
-    color: ${({ theme }) => theme.colors.white};
-    font-weight: 400;
-    font-size: 1rem;
-  }
-`;
+import { BiLogOut } from 'react-icons/bi';
+import { IoMdAdd } from 'react-icons/io';
+import { Wrapper } from './MainTopBar.styles';
 
 const MainTopBar = () => {
   const { setPatient, patient, searchTerm, setSearchTerm } = useContext(PatientContext);
@@ -66,8 +49,13 @@ const MainTopBar = () => {
         <h2>Patients record</h2>
       </div>
       <InputMain placeholder="Search patient" value={searchTerm} onChange={handleChange} />
-      <Button onClick={handleClickNewPatient}>New patient</Button>
+      <Button onClick={handleClickNewPatient}>
+        <IoMdAdd style={{ fontSize: '1.4rem', margin: '0px 3px 0px -5px' }} />
+        New patient
+      </Button>
       <Button onClick={signOut} backgroundColor="#505050" marginLeft="auto">
+        {' '}
+        <BiLogOut style={{ fontSize: '1.3rem', margin: '0px 5px 0px -5px' }} />
         Log Out
       </Button>
     </Wrapper>

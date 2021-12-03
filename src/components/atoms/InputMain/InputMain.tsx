@@ -8,6 +8,7 @@ export const Input = styled.input`
   font-size: ${({ theme }) => theme.fontSizes.l};
   background-color: ${({ theme }) => theme.colors.grey4};
   color: ${({ theme }) => theme.colors.white};
+  width: 300px;
 `;
 
 const InputMain = ({ ...props }: IInput) => {

@@ -4,6 +4,7 @@ import Button from 'components/atoms/Button/Button';
 import { PatientContext } from 'contexts/PatientContext';
 import { Wrapper } from './ManageTop.styles';
 import { initialPatientValues } from 'types/interfaces';
+import { IoIosReturnLeft } from 'react-icons/io';
 
 const ManageTop = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const ManageTop = () => {
   return (
     <Wrapper>
       <Button onClick={handleExitClick} backgroundColor="#505050" padding="6px 28px" fontSize="12px">
+        <IoIosReturnLeft style={{ fontSize: '1.4rem', margin: '-5px 3px -5px -5px' }} />
         Back
       </Button>
     </Wrapper>
