@@ -15,8 +15,8 @@ const DiseasesForm = () => {
   const { patient, setPatient } = useContext(PatientContext);
   const { id } = useParams();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
 
     if (item) {
       setDiseasesList([...diseasesList, item]);
@@ -27,13 +27,16 @@ const DiseasesForm = () => {
   };
   useEffect(() => {
     const getList = patientsList.filter((item: typeof patient) => item.id === Number(id));
-    setDiseasesList(getList[0].diseases);
+    if (getList.length) {
+      setDiseasesList(getList[0].diseases);
+    }
   }, []);
+
   useEffect(() => {
-    setPatient({ ...patient, diseases: diseasesList })
+    setPatient({ ...patient, diseases: diseasesList });
     dispatch(addNewPatient({ ...patient, diseases: diseasesList }));
   }, [diseasesList]);
- 
+
   const deleteItem = (choosedItem: string) => {
     console.log(choosedItem);
     setDiseasesList(diseasesList.filter((item) => item !== choosedItem));

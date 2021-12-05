@@ -60,7 +60,7 @@ const TestsModal = ({ handleCloseModal }: { handleCloseModal: () => void }) => {
           <input type="text" name="date" placeholder="2021-01-01" />
         </label>
         <Button backgroundColor="#505050" padding="6px 28px" fontSize="12px" type="submit">
-          Add test
+          Addd
         </Button>
       </ModalForm>
     </Wrapper>

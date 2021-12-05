@@ -2,7 +2,7 @@ import AllergensInput from 'components/molecules/AllergensInput/AllergensInput';
 import AllergensList from 'components/molecules/AllergensList/AllergensList';
 import React, { useContext, useEffect, useState } from 'react';
 import { Wrapper } from './AllergensForm.styles';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addNewPatient } from 'store/store';
 import { PatientContext } from 'contexts/PatientContext';
 
@@ -11,7 +11,7 @@ const AllergensForm = () => {
   const [allergensList, setAllergensList] = useState<string[]>(patient.allergens);
   const [item, setItem] = useState('');
   const dispatch = useDispatch();
-
+ 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (item) {

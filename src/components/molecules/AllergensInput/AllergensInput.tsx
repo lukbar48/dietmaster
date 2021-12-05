@@ -6,9 +6,9 @@ import { Form } from './AllergensInput.styles';
 const AllergensInput = ({ placeholder, handleSubmit, setItem, item, color }: IAllergensInput) => {
   return (
     <Form onSubmit={handleSubmit}>
-      <input value={item} onChange={(e) => setItem(e.target.value)} maxLength={20} type="text" placeholder={placeholder} />
+      <input value={item} data-testid='allergens-input' onChange={(e) => setItem(e.target.value)} maxLength={20} type="text" placeholder={placeholder} />
       <div>
-        <AllergensListButton color={color}>
+        <AllergensListButton data-testid='allergens-btn' color={color}>
           <MdAddCircle />
         </AllergensListButton>
       </div>
