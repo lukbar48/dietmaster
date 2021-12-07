@@ -4,8 +4,7 @@ import styled from 'styled-components';
 import { useParams } from 'react-router';
 import { PatientContext } from 'contexts/PatientContext';
 import { useContext, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import BloodTestPatientInfo from 'components/molecules/BloodTestPatientInfo/BloodTestPatientInfo';
+import {  useSelector } from 'react-redux';
 import AppointmentsPatientInfo from 'components/molecules/AppointmentsPatientInfo/AppointmentsPatientInfo';
 import Modal from '../Modal/Modal';
 import AppointmentsModal from '../Modal/AppointmentsModal';
@@ -23,7 +22,6 @@ const AppointmentsForm = () => {
   const { id } = useParams();
   const { patient, setPatient } = useContext(PatientContext);
   const patientsList = useSelector((state: any) => state.patientsList);
-  const dispatch = useDispatch();
 
   const { isOpen, handleCloseModal, handleOpenModal } = useModal();
 

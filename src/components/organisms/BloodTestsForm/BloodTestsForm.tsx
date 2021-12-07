@@ -3,8 +3,7 @@ import BloodTestsFormTopBar from 'components/molecules/BloodTestsFormTopBar/Bloo
 import BloodTestPatientInfo from 'components/molecules/BloodTestPatientInfo/BloodTestPatientInfo';
 import styled from 'styled-components';
 import { PatientContext } from 'contexts/PatientContext';
-import { useContext, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useContext } from 'react';
 import Modal from '../Modal/Modal';
 import useModal from '../Modal/useModal';
 import TestsModal from '../Modal/TestsModal';
@@ -19,8 +18,7 @@ const Wrapper = styled.div`
 `;
 
 const BloodTestsForm = () => {
-  const { patient, setPatient } = useContext(PatientContext);
-  const patientsList = useSelector((state: any) => state.patientsList);
+  const { patient } = useContext(PatientContext);
   const { isOpen, handleCloseModal, handleOpenModal } = useModal();
 
   return (
@@ -34,7 +32,6 @@ const BloodTestsForm = () => {
       <Modal handleCloseModal={handleCloseModal} isOpen={isOpen}>
         <TestsModal handleCloseModal={handleCloseModal} />
       </Modal>
-
     </Wrapper>
   );
 };

@@ -6,7 +6,7 @@ import PatientProvider from './PatientContext';
 import { Provider } from 'react-redux';
 import { store } from 'store/store';
 
-const AppProviders = ({ children }: { children: any }) => {
+const AppProviders = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Provider store={store}>

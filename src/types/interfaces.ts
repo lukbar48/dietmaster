@@ -122,3 +122,9 @@ export interface IInfoModal {
   handleCloseModal: () => void;
   patientID: number;
 }
+
+export interface IModal {
+  isOpen: boolean;
+  handleCloseModal: () => void;
+  children: ReactNode;
+}

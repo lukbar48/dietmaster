@@ -1,7 +1,7 @@
 import { createSlice, configureStore, createAsyncThunk } from '@reduxjs/toolkit';
 import { db } from 'mocks/db';
 import axios from 'axios';
-import { InitialPatientType, initialPatientValues } from 'types/interfaces';
+import { InitialPatientType } from 'types/interfaces';
 
 const initialState = [] as InitialPatientType[];
 

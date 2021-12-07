@@ -1,11 +1,5 @@
-import { ReactNode } from 'react';
+import { IModal } from 'types/interfaces';
 import { Wrapper } from './Modal.styles';
-
-interface IModal {
-  isOpen: boolean;
-  handleCloseModal: () => void;
-  children: ReactNode;
-}
 
 const Modal = ({ isOpen, handleCloseModal, children }: IModal) => {
   return (

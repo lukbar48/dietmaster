@@ -2,7 +2,6 @@ import React from 'react';
 import InputMain from './InputMain';
 // import { screen, fireEvent, render } from '@testing-library/react';
 import { render, fireEvent, screen } from '../../../test-utils';
-import { getByDisplayValue, waitFor } from '@testing-library/react';
 
 describe('Input', () => {
   it('Changes input', () => {

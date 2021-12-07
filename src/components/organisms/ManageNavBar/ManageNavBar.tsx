@@ -1,5 +1,5 @@
 import ManageNavButton from 'components/atoms/ManageNavButton/ManageNavButton';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
 import { BsFillPersonFill, BsExclamationDiamond } from "react-icons/bs";
 import { ImSpoonKnife } from "react-icons/im";
