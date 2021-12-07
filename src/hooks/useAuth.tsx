@@ -3,20 +3,23 @@ import React, { createContext, ReactNode, useEffect, useState, useContext } from
 
 const InitialUserValues = { id: '', login: '', name: '', token: '' };
 
-export type PatientContextType = {
+type PatientContextType = {
   signIn: ({ login, password }: { login: string; password: string }) => any;
   signOut: () => void;
   user: typeof InitialUserValues;
+  errMsg: string;
 };
 
 const AuthContext = createContext<PatientContextType>({
   signIn() {},
   signOut() {},
   user: InitialUserValues,
+  errMsg: '',
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }): any => {
   const [user, setUser] = useState(InitialUserValues);
+  const [errMsg, setErrMsg] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -43,14 +46,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }): any => {
       localStorage.setItem('token', response.data.token);
     } catch (error) {
       console.log(error);
+      setErrMsg('Invalid email or password.');
     }
   };
 
   const signOut = () => {
     setUser({ id: '', login: '', name: '', token: '' });
     localStorage.removeItem('token');
+    setErrMsg('');
   };
-  return <AuthContext.Provider value={{ user, signIn, signOut }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ user, signIn, signOut, errMsg }}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => {

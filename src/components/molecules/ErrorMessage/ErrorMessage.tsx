@@ -1,12 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { Wrapper } from './ErrorMessage.styles';
 
-const ErrorMessage = () => {
+const defaultErrorMsg = 'Invalid email or password.';
+
+const ErrorMessage = ({ message = defaultErrorMsg }: { message?: string }) => {
   return (
-    <div>
-      <h6>Oops!</h6>
-      <p>Something went wrong!</p>
-    </div>
-  )
-}
+    <Wrapper>
+      <h4>Error</h4>
+      <p>{message}</p>
+    </Wrapper>
+  );
+};
 
-export default ErrorMessage
+export default ErrorMessage;
