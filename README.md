@@ -20,4 +20,4 @@
   * Allergens - add allergens, diseases and prefferences of the patient
   * Tests - add blood tests and others
   * Appointments - see history and set up new appoitments
-All informations are saved in database
+* All informations are saved in database
