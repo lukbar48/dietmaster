@@ -1,6 +1,6 @@
 # DietMaster App created with React & TypeScript
-
-<img align='center' height='200px' src="https://user-images.githubusercontent.com/29462078/145967869-50361473-c40e-4e5f-b7dd-ebcdbc282f39.png">
+<p align="center">
+<img align="center" margin='0 auto' height='130px' src="https://user-images.githubusercontent.com/29462078/145967869-50361473-c40e-4e5f-b7dd-ebcdbc282f39.png"></p>
 
 <h2 align='center'>Application for dietitian to manage patients</h2>
 
