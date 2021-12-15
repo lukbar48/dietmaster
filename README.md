@@ -21,3 +21,21 @@
   * Tests - add blood tests and others
   * Appointments - see history and set up new appoitments
 * All informations are saved in database
+
+## Getting Started
+
+To get a local copy up and running follow these simple steps.
+
+### Installation
+1. Clone the repo
+```
+git clone https://github.com/lukbar48/dietmaster.git
+```
+2. Install NPM packages
+```
+npm install
+```
+3. Run the dev server
+```
+npm start
+```
