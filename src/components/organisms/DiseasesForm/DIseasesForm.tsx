@@ -21,7 +21,8 @@ const DiseasesForm = () => {
     if (item) {
       setDiseasesList([...diseasesList, item]);
       setItem('');
-    } else if (!item) {
+    }
+    if (!item) {
       alert('Please enter value!');
     }
   };
@@ -30,17 +31,18 @@ const DiseasesForm = () => {
     if (getList.length) {
       setDiseasesList(getList[0].diseases);
     }
-  }, []);
+  }, [id, patientsList]);
 
   useEffect(() => {
     setPatient({ ...patient, diseases: diseasesList });
     dispatch(addNewPatient({ ...patient, diseases: diseasesList }));
-  }, [diseasesList]);
+  }, [diseasesList, dispatch, patient, setPatient]);
 
   const deleteItem = (choosedItem: string) => {
     console.log(choosedItem);
     setDiseasesList(diseasesList.filter((item) => item !== choosedItem));
   };
+
   return (
     <Wrapper>
       <h3>Diseases</h3>

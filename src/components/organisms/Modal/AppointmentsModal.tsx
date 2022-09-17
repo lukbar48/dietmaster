@@ -32,15 +32,13 @@ const AppointmentsModal = ({ handleCloseModal }: { handleCloseModal: () => void 
       });
       handleCloseModal();
     } else {
-      alert("Please provide required data: date, body mass.")
-
+      alert('Please provide required data: date, body mass.');
     }
-
   };
 
   useEffect(() => {
     dispatch(addNewPatient(patient));
-  }, [patient]);
+  }, [dispatch, patient]);
 
   return (
     <Wrapper>

@@ -36,7 +36,7 @@ const TestsModal = ({ handleCloseModal }: { handleCloseModal: () => void }) => {
 
   useEffect(() => {
     dispatch(addNewPatient(patient));
-  }, [patient]);
+  }, [dispatch, patient]);
 
   return (
     <Wrapper>

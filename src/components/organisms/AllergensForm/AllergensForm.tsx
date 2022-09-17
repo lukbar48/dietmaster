@@ -11,13 +11,14 @@ const AllergensForm = () => {
   const [allergensList, setAllergensList] = useState<string[]>(patient.allergens);
   const [item, setItem] = useState('');
   const dispatch = useDispatch();
- 
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (item) {
       setAllergensList([...allergensList, item]);
       setItem('');
-    } else if (!item) {
+    }
+    if (!item) {
       alert('Please enter value!');
     }
   };
@@ -29,7 +30,7 @@ const AllergensForm = () => {
   useEffect(() => {
     setPatient({ ...patient, allergens: allergensList });
     dispatch(addNewPatient({ ...patient, allergens: allergensList }));
-  }, [allergensList]);
+  }, [allergensList, dispatch, patient, setPatient]);
 
   return (
     <Wrapper>

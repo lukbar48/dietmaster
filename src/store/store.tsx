@@ -3,7 +3,7 @@ import { db } from 'mocks/db';
 import axios from 'axios';
 import { InitialPatientType } from 'types/interfaces';
 
-const initialState = [] as InitialPatientType[];
+const initialState: InitialPatientType[] = [];
 
 export const fetchPatients = createAsyncThunk('patients/getPatients', async () => {
   try {

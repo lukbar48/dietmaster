@@ -57,13 +57,25 @@ const AboutForm = () => {
         activityValue.current.value = patient.activity;
       }
     }
-  }, []);
+  }, [
+    id,
+    patient.activity,
+    patient.age,
+    patient.bodymass,
+    patient.email,
+    patient.height,
+    patient.name,
+    patient.notes,
+    patient.surname,
+    patient.telephone,
+    setPatient,
+  ]);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(addNewPatient(patient));
-  }, [patient]);
+  }, [dispatch, patient]);
 
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
     setPatient({

@@ -48,7 +48,7 @@ const DietForm = () => {
         caloriesValue.current.value = patient.calories;
       }
     }
-  }, []);
+  }, [id, patient.calories, patient.carbs, patient.fat, patient.protein, patientsList, setPatient]);
 
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
     setPatient({
@@ -59,7 +59,7 @@ const DietForm = () => {
 
   useEffect(() => {
     dispatch(addNewPatient(patient));
-  }, [patient]);
+  }, [dispatch, patient]);
 
   return (
     <Wrapper onChange={handleChange}>
@@ -81,21 +81,36 @@ const DietForm = () => {
         <SliderWrapper>
           <h4>Protein</h4>
           <SliderInput>
-            <div>{patient.bodymass && patient.age && patient.height && `${(((Number(calculateCPM()) + Number(patient.calories)) * Number(patient.protein)) / 400).toFixed()}g`}</div>
+            <div>
+              {patient.bodymass &&
+                patient.age &&
+                patient.height &&
+                `${(((Number(calculateCPM()) + Number(patient.calories)) * Number(patient.protein)) / 400).toFixed()}g`}
+            </div>
             <input className="red" id="protein" name="protein" type="range" min="1" max="100" step="1" ref={proteinValue} />
           </SliderInput>
         </SliderWrapper>
         <SliderWrapper>
           <h4>Fat</h4>
           <SliderInput>
-            <div>{patient.bodymass && patient.age && patient.height && `${(((Number(calculateCPM()) + Number(patient.calories)) * Number(patient.fat)) / 900).toFixed()}g`}</div>
+            <div>
+              {patient.bodymass &&
+                patient.age &&
+                patient.height &&
+                `${(((Number(calculateCPM()) + Number(patient.calories)) * Number(patient.fat)) / 900).toFixed()}g`}
+            </div>
             <input className="yellow" id="fat" name="fat" type="range" min="1" max="100" step="1" ref={fatValue} />
           </SliderInput>
         </SliderWrapper>
         <SliderWrapper>
           <h4>Carbohydrates</h4>
           <SliderInput>
-            <div>{patient.bodymass && patient.age && patient.height && `${(((Number(calculateCPM()) + Number(patient.calories)) * Number(patient.carbs)) / 400).toFixed()}g`}</div>
+            <div>
+              {patient.bodymass &&
+                patient.age &&
+                patient.height &&
+                `${(((Number(calculateCPM()) + Number(patient.calories)) * Number(patient.carbs)) / 400).toFixed()}g`}
+            </div>
             <Input className="blue" id="carbs" name="carbs" type="range" min="1" max="100" step="1" ref={carbsValue} />
           </SliderInput>
         </SliderWrapper>
