@@ -30,18 +30,18 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
   const patientsList = useSelector((state: any) => state.patientsList);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchPatients());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchPatients());
+  // }, []);
 
-  useEffect(() => {
-    axios
-      .post('/dietmaster', searchTerm)
-      .then(({ data }) => {
-        setSearchResults(data);
-      })
-      .catch((err) => console.log(err));
-  }, [searchTerm]);
+  // useEffect(() => {
+  //   axios
+  //     .post('/dietmaster', searchTerm)
+  //     .then(({ data }) => {
+  //       setSearchResults(data);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, [searchTerm]);
 
   const managePatient = (id: number) => {
     const findPatient = patientsList.filter((patient: any) => patient.id === id);

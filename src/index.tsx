@@ -8,12 +8,6 @@ async function main() {
     window.location.pathname = '/dietmaster/';
     return;
   }
-  const { worker } = require('./mocks/browser');
-  await worker.start({
-    serviceWorker: {
-      url: '/dietmaster/mockServiceWorker.js',
-    },
-  });
 
   ReactDOM.render(
     <React.StrictMode>

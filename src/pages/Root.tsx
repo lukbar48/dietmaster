@@ -15,25 +15,25 @@ const Root = () => {
 
   return (
     <Router basename={process.env.PUBLIC_URL}>
-        <GlobalStyle />
-        <Routes>
-          {user.login ? (
-            <Wrapper>
-              <Route path="/patient/appointments/:id" element={<Appointments />} />
-              <Route path="/patient/blood-tests/:id" element={<BloodTests />} />
-              <Route path="/patient/allergens/:id" element={<Allergens />} />
-              <Route path="/patient/diet/:id" element={<Diet />} />
-              <Route path="/patient/about/:id" element={<About />} />
-              <Route path="/" element={<Main />} />
-              <Route path="*" element={<Navigate to="/" />} />
-            </Wrapper>
-          ) : (
+      <GlobalStyle />
+      <Routes>
+        {/* {user.login ? ( */}
+        <Wrapper>
+          <Route path="/patient/appointments/:id" element={<Appointments />} />
+          <Route path="/patient/blood-tests/:id" element={<BloodTests />} />
+          <Route path="/patient/allergens/:id" element={<Allergens />} />
+          <Route path="/patient/diet/:id" element={<Diet />} />
+          <Route path="/patient/about/:id" element={<About />} />
+          <Route path="/" element={<Main />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Wrapper>
+        {/* ) : (
             <>
               <Route path="*" element={<Navigate to="/login" />} />
               <Route path="/login" element={<Login />} />
             </>
-          )}
-        </Routes>
+          )} */}
+      </Routes>
     </Router>
   );
 };
