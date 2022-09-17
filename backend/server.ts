@@ -1,12 +1,18 @@
 const express = require('express');
 const app = express();
-const patientsRoutes = require('../backend/routes/patients');
+const patientsRoutes = require('./routes/patients');
+const mongoose = require('mongoose');
 
 const port = 4000;
-app.listen(port, () => {
-  console.log('listening on port');
-});
 
-app.get('/', (req, res) => {
-  res.json({ name: 'Jon' });
-});
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    app.listen(port, () => {
+      console.log('listening on port');
+    });
+  })
+  .catch((err) => console.log(err));
+
+app.use(app.express());
+app.use('api/patients', patientsRoutes);
