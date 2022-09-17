@@ -17,7 +17,6 @@ const PatientsReducer = (state: InitialPatientType[], action: ACTIONTYPES) => {
       return [newPatient, ...state];
     }
     case 'SORT_PATIENTS_LIST': {
-      // eslint-disable-next-line array-callback-return
       const sortedList = state.sort((a, b): any => {
         if (action.payload === 'female') {
           return a.sex > b.sex ? 1 : b.sex > a.sex ? -1 : 0;
@@ -29,6 +28,8 @@ const PatientsReducer = (state: InitialPatientType[], action: ACTIONTYPES) => {
           return a.surname > b.surname ? 1 : b.surname > a.surname ? -1 : 0;
         } else if (action.payload === 'z-a') {
           return a.surname > b.surname ? -1 : b.surname > a.surname ? 1 : 0;
+        } else {
+          return a.id > b.id ? -1 : b.id > a.id ? 1 : 0;
         }
       });
       return [...sortedList];
@@ -42,6 +43,4 @@ const PatientsReducer = (state: InitialPatientType[], action: ACTIONTYPES) => {
   }
 };
 
-
 export default PatientsReducer;
-

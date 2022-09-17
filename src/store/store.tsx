@@ -7,7 +7,7 @@ const initialState: InitialPatientType[] = [];
 
 export const fetchPatients = createAsyncThunk('patients/getPatients', async () => {
   try {
-    const response = await axios.get('/dietmaster');
+    const response = await axios.get('/api/patients');
     return response.data;
   } catch (err) {
     console.log(err);
@@ -26,7 +26,7 @@ export const addNewPatient = createAsyncThunk('patients/addPatient', async (pati
   });
   if (!findPatient) {
     try {
-      const response = await axios.post('/dietmaster/add', patient);
+      const response = await axios.post('/api/patients/add', patient);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -34,7 +34,7 @@ export const addNewPatient = createAsyncThunk('patients/addPatient', async (pati
   } else if (findPatient) {
     patientFound = true;
     try {
-      const response = await axios.put('/dietmaster/add', patient);
+      const response = await axios.put('/api/patients/add', patient);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -52,7 +52,7 @@ export const removePatient = createAsyncThunk('patients/removePatient', async (p
   });
   if (findPatient) {
     try {
-      const response = await axios.delete('/dietmaster', { data: findPatient });
+      const response = await axios.delete('/api/patients', { data: findPatient });
       return response.data;
     } catch (err) {
       console.log(err);
@@ -65,7 +65,6 @@ const patientsListSlice = createSlice({
   initialState,
   reducers: {
     sortPatientsList(state, action) {
-      // eslint-disable-next-line array-callback-return
       return state.sort((a, b): any => {
         if (action.payload === 'female') {
           return a.sex > b.sex ? 1 : b.sex > a.sex ? -1 : 0;
@@ -77,6 +76,8 @@ const patientsListSlice = createSlice({
           return a.surname > b.surname ? 1 : b.surname > a.surname ? -1 : 0;
         } else if (action.payload === 'z-a') {
           return a.surname > b.surname ? -1 : b.surname > a.surname ? 1 : 0;
+        } else {
+          return a.id > b.id ? -1 : b.id > a.id ? 1 : 0;
         }
       });
     },
@@ -106,33 +107,3 @@ export const store = configureStore({
     patientsList: patientsListSlice.reducer,
   },
 });
-
-// export const patientsListApi = createApi({
-//   reducerPath: 'patientsListApi',
-//   baseQuery: fetchBaseQuery({
-//     baseUrl: '/dietmaster',
-//   }),
-//   tagTypes: ['Patients'],
-//   endpoints: (builder) => ({
-//     getPatients: builder.query<InitialPatientType[], void>({
-//       query: () => '/',
-//       providesTags: ['Patients'],
-//     }),
-//     addPatient: builder.mutation<any, any>({
-//       query: (body) => ({
-//         url: '/add',
-//         method: 'POST',
-//         body,
-//       }),
-//       invalidatesTags: ['Patients'],
-//     }),
-//     deletePatient: builder.mutation<any, any>({
-//       query: (body) => ({
-//         url: '/',
-//         method: 'DELETE',
-//         body,
-//       }),
-//     }),
-//   }),
-// });
-// export const { useGetPatientsQuery, useAddPatientMutation } = patientsListApi;
