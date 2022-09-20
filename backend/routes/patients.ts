@@ -1,33 +1,17 @@
 const express = require('express');
-var app = express();
 const router = express.Router();
-const PatientModel = require('../models/PatientsModel');
+const { getAllPatients, getSinglePatient, addNewPatient, deletePatient, updatePatient } = require('../controllers/patientsController');
 
-router.get('/', (req, res) => {
-  res.json({ msg: 'get all patients' });
-});
+router.get('/', getAllPatients);
 
-router.get('/:id', (req, res) => {
-  res.json({ msg: 'get single patient' });
-});
+router.get('/:id', getSinglePatient);
 
-router.post('/', async (req, res) => {
-  const patientRequest = req.body;
-  try {
-    const patient = await PatientModel.create(patientRequest);
-    res.status(200).json(patient);
-  } catch (error) {
-    res.stats(400).json({ error: error.message });
-  }
-});
+router.post('/', addNewPatient);
 
-router.delete('/:id', (req, res) => {
-  res.json({ msg: 'delete single patient' });
-});
+router.delete('/:id', deletePatient);
 
-router.patch('/:id', (req, res) => {
-  res.json({ msg: 'update a workout' });
-});
+router.patch('/:id', updatePatient);
 
 module.exports = router;
+
 export {};
