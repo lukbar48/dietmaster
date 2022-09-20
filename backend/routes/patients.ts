@@ -1,15 +1,24 @@
+const express = require('express');
+var app = express();
 const router = express.Router();
+const PatientModel = require('../models/PatientsModel');
 
 router.get('/', (req, res) => {
   res.json({ msg: 'get all patients' });
 });
 
 router.get('/:id', (req, res) => {
-  res.json({ msg: 'get single patiens' });
+  res.json({ msg: 'get single patient' });
 });
 
-router.post('/', (req, res) => {
-  res.json({ msg: 'add new patient' });
+router.post('/', async (req, res) => {
+  const patientRequest = req.body;
+  try {
+    const patient = await PatientModel.create(patientRequest);
+    res.status(200).json(patient);
+  } catch (error) {
+    res.stats(400).json({ error: error.message });
+  }
 });
 
 router.delete('/:id', (req, res) => {
@@ -21,3 +30,4 @@ router.patch('/:id', (req, res) => {
 });
 
 module.exports = router;
+export {};
