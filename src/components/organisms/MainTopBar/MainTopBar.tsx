@@ -8,15 +8,17 @@ import { BiLogOut } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
 import { Wrapper } from './MainTopBar.styles';
 import { initialPatientValues } from 'types/interfaces';
+import { addNewPatient } from 'data-access/patients';
 
 const MainTopBar = () => {
-  const { setPatient, patient, searchTerm, setSearchTerm } = useContext(PatientContext);
+  const { setPatient, searchTerm, setSearchTerm } = useContext(PatientContext);
   const navigate = useNavigate();
   const { signOut } = useAuth();
 
-  const handleClickNewPatient = () => {
-    setPatient(initialPatientValues);
-    navigate(`/patient/about/${patient.id}`);
+  const handleClickNewPatient = async () => {
+    const newPatient = await addNewPatient(initialPatientValues);
+    setPatient(newPatient);
+    navigate(`/patient/about/${newPatient._id}`);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
