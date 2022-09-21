@@ -10,10 +10,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/', (req, res) => {
-  res.json({ msg: 'elo' });
-});
-
 app.use('/api/patients/', patientRoutes);
 
 mongoose
