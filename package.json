@@ -1,5 +1,4 @@
 {
-  "proxy": "http://localhost:4000",
   "homepage": "https://lukbar48.github.io/dietmaster",
   "name": "dietmaster",
   "version": "0.1.0",
