@@ -11,8 +11,6 @@ export const Input = styled.input`
   width: 300px;
 `;
 
-const InputMain = ({ ...props }: IInput) => {
-  return <Input {...props}></Input>;
-};
+const InputMain = ({ ...props }: IInput) => <Input {...props} />;
 
-export default InputMain; 
+export default InputMain;
