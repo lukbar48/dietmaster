@@ -25,7 +25,7 @@ const BloodTestsForm = () => {
     <Wrapper>
       <BloodTestsFormTopBar />
       <BloodTestsFormBottomBar handleOpenModal={handleOpenModal} />
-      {patient.tests &&
+      {patient.tests.length > 0 &&
         patient.tests.map((patient, index) => {
           return <BloodTestPatientInfo index={index + 1} key={patient.type} {...patient} />;
         })}

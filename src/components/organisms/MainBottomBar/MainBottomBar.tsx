@@ -1,10 +1,9 @@
 import Button from 'components/atoms/Button/Button';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { sortPatientsList } from 'store/store';
-import { db } from 'mocks/db';
 
-const Wrapper = styled.div` 
+const Wrapper = styled.div`
   display: flex;
   align-items: center;
   position: fixed;
@@ -32,7 +31,6 @@ const Wrapper = styled.div`
 `;
 
 const MainBottomBar = () => {
-  const patientsList = useSelector((state: any) => state.patientsList);
   const dispatch = useDispatch();
 
   return (
@@ -43,8 +41,6 @@ const MainBottomBar = () => {
           <Button
             onClick={() => {
               dispatch(sortPatientsList('off'));
-              console.log('state ', patientsList);
-              console.log('api', db.patient.getAll());
             }}
             padding="6px 20px"
             borderRadius="6px 0 0 6px"

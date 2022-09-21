@@ -4,15 +4,11 @@ import { Wrapper } from './Root.styles';
 import Main from './Main';
 import About from './About';
 import Diet from './Diet';
-import Login from './Login';
-import { useAuth } from 'hooks/useAuth';
 import Allergens from './Allergens';
 import BloodTests from './BloodTests';
 import Appointments from './Appointments';
 
 const Root = () => {
-  const { user } = useAuth();
-
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <GlobalStyle />

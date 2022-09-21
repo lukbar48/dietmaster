@@ -7,6 +7,7 @@ import { useAuth } from 'hooks/useAuth';
 import { BiLogOut } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
 import { Wrapper } from './MainTopBar.styles';
+import { initialPatientValues } from 'types/interfaces';
 
 const MainTopBar = () => {
   const { setPatient, patient, searchTerm, setSearchTerm } = useContext(PatientContext);
@@ -14,28 +15,7 @@ const MainTopBar = () => {
   const { signOut } = useAuth();
 
   const handleClickNewPatient = () => {
-    setPatient({
-      id: new Date().getTime(),
-      name: '',
-      surname: '',
-      age: '',
-      sex: 'Male',
-      email: '',
-      telephone: '',
-      bodymass: '',
-      height: '',
-      notes: '',
-      activity: '1.2',
-      calories: '0',
-      protein: '30',
-      fat: '20',
-      carbs: '50',
-      allergens: [],
-      preferences: [],
-      diseases: [],
-      tests: [],
-      appointments: [],
-    });
+    setPatient(initialPatientValues);
     navigate(`/patient/about/${patient.id}`);
   };
 

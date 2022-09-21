@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useParams } from 'react-router';
 import { PatientContext } from 'contexts/PatientContext';
 import { useContext, useEffect } from 'react';
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import AppointmentsPatientInfo from 'components/molecules/AppointmentsPatientInfo/AppointmentsPatientInfo';
 import Modal from '../Modal/Modal';
 import AppointmentsModal from '../Modal/AppointmentsModal';
@@ -30,7 +30,7 @@ const AppointmentsForm = () => {
       const getPatient = patientsList.filter((patient: any) => patient.id === Number(id));
       setPatient(getPatient[0]);
     }
-  }, []);
+  }, [id, patientsList, setPatient]);
 
   return (
     <Wrapper>
