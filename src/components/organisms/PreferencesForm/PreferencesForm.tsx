@@ -3,7 +3,7 @@ import AllergensList from 'components/molecules/AllergensList/AllergensList';
 import React, { useContext, useEffect, useState } from 'react';
 import { Wrapper } from '../AllergensForm/AllergensForm.styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNewPatient } from '../../../store';
+import { updatePatient } from '../../../store';
 import { useParams } from 'react-router-dom';
 import { PatientContext } from 'contexts/PatientContext';
 
@@ -38,7 +38,7 @@ const PreferencesForm = () => {
 
   useEffect(() => {
     setPatient({ ...patient, preferences: preferencesList });
-    dispatch(addNewPatient({ ...patient, preferences: preferencesList }));
+    dispatch(updatePatient({ ...patient, preferences: preferencesList }));
   }, [dispatch, patient, preferencesList, setPatient]);
 
   return (

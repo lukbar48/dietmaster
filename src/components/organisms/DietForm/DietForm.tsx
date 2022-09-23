@@ -3,7 +3,7 @@ import useCalculate from 'hooks/useCalculate';
 import React, { useContext, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNewPatient } from '../../../store';
+import { updatePatient } from '../../../store';
 import {
   Nutrient,
   CPMWrapper,
@@ -58,7 +58,7 @@ const DietForm = () => {
   };
 
   useEffect(() => {
-    dispatch(addNewPatient(patient));
+    dispatch(updatePatient(patient));
   }, [dispatch, patient]);
 
   return (

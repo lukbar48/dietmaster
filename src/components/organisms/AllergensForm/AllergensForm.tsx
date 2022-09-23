@@ -3,7 +3,7 @@ import AllergensList from 'components/molecules/AllergensList/AllergensList';
 import React, { useContext, useEffect, useState } from 'react';
 import { Wrapper } from './AllergensForm.styles';
 import { useDispatch } from 'react-redux';
-import { addNewPatient } from '../../../store';
+import { updatePatient } from '../../../store';
 import { PatientContext } from 'contexts/PatientContext';
 
 const AllergensForm = () => {
@@ -29,7 +29,7 @@ const AllergensForm = () => {
 
   useEffect(() => {
     setPatient({ ...patient, allergens: allergensList });
-    dispatch(addNewPatient({ ...patient, allergens: allergensList }));
+    dispatch(updatePatient({ ...patient, allergens: allergensList }));
   }, [allergensList, dispatch, patient, setPatient]);
 
   return (

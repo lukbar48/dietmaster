@@ -4,7 +4,7 @@ import { InitialPatientType } from 'types/interfaces';
 
 const initialState: InitialPatientType[] = [];
 
-export const fetchPatients = createAsyncThunk('patients/getPatients', async () => {
+export const fetchPatients = createAsyncThunk('http://localhost:4000/patients/getPatients', async () => {
   try {
     const response = await axios.get('/api/patients');
     return response.data;
@@ -23,9 +23,17 @@ export const fetchSinglePatient = createAsyncThunk('patient/getPatient', async (
 });
 
 export const addNewPatient = createAsyncThunk('patients/addPatient', async (patient: InitialPatientType) => {
-  console.log('AA', patient);
   try {
-    const response = await axios.post('/api/patients', patient);
+    const response = await axios.post('http://localhost:4000/api/patients', patient);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+export const updatePatient = createAsyncThunk('patients/updatePatient', async (patientData: Partial<InitialPatientType>) => {
+  try {
+    const response = await axios.patch('/api/patients', patientData);
     return response.data;
   } catch (err) {
     console.log(err);
@@ -60,12 +68,11 @@ const patientsListSlice = createSlice({
     builder.addCase(fetchPatients.fulfilled, (state, action) => {
       return action.payload;
     });
-    builder.addCase(addNewPatient.fulfilled, (state, action) => {
+    builder.addCase(updatePatient.fulfilled, (state, action) => {
       state.push(action.payload);
     });
     builder.addCase(removePatient.fulfilled, (state, action) => {
-      console.log(action);
-      // return state.filter((patient) => patient.id !== action.payload.removedPatient.id);
+      return state.filter((patient) => patient._id !== action.payload.id);
     });
   },
 });

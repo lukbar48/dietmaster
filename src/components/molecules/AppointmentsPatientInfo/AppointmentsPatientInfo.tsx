@@ -1,7 +1,7 @@
 import { Wrapper } from './AppointmentsPatientInfo.styles';
 import Button from 'components/atoms/Button/Button';
 import { useContext } from 'react';
-import { addNewPatient } from '../../../store';
+import { updatePatient } from '../../../store';
 import { useDispatch } from 'react-redux';
 import { PatientContext } from 'contexts/PatientContext';
 import { MdDeleteOutline } from 'react-icons/md';
@@ -14,7 +14,7 @@ const AppointmentsPatientInfo = ({ index, date, BMI, bodymass, hips, waist }: IA
   const deleteAppointment = (bodymass: string) => {
     const appointments = patient.appointments.filter((item) => item.bodymass !== bodymass);
     setPatient({ ...patient, appointments });
-    dispatch(addNewPatient({ ...patient, appointments }));
+    dispatch(updatePatient({ appointments }));
   };
 
   return (

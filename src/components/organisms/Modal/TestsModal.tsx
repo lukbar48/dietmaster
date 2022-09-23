@@ -3,7 +3,7 @@ import { ModalForm, ModalTop, Wrapper } from './TestsModal.styles';
 import { useContext, useEffect, useState } from 'react';
 import { PatientContext } from 'contexts/PatientContext';
 import { useDispatch } from 'react-redux';
-import { addNewPatient } from '../../../store';
+import { updatePatient } from '../../../store';
 
 const TestsModal = ({ handleCloseModal }: { handleCloseModal: () => void }) => {
   const { patient, setPatient } = useContext(PatientContext);
@@ -35,7 +35,7 @@ const TestsModal = ({ handleCloseModal }: { handleCloseModal: () => void }) => {
   };
 
   useEffect(() => {
-    dispatch(addNewPatient(patient));
+    dispatch(updatePatient(patient));
   }, [dispatch, patient]);
 
   return (

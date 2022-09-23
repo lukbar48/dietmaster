@@ -1,7 +1,7 @@
 import { Wrapper } from './BloodTestPatientInfo.styles';
 import Button from 'components/atoms/Button/Button';
 import { useContext } from 'react';
-import { addNewPatient } from '../../../store';
+import { updatePatient } from '../../../store';
 import { useDispatch } from 'react-redux';
 import { PatientContext } from 'contexts/PatientContext';
 import { MdDeleteOutline } from 'react-icons/md';
@@ -14,7 +14,7 @@ const BloodTestPatientInfo = ({ index, type, value, date }: IBloodTestPatientInf
   const deleteTest = (type: string) => {
     const tests = patient.tests.filter((item) => item.type !== type);
     setPatient({ ...patient, tests });
-    dispatch(addNewPatient({ ...patient, tests }));
+    dispatch(updatePatient({ tests }));
   };
 
   return (
