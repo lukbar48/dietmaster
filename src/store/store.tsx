@@ -14,6 +14,15 @@ export const fetchPatients = createAsyncThunk('patients/getPatients', async () =
   }
 });
 
+export const fetchSinglePatient = createAsyncThunk('patient/getPatient', async (id: string) => {
+  try {
+    const response = await axios.get(`/api/patients/${id}`);
+    return response.data;
+  } catch (err) {
+    console.log('xxxx', err);
+  }
+});
+
 let patientFound = false;
 export const addNewPatient = createAsyncThunk('patients/addPatient', async (patient: InitialPatientType) => {
   patientFound = false;

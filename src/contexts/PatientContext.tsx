@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState, ReactNode } from 'react';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { InitialPatientType, initialPatientValues } from 'types/interfaces';
 import { fetchPatients } from 'store/store';
@@ -30,9 +29,9 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
   const patientsList = useSelector((state: any) => state.patientsList);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(fetchPatients());
-  // }, []);
+  useEffect(() => {
+    dispatch(fetchPatients());
+  }, []);
 
   // useEffect(() => {
   //   axios
