@@ -8,8 +8,8 @@ import { BiLogOut } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
 import { Wrapper } from './MainTopBar.styles';
 import { initialPatientValues } from 'types/interfaces';
-import { updatePatient } from 'data-access/patients';
 import { useDispatch } from 'react-redux';
+import { addNewPatient } from 'store';
 
 const MainTopBar = () => {
   const { setPatient, searchTerm, setSearchTerm } = useContext(PatientContext);
@@ -18,10 +18,12 @@ const MainTopBar = () => {
   const dispatch = useDispatch();
 
   const handleClickNewPatient = async () => {
-    const patient = await dispatch(updatePatient(initialPatientValues));
+    console.log('elo');
+    const patient = await dispatch(addNewPatient(initialPatientValues));
     console.log(patient);
-    setPatient(patient);
-    navigate(`/patient/about/${patient._id}`);
+    // console.log(patient);
+    // setPatient(patient);
+    // navigate(`/patient/about/${patient._id}`);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

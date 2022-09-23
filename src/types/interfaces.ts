@@ -81,7 +81,34 @@ export const initialPatientValues = {
   ],
 };
 
-export type InitialPatientType = typeof initialPatientValues;
+export type InitialPatientType = {
+  _id: number;
+  name: string;
+  surname: string;
+  age: string;
+  sex: string;
+  email: string;
+  telephone: string;
+  bodymass: string;
+  height: string;
+  notes: string;
+  activity: string;
+  calories: string;
+  protein: string;
+  fat: string;
+  carbs: string;
+  allergens: string[];
+  preferences: string[];
+  diseases: string[];
+  tests: { date: string; type: string; value: string }[];
+  appointments: {
+    date: string;
+    bodymass: string;
+    BMI: string;
+    hips: string;
+    waist: string;
+  }[];
+};
 
 export interface IAllergensInput {
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;

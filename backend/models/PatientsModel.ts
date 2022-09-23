@@ -6,27 +6,27 @@ const patientSchema = new Schema(
   {
     name: {
       type: String,
-      require: true,
+      // require: true,
     },
     surname: {
       type: String,
-      require: true,
+      // require: true,
     },
     age: {
       type: String,
-      require: true,
+      // require: true,
     },
     sex: {
       type: String,
-      require: true,
+      // require: true,
     },
     bodymass: {
       type: String,
-      require: true,
+      // require: true,
     },
     height: {
       type: String,
-      require: true,
+      // require: true,
     },
     email: {
       type: String,
