@@ -11,7 +11,7 @@ const InfoModal = ({ handleCloseModal, patientID }: IInfoModal) => {
   const dispatch = useDispatch();
 
   const handleDiscard = (patientID: number) => {
-    dispatch(removePatient(patientID));
+    dispatch(removePatient(patientID.toString()));
     navigate('/');
   };
   return (

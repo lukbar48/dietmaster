@@ -39,7 +39,7 @@ const MainPatientInfo = ({ name, surname, age, id, index }: IPatientInfo) => {
         </Button>
       </div>
       <Modal handleCloseModal={handleCloseModal} isOpen={isOpen}>
-        <DeleteModal handleCloseModal={handleCloseModal} patientID={id} />
+        <DeleteModal handleCloseModal={handleCloseModal} patientID={id?.toString()} />
       </Modal>
     </Wrapper>
   );

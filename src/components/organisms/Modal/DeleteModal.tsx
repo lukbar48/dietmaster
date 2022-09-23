@@ -8,7 +8,7 @@ import { ButtonsWrapper } from './DeleteModal.styles';
 const DeleteModal = ({ handleCloseModal, patientID }: IDeleteModal) => {
   const dispatch = useDispatch();
 
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: string) => {
     dispatch(removePatient(id));
     handleCloseModal();
   };
@@ -27,7 +27,7 @@ const DeleteModal = ({ handleCloseModal, patientID }: IDeleteModal) => {
       <ModalForm>
         <h3>Do you want to remove selected patient?</h3>
         <ButtonsWrapper>
-          <Button backgroundColor="#FF4343" type="button" onClick={() => handleDelete(patientID)} >
+          <Button backgroundColor="#FF4343" type="button" onClick={() => handleDelete(patientID)}>
             Yes
           </Button>
           <Button backgroundColor="#505050" type="button" onClick={handleRefuse}>

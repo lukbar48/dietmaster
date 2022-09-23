@@ -99,7 +99,7 @@ export interface IAllergensList {
 
 export interface IDeleteModal {
   handleCloseModal: () => void;
-  patientID: number;
+  patientID: string;
 }
 
 export interface IBloodTestPatientInfo {
