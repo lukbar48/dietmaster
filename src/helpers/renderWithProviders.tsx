@@ -6,7 +6,7 @@ import { ReactNode } from 'react';
 import { theme } from 'assets/styles/theme';
 import { Provider } from 'react-redux';
 import PatientProvider from 'contexts/PatientContext';
-import { store } from 'store/store';
+import { store } from '../store';
 
 export const renderWithProviders = (children: ReactNode) => {
   return render(

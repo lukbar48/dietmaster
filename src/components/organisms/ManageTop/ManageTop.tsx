@@ -20,7 +20,7 @@ const ManageTop = () => {
       setPatient(initialPatientValues);
     } else {
       handleOpenModal();
-    };
+    }
   };
 
   return (
@@ -30,7 +30,7 @@ const ManageTop = () => {
         Save and return
       </Button>
       <Modal handleCloseModal={handleCloseModal} isOpen={isOpen}>
-        <InfoModal handleCloseModal={handleCloseModal} patientID={patient.id} />
+        <InfoModal handleCloseModal={handleCloseModal} patientID={patient._id} />
       </Modal>
     </Wrapper>
   );

@@ -4,7 +4,7 @@ import { PatientContext } from 'contexts/PatientContext';
 import { useParams } from 'react-router';
 import axios from 'axios';
 import { Input, Slider, TextArea, Wrapper } from './AboutForm.styles';
-import { addNewPatient } from 'store/store';
+import { addNewPatient } from '../../../store';
 import { useDispatch } from 'react-redux';
 
 const AboutForm = () => {

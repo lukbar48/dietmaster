@@ -3,7 +3,7 @@ import AllergensList from 'components/molecules/AllergensList/AllergensList';
 import React, { useContext, useEffect, useState } from 'react';
 import { Wrapper } from '../AllergensForm/AllergensForm.styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNewPatient } from 'store/store';
+import { addNewPatient } from '../../../store';
 import { useParams } from 'react-router-dom';
 import { PatientContext } from 'contexts/PatientContext';
 
@@ -30,14 +30,17 @@ const PreferencesForm = () => {
     console.log(choosedItem);
     setPreferencesList(preferencesList.filter((item) => item !== choosedItem));
   };
+
   useEffect(() => {
-    const getList = patientsList.filter((item: typeof patient) => item.id === Number(id));
+    const getList = patientsList.filter((item: typeof patient) => item._id === Number(id));
     setPreferencesList(getList[0].preferences);
-  }, []);
+  }, [id, patientsList]);
+
   useEffect(() => {
-    setPatient({ ...patient, preferences: preferencesList })
+    setPatient({ ...patient, preferences: preferencesList });
     dispatch(addNewPatient({ ...patient, preferences: preferencesList }));
-  }, [preferencesList]);
+  }, [dispatch, patient, preferencesList, setPatient]);
+
   return (
     <Wrapper>
       <h3>Doesn't like</h3>

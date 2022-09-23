@@ -3,7 +3,7 @@ import AllergensList from 'components/molecules/AllergensList/AllergensList';
 import React, { useContext, useEffect, useState } from 'react';
 import { Wrapper } from '../AllergensForm/AllergensForm.styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNewPatient } from 'store/store';
+import { addNewPatient } from '../../../store';
 import { useParams } from 'react-router-dom';
 import { PatientContext } from 'contexts/PatientContext';
 
@@ -27,7 +27,7 @@ const DiseasesForm = () => {
     }
   };
   useEffect(() => {
-    const getList = patientsList.filter((item: typeof patient) => item.id === Number(id));
+    const getList = patientsList.filter((item: typeof patient) => item._id === Number(id));
     if (getList.length) {
       setDiseasesList(getList[0].diseases);
     }

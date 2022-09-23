@@ -4,17 +4,17 @@ import { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
 import PatientProvider from './PatientContext';
 import { Provider } from 'react-redux';
-import { store } from 'store/store';
+import { store } from '../store';
 
 const AppProviders = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Provider store={store}>
-          <ThemeProvider theme={theme}>
-            <PatientProvider>
-              <AuthProvider>{children}</AuthProvider>
-            </PatientProvider>
-          </ThemeProvider>
+        <ThemeProvider theme={theme}>
+          <PatientProvider>
+            <AuthProvider>{children}</AuthProvider>
+          </PatientProvider>
+        </ThemeProvider>
       </Provider>
     </>
   );

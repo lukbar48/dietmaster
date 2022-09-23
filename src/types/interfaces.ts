@@ -46,12 +46,12 @@ export interface IPatientInfo {
   name: string;
   surname: string;
   age: string;
-  id: number;
+  _id: number;
   index: number;
 }
 
 export const initialPatientValues = {
-  id: 0,
+  _id: 0,
   name: '',
   surname: '',
   age: '',

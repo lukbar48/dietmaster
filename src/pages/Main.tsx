@@ -16,13 +16,13 @@ const Main = () => {
       <MainTopBar />
       <MainBottomBar />
       <Wrapper>
-        {searchTerm &&
+        {/* {searchTerm &&
           searchResults.map((patient: InitialPatientType, index: number) => {
             return <MainPatientInfo index={index} key={patient.id} {...patient} />;
-          })}
+          })} */}
         {!searchTerm &&
           patients.map((patient: InitialPatientType, index: number) => {
-            return <MainPatientInfo index={index} key={patient.id} {...patient} />;
+            return <MainPatientInfo index={index} key={patient._id} {...patient} />;
           })}
       </Wrapper>
     </>

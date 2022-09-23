@@ -1,7 +1,7 @@
 import { Wrapper } from './AppointmentsPatientInfo.styles';
 import Button from 'components/atoms/Button/Button';
 import { useContext } from 'react';
-import { addNewPatient } from 'store/store';
+import { addNewPatient } from '../../../store';
 import { useDispatch } from 'react-redux';
 import { PatientContext } from 'contexts/PatientContext';
 import { MdDeleteOutline } from 'react-icons/md';
@@ -26,7 +26,8 @@ const AppointmentsPatientInfo = ({ index, date, BMI, bodymass, hips, waist }: IA
       <div>{hips}</div>
       <div>{waist}</div>
       <div>
-        <Button fontSize='1rem' backgroundColor="#C1C1C1" onClick={() => deleteAppointment(bodymass)}><MdDeleteOutline style={{ fontSize: '1.1rem', margin: '-5px 2px -5px -2px' }} />
+        <Button fontSize="1rem" backgroundColor="#C1C1C1" onClick={() => deleteAppointment(bodymass)}>
+          <MdDeleteOutline style={{ fontSize: '1.1rem', margin: '-5px 2px -5px -2px' }} />
           Delete
         </Button>
       </div>

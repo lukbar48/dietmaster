@@ -23,19 +23,19 @@ const PatientsReducer = (state: InitialPatientType[], action: ACTIONTYPES) => {
         } else if (action.payload === 'male') {
           return a.sex > b.sex ? -1 : b.sex > a.sex ? 1 : 0;
         } else if (action.payload === 'off') {
-          return a.id > b.id ? -1 : b.id > a.id ? 1 : 0;
+          return a._id > b._id ? -1 : b._id > a._id ? 1 : 0;
         } else if (action.payload === 'a-z') {
           return a.surname > b.surname ? 1 : b.surname > a.surname ? -1 : 0;
         } else if (action.payload === 'z-a') {
           return a.surname > b.surname ? -1 : b.surname > a.surname ? 1 : 0;
         } else {
-          return a.id > b.id ? -1 : b.id > a.id ? 1 : 0;
+          return a._id > b._id ? -1 : b._id > a._id ? 1 : 0;
         }
       });
       return [...sortedList];
     }
     case 'DELETE_PATIENT': {
-      const deletePatientsList = state.filter((patient) => patient.id !== action.payload.id);
+      const deletePatientsList = state.filter((patient) => patient._id !== action.payload._id);
       return deletePatientsList;
     }
     default:

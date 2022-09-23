@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState, ReactNode } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { InitialPatientType, initialPatientValues } from 'types/interfaces';
-import { fetchPatients } from 'store/store';
+import { fetchPatients } from '../store';
 
 export type PatientContextType = {
   managePatient: (id: number) => void;
@@ -31,7 +31,7 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     dispatch(fetchPatients());
-  }, []);
+  }, [dispatch]);
 
   // useEffect(() => {
   //   axios

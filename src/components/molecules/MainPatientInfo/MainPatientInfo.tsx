@@ -9,7 +9,7 @@ import Modal from 'components/organisms/Modal/Modal';
 import DeleteModal from 'components/organisms/Modal/DeleteModal';
 import { MdDeleteOutline, MdOutlineModeEditOutline } from 'react-icons/md';
 
-const MainPatientInfo = ({ name, surname, age, id, index }: IPatientInfo) => {
+const MainPatientInfo = ({ name, surname, age, _id, index }: IPatientInfo) => {
   const { managePatient } = useContext(PatientContext);
   const navigate = useNavigate();
   const { isOpen, handleCloseModal, handleOpenModal } = useModal();
@@ -29,7 +29,7 @@ const MainPatientInfo = ({ name, surname, age, id, index }: IPatientInfo) => {
       <div>{surname}</div>
       <div>{age}</div>
       <div className="buttons">
-        <Button onClick={() => handleManageClick(id)}>
+        <Button onClick={() => handleManageClick(_id)}>
           <MdOutlineModeEditOutline style={{ fontSize: '1.4rem', margin: '-5px 2px -7px -2px' }} />
           Manage
         </Button>
@@ -39,7 +39,7 @@ const MainPatientInfo = ({ name, surname, age, id, index }: IPatientInfo) => {
         </Button>
       </div>
       <Modal handleCloseModal={handleCloseModal} isOpen={isOpen}>
-        <DeleteModal handleCloseModal={handleCloseModal} patientID={id?.toString()} />
+        <DeleteModal handleCloseModal={handleCloseModal} patientID={_id?.toString()} />
       </Modal>
     </Wrapper>
   );

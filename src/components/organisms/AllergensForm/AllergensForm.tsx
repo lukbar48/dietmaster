@@ -3,7 +3,7 @@ import AllergensList from 'components/molecules/AllergensList/AllergensList';
 import React, { useContext, useEffect, useState } from 'react';
 import { Wrapper } from './AllergensForm.styles';
 import { useDispatch } from 'react-redux';
-import { addNewPatient } from 'store/store';
+import { addNewPatient } from '../../../store';
 import { PatientContext } from 'contexts/PatientContext';
 
 const AllergensForm = () => {
