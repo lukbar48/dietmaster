@@ -4,9 +4,9 @@ import { InitialPatientType } from 'types/interfaces';
 
 const initialState: InitialPatientType[] = [];
 
-export const fetchPatients = createAsyncThunk('http://localhost:4000/patients/getPatients', async () => {
+export const fetchPatients = createAsyncThunk('/patients/getPatients', async () => {
   try {
-    const response = await axios.get('/api/patients');
+    const response = await axios.get('http://localhost:4000/api/patients');
     return response.data;
   } catch (err) {
     console.log(err);
@@ -24,7 +24,7 @@ export const fetchSinglePatient = createAsyncThunk('patient/getPatient', async (
 
 export const addNewPatient = createAsyncThunk('patients/addPatient', async (patient: InitialPatientType) => {
   try {
-    const response = await axios.post('http://localhost:4000/api/patients', patient);
+    const response = await axios.post('/api/patients', patient);
     return response.data;
   } catch (err) {
     console.log(err);

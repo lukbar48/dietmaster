@@ -3,8 +3,10 @@ const express = require('express');
 const app = express();
 const patientRoutes = require('./routes/patients');
 const mongoose = require('mongoose');
+var cors = require('cors');
 
 app.use(express.json());
+app.use(cors());
 
 app.use((req, res, next) => {
   next();

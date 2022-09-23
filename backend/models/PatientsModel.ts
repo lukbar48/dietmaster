@@ -18,17 +18,20 @@ const patientSchema = new Schema(
     },
     sex: {
       type: String,
+      require: true,
+    },
+    bodymass: {
+      type: String,
+      require: true,
+    },
+    height: {
+      type: String,
+      require: true,
     },
     email: {
       type: String,
     },
     telephone: {
-      type: String,
-    },
-    bodymass: {
-      type: String,
-    },
-    height: {
       type: String,
     },
     notes: {
