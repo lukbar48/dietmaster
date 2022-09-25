@@ -29,11 +29,4 @@ export const auth = [
       }),
     );
   }),
-  rest.get('/me', (req, res, ctx) => {
-    if (authenticateRequest(req)) {
-      const user = db.dietitian.getAll();
-      return res(ctx.status(200), ctx.json({ ...sanitizeUser(user) }));
-    }
-    return res(ctx.status(401));
-  }),
 ];
