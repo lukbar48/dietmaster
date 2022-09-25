@@ -27,13 +27,14 @@ const DiseasesForm = () => {
     }
   };
   useEffect(() => {
-    const getList = patientsList.filter((item: typeof patient) => item._id === Number(id));
+    const getList = patientsList.filter((item: typeof patient) => item?._id === id);
     if (getList.length) {
       setDiseasesList(getList[0].diseases);
     }
   }, [id, patientsList]);
 
   useEffect(() => {
+    if (!patient) return;
     setPatient({ ...patient, diseases: diseasesList });
     dispatch(updatePatient({ ...patient, diseases: diseasesList }));
   }, [diseasesList, dispatch, patient, setPatient]);

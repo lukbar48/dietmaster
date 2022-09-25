@@ -11,6 +11,8 @@ const BloodTestPatientInfo = ({ index, type, value, date }: IBloodTestPatientInf
   const { setPatient, patient } = useContext(PatientContext);
   const dispatch = useDispatch();
 
+  if (!patient) return null;
+
   const deleteTest = (type: string) => {
     const tests = patient.tests.filter((item) => item.type !== type);
     setPatient({ ...patient, tests });

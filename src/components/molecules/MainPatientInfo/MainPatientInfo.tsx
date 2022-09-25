@@ -14,7 +14,7 @@ const MainPatientInfo = ({ name, surname, age, _id, index }: IPatientInfo) => {
   const navigate = useNavigate();
   const { isOpen, handleCloseModal, handleOpenModal } = useModal();
 
-  const handleManageClick = (id: number) => {
+  const handleManageClick = (id: string) => {
     managePatient(id);
     navigate(`/patient/about/${id}`);
   };

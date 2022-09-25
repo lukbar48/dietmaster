@@ -31,7 +31,7 @@ const DietForm = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (id) {
+    if (id && patient) {
       const getPatient = patientsList.filter((patient: any) => patient.id === Number(id));
       setPatient(getPatient[0]);
 
@@ -48,9 +48,10 @@ const DietForm = () => {
         caloriesValue.current.value = patient.calories;
       }
     }
-  }, [id, patient.calories, patient.carbs, patient.fat, patient.protein, patientsList, setPatient]);
+  }, [id, patient, patientsList, setPatient]);
 
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
+    if (!patient) return;
     setPatient({
       ...patient,
       [e.target.name]: e.target.value,
@@ -58,8 +59,10 @@ const DietForm = () => {
   };
 
   useEffect(() => {
-    dispatch(updatePatient(patient));
+    if (patient) dispatch(updatePatient(patient));
   }, [dispatch, patient]);
+
+  if (!patient) return null;
 
   return (
     <Wrapper onChange={handleChange}>

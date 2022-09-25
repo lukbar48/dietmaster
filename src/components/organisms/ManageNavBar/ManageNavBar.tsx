@@ -18,6 +18,8 @@ const Wrapper = styled.div`
 const ManageNavBar = () => {
   const { patient } = useContext(PatientContext);
 
+  if (!patient) return null;
+
   return (
     <Wrapper>
       <ManageNavButton to={`/patient/about/${patient._id}`}>

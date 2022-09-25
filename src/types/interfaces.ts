@@ -46,12 +46,11 @@ export interface IPatientInfo {
   name: string;
   surname: string;
   age: string;
-  _id: number;
+  _id: string;
   index: number;
 }
 
 export const initialPatientValues = {
-  _id: 0,
   name: '',
   surname: '',
   age: '',
@@ -66,23 +65,15 @@ export const initialPatientValues = {
   protein: '5',
   fat: '15',
   carbs: '10',
-  allergens: [''],
-  preferences: [''],
-  diseases: [''],
-  tests: [{ date: '2021-01-26', type: 'Red blood cells', value: '75mg' }],
-  appointments: [
-    {
-      date: '2021-06-05',
-      bodymass: '82',
-      BMI: '28',
-      hips: '113',
-      waist: '98',
-    },
-  ],
+  allergens: [],
+  preferences: [],
+  diseases: [],
+  tests: [],
+  appointments: [],
 };
 
 export type InitialPatientType = {
-  _id: number;
+  _id: string;
   name: string;
   surname: string;
   age: string;
@@ -147,7 +138,7 @@ export interface IAppointmentsPatientInfo {
 
 export interface IInfoModal {
   handleCloseModal: () => void;
-  patientID: number;
+  patientID: string;
 }
 
 export interface IModal {

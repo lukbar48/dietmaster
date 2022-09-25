@@ -14,6 +14,12 @@ const TestsModal = ({ handleCloseModal }: { handleCloseModal: () => void }) => {
     value: '',
   });
 
+  useEffect(() => {
+    if (patient) dispatch(updatePatient(patient));
+  }, [dispatch, patient]);
+
+  if (!patient) return <div />;
+
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
     setTestRecord({
       ...testRecord,
@@ -33,10 +39,6 @@ const TestsModal = ({ handleCloseModal }: { handleCloseModal: () => void }) => {
       alert('Please provide all data');
     }
   };
-
-  useEffect(() => {
-    dispatch(updatePatient(patient));
-  }, [dispatch, patient]);
 
   return (
     <Wrapper>

@@ -9,7 +9,7 @@ import { PatientContext } from 'contexts/PatientContext';
 
 const PreferencesForm = () => {
   const { id } = useParams();
-  const [preferencesList, setPreferencesList] = useState<string[]>(['']);
+  const [preferencesList, setPreferencesList] = useState<string[]>([]);
   const [item, setItem] = useState('');
   const patientsList = useSelector((state: any) => state.patientsList);
   const dispatch = useDispatch();
@@ -32,11 +32,12 @@ const PreferencesForm = () => {
   };
 
   useEffect(() => {
-    const getList = patientsList.filter((item: typeof patient) => item._id === Number(id));
+    const getList = patientsList.filter((item: typeof patient) => item?._id === id);
     setPreferencesList(getList[0].preferences);
   }, [id, patientsList]);
 
   useEffect(() => {
+    if (!patient) return;
     setPatient({ ...patient, preferences: preferencesList });
     dispatch(updatePatient({ ...patient, preferences: preferencesList }));
   }, [dispatch, patient, preferencesList, setPatient]);

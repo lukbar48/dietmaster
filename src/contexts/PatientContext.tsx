@@ -1,13 +1,13 @@
 import { createContext, useEffect, useState, ReactNode } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { InitialPatientType, initialPatientValues } from 'types/interfaces';
+import { InitialPatientType } from 'types/interfaces';
 import { fetchPatients } from '../store';
 
 export type PatientContextType = {
-  managePatient: (id: number) => void;
-  setPatient: (obj: InitialPatientType) => void;
+  managePatient: (id: string) => void;
+  setPatient: (obj: InitialPatientType | null) => void;
   searchResults: InitialPatientType[];
-  patient: InitialPatientType;
+  patient: InitialPatientType | null;
   searchTerm: string;
   setSearchTerm: (term: string) => void;
 };
@@ -15,15 +15,15 @@ export type PatientContextType = {
 export const PatientContext = createContext<PatientContextType>({
   managePatient() {},
   setPatient() {},
-  searchResults: [initialPatientValues],
+  searchResults: [],
   searchTerm: '',
   setSearchTerm() {},
-  patient: initialPatientValues,
+  patient: null,
 });
 
 const PatientProvider = ({ children }: { children: ReactNode }) => {
-  const [patient, setPatient] = useState<InitialPatientType>(initialPatientValues);
-  const [searchResults, setSearchResults] = useState<InitialPatientType[]>([] as InitialPatientType[]);
+  const [patient, setPatient] = useState<InitialPatientType | null>(null);
+  const [searchResults, setSearchResults] = useState<InitialPatientType[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
 
   const patientsList = useSelector((state: any) => state.patientsList);
@@ -42,7 +42,7 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
   //     .catch((err) => console.log(err));
   // }, [searchTerm]);
 
-  const managePatient = (id: number) => {
+  const managePatient = (id: string) => {
     const findPatient = patientsList.filter((patient: any) => patient.id === id);
     setPatient(findPatient[0]);
   };

@@ -8,7 +8,7 @@ import { PatientContext } from 'contexts/PatientContext';
 
 const AllergensForm = () => {
   const { patient, setPatient } = useContext(PatientContext);
-  const [allergensList, setAllergensList] = useState<string[]>(patient.allergens);
+  const [allergensList, setAllergensList] = useState<string[]>([]);
   const [item, setItem] = useState('');
   const dispatch = useDispatch();
 
@@ -28,7 +28,8 @@ const AllergensForm = () => {
   };
 
   useEffect(() => {
-    setPatient({ ...patient, allergens: allergensList });
+    if (patient?.allergens) setAllergensList(patient.allergens);
+    if (patient) setPatient({ ...patient, allergens: allergensList });
     dispatch(updatePatient({ ...patient, allergens: allergensList }));
   }, [allergensList, dispatch, patient, setPatient]);
 

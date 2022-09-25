@@ -11,6 +11,8 @@ const AppointmentsPatientInfo = ({ index, date, BMI, bodymass, hips, waist }: IA
   const { setPatient, patient } = useContext(PatientContext);
   const dispatch = useDispatch();
 
+  if (!patient) return null;
+
   const deleteAppointment = (bodymass: string) => {
     const appointments = patient.appointments.filter((item) => item.bodymass !== bodymass);
     setPatient({ ...patient, appointments });

@@ -21,61 +21,53 @@ const AboutForm = () => {
   const activityValue = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (id) {
-      axios
-        .get(`/dietmaster/patient/about/${id}`)
-        .then(({ data }) => {
-          data[0] && setPatient(data[0]);
-        })
-        .catch((err) => console.log(err));
+    const getPatientData = async () => {
+      try {
+        const { data } = await axios.get(`/dietmaster/patient/about/${id}`);
+        if (data[0]) setPatient(data[0]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-      if (nameValue.current) {
-        nameValue.current.value = patient.name;
-      }
-      if (surnameValue.current) {
-        surnameValue.current.value = patient.surname;
-      }
-      if (ageValue.current) {
-        ageValue.current.value = patient.age;
-      }
-      if (telephoneValue.current) {
-        telephoneValue.current.value = patient.telephone;
-      }
-      if (emailValue.current) {
-        emailValue.current.value = patient.email;
-      }
-      if (bodymassValue.current) {
-        bodymassValue.current.value = patient.bodymass;
-      }
-      if (heightValue.current) {
-        heightValue.current.value = patient.height;
-      }
-      if (notesValue.current) {
-        notesValue.current.value = patient.notes;
-      }
-      if (activityValue.current) {
-        activityValue.current.value = patient.activity;
-      }
+    getPatientData();
+
+    if (nameValue.current) {
+      nameValue.current.value = patient?.name || '';
     }
-  }, [
-    id,
-    patient.activity,
-    patient.age,
-    patient.bodymass,
-    patient.email,
-    patient.height,
-    patient.name,
-    patient.notes,
-    patient.surname,
-    patient.telephone,
-    setPatient,
-  ]);
+    if (surnameValue.current) {
+      surnameValue.current.value = patient?.surname || '';
+    }
+    if (ageValue.current) {
+      ageValue.current.value = patient?.age || '';
+    }
+    if (telephoneValue.current) {
+      telephoneValue.current.value = patient?.telephone || '';
+    }
+    if (emailValue.current) {
+      emailValue.current.value = patient?.email || '';
+    }
+    if (bodymassValue.current) {
+      bodymassValue.current.value = patient?.bodymass || '';
+    }
+    if (heightValue.current) {
+      heightValue.current.value = patient?.height || '';
+    }
+    if (notesValue.current) {
+      notesValue.current.value = patient?.notes || '';
+    }
+    if (activityValue.current) {
+      activityValue.current.value = patient?.activity || '';
+    }
+  }, [id, patient, setPatient]);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(updatePatient(patient));
+    if (patient) dispatch(updatePatient(patient));
   }, [dispatch, patient]);
+
+  if (!patient) return null;
 
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
     setPatient({

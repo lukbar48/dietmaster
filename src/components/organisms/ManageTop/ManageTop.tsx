@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import Button from 'components/atoms/Button/Button';
 import { PatientContext } from 'contexts/PatientContext';
 import { Wrapper } from './ManageTop.styles';
-import { initialPatientValues } from 'types/interfaces';
 import { IoIosReturnLeft } from 'react-icons/io';
 import Modal from 'components/organisms/Modal/Modal';
 import useModal from '../Modal/useModal';
@@ -14,10 +13,12 @@ const ManageTop = () => {
   const { setPatient, patient } = useContext(PatientContext);
   const { isOpen, handleCloseModal, handleOpenModal } = useModal();
 
+  if (!patient) return null;
+
   const handleExitClick = () => {
     if (patient.name && patient.surname && patient.bodymass && patient.height && patient.age) {
       navigate('/');
-      setPatient(initialPatientValues);
+      setPatient(null);
     } else {
       handleOpenModal();
     }

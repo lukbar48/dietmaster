@@ -16,6 +16,12 @@ const AppointmentsModal = ({ handleCloseModal }: { handleCloseModal: () => void 
     waist: 'no data',
   });
 
+  useEffect(() => {
+    if (patient) dispatch(updatePatient(patient));
+  }, [dispatch, patient]);
+
+  if (!patient) return null;
+
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
     setAppointmentRecord({
       ...appointmentRecord,
@@ -35,10 +41,6 @@ const AppointmentsModal = ({ handleCloseModal }: { handleCloseModal: () => void 
       alert('Please provide required data: date, body mass.');
     }
   };
-
-  useEffect(() => {
-    dispatch(updatePatient(patient));
-  }, [dispatch, patient]);
 
   return (
     <Wrapper>

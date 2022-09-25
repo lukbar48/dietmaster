@@ -8,6 +8,8 @@ const AboutBottomBar = () => {
   const { patient } = useContext(PatientContext);
   const { BMIdescription, calculateBMI, calculateRisk, idealWeight } = useCalculate(patient);
 
+  if (!patient) return null;
+
   return (
     <Wrapper>
       <div className="text">Body weight assessment</div>
