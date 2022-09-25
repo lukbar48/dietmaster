@@ -33,15 +33,6 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
     dispatch(fetchPatients());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   axios
-  //     .post('/dietmaster', searchTerm)
-  //     .then(({ data }) => {
-  //       setSearchResults(data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, [searchTerm]);
-
   const managePatient = (id: string) => {
     const findPatient = patientsList.filter((patient: any) => patient.id === id);
     setPatient(findPatient[0]);

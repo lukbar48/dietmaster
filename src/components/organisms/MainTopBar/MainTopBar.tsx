@@ -7,23 +7,22 @@ import { useAuth } from 'hooks/useAuth';
 import { BiLogOut } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
 import { Wrapper } from './MainTopBar.styles';
-import { initialPatientValues } from 'types/interfaces';
+import { InitialPatientType, initialPatientValues } from 'types/interfaces';
 import { useDispatch } from 'react-redux';
-import { addNewPatient } from 'store';
+import { addNewPatient, AppDispatch } from 'store';
 
 const MainTopBar = () => {
   const { setPatient, searchTerm, setSearchTerm } = useContext(PatientContext);
   const navigate = useNavigate();
   const { signOut } = useAuth();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const handleClickNewPatient = async () => {
-    console.log('elo');
-    const patient = await dispatch(addNewPatient(initialPatientValues));
-    console.log(patient);
-    // console.log(patient);
-    // setPatient(patient);
-    // navigate(`/patient/about/${patient._id}`);
+  const handleClickNewPatient = () => {
+    const patient = dispatch(addNewPatient(initialPatientValues));
+    // if (!patient) return;
+    console.log(patient.arg);
+    setPatient(patient.arg);
+    navigate(`/patient/about/${patient.arg._id}`);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

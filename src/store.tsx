@@ -22,7 +22,7 @@ export const fetchSinglePatient = createAsyncThunk('patient/getPatient', async (
   }
 });
 
-export const addNewPatient = createAsyncThunk('patients/addPatient', async (patient: Partial<InitialPatientType>) => {
+export const addNewPatient = createAsyncThunk('patients/addPatient', async (patient: InitialPatientType) => {
   try {
     const response = await axios.post('http://localhost:4000/api/patients', patient);
     return response.data;
@@ -84,3 +84,6 @@ export const store = configureStore({
     patientsList: patientsListSlice.reducer,
   },
 });
+
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
