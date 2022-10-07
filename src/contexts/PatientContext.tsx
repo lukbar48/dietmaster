@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState, ReactNode } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchPatients } from 'redux/patientsSlice';
 import { InitialPatientType } from 'types/interfaces';
-import { fetchPatients } from '../store';
 
 export type PatientContextType = {
   managePatient: (id: string) => void;

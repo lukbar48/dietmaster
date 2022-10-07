@@ -9,7 +9,8 @@ import { IoMdAdd } from 'react-icons/io';
 import { Wrapper } from './MainTopBar.styles';
 import { InitialPatientType, initialPatientValues } from 'types/interfaces';
 import { useDispatch } from 'react-redux';
-import { addNewPatient, AppDispatch } from 'store';
+import { AppDispatch } from 'store';
+import { addNewPatient } from '../../../redux/patientsSlice';
 
 const MainTopBar = () => {
   const { setPatient, searchTerm, setSearchTerm } = useContext(PatientContext);

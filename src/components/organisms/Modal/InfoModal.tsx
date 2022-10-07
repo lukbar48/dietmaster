@@ -3,8 +3,8 @@ import { ModalForm, ModalTop, Wrapper } from './TestsModal.styles';
 import { ButtonsWrapper } from './DeleteModal.styles';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { removePatient } from '../../../store';
 import { IInfoModal } from 'types/interfaces';
+import { removePatient } from 'redux/patientsSlice';
 
 const InfoModal = ({ handleCloseModal, patientID }: IInfoModal) => {
   const navigate = useNavigate();

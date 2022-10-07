@@ -3,8 +3,8 @@ import AllergensList from 'components/molecules/AllergensList/AllergensList';
 import React, { useContext, useEffect, useState } from 'react';
 import { Wrapper } from './AllergensForm.styles';
 import { useDispatch } from 'react-redux';
-import { updatePatient } from '../../../store';
 import { PatientContext } from 'contexts/PatientContext';
+import { updatePatient } from 'redux/singlePatientSlice';
 
 const AllergensForm = () => {
   const { patient, setPatient } = useContext(PatientContext);

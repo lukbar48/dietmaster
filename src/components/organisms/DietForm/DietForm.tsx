@@ -3,7 +3,6 @@ import useCalculate from 'hooks/useCalculate';
 import React, { useContext, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { updatePatient } from '../../../store';
 import {
   Nutrient,
   CPMWrapper,
@@ -17,6 +16,7 @@ import {
   SliderWrapper,
   Wrapper,
 } from './DietForm.styles';
+import { updatePatient } from 'redux/singlePatientSlice';
 
 const DietForm = () => {
   const { id } = useParams();

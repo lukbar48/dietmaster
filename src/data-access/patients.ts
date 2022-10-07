@@ -11,7 +11,7 @@ export const fetchSinglePatient = async (id: string) => {
   return response.data;
 };
 
-export const updatePatient = async (data: Partial<InitialPatientType>) => {
+export const addPatient = async (data: Partial<InitialPatientType>) => {
   const response = await axios.post('/api/patients', data);
   return response.data;
 };

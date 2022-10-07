@@ -2,14 +2,15 @@ import SexButton from 'components/molecules/SexButton/SexButton';
 import React, { useContext, useEffect, useRef } from 'react';
 import { PatientContext } from 'contexts/PatientContext';
 import { useParams } from 'react-router';
-import axios from 'axios';
 import { Input, Slider, TextArea, Wrapper } from './AboutForm.styles';
-import { updatePatient } from '../../../store';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPatient, updatePatient } from 'redux/singlePatientSlice';
 
 const AboutForm = () => {
   const { id } = useParams();
-  const { patient, setPatient } = useContext(PatientContext);
+  const { setPatient } = useContext(PatientContext);
+  const dispatch = useDispatch();
+  const patient = useSelector((state: any) => state.patient);
   const nameValue = useRef<HTMLInputElement>(null);
   const surnameValue = useRef<HTMLInputElement>(null);
   const ageValue = useRef<HTMLInputElement>(null);
@@ -21,17 +22,12 @@ const AboutForm = () => {
   const activityValue = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const getPatientData = async () => {
-      try {
-        const { data } = await axios.get(`/dietmaster/patient/about/${id}`);
-        if (data[0]) setPatient(data[0]);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    if (!id) return;
+    dispatch(fetchPatient(id));
+    console.log('elooo', patient);
+  }, [dispatch, id, patient]);
 
-    getPatientData();
-
+  useEffect(() => {
     if (nameValue.current) {
       nameValue.current.value = patient?.name || '';
     }
@@ -59,13 +55,24 @@ const AboutForm = () => {
     if (activityValue.current) {
       activityValue.current.value = patient?.activity || '';
     }
-  }, [id, patient, setPatient]);
+  }, [
+    dispatch,
+    id,
+    patient,
+    patient?.activity,
+    patient?.age,
+    patient?.bodymass,
+    patient?.email,
+    patient?.height,
+    patient?.name,
+    patient?.notes,
+    patient?.surname,
+    patient?.telephone,
+  ]);
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (patient) dispatch(updatePatient(patient));
-  }, [dispatch, patient]);
+  // useEffect(() => {
+  //   if (patient) dispatch(updatePatient(patient));
+  // }, [dispatch, patient]);
 
   if (!patient) return null;
 
