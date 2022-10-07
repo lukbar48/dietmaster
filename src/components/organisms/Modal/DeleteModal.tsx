@@ -1,7 +1,7 @@
 import Button from 'components/atoms/Button/Button';
 import { ModalForm, ModalTop, Wrapper } from './TestsModal.styles';
 import { useDispatch } from 'react-redux';
-import { IDeleteModal } from 'types/interfaces';
+import { IDeleteModal } from 'types/types';
 import { ButtonsWrapper } from './DeleteModal.styles';
 import { removePatient } from 'redux/patientsSlice';
 

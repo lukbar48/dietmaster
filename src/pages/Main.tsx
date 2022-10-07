@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { PatientContext } from 'contexts/PatientContext';
 import { Wrapper } from './Main.styles';
 import { useSelector } from 'react-redux';
-import { InitialPatientType } from 'types/interfaces';
+import { InitialPatientType } from 'types/types';
 
 const Main = () => {
   const { searchResults, searchTerm } = useContext(PatientContext);

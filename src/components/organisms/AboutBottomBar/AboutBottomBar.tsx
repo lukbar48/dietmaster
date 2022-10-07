@@ -1,11 +1,10 @@
 import AboutBottomBarBox from 'components/atoms/AboutBottomBarBox/AboutBottomBarBox';
-import React, { useContext } from 'react';
-import { PatientContext } from 'contexts/PatientContext';
-import { CalculationsWrapper, Calc, Wrapper } from './AboutBottomBar.styles';
 import useCalculate from 'hooks/useCalculate';
+import { useSelector } from 'react-redux';
+import { Calc, CalculationsWrapper, Wrapper } from './AboutBottomBar.styles';
 
 const AboutBottomBar = () => {
-  const { patient } = useContext(PatientContext);
+  const patient = useSelector((state: any) => state.patient);
   const { BMIdescription, calculateBMI, calculateRisk, idealWeight } = useCalculate(patient);
 
   if (!patient) return null;

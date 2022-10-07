@@ -1,11 +1,10 @@
 import ManageNavButton from 'components/atoms/ManageNavButton/ManageNavButton';
-import { useContext } from 'react';
-import styled from 'styled-components';
-import { BsFillPersonFill, BsExclamationDiamond } from 'react-icons/bs';
-import { ImSpoonKnife } from 'react-icons/im';
-import { BiTestTube } from 'react-icons/bi';
 import { AiTwotoneCalendar } from 'react-icons/ai';
-import { PatientContext } from 'contexts/PatientContext';
+import { BiTestTube } from 'react-icons/bi';
+import { BsExclamationDiamond, BsFillPersonFill } from 'react-icons/bs';
+import { ImSpoonKnife } from 'react-icons/im';
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   display: grid;
@@ -16,7 +15,9 @@ const Wrapper = styled.div`
 `;
 
 const ManageNavBar = () => {
-  const { patient } = useContext(PatientContext);
+  const patient = useSelector((state: any) => state.patient);
+
+  console.log('aaaa', patient._id);
 
   if (!patient) return null;
 

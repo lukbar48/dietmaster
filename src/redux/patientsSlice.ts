@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { InitialPatientType } from 'types/interfaces';
+import { InitialPatientType } from 'types/types';
 
 const initialState: InitialPatientType[] = [];
 
@@ -24,18 +24,12 @@ export const fetchSinglePatient = createAsyncThunk('patient/getPatient', async (
 
 export const addNewPatient = createAsyncThunk('patients/addPatient', async (patient: InitialPatientType) => {
   try {
+    console.log(patient);
     const response = await axios.post('http://localhost:4000/api/patients', patient);
+    console.log('pppp', response);
     return response.data;
   } catch (err) {
-    console.log(err);
-  }
-});
-
-export const updatePatient = createAsyncThunk('patients/updatePatient', async (patientData: Partial<InitialPatientType>) => {
-  try {
-    const response = await axios.patch('/api/patients', patientData);
-    return response.data;
-  } catch (err) {
+    console.log('errrr');
     console.log(err);
   }
 });
@@ -67,9 +61,6 @@ export const patientsListSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(fetchPatients.fulfilled, (state, action) => {
       return action.payload;
-    });
-    builder.addCase(updatePatient.fulfilled, (state, action) => {
-      state.push(action.payload);
     });
     builder.addCase(removePatient.fulfilled, (state, action) => {
       return state.filter((patient) => patient._id !== action.payload.id);

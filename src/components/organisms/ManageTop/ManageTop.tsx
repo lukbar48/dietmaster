@@ -7,10 +7,11 @@ import { IoIosReturnLeft } from 'react-icons/io';
 import Modal from 'components/organisms/Modal/Modal';
 import useModal from '../Modal/useModal';
 import InfoModal from '../Modal/InfoModal';
+import { useSelector } from 'react-redux';
 
 const ManageTop = () => {
   const navigate = useNavigate();
-  const { setPatient, patient } = useContext(PatientContext);
+  const patient = useSelector((state: any) => state.patient);
   const { isOpen, handleCloseModal, handleOpenModal } = useModal();
 
   if (!patient) return null;
@@ -18,7 +19,7 @@ const ManageTop = () => {
   const handleExitClick = () => {
     if (patient.name && patient.surname && patient.bodymass && patient.height && patient.age) {
       navigate('/');
-      setPatient(null);
+      // setPatient(null);
     } else {
       handleOpenModal();
     }

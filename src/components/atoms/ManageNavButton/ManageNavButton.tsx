@@ -1,4 +1,4 @@
-import { IManageNavButton } from 'types/interfaces';
+import { IManageNavButton } from 'types/types';
 import { StyledButton } from './ManageNavButton.styles';
 
 const ManageNavButton = ({ children, to }: IManageNavButton) => {

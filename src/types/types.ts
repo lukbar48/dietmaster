@@ -51,7 +51,6 @@ export interface IPatientInfo {
 }
 
 export const initialPatientValues = {
-  _id: '',
   name: '',
   surname: '',
   age: '',
@@ -74,7 +73,7 @@ export const initialPatientValues = {
 };
 
 export type InitialPatientType = {
-  _id: string;
+  _id?: string;
   name: string;
   surname: string;
   age: string;

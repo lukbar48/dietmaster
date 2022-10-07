@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { InitialPatientType } from 'types/interfaces';
+import { InitialPatientType } from 'types/types';
 
 const initialState: InitialPatientType = {
   _id: '',

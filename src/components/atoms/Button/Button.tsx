@@ -1,4 +1,4 @@
-import { IButton } from 'types/interfaces';
+import { IButton } from 'types/types';
 import { StyledButton } from './Button.styles';
 
 const Button = ({ ...props }: IButton) => {

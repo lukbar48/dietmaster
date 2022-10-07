@@ -3,7 +3,7 @@ import Button from 'components/atoms/Button/Button';
 import { PatientContext } from 'contexts/PatientContext';
 import { useNavigate } from 'react-router-dom';
 import { Wrapper } from './MainPatientInfo.styles';
-import { IPatientInfo } from 'types/interfaces';
+import { IPatientInfo } from 'types/types';
 import useModal from 'components/organisms/Modal/useModal';
 import Modal from 'components/organisms/Modal/Modal';
 import DeleteModal from 'components/organisms/Modal/DeleteModal';

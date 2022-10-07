@@ -5,7 +5,7 @@ import { updatePatient } from 'redux/singlePatientSlice';
 import { useDispatch } from 'react-redux';
 import { PatientContext } from 'contexts/PatientContext';
 import { MdDeleteOutline } from 'react-icons/md';
-import { IAppointmentsPatientInfo } from 'types/interfaces';
+import { IAppointmentsPatientInfo } from 'types/types';
 
 const AppointmentsPatientInfo = ({ index, date, BMI, bodymass, hips, waist }: IAppointmentsPatientInfo) => {
   const { setPatient, patient } = useContext(PatientContext);

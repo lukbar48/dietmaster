@@ -5,7 +5,7 @@ import { updatePatient } from 'redux/singlePatientSlice';
 import { useDispatch } from 'react-redux';
 import { PatientContext } from 'contexts/PatientContext';
 import { MdDeleteOutline } from 'react-icons/md';
-import { IBloodTestPatientInfo } from 'types/interfaces';
+import { IBloodTestPatientInfo } from 'types/types';
 
 const BloodTestPatientInfo = ({ index, type, value, date }: IBloodTestPatientInfo) => {
   const { setPatient, patient } = useContext(PatientContext);

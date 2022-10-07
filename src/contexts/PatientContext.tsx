@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState, ReactNode } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPatients } from 'redux/patientsSlice';
-import { InitialPatientType } from 'types/interfaces';
+import { InitialPatientType } from 'types/types';
 
 export type PatientContextType = {
   managePatient: (id: string) => void;
@@ -34,8 +34,8 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
   }, [dispatch]);
 
   const managePatient = (id: string) => {
-    const findPatient = patientsList.filter((patient: any) => patient.id === id);
-    setPatient(findPatient[0]);
+    const findPatient = patientsList.find((patient: any) => patient.id === id);
+    setPatient(findPatient);
   };
 
   return (

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { InitialPatientType } from 'types/interfaces';
+import { InitialPatientType } from 'types/types';
 
 export const fetchPatients = async () => {
   const response = await axios.get('/api/patients');

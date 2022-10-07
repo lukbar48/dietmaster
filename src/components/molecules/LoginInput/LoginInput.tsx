@@ -1,4 +1,4 @@
-import { ILoginInput } from 'types/interfaces';
+import { ILoginInput } from 'types/types';
 import React from 'react';
 import { Input, Label, Wrapper } from './LoginInput.styles';
 

@@ -7,7 +7,7 @@ import { useAuth } from 'hooks/useAuth';
 import { BiLogOut } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
 import { Wrapper } from './MainTopBar.styles';
-import { InitialPatientType, initialPatientValues } from 'types/interfaces';
+import { InitialPatientType, initialPatientValues } from 'types/types';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'store';
 import { addNewPatient } from '../../../redux/patientsSlice';
@@ -21,7 +21,7 @@ const MainTopBar = () => {
   const handleClickNewPatient = () => {
     const patient = dispatch(addNewPatient(initialPatientValues));
     // if (!patient) return;
-    console.log(patient.arg);
+    console.log('xxx', patient.arg);
     setPatient(patient.arg);
     navigate(`/patient/about/${patient.arg._id}`);
   };
