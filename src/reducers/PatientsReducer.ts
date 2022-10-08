@@ -32,7 +32,7 @@ const PatientsReducer = (state: InitialPatientType[], action: ACTIONTYPES) => {
           return a._id > b._id ? -1 : b._id > a._id ? 1 : 0;
         }
       });
-      return [...sortedList];
+      return sortedList;
     }
     case 'DELETE_PATIENT': {
       const deletePatientsList = state.filter((patient) => patient._id !== action.payload._id);

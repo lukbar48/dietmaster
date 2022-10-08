@@ -11,10 +11,12 @@ const patientSchema = new Schema(
     surname: {
       type: String,
       // require: true,
+      default: 'default',
     },
     age: {
       type: String,
       // require: true,
+      default: '',
     },
     sex: {
       type: String,
@@ -23,34 +25,44 @@ const patientSchema = new Schema(
     bodymass: {
       type: String,
       // require: true,
+      default: '',
     },
     height: {
       type: String,
       // require: true,
+      default: '',
     },
     email: {
       type: String,
+      default: '',
     },
     telephone: {
       type: String,
+      default: '',
     },
     notes: {
       type: String,
+      default: '',
     },
     activity: {
       type: String,
+      default: '',
     },
     calories: {
       type: String,
+      default: '',
     },
     protein: {
       type: String,
+      default: '',
     },
     fat: {
       type: String,
+      default: '',
     },
     carbs: {
       type: String,
+      default: '',
     },
     allergens: {
       type: Array,

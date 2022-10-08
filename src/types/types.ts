@@ -54,7 +54,7 @@ export const initialPatientValues = {
   name: '',
   surname: '',
   age: '',
-  sex: 'Male',
+  sex: 'Female',
   email: '',
   telephone: '',
   bodymass: '',
@@ -73,7 +73,7 @@ export const initialPatientValues = {
 };
 
 export type InitialPatientType = {
-  _id?: string;
+  _id: string;
   name: string;
   surname: string;
   age: string;

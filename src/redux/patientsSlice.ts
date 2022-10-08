@@ -22,11 +22,9 @@ export const fetchSinglePatient = createAsyncThunk('patient/getPatient', async (
   }
 });
 
-export const addNewPatient = createAsyncThunk('patients/addPatient', async (patient: InitialPatientType) => {
+export const addNewPatient = createAsyncThunk('patients/addPatient', async (patient: Partial<InitialPatientType>) => {
   try {
-    console.log(patient);
     const response = await axios.post('http://localhost:4000/api/patients', patient);
-    console.log('pppp', response);
     return response.data;
   } catch (err) {
     console.log('errrr');
