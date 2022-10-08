@@ -49,7 +49,8 @@ export const singlePatientSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder.addCase(fetchPatient.fulfilled, (state, action) => {
-      state = action.payload;
+      // state = action.payload;
+      return action.payload;
     });
     builder.addCase(updatePatient.fulfilled, (state, action) => {
       state = action.payload;

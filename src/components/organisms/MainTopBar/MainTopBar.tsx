@@ -7,21 +7,18 @@ import { useAuth } from 'hooks/useAuth';
 import { BiLogOut } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
 import { Wrapper } from './MainTopBar.styles';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from 'store';
 import { addNewPatient } from '../../../redux/patientsSlice';
-import { fetchPatient } from 'redux/singlePatientSlice';
+import { useAppDispatch } from 'redux/hooks';
 
 const MainTopBar = () => {
   const { searchTerm, setSearchTerm } = useContext(PatientContext);
   const navigate = useNavigate();
   const { signOut } = useAuth();
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   const handleClickNewPatient = async () => {
     const patient = await dispatch(addNewPatient({ name: 'imie' }));
-    if (!patient.payload) return;
-    dispatch(fetchPatient(patient.payload._id));
+    // dispatch(fetchPatient(patient.payload._id));
     navigate(`/patient/about/${patient.payload._id}`);
   };
 

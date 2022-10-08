@@ -21,9 +21,9 @@ const AboutForm = () => {
   const activityValue = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (!id) return;
-    dispatch(fetchPatient(id));
-  }, [dispatch, id, patient]);
+    if (id) dispatch(fetchPatient(id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (nameValue.current) {
@@ -77,10 +77,6 @@ const AboutForm = () => {
         [e.target.name]: e.target.value,
       }),
     );
-    // setPatient({
-    //   ...patient,
-    //   [e.target.name]: e.target.value,
-    // });
   };
 
   return (

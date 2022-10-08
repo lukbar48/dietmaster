@@ -31,7 +31,8 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     dispatch(fetchPatients());
-  }, [dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const managePatient = (id: string) => {
     const findPatient = patientsList.find((patient: any) => patient.id === id);
