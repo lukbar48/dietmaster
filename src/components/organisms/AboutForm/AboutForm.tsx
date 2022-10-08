@@ -73,7 +73,7 @@ const AboutForm = () => {
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
     dispatch(
       updatePatient({
-        // ...patient,
+        _id: patient._id,
         [e.target.name]: e.target.value,
       }),
     );

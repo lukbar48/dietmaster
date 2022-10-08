@@ -4,12 +4,13 @@ import MainTopBar from 'components/organisms/MainTopBar/MainTopBar';
 import { useContext } from 'react';
 import { PatientContext } from 'contexts/PatientContext';
 import { Wrapper } from './Main.styles';
-import { useSelector } from 'react-redux';
 import { InitialPatientType } from 'types/types';
+import { RootState } from 'store';
+import { useAppSelector } from '../redux/hooks';
 
 const Main = () => {
-  const { searchResults, searchTerm } = useContext(PatientContext);
-  const patients = useSelector((state: any) => state.patientsList);
+  const { searchTerm } = useContext(PatientContext);
+  const patients = useAppSelector((state: RootState) => state.patientsList);
 
   return (
     <>

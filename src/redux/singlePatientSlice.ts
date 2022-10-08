@@ -3,6 +3,7 @@ import axios from 'axios';
 import { InitialPatientType } from 'types/types';
 
 const initialState = {
+  _id: '',
   name: '',
   surname: '',
   age: '',
@@ -44,7 +45,7 @@ export const updatePatient = createAsyncThunk('patient/updatePatient', async (pa
 
 export const singlePatientSlice = createSlice({
   name: 'singlePatient',
-  initialState,
+  initialState: initialState,
   reducers: {},
   extraReducers(builder) {
     builder.addCase(fetchPatient.fulfilled, (state, action) => {

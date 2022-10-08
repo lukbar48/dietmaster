@@ -6,13 +6,12 @@ import useModal from 'components/organisms/Modal/useModal';
 import Modal from 'components/organisms/Modal/Modal';
 import DeleteModal from 'components/organisms/Modal/DeleteModal';
 import { MdDeleteOutline, MdOutlineModeEditOutline } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
 import { fetchPatient } from 'redux/singlePatientSlice';
-import { AppDispatch } from '../../../store';
+import { useAppDispatch } from 'redux/hooks';
 
 const MainPatientInfo = ({ name, surname, age, _id, index }: IPatientInfo) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const { isOpen, handleCloseModal, handleOpenModal } = useModal();
 
   const handleManageClick = (id: string) => {

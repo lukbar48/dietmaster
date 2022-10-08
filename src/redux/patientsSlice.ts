@@ -63,6 +63,9 @@ export const patientsListSlice = createSlice({
     builder.addCase(removePatient.fulfilled, (state, action) => {
       return state.filter((patient) => patient._id !== action.payload.id);
     });
+    builder.addCase(addNewPatient.fulfilled, (state, action) => {
+      state = [...state, action.payload];
+    });
   },
 });
 
