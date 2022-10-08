@@ -1,15 +1,15 @@
-import { InitialPatientType } from 'types/interfaces';
+import { InitialPatientType } from 'types/types';
 
 const useCalculate = (patient: InitialPatientType) => {
   const calculateBMI = () => {
-    const height = Number(patient.height) / 100;
-    const BMI = (Number(patient.bodymass) / Math.pow(height, 2)).toFixed(2).toString();
+    const height = Number(patient?.height) / 100;
+    const BMI = (Number(patient?.bodymass) / Math.pow(height, 2)).toFixed(2).toString();
     return BMI;
   };
 
   const BMIdescription = () => {
-    const height = Number(patient.height) / 100;
-    let BMI = Number((Number(patient.bodymass) / Math.pow(height, 2)).toFixed(2));
+    const height = Number(patient?.height) / 100;
+    let BMI = Number((Number(patient?.bodymass) / Math.pow(height, 2)).toFixed(2));
     if (BMI < 25 && BMI > 18.5) {
       return 'Normal';
     } else if (BMI >= 25) {
@@ -22,8 +22,8 @@ const useCalculate = (patient: InitialPatientType) => {
   };
 
   const calculateRisk = () => {
-    const height = Number(patient.height) / 100;
-    let BMI = Number((Number(patient.bodymass) / Math.pow(height, 2)).toFixed(2));
+    const height = Number(patient?.height) / 100;
+    let BMI = Number((Number(patient?.bodymass) / Math.pow(height, 2)).toFixed(2));
     if (BMI < 25 && BMI > 18.5) {
       return 'Lowest';
     } else if (BMI >= 25 && BMI <= 35) {
@@ -38,10 +38,10 @@ const useCalculate = (patient: InitialPatientType) => {
   };
 
   const idealWeight = () => {
-    const height = Number(patient.height);
+    const height = Number(patient?.height);
     let idealWeightMin = '';
     let idealWeightMax = '';
-    if (patient.sex === 'Male') {
+    if (patient?.sex === 'Male') {
       idealWeightMin = (height - 100 - (height - 138) / 4).toString();
       idealWeightMax = (height - 100 - (height - 162) / 4).toString();
     } else {
@@ -53,11 +53,10 @@ const useCalculate = (patient: InitialPatientType) => {
   };
 
   const calculateCPM = () => {
-    const CPM = (66.5 + 13.75 * Number(patient.bodymass) + 5.003 * Number(patient.height) - 6.775 * Number(patient.age)) * Number(patient.activity);
+    const CPM =
+      (66.5 + 13.75 * Number(patient?.bodymass) + 5.003 * Number(patient?.height) - 6.775 * Number(patient?.age)) * Number(patient?.activity);
     return CPM.toFixed().toString();
   };
-
-
 
   return { calculateBMI, BMIdescription, calculateRisk, idealWeight, calculateCPM };
 };

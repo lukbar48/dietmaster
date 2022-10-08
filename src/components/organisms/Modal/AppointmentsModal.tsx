@@ -3,7 +3,7 @@ import { ModalForm, ModalTop, Wrapper } from './TestsModal.styles';
 import { useContext, useEffect, useState } from 'react';
 import { PatientContext } from 'contexts/PatientContext';
 import { useDispatch } from 'react-redux';
-import { addNewPatient } from 'store/store';
+import { updatePatient } from 'redux/singlePatientSlice';
 
 const AppointmentsModal = ({ handleCloseModal }: { handleCloseModal: () => void }) => {
   const { patient, setPatient } = useContext(PatientContext);
@@ -15,6 +15,12 @@ const AppointmentsModal = ({ handleCloseModal }: { handleCloseModal: () => void 
     hips: 'no data',
     waist: 'no data',
   });
+
+  useEffect(() => {
+    if (patient) dispatch(updatePatient(patient));
+  }, [dispatch, patient]);
+
+  if (!patient) return null;
 
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
     setAppointmentRecord({
@@ -35,10 +41,6 @@ const AppointmentsModal = ({ handleCloseModal }: { handleCloseModal: () => void 
       alert('Please provide required data: date, body mass.');
     }
   };
-
-  useEffect(() => {
-    dispatch(addNewPatient(patient));
-  }, [dispatch, patient]);
 
   return (
     <Wrapper>

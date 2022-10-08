@@ -1,21 +1,21 @@
-import { useContext } from 'react';
 import Button from 'components/atoms/Button/Button';
-import { PatientContext } from 'contexts/PatientContext';
 import { useNavigate } from 'react-router-dom';
 import { Wrapper } from './MainPatientInfo.styles';
-import { IPatientInfo } from 'types/interfaces';
+import { IPatientInfo } from 'types/types';
 import useModal from 'components/organisms/Modal/useModal';
 import Modal from 'components/organisms/Modal/Modal';
 import DeleteModal from 'components/organisms/Modal/DeleteModal';
 import { MdDeleteOutline, MdOutlineModeEditOutline } from 'react-icons/md';
+import { fetchPatient } from 'redux/singlePatientSlice';
+import { useAppDispatch } from 'redux/hooks';
 
-const MainPatientInfo = ({ name, surname, age, id, index }: IPatientInfo) => {
-  const { managePatient } = useContext(PatientContext);
+const MainPatientInfo = ({ name, surname, age, _id, index }: IPatientInfo) => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { isOpen, handleCloseModal, handleOpenModal } = useModal();
 
-  const handleManageClick = (id: number) => {
-    managePatient(id);
+  const handleManageClick = (id: string) => {
+    dispatch(fetchPatient(_id));
     navigate(`/patient/about/${id}`);
   };
   const handleDeleteClick = () => {
@@ -29,7 +29,7 @@ const MainPatientInfo = ({ name, surname, age, id, index }: IPatientInfo) => {
       <div>{surname}</div>
       <div>{age}</div>
       <div className="buttons">
-        <Button onClick={() => handleManageClick(id)}>
+        <Button onClick={() => handleManageClick(_id)}>
           <MdOutlineModeEditOutline style={{ fontSize: '1.4rem', margin: '-5px 2px -7px -2px' }} />
           Manage
         </Button>
@@ -39,7 +39,7 @@ const MainPatientInfo = ({ name, surname, age, id, index }: IPatientInfo) => {
         </Button>
       </div>
       <Modal handleCloseModal={handleCloseModal} isOpen={isOpen}>
-        <DeleteModal handleCloseModal={handleCloseModal} patientID={id} />
+        <DeleteModal handleCloseModal={handleCloseModal} patientID={_id?.toString()} />
       </Modal>
     </Wrapper>
   );

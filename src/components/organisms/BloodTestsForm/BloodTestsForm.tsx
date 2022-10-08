@@ -2,11 +2,11 @@ import BloodTestsFormBottomBar from 'components/molecules/BloodTestsFormBottomBa
 import BloodTestsFormTopBar from 'components/molecules/BloodTestsFormTopBar/BloodTestsFormTopBar';
 import BloodTestPatientInfo from 'components/molecules/BloodTestPatientInfo/BloodTestPatientInfo';
 import styled from 'styled-components';
-import { PatientContext } from 'contexts/PatientContext';
-import { useContext } from 'react';
 import Modal from '../Modal/Modal';
 import useModal from '../Modal/useModal';
 import TestsModal from '../Modal/TestsModal';
+import { RootState } from 'store';
+import { useAppSelector } from 'redux/hooks';
 
 const Wrapper = styled.div`
   display: flex;
@@ -18,14 +18,14 @@ const Wrapper = styled.div`
 `;
 
 const BloodTestsForm = () => {
-  const { patient } = useContext(PatientContext);
+  const patient = useAppSelector((state: RootState) => state.patient);
   const { isOpen, handleCloseModal, handleOpenModal } = useModal();
 
   return (
     <Wrapper>
       <BloodTestsFormTopBar />
       <BloodTestsFormBottomBar handleOpenModal={handleOpenModal} />
-      {patient.tests.length > 0 &&
+      {patient?.tests &&
         patient.tests.map((patient, index) => {
           return <BloodTestPatientInfo index={index + 1} key={patient.type} {...patient} />;
         })}

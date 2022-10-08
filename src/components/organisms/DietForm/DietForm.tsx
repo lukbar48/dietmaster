@@ -1,9 +1,6 @@
-import { PatientContext } from 'contexts/PatientContext';
 import useCalculate from 'hooks/useCalculate';
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { addNewPatient } from 'store/store';
 import {
   Nutrient,
   CPMWrapper,
@@ -17,24 +14,29 @@ import {
   SliderWrapper,
   Wrapper,
 } from './DietForm.styles';
+import { updatePatient } from 'redux/singlePatientSlice';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { RootState } from 'store';
 
 const DietForm = () => {
   const { id } = useParams();
-  const { patient, setPatient } = useContext(PatientContext);
-  const { calculateCPM } = useCalculate(patient);
+  const patient = useAppSelector((state: RootState) => state.patient);
+  const dispatch = useAppDispatch();
   const caloriesValue = useRef<HTMLInputElement>(null);
   const proteinValue = useRef<HTMLInputElement>(null);
   const fatValue = useRef<HTMLInputElement>(null);
   const carbsValue = useRef<HTMLInputElement>(null);
+  const { calculateCPM } = useCalculate(patient);
 
-  const patientsList = useSelector((state: any) => state.patientsList);
-  const dispatch = useDispatch();
+  console.log(patient);
+
+  // useEffect(() => {
+  //   if (id && id !== patient._id) dispatch(fetchPatient(id));
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   useEffect(() => {
-    if (id) {
-      const getPatient = patientsList.filter((patient: any) => patient.id === Number(id));
-      setPatient(getPatient[0]);
-
+    if (patient) {
       if (proteinValue.current) {
         proteinValue.current.value = patient.protein;
       }
@@ -48,18 +50,27 @@ const DietForm = () => {
         caloriesValue.current.value = patient.calories;
       }
     }
-  }, [id, patient.calories, patient.carbs, patient.fat, patient.protein, patientsList, setPatient]);
+  }, [patient]);
 
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
-    setPatient({
-      ...patient,
-      [e.target.name]: e.target.value,
-    });
+    dispatch(
+      updatePatient({
+        _id: patient._id,
+        [e.target.name]: e.target.value,
+      }),
+    );
   };
 
   useEffect(() => {
-    dispatch(addNewPatient(patient));
+    if (patient) dispatch(updatePatient(patient));
   }, [dispatch, patient]);
+
+  if (!patient) return null;
+
+  console.log(patient.bodymass, patient.age, patient.height);
+
+  const isBodyData = !!patient.bodymass && !!patient.age && !!patient.height;
+  console.log(isBodyData);
 
   return (
     <Wrapper onChange={handleChange}>
@@ -81,36 +92,21 @@ const DietForm = () => {
         <SliderWrapper>
           <h4>Protein</h4>
           <SliderInput>
-            <div>
-              {patient.bodymass &&
-                patient.age &&
-                patient.height &&
-                `${(((Number(calculateCPM()) + Number(patient.calories)) * Number(patient.protein)) / 400).toFixed()}g`}
-            </div>
+            <div>{isBodyData && `${(((Number(calculateCPM()) + Number(patient.calories)) * Number(patient.protein)) / 400).toFixed()}g`}</div>
             <input className="red" id="protein" name="protein" type="range" min="1" max="100" step="1" ref={proteinValue} />
           </SliderInput>
         </SliderWrapper>
         <SliderWrapper>
           <h4>Fat</h4>
           <SliderInput>
-            <div>
-              {patient.bodymass &&
-                patient.age &&
-                patient.height &&
-                `${(((Number(calculateCPM()) + Number(patient.calories)) * Number(patient.fat)) / 900).toFixed()}g`}
-            </div>
+            <div>{isBodyData && `${(((Number(calculateCPM()) + Number(patient.calories)) * Number(patient.fat)) / 900).toFixed()}g`}</div>
             <input className="yellow" id="fat" name="fat" type="range" min="1" max="100" step="1" ref={fatValue} />
           </SliderInput>
         </SliderWrapper>
         <SliderWrapper>
           <h4>Carbohydrates</h4>
           <SliderInput>
-            <div>
-              {patient.bodymass &&
-                patient.age &&
-                patient.height &&
-                `${(((Number(calculateCPM()) + Number(patient.calories)) * Number(patient.carbs)) / 400).toFixed()}g`}
-            </div>
+            <div>{isBodyData && `${(((Number(calculateCPM()) + Number(patient.calories)) * Number(patient.carbs)) / 400).toFixed()}g`}</div>
             <Input className="blue" id="carbs" name="carbs" type="range" min="1" max="100" step="1" ref={carbsValue} />
           </SliderInput>
         </SliderWrapper>

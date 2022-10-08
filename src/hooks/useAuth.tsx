@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { createContext, ReactNode, useEffect, useState, useContext } from 'react';
+import { createContext, ReactNode, useState, useContext } from 'react';
 
 const InitialUserValues = { id: '', login: '', name: '', token: '' };
 
@@ -21,23 +21,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }): any => {
   const [user, setUser] = useState(InitialUserValues);
   const [errMsg, setErrMsg] = useState('');
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      (async () => {
-        try {
-          const response = await axios.get('/me', {
-            headers: {
-              authorization: `Bearer ${token}`,
-            },
-          });
-          setUser(response.data[0]);
-        } catch (error) {
-          console.log(error);
-        }
-      })();
-    }
-  }, []);
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   if (token) {
+  //     (async () => {
+  //       try {
+  //         const response = await axios.get('/me', {
+  //           headers: {
+  //             authorization: `Bearer ${token}`,
+  //           },
+  //         });
+  //         setUser(response.data[0]);
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     })();
+  //   }
+  // }, []);
 
   const signIn = async ({ login, password }: { login: string; password: string }) => {
     try {

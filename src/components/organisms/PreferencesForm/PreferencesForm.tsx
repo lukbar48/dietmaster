@@ -3,13 +3,13 @@ import AllergensList from 'components/molecules/AllergensList/AllergensList';
 import React, { useContext, useEffect, useState } from 'react';
 import { Wrapper } from '../AllergensForm/AllergensForm.styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNewPatient } from 'store/store';
+import { updatePatient } from 'redux/singlePatientSlice';
 import { useParams } from 'react-router-dom';
 import { PatientContext } from 'contexts/PatientContext';
 
 const PreferencesForm = () => {
   const { id } = useParams();
-  const [preferencesList, setPreferencesList] = useState<string[]>(['']);
+  const [preferencesList, setPreferencesList] = useState<string[]>([]);
   const [item, setItem] = useState('');
   const patientsList = useSelector((state: any) => state.patientsList);
   const dispatch = useDispatch();
@@ -30,14 +30,18 @@ const PreferencesForm = () => {
     console.log(choosedItem);
     setPreferencesList(preferencesList.filter((item) => item !== choosedItem));
   };
+
   useEffect(() => {
-    const getList = patientsList.filter((item: typeof patient) => item.id === Number(id));
+    const getList = patientsList.filter((item: typeof patient) => item?._id === id);
     setPreferencesList(getList[0].preferences);
-  }, []);
+  }, [id, patientsList]);
+
   useEffect(() => {
-    setPatient({ ...patient, preferences: preferencesList })
-    dispatch(addNewPatient({ ...patient, preferences: preferencesList }));
-  }, [preferencesList]);
+    if (!patient) return;
+    setPatient({ ...patient, preferences: preferencesList });
+    dispatch(updatePatient({ ...patient, preferences: preferencesList }));
+  }, [dispatch, patient, preferencesList, setPatient]);
+
   return (
     <Wrapper>
       <h3>Doesn't like</h3>

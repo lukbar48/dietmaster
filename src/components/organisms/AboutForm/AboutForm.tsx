@@ -1,15 +1,15 @@
 import SexButton from 'components/molecules/SexButton/SexButton';
-import React, { useContext, useEffect, useRef } from 'react';
-import { PatientContext } from 'contexts/PatientContext';
+import React, { useEffect, useRef } from 'react';
 import { useParams } from 'react-router';
-import axios from 'axios';
 import { Input, Slider, TextArea, Wrapper } from './AboutForm.styles';
-import { addNewPatient } from 'store/store';
-import { useDispatch } from 'react-redux';
+import { fetchPatient, updatePatient } from 'redux/singlePatientSlice';
+import { RootState } from 'store';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 const AboutForm = () => {
   const { id } = useParams();
-  const { patient, setPatient } = useContext(PatientContext);
+  const dispatch = useAppDispatch();
+  const patient = useAppSelector((state: RootState) => state.patient);
   const nameValue = useRef<HTMLInputElement>(null);
   const surnameValue = useRef<HTMLInputElement>(null);
   const ageValue = useRef<HTMLInputElement>(null);
@@ -21,102 +21,100 @@ const AboutForm = () => {
   const activityValue = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (id) {
-      axios
-        .get(`/dietmaster/patient/about/${id}`)
-        .then(({ data }) => {
-          data[0] && setPatient(data[0]);
-        })
-        .catch((err) => console.log(err));
-
-      if (nameValue.current) {
-        nameValue.current.value = patient.name;
-      }
-      if (surnameValue.current) {
-        surnameValue.current.value = patient.surname;
-      }
-      if (ageValue.current) {
-        ageValue.current.value = patient.age;
-      }
-      if (telephoneValue.current) {
-        telephoneValue.current.value = patient.telephone;
-      }
-      if (emailValue.current) {
-        emailValue.current.value = patient.email;
-      }
-      if (bodymassValue.current) {
-        bodymassValue.current.value = patient.bodymass;
-      }
-      if (heightValue.current) {
-        heightValue.current.value = patient.height;
-      }
-      if (notesValue.current) {
-        notesValue.current.value = patient.notes;
-      }
-      if (activityValue.current) {
-        activityValue.current.value = patient.activity;
-      }
-    }
-  }, [
-    id,
-    patient.activity,
-    patient.age,
-    patient.bodymass,
-    patient.email,
-    patient.height,
-    patient.name,
-    patient.notes,
-    patient.surname,
-    patient.telephone,
-    setPatient,
-  ]);
-
-  const dispatch = useDispatch();
+    if (id) dispatch(fetchPatient(id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
-    dispatch(addNewPatient(patient));
-  }, [dispatch, patient]);
+    if (nameValue.current) {
+      nameValue.current.value = patient?.name || '';
+    }
+    if (surnameValue.current) {
+      surnameValue.current.value = patient?.surname || '';
+    }
+    if (ageValue.current) {
+      ageValue.current.value = patient?.age || '';
+    }
+    if (telephoneValue.current) {
+      telephoneValue.current.value = patient?.telephone || '';
+    }
+    if (emailValue.current) {
+      emailValue.current.value = patient?.email || '';
+    }
+    if (bodymassValue.current) {
+      bodymassValue.current.value = patient?.bodymass || '';
+    }
+    if (heightValue.current) {
+      heightValue.current.value = patient?.height || '';
+    }
+    if (notesValue.current) {
+      notesValue.current.value = patient?.notes || '';
+    }
+    if (activityValue.current) {
+      activityValue.current.value = patient?.activity || '';
+    }
+  }, [
+    dispatch,
+    id,
+    patient,
+    patient?.activity,
+    patient?.age,
+    patient?.bodymass,
+    patient?.email,
+    patient?.height,
+    patient?.name,
+    patient?.notes,
+    patient?.surname,
+    patient?.telephone,
+  ]);
+
+  if (!patient) return null;
 
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
-    setPatient({
-      ...patient,
+    console.log({
       [e.target.name]: e.target.value,
     });
+    dispatch(
+      updatePatient({
+        _id: patient._id,
+        [e.target.name]: e.target.value,
+      }),
+    );
   };
 
   return (
     <Wrapper onChange={handleChange}>
       <Input>
-        <label htmlFor="Name">Name</label>
+        <label htmlFor="name">Name</label>
         <input ref={nameValue} id="name" name="name" type="text" required />
       </Input>
       <Input>
-        <label htmlFor="Surname">Surname</label>
+        <label htmlFor="surname">Surname</label>
         <input ref={surnameValue} id="surname" name="surname" required type="text" />
       </Input>
       <Input>
-        <label htmlFor="Age">Age</label>
+        <label htmlFor="age">Age</label>
         <input ref={ageValue} id="age" name="age" type="number" required />
       </Input>
       <SexButton />
       <Input>
-        <label htmlFor="Body mass (kg)">Body mass (kg)</label>
+        <label htmlFor="bodymass">Body mass (kg)</label>
         <input ref={bodymassValue} id="bodymass" name="bodymass" type="number" required />
       </Input>
       <Input>
-        <label htmlFor="Height (cm)">Height (cm)</label>
+        <label htmlFor="height">Height (cm)</label>
         <input ref={heightValue} id="height" name="height" type="number" required />
       </Input>
       <Input>
-        <label htmlFor="Telephone">Telephone</label>
+        <label htmlFor="telephone">Telephone</label>
         <input ref={telephoneValue} id="telephone" name="telephone" type="tel" />
       </Input>
       <Input>
-        <label htmlFor="E-mail">E-mail</label>
+        <label htmlFor="email">E-mail</label>
         <input ref={emailValue} id="email" name="email" type="email" />
       </Input>
       <TextArea>
-        <label htmlFor="Notes">Notes</label>
+        <label htmlFor="notes">Notes</label>
         <textarea ref={notesValue} id="notes" name="notes" />
       </TextArea>
       <Slider>

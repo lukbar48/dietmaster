@@ -1,14 +1,15 @@
 import AllergensInput from 'components/molecules/AllergensInput/AllergensInput';
 import AllergensList from 'components/molecules/AllergensList/AllergensList';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Wrapper } from './AllergensForm.styles';
 import { useDispatch } from 'react-redux';
-import { addNewPatient } from 'store/store';
-import { PatientContext } from 'contexts/PatientContext';
+import { updatePatient } from 'redux/singlePatientSlice';
+import { RootState } from 'store';
+import { useAppSelector } from 'redux/hooks';
 
 const AllergensForm = () => {
-  const { patient, setPatient } = useContext(PatientContext);
-  const [allergensList, setAllergensList] = useState<string[]>(patient.allergens);
+  const patient = useAppSelector((state: RootState) => state.patient);
+  const [allergensList, setAllergensList] = useState<string[]>([]);
   const [item, setItem] = useState('');
   const dispatch = useDispatch();
 
@@ -17,8 +18,7 @@ const AllergensForm = () => {
     if (item) {
       setAllergensList([...allergensList, item]);
       setItem('');
-    }
-    if (!item) {
+    } else {
       alert('Please enter value!');
     }
   };
@@ -28,9 +28,9 @@ const AllergensForm = () => {
   };
 
   useEffect(() => {
-    setPatient({ ...patient, allergens: allergensList });
-    dispatch(addNewPatient({ ...patient, allergens: allergensList }));
-  }, [allergensList, dispatch, patient, setPatient]);
+    if (patient?.allergens) setAllergensList(patient.allergens);
+    dispatch(updatePatient({ _id: patient._id, allergens: allergensList }));
+  }, [allergensList, dispatch, patient._id, patient.allergens]);
 
   return (
     <Wrapper>

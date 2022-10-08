@@ -1,4 +1,4 @@
-import { IModal } from 'types/interfaces';
+import { IModal } from 'types/types';
 import { Wrapper } from './Modal.styles';
 
 const Modal = ({ isOpen, handleCloseModal, children }: IModal) => {

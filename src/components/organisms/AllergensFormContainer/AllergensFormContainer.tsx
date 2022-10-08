@@ -1,5 +1,5 @@
 import AllergensForm from '../AllergensForm/AllergensForm';
-import DiseasesForm from '../DiseasesForm/DiseasesForm';
+import DiseaseForm from '../DiseaseForm/DiseaseForm';
 import PreferencesForm from '../PreferencesForm/PreferencesForm';
 import { Wrapper } from './AllergensFormContainer.styles';
 
@@ -8,7 +8,7 @@ const AllergensFormContainer = () => {
     <Wrapper>
       <AllergensForm />
       <PreferencesForm />
-      <DiseasesForm />
+      <DiseaseForm />
     </Wrapper>
   );
 };

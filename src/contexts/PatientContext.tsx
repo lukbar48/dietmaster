@@ -1,14 +1,13 @@
 import { createContext, useEffect, useState, ReactNode } from 'react';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { InitialPatientType, initialPatientValues } from 'types/interfaces';
-import { fetchPatients } from 'store/store';
+import { fetchPatients } from 'redux/patientsSlice';
+import { InitialPatientType } from 'types/types';
 
 export type PatientContextType = {
-  managePatient: (id: number) => void;
-  setPatient: (obj: InitialPatientType) => void;
+  managePatient: (id: string) => void;
+  setPatient: (obj: InitialPatientType | null) => void;
   searchResults: InitialPatientType[];
-  patient: InitialPatientType;
+  patient: InitialPatientType | null;
   searchTerm: string;
   setSearchTerm: (term: string) => void;
 };
@@ -16,36 +15,28 @@ export type PatientContextType = {
 export const PatientContext = createContext<PatientContextType>({
   managePatient() {},
   setPatient() {},
-  searchResults: [initialPatientValues],
+  searchResults: [],
   searchTerm: '',
   setSearchTerm() {},
-  patient: initialPatientValues,
+  patient: null,
 });
 
 const PatientProvider = ({ children }: { children: ReactNode }) => {
-  const [patient, setPatient] = useState<InitialPatientType>(initialPatientValues);
-  const [searchResults, setSearchResults] = useState<InitialPatientType[]>([] as InitialPatientType[]);
+  const [patient, setPatient] = useState<InitialPatientType | null>(null);
+  const [searchResults, setSearchResults] = useState<InitialPatientType[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
 
   const patientsList = useSelector((state: any) => state.patientsList);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(fetchPatients());
-  // }, []);
+  useEffect(() => {
+    dispatch(fetchPatients());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  // useEffect(() => {
-  //   axios
-  //     .post('/dietmaster', searchTerm)
-  //     .then(({ data }) => {
-  //       setSearchResults(data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, [searchTerm]);
-
-  const managePatient = (id: number) => {
-    const findPatient = patientsList.filter((patient: any) => patient.id === id);
-    setPatient(findPatient[0]);
+  const managePatient = (id: string) => {
+    const findPatient = patientsList.find((patient: any) => patient.id === id);
+    setPatient(findPatient);
   };
 
   return (

@@ -46,16 +46,15 @@ export interface IPatientInfo {
   name: string;
   surname: string;
   age: string;
-  id: number;
+  _id: string;
   index: number;
 }
 
 export const initialPatientValues = {
-  id: 0,
   name: '',
   surname: '',
   age: '',
-  sex: 'Male',
+  sex: 'Female',
   email: '',
   telephone: '',
   bodymass: '',
@@ -66,22 +65,41 @@ export const initialPatientValues = {
   protein: '5',
   fat: '15',
   carbs: '10',
-  allergens: [''],
-  preferences: [''],
-  diseases: [''],
-  tests: [{ date: '2021-01-26', type: 'Red blood cells', value: '75mg' }],
-  appointments: [
-    {
-      date: '2021-06-05',
-      bodymass: '82',
-      BMI: '28',
-      hips: '113',
-      waist: '98',
-    },
-  ],
+  allergens: [],
+  preferences: [],
+  diseases: [],
+  tests: [],
+  appointments: [],
 };
 
-export type InitialPatientType = typeof initialPatientValues;
+export type InitialPatientType = {
+  _id: string;
+  name: string;
+  surname: string;
+  age: string;
+  sex: string;
+  email: string;
+  telephone: string;
+  bodymass: string;
+  height: string;
+  notes: string;
+  activity: string;
+  calories: string;
+  protein: string;
+  fat: string;
+  carbs: string;
+  allergens: string[];
+  preferences: string[];
+  diseases: string[];
+  tests: { date: string; type: string; value: string }[];
+  appointments: {
+    date: string;
+    bodymass: string;
+    BMI: string;
+    hips: string;
+    waist: string;
+  }[];
+};
 
 export interface IAllergensInput {
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -99,7 +117,7 @@ export interface IAllergensList {
 
 export interface IDeleteModal {
   handleCloseModal: () => void;
-  patientID: number;
+  patientID: string;
 }
 
 export interface IBloodTestPatientInfo {
@@ -120,7 +138,7 @@ export interface IAppointmentsPatientInfo {
 
 export interface IInfoModal {
   handleCloseModal: () => void;
-  patientID: number;
+  patientID: string;
 }
 
 export interface IModal {

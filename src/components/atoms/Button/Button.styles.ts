@@ -1,4 +1,4 @@
-import { IButton } from 'types/interfaces';
+import { IButton } from 'types/types';
 import styled from 'styled-components';
 
 export const StyledButton = styled.button<IButton>`

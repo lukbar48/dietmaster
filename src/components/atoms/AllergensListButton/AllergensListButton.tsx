@@ -1,4 +1,4 @@
-import { IButton } from 'types/interfaces';
+import { IButton } from 'types/types';
 import React from 'react';
 import styled from 'styled-components';
 

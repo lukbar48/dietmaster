@@ -3,7 +3,7 @@ import AllergensList from 'components/molecules/AllergensList/AllergensList';
 import React, { useContext, useEffect, useState } from 'react';
 import { Wrapper } from '../AllergensForm/AllergensForm.styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNewPatient } from 'store/store';
+import { updatePatient } from 'redux/singlePatientSlice';
 import { useParams } from 'react-router-dom';
 import { PatientContext } from 'contexts/PatientContext';
 
@@ -27,15 +27,16 @@ const DiseasesForm = () => {
     }
   };
   useEffect(() => {
-    const getList = patientsList.filter((item: typeof patient) => item.id === Number(id));
+    const getList = patientsList.filter((item: typeof patient) => item?._id === id);
     if (getList.length) {
       setDiseasesList(getList[0].diseases);
     }
   }, [id, patientsList]);
 
   useEffect(() => {
+    if (!patient) return;
     setPatient({ ...patient, diseases: diseasesList });
-    dispatch(addNewPatient({ ...patient, diseases: diseasesList }));
+    dispatch(updatePatient({ ...patient, diseases: diseasesList }));
   }, [diseasesList, dispatch, patient, setPatient]);
 
   const deleteItem = (choosedItem: string) => {

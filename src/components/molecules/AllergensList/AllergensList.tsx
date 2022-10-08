@@ -1,7 +1,7 @@
 import AllergensListButton from 'components/atoms/AllergensListButton/AllergensListButton';
 import { MdRemoveCircle } from 'react-icons/md';
 import styled from 'styled-components';
-import { IAllergensList } from 'types/interfaces';
+import { IAllergensList } from 'types/types';
 
 const Wrapper = styled.div`
   width: 100%;

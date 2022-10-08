@@ -36,7 +36,7 @@ const AppointmentsForm = () => {
     <Wrapper>
       <AppointmentsFormTopBar />
       <AppointmentsFormBottomBar handleOpenModal={handleOpenModal} />
-      {patient.appointments &&
+      {patient?.appointments &&
         patient.appointments.map((patient, index) => {
           return <AppointmentsPatientInfo index={index + 1} key={patient.bodymass} {...patient} />;
         })}

@@ -56,9 +56,9 @@ const updatePatient = async (req, res) => {
 module.exports = {
   getAllPatients,
   getSinglePatient,
-  addNewPatient,
-  deletePatient,
   updatePatient,
+  deletePatient,
+  addNewPatient,
 };
 
 export {};

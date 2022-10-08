@@ -1,7 +1,7 @@
 import Button from 'components/atoms/Button/Button';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { sortPatientsList } from 'store/store';
+import { sortPatientsList } from 'redux/patientsSlice';
 
 const Wrapper = styled.div`
   display: flex;

@@ -3,7 +3,7 @@ import { ModalForm, ModalTop, Wrapper } from './TestsModal.styles';
 import { useContext, useEffect, useState } from 'react';
 import { PatientContext } from 'contexts/PatientContext';
 import { useDispatch } from 'react-redux';
-import { addNewPatient } from 'store/store';
+import { updatePatient } from 'redux/singlePatientSlice';
 
 const TestsModal = ({ handleCloseModal }: { handleCloseModal: () => void }) => {
   const { patient, setPatient } = useContext(PatientContext);
@@ -13,6 +13,12 @@ const TestsModal = ({ handleCloseModal }: { handleCloseModal: () => void }) => {
     type: '',
     value: '',
   });
+
+  useEffect(() => {
+    if (patient) dispatch(updatePatient(patient));
+  }, [dispatch, patient]);
+
+  if (!patient) return <div />;
 
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
     setTestRecord({
@@ -33,10 +39,6 @@ const TestsModal = ({ handleCloseModal }: { handleCloseModal: () => void }) => {
       alert('Please provide all data');
     }
   };
-
-  useEffect(() => {
-    dispatch(addNewPatient(patient));
-  }, [dispatch, patient]);
 
   return (
     <Wrapper>
