@@ -3,8 +3,9 @@ import { AiTwotoneCalendar } from 'react-icons/ai';
 import { BiTestTube } from 'react-icons/bi';
 import { BsExclamationDiamond, BsFillPersonFill } from 'react-icons/bs';
 import { ImSpoonKnife } from 'react-icons/im';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from 'redux/hooks';
 import styled from 'styled-components';
+import { RootState } from 'store';
 
 const Wrapper = styled.div`
   display: grid;
@@ -15,9 +16,7 @@ const Wrapper = styled.div`
 `;
 
 const ManageNavBar = () => {
-  const patient = useSelector((state: any) => state.patient);
-
-  console.log('aaaa', patient._id);
+  const patient = useAppSelector((state: RootState) => state.patient);
 
   if (!patient) return null;
 

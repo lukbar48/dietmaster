@@ -17,8 +17,7 @@ const MainTopBar = () => {
   const dispatch = useAppDispatch();
 
   const handleClickNewPatient = async () => {
-    const patient = await dispatch(addNewPatient({ name: 'imie' }));
-    // dispatch(fetchPatient(patient.payload._id));
+    const patient = await dispatch(addNewPatient());
     navigate(`/patient/about/${patient.payload._id}`);
   };
 

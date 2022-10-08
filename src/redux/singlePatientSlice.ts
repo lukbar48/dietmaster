@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { InitialPatientType } from 'types/types';
 
-const initialState = {
+const initialState: InitialPatientType = {
   _id: '',
   name: '',
   surname: '',
@@ -21,7 +21,7 @@ const initialState = {
   allergens: [],
   preferences: [],
   diseases: [],
-  tests: ['test1'],
+  tests: [],
   appointments: [],
 };
 
@@ -49,7 +49,6 @@ export const singlePatientSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder.addCase(fetchPatient.fulfilled, (state, action) => {
-      // state = action.payload;
       return action.payload;
     });
     builder.addCase(updatePatient.fulfilled, (state, action) => {

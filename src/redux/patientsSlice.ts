@@ -22,12 +22,11 @@ export const fetchSinglePatient = createAsyncThunk('patient/getPatient', async (
   }
 });
 
-export const addNewPatient = createAsyncThunk('patients/addPatient', async (patient: Partial<InitialPatientType>) => {
+export const addNewPatient = createAsyncThunk('patients/addPatient', async (patient?: Partial<InitialPatientType>) => {
   try {
     const response = await axios.post('http://localhost:4000/api/patients', patient);
     return response.data;
   } catch (err) {
-    console.log('errrr');
     console.log(err);
   }
 });
@@ -61,10 +60,10 @@ export const patientsListSlice = createSlice({
       return action.payload;
     });
     builder.addCase(removePatient.fulfilled, (state, action) => {
-      return state.filter((patient) => patient._id !== action.payload.id);
+      return state.filter((patient) => patient._id !== action.payload._id);
     });
     builder.addCase(addNewPatient.fulfilled, (state, action) => {
-      state = [...state, action.payload];
+      return [...state, action.payload];
     });
   },
 });

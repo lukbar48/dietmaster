@@ -11,7 +11,7 @@ const patientSchema = new Schema(
     surname: {
       type: String,
       // require: true,
-      default: 'default',
+      default: '',
     },
     age: {
       type: String,
@@ -46,23 +46,23 @@ const patientSchema = new Schema(
     },
     activity: {
       type: String,
-      default: '',
+      default: '1.2',
     },
     calories: {
       type: String,
-      default: '',
+      default: '3000',
     },
     protein: {
       type: String,
-      default: '',
+      default: '80',
     },
     fat: {
       type: String,
-      default: '',
+      default: '105',
     },
     carbs: {
       type: String,
-      default: '',
+      default: '260',
     },
     allergens: {
       type: Array,

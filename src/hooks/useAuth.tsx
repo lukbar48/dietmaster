@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { createContext, ReactNode, useEffect, useState, useContext } from 'react';
+import { createContext, ReactNode, useState, useContext } from 'react';
 
 const InitialUserValues = { id: '', login: '', name: '', token: '' };
 
