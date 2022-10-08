@@ -1,16 +1,15 @@
 import SexButton from 'components/molecules/SexButton/SexButton';
-import React, { useContext, useEffect, useRef } from 'react';
-import { PatientContext } from 'contexts/PatientContext';
+import React, { useEffect, useRef } from 'react';
 import { useParams } from 'react-router';
 import { Input, Slider, TextArea, Wrapper } from './AboutForm.styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPatient, updatePatient } from 'redux/singlePatientSlice';
+import { RootState } from 'store';
 
 const AboutForm = () => {
   const { id } = useParams();
-  const { setPatient } = useContext(PatientContext);
   const dispatch = useDispatch();
-  const patient = useSelector((state: any) => state.patient);
+  const patient = useSelector((state: RootState) => state.patient);
   const nameValue = useRef<HTMLInputElement>(null);
   const surnameValue = useRef<HTMLInputElement>(null);
   const ageValue = useRef<HTMLInputElement>(null);
@@ -24,7 +23,6 @@ const AboutForm = () => {
   useEffect(() => {
     if (!id) return;
     dispatch(fetchPatient(id));
-    console.log('elooo', patient);
   }, [dispatch, id, patient]);
 
   useEffect(() => {
@@ -70,17 +68,19 @@ const AboutForm = () => {
     patient?.telephone,
   ]);
 
-  // useEffect(() => {
-  //   if (patient) dispatch(updatePatient(patient));
-  // }, [dispatch, patient]);
-
   if (!patient) return null;
 
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
-    setPatient({
-      ...patient,
-      [e.target.name]: e.target.value,
-    });
+    dispatch(
+      updatePatient({
+        // ...patient,
+        [e.target.name]: e.target.value,
+      }),
+    );
+    // setPatient({
+    //   ...patient,
+    //   [e.target.name]: e.target.value,
+    // });
   };
 
   return (

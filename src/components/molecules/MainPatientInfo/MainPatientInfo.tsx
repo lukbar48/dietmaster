@@ -1,6 +1,4 @@
-import { useContext } from 'react';
 import Button from 'components/atoms/Button/Button';
-import { PatientContext } from 'contexts/PatientContext';
 import { useNavigate } from 'react-router-dom';
 import { Wrapper } from './MainPatientInfo.styles';
 import { IPatientInfo } from 'types/types';
@@ -8,14 +6,17 @@ import useModal from 'components/organisms/Modal/useModal';
 import Modal from 'components/organisms/Modal/Modal';
 import DeleteModal from 'components/organisms/Modal/DeleteModal';
 import { MdDeleteOutline, MdOutlineModeEditOutline } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
+import { fetchPatient } from 'redux/singlePatientSlice';
+import { AppDispatch } from '../../../store';
 
 const MainPatientInfo = ({ name, surname, age, _id, index }: IPatientInfo) => {
-  const { managePatient } = useContext(PatientContext);
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const { isOpen, handleCloseModal, handleOpenModal } = useModal();
 
   const handleManageClick = (id: string) => {
-    managePatient(id);
+    dispatch(fetchPatient(_id));
     navigate(`/patient/about/${id}`);
   };
   const handleDeleteClick = () => {
