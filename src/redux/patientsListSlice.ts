@@ -55,13 +55,7 @@ export const patientsListSlice = createSlice({
       });
     },
     updatePatientsList(state, action) {
-      const patientId = action.payload._id;
-      console.log(action);
-
       const patientsList = state.filter((patient) => patient._id !== action.payload._id);
-      // const patientIndex = state.findIndex((a) => a._id === patientId);
-      // console.log(patientIndex);
-      // state[patientIndex] = action.payload;
       return [action.payload, ...patientsList];
     },
   },

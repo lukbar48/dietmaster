@@ -15,7 +15,6 @@ const Main = () => {
 
   useEffect(() => {
     if (!!patient._id) {
-      console.log('main id', patient._id);
       dispatch(updatePatientsList(patient));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

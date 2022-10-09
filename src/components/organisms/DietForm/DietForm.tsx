@@ -14,9 +14,9 @@ import {
   SliderWrapper,
   Wrapper,
 } from './DietForm.styles';
-import { updatePatient } from 'redux/patientSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { RootState } from 'store';
+import { updatePatient } from 'redux/patientSlice';
 
 const DietForm = () => {
   const { id } = useParams();
