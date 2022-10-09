@@ -2,22 +2,22 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { InitialPatientType } from 'types/types';
 
-const initialState: InitialPatientType = {
+export const initialState: InitialPatientType = {
   _id: '',
   name: '',
   surname: '',
   age: '',
-  sex: 'Female',
+  sex: '',
   email: '',
   telephone: '',
   bodymass: '',
   height: '',
   notes: '',
-  activity: '1.2',
-  calories: '0',
-  protein: '5',
-  fat: '15',
-  carbs: '10',
+  activity: '',
+  calories: '',
+  protein: '',
+  fat: '',
+  carbs: '',
   allergens: [],
   preferences: [],
   diseases: [],
