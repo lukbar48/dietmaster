@@ -3,7 +3,7 @@ import { ModalForm, ModalTop, Wrapper } from './TestsModal.styles';
 import { useDispatch } from 'react-redux';
 import { IDeleteModal } from 'types/types';
 import { ButtonsWrapper } from './DeleteModal.styles';
-import { removePatient } from 'redux/patientsSlice';
+import { removePatient } from 'redux/patientsListSlice';
 
 const DeleteModal = ({ handleCloseModal, patientID }: IDeleteModal) => {
   const dispatch = useDispatch();

@@ -4,24 +4,36 @@ import MainTopBar from 'components/organisms/MainTopBar/MainTopBar';
 import { Wrapper } from './Main.styles';
 import { InitialPatientType } from 'types/types';
 import { RootState } from 'store';
-import { useAppSelector } from '../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { useEffect } from 'react';
+import { updatePatientsList } from 'redux/patientsListSlice';
 
 const Main = () => {
-  const patients = useAppSelector((state: RootState) => state.patientsList);
+  const patientsList = useAppSelector((state: RootState) => state.patientsList);
+  const patient = useAppSelector((state: RootState) => state.patient);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (!!patient._id) {
+      console.log('main id', patient._id);
+      dispatch(updatePatientsList(patient));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
       <MainTopBar />
-      <MainBottomBar />
       <Wrapper>
         {/* {searchTerm &&
           searchResults.map((patient: InitialPatientType, index: number) => {
             return <MainPatientInfo index={index} key={patient.id} {...patient} />;
           })} */}
-        {patients.map((patient: InitialPatientType, index: number) => {
-          return <MainPatientInfo index={index} key={patient._id} {...patient} />;
-        })}
+        {patientsList.map((patient: InitialPatientType, index: number) => (
+          <MainPatientInfo index={index} key={patient._id} {...patient} />
+        ))}
       </Wrapper>
+      <MainBottomBar />
     </>
   );
 };

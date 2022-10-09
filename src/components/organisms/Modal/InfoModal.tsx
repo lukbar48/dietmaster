@@ -4,7 +4,7 @@ import { ButtonsWrapper } from './DeleteModal.styles';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { IInfoModal } from 'types/types';
-import { removePatient } from 'redux/patientsSlice';
+import { removePatient } from 'redux/patientsListSlice';
 
 const InfoModal = ({ handleCloseModal, patientID }: IInfoModal) => {
   const navigate = useNavigate();

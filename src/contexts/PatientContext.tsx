@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState, ReactNode } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPatients } from 'redux/patientsSlice';
+import { fetchPatients } from 'redux/patientsListSlice';
 import { InitialPatientType } from 'types/types';
 
 export type PatientContextType = {

@@ -2,7 +2,7 @@ import SexButton from 'components/molecules/SexButton/SexButton';
 import React, { useEffect, useRef } from 'react';
 import { useParams } from 'react-router';
 import { Input, Slider, TextArea, Wrapper } from './AboutForm.styles';
-import { fetchPatient, updatePatient } from 'redux/singlePatientSlice';
+import { fetchPatient, updatePatient } from 'redux/patientSlice';
 import { RootState } from 'store';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 

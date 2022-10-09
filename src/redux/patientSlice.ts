@@ -45,14 +45,14 @@ export const updatePatient = createAsyncThunk('patient/updatePatient', async (pa
 
 export const singlePatientSlice = createSlice({
   name: 'singlePatient',
-  initialState: initialState,
+  initialState,
   reducers: {},
-  extraReducers(builder) {
+  extraReducers: (builder) => {
     builder.addCase(fetchPatient.fulfilled, (state, action) => {
       return action.payload;
     });
     builder.addCase(updatePatient.fulfilled, (state, action) => {
-      state = action.payload;
+      return action.payload;
     });
   },
 });

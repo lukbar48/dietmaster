@@ -1,7 +1,7 @@
 import Button from 'components/atoms/Button/Button';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
-import { sortPatientsList } from 'redux/patientsSlice';
+import { sortPatientsList } from 'redux/patientsListSlice';
+import { useAppDispatch } from 'redux/hooks';
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,7 +31,7 @@ const Wrapper = styled.div`
 `;
 
 const MainBottomBar = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <Wrapper>

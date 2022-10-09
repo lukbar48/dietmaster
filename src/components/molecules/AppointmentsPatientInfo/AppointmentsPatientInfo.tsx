@@ -1,7 +1,7 @@
 import { Wrapper } from './AppointmentsPatientInfo.styles';
 import Button from 'components/atoms/Button/Button';
 import { useContext } from 'react';
-import { updatePatient } from 'redux/singlePatientSlice';
+import { updatePatient } from 'redux/patientSlice';
 import { useDispatch } from 'react-redux';
 import { PatientContext } from 'contexts/PatientContext';
 import { MdDeleteOutline } from 'react-icons/md';

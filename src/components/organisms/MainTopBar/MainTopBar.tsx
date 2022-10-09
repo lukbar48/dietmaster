@@ -7,7 +7,7 @@ import { useAuth } from 'hooks/useAuth';
 import { BiLogOut } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
 import { Wrapper } from './MainTopBar.styles';
-import { addNewPatient } from '../../../redux/patientsSlice';
+import { addNewPatient } from '../../../redux/patientsListSlice';
 import { useAppDispatch } from 'redux/hooks';
 
 const MainTopBar = () => {

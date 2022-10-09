@@ -54,6 +54,16 @@ export const patientsListSlice = createSlice({
         return a._id > b._id ? -1 : b._id > a._id ? 1 : 0;
       });
     },
+    updatePatientsList(state, action) {
+      const patientId = action.payload._id;
+      console.log(action);
+
+      const patientsList = state.filter((patient) => patient._id !== action.payload._id);
+      // const patientIndex = state.findIndex((a) => a._id === patientId);
+      // console.log(patientIndex);
+      // state[patientIndex] = action.payload;
+      return [action.payload, ...patientsList];
+    },
   },
   extraReducers(builder) {
     builder.addCase(fetchPatients.fulfilled, (state, action) => {
@@ -70,4 +80,4 @@ export const patientsListSlice = createSlice({
 
 export default patientsListSlice.reducer;
 
-export const { sortPatientsList } = patientsListSlice.actions;
+export const { sortPatientsList, updatePatientsList } = patientsListSlice.actions;

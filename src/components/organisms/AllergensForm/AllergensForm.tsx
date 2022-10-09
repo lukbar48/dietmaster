@@ -3,7 +3,7 @@ import AllergensList from 'components/molecules/AllergensList/AllergensList';
 import React, { useEffect, useState } from 'react';
 import { Wrapper } from './AllergensForm.styles';
 import { useDispatch } from 'react-redux';
-import { updatePatient } from 'redux/singlePatientSlice';
+import { updatePatient } from 'redux/patientSlice';
 import { RootState } from 'store';
 import { useAppSelector } from 'redux/hooks';
 

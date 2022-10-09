@@ -6,7 +6,7 @@ import useModal from 'components/organisms/Modal/useModal';
 import Modal from 'components/organisms/Modal/Modal';
 import DeleteModal from 'components/organisms/Modal/DeleteModal';
 import { MdDeleteOutline, MdOutlineModeEditOutline } from 'react-icons/md';
-import { fetchPatient } from 'redux/singlePatientSlice';
+import { fetchPatient } from 'redux/patientSlice';
 import { useAppDispatch } from 'redux/hooks';
 
 const MainPatientInfo = ({ name, surname, age, _id, index }: IPatientInfo) => {
@@ -39,7 +39,7 @@ const MainPatientInfo = ({ name, surname, age, _id, index }: IPatientInfo) => {
         </Button>
       </div>
       <Modal handleCloseModal={handleCloseModal} isOpen={isOpen}>
-        <DeleteModal handleCloseModal={handleCloseModal} patientID={_id?.toString()} />
+        <DeleteModal handleCloseModal={handleCloseModal} patientID={_id} />
       </Modal>
     </Wrapper>
   );

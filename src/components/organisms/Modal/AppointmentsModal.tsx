@@ -3,7 +3,7 @@ import { ModalForm, ModalTop, Wrapper } from './TestsModal.styles';
 import { useContext, useEffect, useState } from 'react';
 import { PatientContext } from 'contexts/PatientContext';
 import { useDispatch } from 'react-redux';
-import { updatePatient } from 'redux/singlePatientSlice';
+import { updatePatient } from 'redux/patientSlice';
 
 const AppointmentsModal = ({ handleCloseModal }: { handleCloseModal: () => void }) => {
   const { patient, setPatient } = useContext(PatientContext);
