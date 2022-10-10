@@ -25,12 +25,14 @@ const MainTopBar = () => {
     setSearchTerm(e.currentTarget.value.toLowerCase());
   };
 
+  const handleOnSearchPress = () => {};
+
   return (
     <Wrapper>
       <div>
         <h2>Patients record</h2>
       </div>
-      <InputMain placeholder="Search patient" value={searchTerm} onChange={handleChange} />
+      <InputMain placeholder="Search patient" value={searchTerm} onChange={handleChange} handleOnSearchPress={handleOnSearchPress} />
       <Button onClick={handleClickNewPatient}>
         <IoMdAdd style={{ fontSize: '1.4rem', margin: '0px 3px 0px -5px' }} />
         New patient

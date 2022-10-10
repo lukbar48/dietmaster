@@ -1,5 +1,6 @@
 import { IInput } from 'types/types';
 import styled from 'styled-components';
+import { BiSearch } from 'react-icons/bi';
 
 export const Input = styled.input`
   padding: 8px;
@@ -9,8 +10,26 @@ export const Input = styled.input`
   background-color: ${({ theme }) => theme.colors.grey4};
   color: ${({ theme }) => theme.colors.white};
   width: 300px;
+  padding-right: 50px;
+`;
+const InputWrapper = styled.div`
+  position: relative;
+`;
+const BiSearchIcon = styled(BiSearch)`
+  color: white;
+  font-size: 48px;
+  position: absolute;
+  right: 0px;
+  top: -3px;
+  cursor: pointer;
+  padding: 10px;
 `;
 
-const InputMain = ({ ...props }: IInput) => <Input {...props} />;
+const InputMain = ({ ...props }: IInput) => (
+  <InputWrapper>
+    <Input {...props} />
+    <BiSearchIcon onClick={props.handleOnSearchPress} />
+  </InputWrapper>
+);
 
 export default InputMain;

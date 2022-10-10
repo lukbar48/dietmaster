@@ -24,6 +24,7 @@ export interface IInput {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
   value: string;
+  handleOnSearchPress: () => void;
 }
 
 export interface IManageNavButton {
