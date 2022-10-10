@@ -40,6 +40,15 @@ export const removePatient = createAsyncThunk('patients/removePatient', async (i
   }
 });
 
+export const fetchFilteredPatients = createAsyncThunk('patients/filterPatients', async (query: string) => {
+  try {
+    const response = await axios.get(`http://localhost:4000/api/patients/search?q=${query}`);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 export const patientsListSlice = createSlice({
   name: 'patientsList',
   initialState,
@@ -68,6 +77,9 @@ export const patientsListSlice = createSlice({
     });
     builder.addCase(addNewPatient.fulfilled, (state, action) => {
       return [...state, action.payload];
+    });
+    builder.addCase(fetchFilteredPatients.fulfilled, (state, action) => {
+      return action.payload || [];
     });
   },
 });

@@ -1,6 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { getAllPatients, getSinglePatient, addNewPatient, deletePatient, updatePatient } = require('../controllers/patientsController');
+const {
+  getAllPatients,
+  getSinglePatient,
+  addNewPatient,
+  deletePatient,
+  updatePatient,
+  filterPatients,
+} = require('../controllers/patientsController');
 
 router.get('/', getAllPatients);
 
@@ -11,6 +18,8 @@ router.post('/', addNewPatient);
 router.delete('/:id', deletePatient);
 
 router.patch('/:id', updatePatient);
+
+router.get('/search', filterPatients);
 
 module.exports = router;
 

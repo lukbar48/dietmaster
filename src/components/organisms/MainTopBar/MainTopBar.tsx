@@ -1,17 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import InputMain from 'components/atoms/InputMain/InputMain';
 import Button from 'components/atoms/Button/Button';
-import { PatientContext } from 'contexts/PatientContext';
 import { useAuth } from 'hooks/useAuth';
 import { BiLogOut } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
 import { Wrapper } from './MainTopBar.styles';
-import { addNewPatient } from '../../../redux/patientsListSlice';
+import { addNewPatient, fetchFilteredPatients } from '../../../redux/patientsListSlice';
 import { useAppDispatch } from 'redux/hooks';
 
 const MainTopBar = () => {
-  const { searchTerm, setSearchTerm } = useContext(PatientContext);
+  const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const { signOut } = useAuth();
   const dispatch = useAppDispatch();
@@ -25,7 +24,9 @@ const MainTopBar = () => {
     setSearchTerm(e.currentTarget.value.toLowerCase());
   };
 
-  const handleOnSearchPress = () => {};
+  const handleOnSearchPress = async () => {
+    if (searchTerm.length > 0) dispatch(fetchFilteredPatients(searchTerm));
+  };
 
   return (
     <Wrapper>
@@ -38,7 +39,6 @@ const MainTopBar = () => {
         New patient
       </Button>
       <Button onClick={signOut} backgroundColor="#505050" marginLeft="auto">
-        {' '}
         <BiLogOut style={{ fontSize: '1.3rem', margin: '0px 5px 0px -5px' }} />
         Log Out
       </Button>

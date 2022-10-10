@@ -53,12 +53,21 @@ const updatePatient = async (req, res) => {
   res.status(200).json(patient);
 };
 
+const filterPatients = async (req, res) => {
+  console.log(req.query);
+  const allPatients = await Patient.find({}).sort({ createdAt: -1 });
+  console.log(allPatients);
+  console.log(req.query.q);
+  return allPatients;
+};
+
 module.exports = {
   getAllPatients,
   getSinglePatient,
   updatePatient,
   deletePatient,
   addNewPatient,
+  filterPatients,
 };
 
 export {};
