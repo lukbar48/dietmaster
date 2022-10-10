@@ -14,9 +14,7 @@ const Main = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!!patient._id) {
-      dispatch(updatePatientsList(patient));
-    }
+    if (!!patient._id) dispatch(updatePatientsList(patient));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -24,13 +22,8 @@ const Main = () => {
     <>
       <MainTopBar />
       <Wrapper>
-        {/* {searchTerm &&
-          searchResults.map((patient: InitialPatientType, index: number) => {
-            return <MainPatientInfo index={index} key={patient.id} {...patient} />;
-          })} */}
-        {patientsList.map((patient: InitialPatientType, index: number) => (
-          <MainPatientInfo index={index} key={patient._id} {...patient} />
-        ))}
+        {patientsList.length > 0 &&
+          patientsList.map((patient: InitialPatientType, index: number) => <MainPatientInfo index={index} key={patient._id} {...patient} />)}
       </Wrapper>
       <MainBottomBar />
     </>

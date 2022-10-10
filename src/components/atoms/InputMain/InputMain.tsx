@@ -17,10 +17,10 @@ const InputWrapper = styled.div`
 `;
 const BiSearchIcon = styled(BiSearch)`
   color: white;
-  font-size: 48px;
+  font-size: 44px;
   position: absolute;
   right: 0px;
-  top: -3px;
+  top: -2px;
   cursor: pointer;
   padding: 10px;
 `;

@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import React from 'react';
 
 export interface IInitialState {
   name: string;
@@ -25,6 +26,7 @@ export interface IInput {
   placeholder: string;
   value: string;
   handleOnSearchPress: () => void;
+  onKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 export interface IManageNavButton {
@@ -50,28 +52,6 @@ export interface IPatientInfo {
   _id: string;
   index: number;
 }
-
-export const initialPatientValues = {
-  name: '',
-  surname: '',
-  age: '',
-  sex: 'Female',
-  email: '',
-  telephone: '',
-  bodymass: '',
-  height: '',
-  notes: '',
-  activity: '1.2',
-  calories: '0',
-  protein: '5',
-  fat: '15',
-  carbs: '10',
-  allergens: [],
-  preferences: [],
-  diseases: [],
-  tests: [],
-  appointments: [],
-};
 
 export type InitialPatientType = {
   _id: string;

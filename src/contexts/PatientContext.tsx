@@ -8,23 +8,18 @@ export type PatientContextType = {
   setPatient: (obj: InitialPatientType | null) => void;
   searchResults: InitialPatientType[];
   patient: InitialPatientType | null;
-  searchTerm: string;
-  setSearchTerm: (term: string) => void;
 };
 
 export const PatientContext = createContext<PatientContextType>({
   managePatient() {},
   setPatient() {},
   searchResults: [],
-  searchTerm: '',
-  setSearchTerm() {},
   patient: null,
 });
 
 const PatientProvider = ({ children }: { children: ReactNode }) => {
   const [patient, setPatient] = useState<InitialPatientType | null>(null);
   const [searchResults, setSearchResults] = useState<InitialPatientType[]>([]);
-  const [searchTerm, setSearchTerm] = useState('');
 
   const patientsList = useSelector((state: any) => state.patientsList);
   const dispatch = useDispatch();
@@ -46,8 +41,6 @@ const PatientProvider = ({ children }: { children: ReactNode }) => {
         patient,
         setPatient,
         searchResults,
-        searchTerm,
-        setSearchTerm,
       }}
     >
       {children}

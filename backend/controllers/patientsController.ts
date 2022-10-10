@@ -54,11 +54,10 @@ const updatePatient = async (req, res) => {
 };
 
 const filterPatients = async (req, res) => {
-  console.log(req.query);
-  const allPatients = await Patient.find({}).sort({ createdAt: -1 });
-  console.log(allPatients);
-  console.log(req.query.q);
-  return allPatients;
+  const patientsBySurname = await Patient.find({
+    $or: [{ name: { $regex: req.query.q, $options: 'i' } }, { surname: { $regex: req.query.q, $options: 'i' } }],
+  });
+  res.status(200).json(patientsBySurname);
 };
 
 module.exports = {

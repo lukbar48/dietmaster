@@ -6,7 +6,7 @@ import { useAuth } from 'hooks/useAuth';
 import { BiLogOut } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
 import { Wrapper } from './MainTopBar.styles';
-import { addNewPatient, fetchFilteredPatients } from '../../../redux/patientsListSlice';
+import { addNewPatient, fetchFilteredPatients, fetchPatients } from '../../../redux/patientsListSlice';
 import { useAppDispatch } from 'redux/hooks';
 
 const MainTopBar = () => {
@@ -21,11 +21,16 @@ const MainTopBar = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.currentTarget.value.toLowerCase());
+    setSearchTerm(e.currentTarget.value);
   };
 
-  const handleOnSearchPress = async () => {
-    if (searchTerm.length > 0) dispatch(fetchFilteredPatients(searchTerm));
+  const handleOnSearchPress = () => {
+    if (searchTerm.length > 0) return dispatch(fetchFilteredPatients(searchTerm));
+    dispatch(fetchPatients());
+  };
+
+  const onSearchEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') handleOnSearchPress();
   };
 
   return (
@@ -33,7 +38,13 @@ const MainTopBar = () => {
       <div>
         <h2>Patients record</h2>
       </div>
-      <InputMain placeholder="Search patient" value={searchTerm} onChange={handleChange} handleOnSearchPress={handleOnSearchPress} />
+      <InputMain
+        placeholder="Search patient"
+        value={searchTerm}
+        onChange={handleChange}
+        handleOnSearchPress={handleOnSearchPress}
+        onKeyPress={onSearchEnterPress}
+      />
       <Button onClick={handleClickNewPatient}>
         <IoMdAdd style={{ fontSize: '1.4rem', margin: '0px 3px 0px -5px' }} />
         New patient

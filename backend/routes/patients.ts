@@ -9,6 +9,8 @@ const {
   filterPatients,
 } = require('../controllers/patientsController');
 
+router.get('/search', filterPatients);
+
 router.get('/', getAllPatients);
 
 router.get('/:id', getSinglePatient);
@@ -18,8 +20,6 @@ router.post('/', addNewPatient);
 router.delete('/:id', deletePatient);
 
 router.patch('/:id', updatePatient);
-
-router.get('/search', filterPatients);
 
 module.exports = router;
 
