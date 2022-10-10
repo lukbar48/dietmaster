@@ -1,8 +1,8 @@
-import { IButton } from 'types/types';
+import { ButtonType } from 'types/types';
 import React from 'react';
 import styled from 'styled-components';
 
-export const StyledButton = styled.button<IButton>`
+export const StyledButton = styled.button<ButtonType>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,7 +15,7 @@ export const StyledButton = styled.button<IButton>`
   color: ${({ color, theme: { colors } }) => (color ? color : colors.blue3)};
 `;
 
-const AllergensListButton = ({ ...props }: IButton) => {
+const AllergensListButton = ({ ...props }: ButtonType) => {
   return <StyledButton {...props}>{props.children}</StyledButton>;
 };
 

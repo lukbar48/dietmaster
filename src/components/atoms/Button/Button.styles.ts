@@ -1,7 +1,7 @@
-import { IButton } from 'types/types';
+import { ButtonType } from 'types/types';
 import styled from 'styled-components';
 
-export const StyledButton = styled.button<IButton>`
+export const StyledButton = styled.button<ButtonType>`
   display: flex;
   justify-content: center;
   align-items: center;

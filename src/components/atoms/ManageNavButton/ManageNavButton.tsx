@@ -1,7 +1,12 @@
-import { IManageNavButton } from 'types/types';
 import { StyledButton } from './ManageNavButton.styles';
+import { ReactNode } from 'react';
 
-const ManageNavButton = ({ children, to }: IManageNavButton) => {
+export interface ManageNavButtonType {
+  children: ReactNode;
+  to: string;
+}
+
+const ManageNavButton = ({ children, to }: ManageNavButtonType) => {
   return <StyledButton to={to}>{children}</StyledButton>;
 };
 

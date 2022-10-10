@@ -1,7 +1,6 @@
 import Button from 'components/atoms/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { Wrapper } from './MainPatientInfo.styles';
-import { IPatientInfo } from 'types/types';
 import useModal from 'components/organisms/Modal/useModal';
 import Modal from 'components/organisms/Modal/Modal';
 import DeleteModal from 'components/organisms/Modal/DeleteModal';
@@ -9,7 +8,15 @@ import { MdDeleteOutline, MdOutlineModeEditOutline } from 'react-icons/md';
 import { fetchPatient } from 'redux/patientSlice';
 import { useAppDispatch } from 'redux/hooks';
 
-const MainPatientInfo = ({ name, surname, age, _id, index }: IPatientInfo) => {
+export interface PatientInfoType {
+  name: string;
+  surname: string;
+  age: string;
+  _id: string;
+  index: number;
+}
+
+const MainPatientInfo = ({ name, surname, age, _id, index }: PatientInfoType) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { isOpen, handleCloseModal, handleOpenModal } = useModal();

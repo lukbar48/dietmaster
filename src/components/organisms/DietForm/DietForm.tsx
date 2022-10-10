@@ -63,7 +63,7 @@ const DietForm = () => {
 
   useEffect(() => {
     if (patient) dispatch(updatePatient(patient));
-  }, [dispatch, patient]);
+  }, []);
 
   if (!patient) return null;
 

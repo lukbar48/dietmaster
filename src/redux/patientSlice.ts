@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { InitialPatientType } from 'types/types';
+import { PatientType } from 'types/types';
 
-export const initialState: InitialPatientType = {
+export const initialState: PatientType = {
   _id: '',
   name: '',
   surname: '',
@@ -34,7 +34,7 @@ export const fetchPatient = createAsyncThunk('patient/getPatient', async (id: st
   }
 });
 
-export const updatePatient = createAsyncThunk('patient/updatePatient', async (patient: Partial<InitialPatientType>) => {
+export const updatePatient = createAsyncThunk('patient/updatePatient', async (patient: Partial<PatientType>) => {
   try {
     const response = await axios.patch(`/api/patients/${patient._id}`, patient);
     return response.data;

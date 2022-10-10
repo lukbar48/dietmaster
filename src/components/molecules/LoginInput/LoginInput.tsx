@@ -1,8 +1,17 @@
-import { ILoginInput } from 'types/types';
 import React from 'react';
 import { Input, Label, Wrapper } from './LoginInput.styles';
 
-const LoginInput = React.forwardRef(({ label, name, id, type, value, onChange, ...props }: ILoginInput, ref: any) => {
+export interface LoginInputType {
+  label: string;
+  name: string;
+  id: string;
+  type: string;
+  placeholder?: string;
+  onChange: (data: any) => void;
+  value?: string;
+}
+
+const LoginInput = React.forwardRef(({ label, name, id, type, value, onChange, ...props }: LoginInputType, ref: any) => {
   return (
     <Wrapper>
       <Label htmlFor={id}>{label}</Label>

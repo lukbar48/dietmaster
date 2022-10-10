@@ -1,7 +1,6 @@
 import AllergensListButton from 'components/atoms/AllergensListButton/AllergensListButton';
 import { MdRemoveCircle } from 'react-icons/md';
 import styled from 'styled-components';
-import { IAllergensList } from 'types/types';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -19,7 +18,13 @@ const Wrapper = styled.div`
   }
 `;
 
-const AllergensList = ({ allergensList, deleteItem, color }: IAllergensList) => {
+export interface AllergensListType {
+  allergensList: string[];
+  deleteItem: (choosedItem: string) => void;
+  color?: string;
+}
+
+const AllergensList = ({ allergensList, deleteItem, color }: AllergensListType) => {
   return (
     <Wrapper>
       <ul>

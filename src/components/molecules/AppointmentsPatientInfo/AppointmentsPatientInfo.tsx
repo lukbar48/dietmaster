@@ -5,9 +5,16 @@ import { updatePatient } from 'redux/patientSlice';
 import { useDispatch } from 'react-redux';
 import { PatientContext } from 'contexts/PatientContext';
 import { MdDeleteOutline } from 'react-icons/md';
-import { IAppointmentsPatientInfo } from 'types/types';
+export interface AppointmentsPatientInfoType {
+  index: number;
+  date: string;
+  BMI: string;
+  bodymass: string;
+  hips: string;
+  waist: string;
+}
 
-const AppointmentsPatientInfo = ({ index, date, BMI, bodymass, hips, waist }: IAppointmentsPatientInfo) => {
+const AppointmentsPatientInfo = ({ index, date, BMI, bodymass, hips, waist }: AppointmentsPatientInfoType) => {
   const { setPatient, patient } = useContext(PatientContext);
   const dispatch = useDispatch();
 

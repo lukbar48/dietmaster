@@ -1,6 +1,6 @@
-import { InitialPatientType } from 'types/types';
+import { PatientType } from 'types/types';
 
-const useCalculate = (patient: InitialPatientType) => {
+const useCalculate = (patient: PatientType) => {
   const calculateBMI = () => {
     const height = Number(patient?.height) / 100;
     const BMI = (Number(patient?.bodymass) / Math.pow(height, 2)).toFixed(2).toString();

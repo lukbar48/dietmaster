@@ -2,7 +2,7 @@ import MainBottomBar from 'components/organisms/MainBottomBar/MainBottomBar';
 import MainPatientInfo from 'components/molecules/MainPatientInfo/MainPatientInfo';
 import MainTopBar from 'components/organisms/MainTopBar/MainTopBar';
 import { Wrapper } from './Main.styles';
-import { InitialPatientType } from 'types/types';
+import { PatientType } from 'types/types';
 import { RootState } from 'store';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { useEffect } from 'react';
@@ -23,7 +23,7 @@ const Main = () => {
       <MainTopBar />
       <Wrapper>
         {patientsList.length > 0 &&
-          patientsList.map((patient: InitialPatientType, index: number) => <MainPatientInfo index={index} key={patient._id} {...patient} />)}
+          patientsList.map((patient: PatientType, index: number) => <MainPatientInfo index={index} key={patient._id} {...patient} />)}
       </Wrapper>
       <MainBottomBar />
     </>

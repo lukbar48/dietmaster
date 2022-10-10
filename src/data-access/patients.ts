@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { InitialPatientType } from 'types/types';
+import { PatientType } from 'types/types';
 
 export const fetchPatients = async () => {
   const response = await axios.get('/api/patients');
@@ -11,12 +11,12 @@ export const fetchSinglePatient = async (id: string) => {
   return response.data;
 };
 
-export const addPatient = async (data: Partial<InitialPatientType>) => {
+export const addPatient = async (data: Partial<PatientType>) => {
   const response = await axios.post('/api/patients', data);
   return response.data;
 };
 
-export const editPatient = async (id: string, data: Partial<InitialPatientType>) => {
+export const editPatient = async (id: string, data: Partial<PatientType>) => {
   const response = await axios.patch(`/api/patients/${id}`, data);
   return response.data;
 };

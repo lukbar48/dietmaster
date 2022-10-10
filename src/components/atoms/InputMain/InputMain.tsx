@@ -1,8 +1,16 @@
-import { IInput } from 'types/types';
 import styled from 'styled-components';
 import { BiSearch } from 'react-icons/bi';
+import React from 'react';
 
-export const Input = styled.input`
+export interface InputType {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder: string;
+  value: string;
+  handleOnSearchPress: () => void;
+  onKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+}
+
+const Input = styled.input`
   padding: 8px;
   border: 1px solid ${({ theme }) => theme.colors.white};
   border-radius: 6px;
@@ -25,7 +33,7 @@ const BiSearchIcon = styled(BiSearch)`
   padding: 10px;
 `;
 
-const InputMain = ({ ...props }: IInput) => (
+const InputMain = ({ ...props }: InputType) => (
   <InputWrapper>
     <Input {...props} />
     <BiSearchIcon onClick={props.handleOnSearchPress} />

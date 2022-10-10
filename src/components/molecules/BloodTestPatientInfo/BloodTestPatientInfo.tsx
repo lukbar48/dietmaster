@@ -5,9 +5,15 @@ import { updatePatient } from 'redux/patientSlice';
 import { useDispatch } from 'react-redux';
 import { PatientContext } from 'contexts/PatientContext';
 import { MdDeleteOutline } from 'react-icons/md';
-import { IBloodTestPatientInfo } from 'types/types';
 
-const BloodTestPatientInfo = ({ index, type, value, date }: IBloodTestPatientInfo) => {
+export interface BloodTestPatientInfoType {
+  index: number;
+  type: string;
+  value: string;
+  date: string;
+}
+
+const BloodTestPatientInfo = ({ index, type, value, date }: BloodTestPatientInfoType) => {
   const { setPatient, patient } = useContext(PatientContext);
   const dispatch = useDispatch();
 

@@ -7,8 +7,18 @@ import Diet from './Diet';
 import Allergens from './Allergens';
 import BloodTests from './BloodTests';
 import Appointments from './Appointments';
+import { useEffect } from 'react';
+import { fetchPatients } from 'redux/patientsListSlice';
+import { useAppDispatch } from 'redux/hooks';
 
 const Root = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPatients());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <GlobalStyle />

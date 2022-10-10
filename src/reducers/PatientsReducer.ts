@@ -1,13 +1,13 @@
-import { InitialPatientType } from 'types/types';
+import { PatientType } from 'types/types';
 
 type ACTIONTYPES =
-  | { type: 'DELETE_PATIENT'; payload: InitialPatientType }
+  | { type: 'DELETE_PATIENT'; payload: PatientType }
   | { type: 'SORT_PATIENTS_LIST'; payload: string }
-  | { type: 'ADD_PATIENT'; payload: InitialPatientType }
+  | { type: 'ADD_PATIENT'; payload: PatientType }
   | { type: 'SEARCH_IN_LIST'; payload: string }
-  | { type: 'ADD_PATIENTS_LIST'; payload: InitialPatientType[] };
+  | { type: 'ADD_PATIENTS_LIST'; payload: PatientType[] };
 
-const PatientsReducer = (state: InitialPatientType[], action: ACTIONTYPES) => {
+const PatientsReducer = (state: PatientType[], action: ACTIONTYPES) => {
   switch (action.type) {
     case 'ADD_PATIENTS_LIST': {
       return action.payload;

@@ -1,9 +1,17 @@
 import AllergensListButton from 'components/atoms/AllergensListButton/AllergensListButton';
 import { MdAddCircle } from 'react-icons/md';
-import { IAllergensInput } from 'types/types';
 import { Form } from './AllergensInput.styles';
+import React from 'react';
 
-const AllergensInput = ({ placeholder, handleSubmit, setItem, item, color }: IAllergensInput) => {
+export interface AllergensInputType {
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  placeholder: string;
+  setItem: React.Dispatch<React.SetStateAction<string>>;
+  item: string;
+  color?: string;
+}
+
+const AllergensInput = ({ placeholder, handleSubmit, setItem, item, color }: AllergensInputType) => {
   return (
     <Form onSubmit={handleSubmit}>
       <input
