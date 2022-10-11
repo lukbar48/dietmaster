@@ -6,7 +6,7 @@ import { useAuth } from 'hooks/useAuth';
 import { BiLogOut } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
 import { Wrapper } from './MainTopBar.styles';
-import { addNewPatient, fetchFilteredPatients, fetchPatients } from '../../../redux/patientsListSlice';
+import { addNewPatient, filterPatientsList, fetchPatients } from '../../../redux/patientsListSlice';
 import { useAppDispatch } from 'redux/hooks';
 
 const MainTopBar = () => {
@@ -25,7 +25,7 @@ const MainTopBar = () => {
   };
 
   const handleOnSearchPress = () => {
-    if (searchTerm.length > 0) return dispatch(fetchFilteredPatients(searchTerm));
+    if (searchTerm.length > 0) return dispatch(filterPatientsList(searchTerm));
     dispatch(fetchPatients());
   };
 

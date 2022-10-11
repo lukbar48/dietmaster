@@ -40,9 +40,9 @@ export const removePatient = createAsyncThunk('patients/removePatient', async (i
   }
 });
 
-export const fetchFilteredPatients = createAsyncThunk('patients/filterPatients', async (query: string) => {
+export const filterPatientsList = createAsyncThunk('patients/filterPatients', async (query: string) => {
   try {
-    const response = await axios.get(`http://localhost:4000/api/patients/search?q=${query}`);
+    const response = await axios.get(`/api/patients/search?q=${query}`);
     return response.data;
   } catch (err) {
     console.log(err);
@@ -51,7 +51,7 @@ export const fetchFilteredPatients = createAsyncThunk('patients/filterPatients',
 
 export const sortPatientsList = createAsyncThunk('patients/sortPatients', async (query: string) => {
   try {
-    const response = await axios.get(`http://localhost:4000/api/patients/sort?q=${query}`);
+    const response = await axios.get(`/api/patients/sort?q=${query}`);
     return response.data;
   } catch (err) {
     console.log(err);
@@ -77,7 +77,7 @@ export const patientsListSlice = createSlice({
     builder.addCase(addNewPatient.fulfilled, (state, action) => {
       return [...state, action.payload];
     });
-    builder.addCase(fetchFilteredPatients.fulfilled, (state, action) => {
+    builder.addCase(filterPatientsList.fulfilled, (state, action) => {
       return action.payload || [];
     });
     builder.addCase(sortPatientsList.fulfilled, (state, action) => {
