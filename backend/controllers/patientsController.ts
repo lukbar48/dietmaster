@@ -65,21 +65,22 @@ const sortPatients = async (req, res) => {
   let patients;
   switch (query) {
     case 'a-z':
-      patients = await Patient.find().sort({ surname: 1 });
+      patients = Patient.find().sort({ surname: 1 });
       break;
     case 'z-a':
-      patients = await Patient.find().sort({ surname: -1 });
+      patients = Patient.find().sort({ surname: -1 });
       break;
     case 'male':
-      patients = await Patient.find().sort({ sex: -1 });
+      patients = Patient.find().sort({ sex: -1 });
       break;
     case 'female':
-      patients = await Patient.find().sort({ sex: 1 });
+      patients = Patient.find().sort({ sex: 1 });
       break;
     default:
-      patients = await Patient.find().sort({ createdAt: -1 });
+      patients = Patient.find().sort({ createdAt: -1 });
       break;
   }
+  patients = await patients.exec();
 
   res.status(200).json(patients);
 };
