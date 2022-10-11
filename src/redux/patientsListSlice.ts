@@ -49,20 +49,19 @@ export const fetchFilteredPatients = createAsyncThunk('patients/filterPatients',
   }
 });
 
+export const sortPatientsList = createAsyncThunk('patients/sortPatients', async (query: string) => {
+  try {
+    const response = await axios.get(`http://localhost:4000/api/patients/sort?q=${query}`);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 export const patientsListSlice = createSlice({
   name: 'patientsList',
   initialState,
   reducers: {
-    sortPatientsList(state, action) {
-      return state.sort((a, b): any => {
-        if (action.payload === 'female') return a.sex > b.sex ? 1 : b.sex > a.sex ? -1 : 0;
-        if (action.payload === 'male') return a.sex > b.sex ? -1 : b.sex > a.sex ? 1 : 0;
-        if (action.payload === 'off') return a._id > b._id ? -1 : b._id > a._id ? 1 : 0;
-        if (action.payload === 'a-z') return a.surname > b.surname ? 1 : b.surname > a.surname ? -1 : 0;
-        if (action.payload === 'z-a') return a.surname > b.surname ? -1 : b.surname > a.surname ? 1 : 0;
-        return a._id > b._id ? -1 : b._id > a._id ? 1 : 0;
-      });
-    },
     updatePatientsList(state, action) {
       const patientsList = state.filter((patient) => patient._id !== action.payload._id);
       return [action.payload, ...patientsList];
@@ -81,9 +80,12 @@ export const patientsListSlice = createSlice({
     builder.addCase(fetchFilteredPatients.fulfilled, (state, action) => {
       return action.payload || [];
     });
+    builder.addCase(sortPatientsList.fulfilled, (state, action) => {
+      return action.payload || [];
+    });
   },
 });
 
 export default patientsListSlice.reducer;
 
-export const { sortPatientsList, updatePatientsList } = patientsListSlice.actions;
+export const { updatePatientsList } = patientsListSlice.actions;

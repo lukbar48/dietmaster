@@ -2,7 +2,7 @@ const Patient = require('../models/PatientsModel');
 const mongoose = require('mongoose');
 
 const getAllPatients = async (req, res) => {
-  const patients = await Patient.find({}).sort({ createdAt: -1 });
+  const patients = await Patient.find().sort({ createdAt: -1 });
   res.status(200).json(patients);
 };
 
@@ -54,10 +54,34 @@ const updatePatient = async (req, res) => {
 };
 
 const filterPatients = async (req, res) => {
-  const patientsBySurname = await Patient.find({
+  const patients = await Patient.find({
     $or: [{ name: { $regex: req.query.q, $options: 'i' } }, { surname: { $regex: req.query.q, $options: 'i' } }],
   });
-  res.status(200).json(patientsBySurname);
+  res.status(200).json(patients);
+};
+
+const sortPatients = async (req, res) => {
+  const query = req.query.q;
+  let patients;
+  switch (query) {
+    case 'a-z':
+      patients = await Patient.find().sort({ surname: 1 });
+      break;
+    case 'z-a':
+      patients = await Patient.find().sort({ surname: -1 });
+      break;
+    case 'male':
+      patients = await Patient.find().sort({ sex: -1 });
+      break;
+    case 'female':
+      patients = await Patient.find().sort({ sex: 1 });
+      break;
+    default:
+      patients = await Patient.find().sort({ createdAt: -1 });
+      break;
+  }
+
+  res.status(200).json(patients);
 };
 
 module.exports = {
@@ -67,6 +91,7 @@ module.exports = {
   deletePatient,
   addNewPatient,
   filterPatients,
+  sortPatients,
 };
 
 export {};

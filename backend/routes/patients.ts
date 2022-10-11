@@ -7,9 +7,12 @@ const {
   deletePatient,
   updatePatient,
   filterPatients,
+  sortPatients,
 } = require('../controllers/patientsController');
 
 router.get('/search', filterPatients);
+
+router.get('/sort', sortPatients);
 
 router.get('/', getAllPatients);
 
