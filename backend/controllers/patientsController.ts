@@ -55,7 +55,6 @@ const updatePatient = async (req, res) => {
 
 const filterPatients = async (req, res) => {
   const { text, sort } = req.query;
-  console.log(req.query);
   let patients = Patient.find({
     $or: [{ name: { $regex: text, $options: 'i' } }, { surname: { $regex: text, $options: 'i' } }],
   });
@@ -81,13 +80,6 @@ const filterPatients = async (req, res) => {
       break;
   }
   patients = await patients.exec();
-
-  res.status(200).json(patients);
-};
-
-const sortPatients = async (req, res) => {
-  const query = req.query.q;
-  let patients;
 
   res.status(200).json(patients);
 };
