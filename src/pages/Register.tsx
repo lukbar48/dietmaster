@@ -6,6 +6,7 @@ import { Wrapper, Image, Form } from './Login.styles';
 import LoginInput from 'components/molecules/LoginInput/LoginInput';
 import ErrorMessage from 'components/molecules/ErrorMessage/ErrorMessage';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const Text = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.l};
@@ -13,18 +14,18 @@ const Text = styled.div`
 `;
 
 const Register = () => {
-  const { signIn, errMsg } = useAuth();
-
-  const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
+  const { errMsg, register: registerUser } = useAuth();
+  const { register, handleSubmit } = useForm<{ email: string; password: string }>();
 
   return (
     <Wrapper>
       <Image src={logo} />
-      <Form onSubmit={() => console.log('yoo')}>
+      <Form onSubmit={handleSubmit(registerUser)}>
         <Text>Register</Text>
         <LoginInput id="email" label="Email" type="email" {...register('email', { required: true })} />
         <LoginInput id="password" label="Password" type="password" {...register('password', { required: true })} />
-        <Button type="submit" backgroundColor="#e55656">
+        <Button onClick={() => navigate(`/login`)} type="submit" backgroundColor="#e55656">
           Register
         </Button>
       </Form>

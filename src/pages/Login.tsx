@@ -15,13 +15,13 @@ const Text = styled.div`
 
 const Login = () => {
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
-  const { signIn, errMsg } = useAuth();
+  const { register, handleSubmit } = useForm<{ email: string; password: string }>();
+  const { logIn, errMsg } = useAuth();
 
   return (
     <Wrapper>
       <Image src={logo} />
-      <Form onSubmit={() => console.log('yoo')}>
+      <Form onSubmit={handleSubmit(logIn)}>
         <Text>Log In</Text>
         <LoginInput id="email" label="Email" type="email" {...register('email', { required: true })} />
         <LoginInput id="password" label="Password" type="password" {...register('password', { required: true })} />

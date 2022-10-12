@@ -1,18 +1,20 @@
 import axios from 'axios';
 import { createContext, ReactNode, useState, useContext } from 'react';
 
-const InitialUserValues = { id: '', login: '', name: '', token: '' };
+const InitialUserValues = { id: '', email: '', name: '', token: '' };
 
 type PatientContextType = {
-  signIn: ({ login, password }: { login: string; password: string }) => any;
+  logIn: ({ email, password }: { email: string; password: string }) => any;
   signOut: () => void;
   user: typeof InitialUserValues;
   errMsg: string;
+  register: ({ email, password }: { email: string; password: string }) => any;
 };
 
 const AuthContext = createContext<PatientContextType>({
-  signIn() {},
+  logIn() {},
   signOut() {},
+  register() {},
   user: InitialUserValues,
   errMsg: '',
 });
@@ -39,9 +41,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }): any => {
   //   }
   // }, []);
 
-  const signIn = async ({ login, password }: { login: string; password: string }) => {
+  const register = async ({ email, password }: { email: string; password: string }) => {
     try {
-      const response = await axios.post('/dietmaster/login', { login, password });
+      const response = await axios.post('http://localhost:4000/api/register', { email, password });
+      setUser(response.data);
+      localStorage.setItem('token', response.data.token);
+    } catch (error) {
+      console.log(error);
+      setErrMsg('Invalid email or password.');
+    }
+  };
+
+  const logIn = async ({ email, password }: { email: string; password: string }) => {
+    try {
+      const response = await axios.post('http://localhost:4000/api/login', { email, password });
       setUser(response.data);
       localStorage.setItem('token', response.data.token);
     } catch (error) {
@@ -51,11 +64,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }): any => {
   };
 
   const signOut = () => {
-    setUser({ id: '', login: '', name: '', token: '' });
+    setUser({ id: '', email: '', name: '', token: '' });
     localStorage.removeItem('token');
     setErrMsg('');
   };
-  return <AuthContext.Provider value={{ user, signIn, signOut, errMsg }}>{children}</AuthContext.Provider>;
+
+  return <AuthContext.Provider value={{ user, logIn, signOut, errMsg, register }}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => {
