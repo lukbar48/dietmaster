@@ -10,6 +10,8 @@ import Appointments from './Appointments';
 import { useEffect } from 'react';
 import { fetchPatients } from 'redux/patientsListSlice';
 import { useAppDispatch } from 'redux/hooks';
+import Login from './Login';
+import Register from './Register';
 
 const Root = () => {
   const dispatch = useAppDispatch();
@@ -25,13 +27,15 @@ const Root = () => {
       <Routes>
         {/* {user.login ? ( */}
         <Wrapper>
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/patient/appointments/:id" element={<Appointments />} />
           <Route path="/patient/blood-tests/:id" element={<BloodTests />} />
           <Route path="/patient/allergens/:id" element={<Allergens />} />
           <Route path="/patient/diet/:id" element={<Diet />} />
           <Route path="/patient/about/:id" element={<About />} />
           <Route path="/" element={<Main />} />
-          <Route path="*" element={<Navigate to="/" />} />
+          {/* <Route path="*" element={<Navigate to="/" />} /> */}
         </Wrapper>
         {/* ) : (
             <>
