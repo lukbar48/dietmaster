@@ -5,10 +5,13 @@ import { Wrapper } from './Main.styles';
 import { PatientType } from 'types/types';
 import { RootState } from 'store';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { updatePatientsList } from 'redux/patientsListSlice';
 
+export type SortTermType = 'off' | 'desc' | 'asc' | 'male' | 'female';
+
 const Main = () => {
+  const [sortTerm, setSortTerm] = useState<SortTermType>('off');
   const patientsList = useAppSelector((state: RootState) => state.patientsList);
   const patient = useAppSelector((state: RootState) => state.patient);
   const dispatch = useAppDispatch();
@@ -20,12 +23,12 @@ const Main = () => {
 
   return (
     <>
-      <MainTopBar />
+      <MainTopBar sortTerm={sortTerm} />
       <Wrapper>
         {patientsList.length > 0 &&
           patientsList.map((patient: PatientType, index: number) => <MainPatientInfo index={index} key={patient._id} {...patient} />)}
       </Wrapper>
-      <MainBottomBar />
+      <MainBottomBar setSortTerm={setSortTerm} />
     </>
   );
 };

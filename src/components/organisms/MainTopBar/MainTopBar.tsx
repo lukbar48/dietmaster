@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import InputMain from 'components/atoms/InputMain/InputMain';
 import Button from 'components/atoms/Button/Button';
@@ -8,8 +8,9 @@ import { IoMdAdd } from 'react-icons/io';
 import { Wrapper } from './MainTopBar.styles';
 import { addNewPatient, filterPatientsList, fetchPatients } from '../../../redux/patientsListSlice';
 import { useAppDispatch } from 'redux/hooks';
+import { SortTermType } from '../../../pages/Main';
 
-const MainTopBar = () => {
+const MainTopBar = ({ sortTerm }: { sortTerm: SortTermType }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const { signOut } = useAuth();
@@ -24,10 +25,16 @@ const MainTopBar = () => {
     setSearchTerm(e.currentTarget.value);
   };
 
+  const sortPatients = () => dispatch(filterPatientsList({ searchTerm: searchTerm, sortTerm: sortTerm }));
+
   const handleOnSearchPress = () => {
-    if (searchTerm.length > 0) return dispatch(filterPatientsList(searchTerm));
+    if (searchTerm.length > 0) return sortPatients();
     dispatch(fetchPatients());
   };
+
+  useEffect(() => {
+    sortPatients();
+  }, [sortTerm]);
 
   const onSearchEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') handleOnSearchPress();

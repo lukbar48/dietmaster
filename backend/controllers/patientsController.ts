@@ -54,33 +54,40 @@ const updatePatient = async (req, res) => {
 };
 
 const filterPatients = async (req, res) => {
-  const patients = await Patient.find({
-    $or: [{ name: { $regex: req.query.q, $options: 'i' } }, { surname: { $regex: req.query.q, $options: 'i' } }],
+  const { text, sort } = req.query;
+  console.log(req.query);
+  let patients = Patient.find({
+    $or: [{ name: { $regex: text, $options: 'i' } }, { surname: { $regex: text, $options: 'i' } }],
   });
+
+  switch (sort) {
+    case 'off':
+      patients = patients.sort({ createdAt: 1 });
+      break;
+    case 'asc':
+      patients = patients.sort({ surname: 1 });
+      break;
+    case 'desc':
+      patients = patients.sort({ surname: -1 });
+      break;
+    case 'male':
+      patients = patients.sort({ sex: -1 });
+      break;
+    case 'female':
+      patients = patients.sort({ sex: 1 });
+      break;
+    default:
+      patients = patients.sort({ createdAt: -1 });
+      break;
+  }
+  patients = await patients.exec();
+
   res.status(200).json(patients);
 };
 
 const sortPatients = async (req, res) => {
   const query = req.query.q;
   let patients;
-  switch (query) {
-    case 'a-z':
-      patients = Patient.find().sort({ surname: 1 });
-      break;
-    case 'z-a':
-      patients = Patient.find().sort({ surname: -1 });
-      break;
-    case 'male':
-      patients = Patient.find().sort({ sex: -1 });
-      break;
-    case 'female':
-      patients = Patient.find().sort({ sex: 1 });
-      break;
-    default:
-      patients = Patient.find().sort({ createdAt: -1 });
-      break;
-  }
-  patients = await patients.exec();
 
   res.status(200).json(patients);
 };
@@ -92,7 +99,6 @@ module.exports = {
   deletePatient,
   addNewPatient,
   filterPatients,
-  sortPatients,
 };
 
 export {};
