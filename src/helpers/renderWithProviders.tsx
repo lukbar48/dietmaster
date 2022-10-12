@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
-import { AuthProvider } from 'hooks/useAuth';
+import { AuthProvider } from 'contexts/AuthContext';
 import { ReactNode } from 'react';
 import { theme } from 'assets/styles/theme';
 import { Provider } from 'react-redux';

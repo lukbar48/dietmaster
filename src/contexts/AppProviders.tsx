@@ -1,5 +1,5 @@
 import { theme } from 'assets/styles/theme';
-import { AuthProvider } from 'hooks/useAuth';
+import { AuthProvider } from 'contexts/AuthContext';
 import { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
 import PatientProvider from './PatientContext';

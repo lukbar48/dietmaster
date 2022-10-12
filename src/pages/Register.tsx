@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import Button from 'components/atoms/Button/Button';
 import logo from '../assets/images/logo.png';
-import { useAuth } from 'hooks/useAuth';
+import { useAuth } from 'contexts/AuthContext';
 import { Wrapper, Image, Form } from './Login.styles';
 import LoginInput from 'components/molecules/LoginInput/LoginInput';
 import ErrorMessage from 'components/molecules/ErrorMessage/ErrorMessage';
