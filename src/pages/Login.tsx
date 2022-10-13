@@ -15,7 +15,7 @@ const Text = styled.div`
 
 const Login = () => {
   const navigate = useNavigate();
-  const { register, handleSubmit, watch } = useForm<{ email: string; password: string }>();
+  const { register, handleSubmit } = useForm<{ email: string; password: string }>();
   const { logIn, errMsg } = useAuthContext();
 
   const submit = (data: { email: string; password: string }) => {

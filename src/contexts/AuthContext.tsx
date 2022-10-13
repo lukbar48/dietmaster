@@ -3,10 +3,12 @@ import { createContext, ReactNode, useState, useContext, useEffect } from 'react
 
 const InitialUserValues = { email: '', token: '' };
 
+export type UserType = { email: string; token: string };
+
 type PatientContextType = {
   logIn: ({ email, password }: { email: string; password: string }) => any;
-  signOut: () => void;
-  user: typeof InitialUserValues | null;
+  logOut: () => void;
+  user: UserType | null;
   errMsg: string;
   register: ({ email, password }: { email: string; password: string }) => any;
   isLoading: boolean;
@@ -14,7 +16,7 @@ type PatientContextType = {
 
 const AuthContext = createContext<PatientContextType>({
   logIn() {},
-  signOut() {},
+  logOut() {},
   register() {},
   user: InitialUserValues,
   errMsg: '',
@@ -22,26 +24,16 @@ const AuthContext = createContext<PatientContextType>({
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }): any => {
-  const [user, setUser] = useState<typeof InitialUserValues | null>(null);
+  const [user, setUser] = useState<UserType | null>(null);
   const [errMsg, setErrMsg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  console.log(user);
+
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    // if (token) {
-    //   (async () => {
-    //     try {
-    //       const response = await axios.get('/me', {
-    //         headers: {
-    //           authorization: `Bearer ${token}`,
-    //         },
-    //       });
-    //       setUser(response.data[0]);
-    //     } catch (error) {
-    //       console.log(error);
-    //     }
-    //   })();
-    // }
+    const localStorageUser = localStorage.getItem('user');
+    if (!localStorageUser) return;
+    setUser(JSON.parse(localStorageUser));
   }, []);
 
   const register = async ({ email, password }: { email: string; password: string }) => {
@@ -49,8 +41,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }): any => {
     setIsLoading(true);
     try {
       const response = await axios.post('http://localhost:4000/api/user/register', { email, password });
-      localStorage.setItem('token', response.data.token);
-      setUser(response.data);
       setIsLoading(false);
       return response.data;
     } catch (error) {
@@ -63,22 +53,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }): any => {
   const logIn = async ({ email, password }: { email: string; password: string }) => {
     try {
       const response = await axios.post('http://localhost:4000/api/user/login', { email, password });
-      console.log('RES LOG', response);
+      console.log('axi', response.data);
+      localStorage.setItem('user', JSON.stringify(response.data));
       setUser(response.data);
-      localStorage.setItem('token', response.data.token);
     } catch (error) {
       console.log(error);
       setErrMsg('Invalid email or password.');
     }
   };
 
-  const signOut = () => {
+  const logOut = () => {
     setUser(null);
-    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setErrMsg('');
   };
 
-  return <AuthContext.Provider value={{ user, logIn, signOut, errMsg, register, isLoading }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ user, logIn, logOut, errMsg, register, isLoading }}>{children}</AuthContext.Provider>;
 };
 
 export const useAuthContext = () => {

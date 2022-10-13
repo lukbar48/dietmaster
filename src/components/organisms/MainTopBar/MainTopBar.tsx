@@ -12,7 +12,7 @@ import { SortTermType } from '../../../pages/Main';
 
 const MainTopBar = ({ sortTerm }: { sortTerm: SortTermType }) => {
   const navigate = useNavigate();
-  const { signOut } = useAuthContext();
+  const { logOut } = useAuthContext();
   const dispatch = useAppDispatch();
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -56,7 +56,7 @@ const MainTopBar = ({ sortTerm }: { sortTerm: SortTermType }) => {
         <IoMdAdd style={{ fontSize: '1.4rem', margin: '0px 3px 0px -5px' }} />
         New patient
       </Button>
-      <Button onClick={signOut} backgroundColor="#505050" marginLeft="auto">
+      <Button onClick={logOut} backgroundColor="#505050" marginLeft="auto">
         <BiLogOut style={{ fontSize: '1.3rem', margin: '0px 5px 0px -5px' }} />
         Log Out
       </Button>

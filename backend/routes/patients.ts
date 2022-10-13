@@ -8,6 +8,9 @@ const {
   updatePatient,
   filterPatients,
 } = require('../controllers/patientsController');
+const { requireAuth } = require('../middleware/requireAuth');
+
+router.use(requireAuth);
 
 router.get('/search', filterPatients);
 
