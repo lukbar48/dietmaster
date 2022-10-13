@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import InputMain from 'components/atoms/InputMain/InputMain';
 import Button from 'components/atoms/Button/Button';
-import { useAuth } from 'contexts/AuthContext';
+import { useAuthContext } from 'contexts/AuthContext';
 import { BiLogOut } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
 import { Wrapper } from './MainTopBar.styles';
@@ -11,10 +11,10 @@ import { useAppDispatch } from 'redux/hooks';
 import { SortTermType } from '../../../pages/Main';
 
 const MainTopBar = ({ sortTerm }: { sortTerm: SortTermType }) => {
-  const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
-  const { signOut } = useAuth();
+  const { signOut } = useAuthContext();
   const dispatch = useAppDispatch();
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleClickNewPatient = async () => {
     const patient = await dispatch(addNewPatient());

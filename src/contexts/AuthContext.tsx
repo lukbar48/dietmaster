@@ -1,14 +1,15 @@
 import axios from 'axios';
-import { createContext, ReactNode, useState, useContext } from 'react';
+import { createContext, ReactNode, useState, useContext, useEffect } from 'react';
 
-const InitialUserValues = { id: '', email: '', name: '', token: '' };
+const InitialUserValues = { email: '', token: '' };
 
 type PatientContextType = {
   logIn: ({ email, password }: { email: string; password: string }) => any;
   signOut: () => void;
-  user: typeof InitialUserValues;
+  user: typeof InitialUserValues | null;
   errMsg: string;
   register: ({ email, password }: { email: string; password: string }) => any;
+  isLoading: boolean;
 };
 
 const AuthContext = createContext<PatientContextType>({
@@ -17,44 +18,52 @@ const AuthContext = createContext<PatientContextType>({
   register() {},
   user: InitialUserValues,
   errMsg: '',
+  isLoading: false,
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }): any => {
-  const [user, setUser] = useState(InitialUserValues);
+  const [user, setUser] = useState<typeof InitialUserValues | null>(null);
   const [errMsg, setErrMsg] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   if (token) {
-  //     (async () => {
-  //       try {
-  //         const response = await axios.get('/me', {
-  //           headers: {
-  //             authorization: `Bearer ${token}`,
-  //           },
-  //         });
-  //         setUser(response.data[0]);
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     })();
-  //   }
-  // }, []);
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    // if (token) {
+    //   (async () => {
+    //     try {
+    //       const response = await axios.get('/me', {
+    //         headers: {
+    //           authorization: `Bearer ${token}`,
+    //         },
+    //       });
+    //       setUser(response.data[0]);
+    //     } catch (error) {
+    //       console.log(error);
+    //     }
+    //   })();
+    // }
+  }, []);
 
   const register = async ({ email, password }: { email: string; password: string }) => {
+    console.log(email, password);
+    setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:4000/api/register', { email, password });
-      setUser(response.data);
+      const response = await axios.post('http://localhost:4000/api/user/register', { email, password });
       localStorage.setItem('token', response.data.token);
+      setUser(response.data);
+      setIsLoading(false);
+      return response.data;
     } catch (error) {
       console.log(error);
-      setErrMsg('Invalid email or password.');
+      setErrMsg(error + 'Invalid email or password.');
+      setIsLoading(false);
     }
   };
 
   const logIn = async ({ email, password }: { email: string; password: string }) => {
     try {
-      const response = await axios.post('http://localhost:4000/api/login', { email, password });
+      const response = await axios.post('http://localhost:4000/api/user/login', { email, password });
+      console.log('RES LOG', response);
       setUser(response.data);
       localStorage.setItem('token', response.data.token);
     } catch (error) {
@@ -64,15 +73,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }): any => {
   };
 
   const signOut = () => {
-    setUser({ id: '', email: '', name: '', token: '' });
+    setUser(null);
     localStorage.removeItem('token');
     setErrMsg('');
   };
 
-  return <AuthContext.Provider value={{ user, logIn, signOut, errMsg, register }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ user, logIn, signOut, errMsg, register, isLoading }}>{children}</AuthContext.Provider>;
 };
 
-export const useAuth = () => {
+export const useAuthContext = () => {
   const auth = useContext(AuthContext);
 
   return auth;
