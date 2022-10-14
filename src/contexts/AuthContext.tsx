@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createContext, ReactNode, useState, useContext, useEffect } from 'react';
+import { unauthorizeAxiosClient, authorizeAxiosClient, restClient } from '../helpers/axiosInit';
 
 const InitialUserValues = { email: '', token: '' };
 
@@ -28,20 +29,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }): any => {
   const [errMsg, setErrMsg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log(user);
-
   useEffect(() => {
     const localStorageUser = localStorage.getItem('user');
     if (!localStorageUser) return;
-    axios.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(localStorageUser).token}`;
-    setUser(JSON.parse(localStorageUser));
+    const parsedUser = JSON.parse(localStorageUser);
+    authorizeAxiosClient(parsedUser.token);
+    setUser(parsedUser);
   }, []);
 
   const register = async ({ email, password }: { email: string; password: string }) => {
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:4000/api/user/register', { email, password });
-
+      const response = await restClient.post('/user/register', { email, password });
       return response.data;
     } catch (error) {
       console.log(error);
@@ -53,9 +52,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }): any => {
 
   const logIn = async ({ email, password }: { email: string; password: string }) => {
     try {
-      const response = await axios.post('http://localhost:4000/api/user/login', { email, password });
+      const response = await restClient.post('/user/login', { email, password });
       localStorage.setItem('user', JSON.stringify(response.data));
       setUser(response.data);
+      return response.data;
     } catch (error) {
       console.log(error);
       setErrMsg('Invalid email or password.');
@@ -66,6 +66,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): any => {
     setUser(null);
     localStorage.removeItem('user');
     setErrMsg('');
+    unauthorizeAxiosClient();
   };
 
   return <AuthContext.Provider value={{ user, logIn, logOut, errMsg, register, isLoading }}>{children}</AuthContext.Provider>;

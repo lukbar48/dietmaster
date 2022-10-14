@@ -7,6 +7,7 @@ import LoginInput from 'components/molecules/LoginInput/LoginInput';
 import ErrorMessage from 'components/molecules/ErrorMessage/ErrorMessage';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { authorizeAxiosClient } from '../helpers/axiosInit';
 
 const Text = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.l};
@@ -18,9 +19,9 @@ const Login = () => {
   const { register, handleSubmit } = useForm<{ email: string; password: string }>();
   const { logIn, errMsg } = useAuthContext();
 
-  const submit = (data: { email: string; password: string }) => {
-    logIn(data);
-    if (!errMsg) navigate(`/login`);
+  const submit = async (data: { email: string; password: string }) => {
+    const user = await logIn(data);
+    authorizeAxiosClient(user.token);
   };
 
   return (

@@ -13,10 +13,8 @@ import { useAppDispatch } from 'redux/hooks';
 import Login from './Login';
 import Register from './Register';
 import { useAuthContext } from 'contexts/AuthContext';
-import { useAxiosInitialization } from 'hooks/useAxiosInitialization';
 
 const Root = () => {
-  useAxiosInitialization();
   const dispatch = useAppDispatch();
   const { user } = useAuthContext();
 
