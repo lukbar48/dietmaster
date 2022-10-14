@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { SortTermType } from 'pages/Main';
 import { PatientType } from 'types/types';
 import { restClient } from '../helpers/axiosInit';

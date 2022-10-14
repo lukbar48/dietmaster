@@ -37,11 +37,11 @@ const Root = () => {
             <Route path="*" element={<Navigate to="/" />} />
           </Wrapper>
         ) : (
-          <>
-            <Route path="*" element={<Navigate to="/login" />} />
+          <Wrapper>
+            <Route path="*" element={<Login />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-          </>
+          </Wrapper>
         )}
       </Routes>
     </Router>

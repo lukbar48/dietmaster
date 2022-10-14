@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { createContext, ReactNode, useState, useContext, useEffect } from 'react';
 import { unauthorizeAxiosClient, authorizeAxiosClient, restClient } from '../helpers/axiosInit';
 
