@@ -6,7 +6,6 @@ export interface InputType {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
   value: string;
-  handleOnSearchPress: () => void;
   onKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
@@ -36,7 +35,7 @@ const BiSearchIcon = styled(BiSearch)`
 const InputMain = ({ ...props }: InputType) => (
   <InputWrapper>
     <Input {...props} />
-    <BiSearchIcon onClick={props.handleOnSearchPress} />
+    <BiSearchIcon />
   </InputWrapper>
 );
 

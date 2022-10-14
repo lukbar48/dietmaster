@@ -21,7 +21,7 @@ const Login = () => {
 
   const submit = async (data: { email: string; password: string }) => {
     const user = await logIn(data);
-    authorizeAxiosClient(user.token);
+    if (user) authorizeAxiosClient(user.token);
   };
 
   return (

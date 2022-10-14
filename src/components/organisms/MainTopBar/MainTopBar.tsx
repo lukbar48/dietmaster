@@ -6,7 +6,7 @@ import { useAuthContext } from 'contexts/AuthContext';
 import { BiLogOut } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
 import { Wrapper } from './MainTopBar.styles';
-import { addNewPatient, filterPatientsList, fetchPatients } from '../../../redux/patientsListSlice';
+import { addNewPatient, filterPatientsList } from '../../../redux/patientsListSlice';
 import { useAppDispatch } from 'redux/hooks';
 import { SortTermType } from '../../../pages/Main';
 
@@ -18,26 +18,19 @@ const MainTopBar = ({ sortTerm }: { sortTerm: SortTermType }) => {
 
   const handleClickNewPatient = async () => {
     const patient = await dispatch(addNewPatient());
-    // navigate(`/patient/about/${patient.payload._id}`);
+    navigate(`/patient/about/${patient.payload._id}`);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.currentTarget.value);
   };
 
-  const sortPatients = () => dispatch(filterPatientsList({ searchTerm: searchTerm, sortTerm: sortTerm }));
-
-  const handleOnSearchPress = () => {
-    if (searchTerm.length > 0) return sortPatients();
-    dispatch(fetchPatients());
-  };
-
   useEffect(() => {
-    sortPatients();
-  }, [sortTerm]);
+    dispatch(filterPatientsList({ searchTerm, sortTerm }));
+  }, [sortTerm, searchTerm, dispatch]);
 
   const onSearchEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') handleOnSearchPress();
+    if (e.key === 'Enter') dispatch(filterPatientsList({ searchTerm, sortTerm }));
   };
 
   return (
@@ -45,13 +38,7 @@ const MainTopBar = ({ sortTerm }: { sortTerm: SortTermType }) => {
       <div>
         <h2>Patients record</h2>
       </div>
-      <InputMain
-        placeholder="Search patient"
-        value={searchTerm}
-        onChange={handleChange}
-        handleOnSearchPress={handleOnSearchPress}
-        onKeyPress={onSearchEnterPress}
-      />
+      <InputMain placeholder="Search patient" value={searchTerm} onChange={handleChange} onKeyPress={onSearchEnterPress} />
       <Button onClick={handleClickNewPatient}>
         <IoMdAdd style={{ fontSize: '1.4rem', margin: '0px 3px 0px -5px' }} />
         New patient

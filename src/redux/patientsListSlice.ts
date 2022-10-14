@@ -5,7 +5,7 @@ import { restClient } from '../helpers/axiosInit';
 
 const initialState: PatientType[] = [];
 
-export const fetchPatients = createAsyncThunk('/patients/getPatientsList', async () => {
+export const fetchPatients = createAsyncThunk('patients/getPatientsList', async () => {
   try {
     const response = await restClient.get('/patients');
     return response.data;
@@ -23,7 +23,7 @@ export const fetchSinglePatient = createAsyncThunk('patient/getPatient', async (
   }
 });
 
-export const addNewPatient = createAsyncThunk('patients/addPatient', async (patient?: Partial<PatientType>) => {
+export const addNewPatient = createAsyncThunk('patient/addPatient', async (patient?: Partial<PatientType>) => {
   try {
     const response = await restClient.post('/patients', patient);
     return response.data;
@@ -32,7 +32,7 @@ export const addNewPatient = createAsyncThunk('patients/addPatient', async (pati
   }
 });
 
-export const removePatient = createAsyncThunk('patients/removePatient', async (id: string) => {
+export const removePatient = createAsyncThunk('patient/removePatient', async (id: string) => {
   try {
     const response = await restClient.delete(`/patients/${id}`);
     return response.data;
@@ -59,6 +59,7 @@ export const patientsListSlice = createSlice({
   initialState,
   reducers: {
     updatePatientsList(state, action) {
+      if (action.payload === null) return [];
       const patientsList = state.filter((patient) => patient._id !== action.payload._id);
       return [action.payload, ...patientsList];
     },

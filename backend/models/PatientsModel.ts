@@ -79,6 +79,10 @@ const patientSchema = new Schema(
     appointments: {
       type: Array,
     },
+    user_id: {
+      type: String,
+      require: true,
+    },
   },
   { timestamps: true },
 );
