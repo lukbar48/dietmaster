@@ -1,9 +1,11 @@
 import Button from 'components/atoms/Button/Button';
 import styled from 'styled-components';
 import { SortTermType } from 'pages/Main';
+import { useAuthContext } from 'contexts/AuthContext';
 
 const Wrapper = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   position: fixed;
   bottom: 0;
@@ -21,12 +23,14 @@ const Wrapper = styled.div`
   .filterSex {
     display: flex;
     flex-direction: column;
-
-    .buttons {
-      display: flex;
-      gap: 2px;
-    }
   }
+  .buttons {
+    display: flex;
+    gap: 2px;
+  }
+`;
+const Text = styled.div`
+  color: white;
 `;
 
 type MainBottomBarProps = {
@@ -34,6 +38,7 @@ type MainBottomBarProps = {
 };
 
 const MainBottomBar = ({ setSortTerm }: MainBottomBarProps) => {
+  const { user } = useAuthContext();
   return (
     <Wrapper>
       <div className="filterSex">
@@ -56,6 +61,7 @@ const MainBottomBar = ({ setSortTerm }: MainBottomBarProps) => {
           </Button>
         </div>
       </div>
+      <Text>{user?.email}</Text>
     </Wrapper>
   );
 };
