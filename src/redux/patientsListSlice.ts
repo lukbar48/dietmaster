@@ -7,7 +7,7 @@ const initialState: PatientType[] = [];
 
 export const fetchPatients = createAsyncThunk('/patients/getPatients', async () => {
   try {
-    const response = await axios.get('http://localhost:4000/api/patients');
+    const response = await axios.get('/api/patients');
     return response.data;
   } catch (err) {
     console.log(err);
@@ -25,7 +25,7 @@ export const fetchSinglePatient = createAsyncThunk('patient/getPatient', async (
 
 export const addNewPatient = createAsyncThunk('patients/addPatient', async (patient?: Partial<PatientType>) => {
   try {
-    const response = await axios.post('http://localhost:4000/api/patients', patient);
+    const response = await axios.post('/api/patients', patient);
     return response.data;
   } catch (err) {
     console.log(err);
@@ -47,7 +47,7 @@ export const filterPatientsList = createAsyncThunk('patients/filterPatients', as
     sort: query.sortTerm,
   });
   try {
-    const response = await axios.get(`http://localhost:4000/api/patients/search?${searchParams}`);
+    const response = await axios.get(`/api/patients/search?${searchParams}`);
     return response.data;
   } catch (err) {
     console.log(err);

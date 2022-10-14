@@ -33,7 +33,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }): any => {
   useEffect(() => {
     const localStorageUser = localStorage.getItem('user');
     if (!localStorageUser) return;
-    console.log(JSON.parse(localStorageUser));
     axios.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(localStorageUser).token}`;
     setUser(JSON.parse(localStorageUser));
   }, []);

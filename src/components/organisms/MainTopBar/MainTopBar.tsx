@@ -18,7 +18,7 @@ const MainTopBar = ({ sortTerm }: { sortTerm: SortTermType }) => {
 
   const handleClickNewPatient = async () => {
     const patient = await dispatch(addNewPatient());
-    navigate(`/patient/about/${patient.payload._id}`);
+    // navigate(`/patient/about/${patient.payload._id}`);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

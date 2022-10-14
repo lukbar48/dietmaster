@@ -26,7 +26,7 @@ const Main = () => {
       <MainTopBar sortTerm={sortTerm} />
       <Wrapper>
         {patientsList.length > 0 &&
-          patientsList.map((patient: PatientType, index: number) => <MainPatientInfo index={index} key={patient._id} {...patient} />)}
+          patientsList.map((patient: PatientType, index: number) => <MainPatientInfo index={index} key={patient?._id} {...patient} />)}
       </Wrapper>
       <MainBottomBar setSortTerm={setSortTerm} />
     </>
