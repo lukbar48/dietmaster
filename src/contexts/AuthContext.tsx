@@ -33,19 +33,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }): any => {
   useEffect(() => {
     const localStorageUser = localStorage.getItem('user');
     if (!localStorageUser) return;
+    console.log(JSON.parse(localStorageUser));
+    axios.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(localStorageUser).token}`;
     setUser(JSON.parse(localStorageUser));
   }, []);
 
   const register = async ({ email, password }: { email: string; password: string }) => {
-    console.log(email, password);
     setIsLoading(true);
     try {
       const response = await axios.post('http://localhost:4000/api/user/register', { email, password });
-      setIsLoading(false);
+
       return response.data;
     } catch (error) {
       console.log(error);
       setErrMsg(error + 'Invalid email or password.');
+    } finally {
       setIsLoading(false);
     }
   };
@@ -53,7 +55,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }): any => {
   const logIn = async ({ email, password }: { email: string; password: string }) => {
     try {
       const response = await axios.post('http://localhost:4000/api/user/login', { email, password });
-      console.log('axi', response.data);
       localStorage.setItem('user', JSON.stringify(response.data));
       setUser(response.data);
     } catch (error) {
