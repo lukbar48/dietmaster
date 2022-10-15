@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useState, useContext, useEffect } from 'react';
 import { unauthorizeAxiosClient, authorizeAxiosClient, restClient } from '../helpers/axiosInit';
-import { updatePatientsList } from 'redux/patientsListSlice';
+import { reset } from 'redux/patientsListSlice';
 import { useAppDispatch } from 'redux/hooks';
 
 const InitialUserValues = { email: '', token: '' };
@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): any => {
     localStorage.removeItem('user');
     setErrMsg('');
     unauthorizeAxiosClient();
-    dispatch(updatePatientsList(null));
+    dispatch(reset());
   };
 
   return <AuthContext.Provider value={{ user, logIn, logOut, errMsg, register, isLoading }}>{children}</AuthContext.Provider>;

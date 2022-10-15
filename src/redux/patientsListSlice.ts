@@ -59,10 +59,10 @@ export const patientsListSlice = createSlice({
   initialState,
   reducers: {
     updatePatientsList(state, action) {
-      if (action.payload === null) return [];
       const patientsList = state.filter((patient) => patient._id !== action.payload._id);
       return [action.payload, ...patientsList];
     },
+    reset: () => initialState,
   },
   extraReducers(builder) {
     builder.addCase(fetchPatients.fulfilled, (state, action) => {
@@ -82,4 +82,4 @@ export const patientsListSlice = createSlice({
 
 export default patientsListSlice.reducer;
 
-export const { updatePatientsList } = patientsListSlice.actions;
+export const { updatePatientsList, reset } = patientsListSlice.actions;
