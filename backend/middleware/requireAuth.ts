@@ -1,7 +1,9 @@
+import { NextFunction, Request, Response } from 'express';
+
 const jwt = require('jsonwebtoken');
 const User = require('../models/UserModel');
 
-const requireAuth = async (req, res, next) => {
+const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
 
   if (!authorization) return res.status(401).json({ error: 'Authorization error' });
@@ -18,4 +20,4 @@ const requireAuth = async (req, res, next) => {
   }
 };
 
-module.exports = { requireAuth };
+export default requireAuth;

@@ -1,13 +1,14 @@
+import mongoose from 'mongoose';
+import { Request, Response } from 'express';
 const Patient = require('../models/PatientsModel');
-const mongoose = require('mongoose');
 
-const getAllPatients = async (req, res) => {
+const getAllPatients = async (req: Request, res: Response) => {
   const user_id = req.user._id;
   const patients = await Patient.find({ user_id }).sort({ createdAt: -1 });
   res.status(200).json(patients);
 };
 
-const getSinglePatient = async (req, res) => {
+const getSinglePatient = async (req: Request, res: Response) => {
   const patient_id = req.params.id;
 
   if (!mongoose.Types.ObjectId.isValid(patient_id)) {
@@ -20,7 +21,7 @@ const getSinglePatient = async (req, res) => {
   res.status(200).json(patient);
 };
 
-const addNewPatient = async (req, res) => {
+const addNewPatient = async (req: Request, res: Response) => {
   const user_id = req.user._id;
   const patientRequest = req.body;
   try {
@@ -31,7 +32,7 @@ const addNewPatient = async (req, res) => {
   }
 };
 
-const deletePatient = async (req, res) => {
+const deletePatient = async (req: Request, res: Response) => {
   const patient_id = req.params.id;
 
   if (!mongoose.Types.ObjectId.isValid(patient_id)) {
@@ -43,7 +44,7 @@ const deletePatient = async (req, res) => {
   res.status(200).json(patient);
 };
 
-const updatePatient = async (req, res) => {
+const updatePatient = async (req: Request, res: Response) => {
   const patient_id = req.params.id;
 
   if (!mongoose.Types.ObjectId.isValid(patient_id)) {
@@ -55,7 +56,7 @@ const updatePatient = async (req, res) => {
   res.status(200).json(patient);
 };
 
-const filterPatients = async (req, res) => {
+const filterPatients = async (req: Request, res: Response) => {
   const { text, sort } = req.query;
   const user_id = req.user._id;
 
@@ -88,13 +89,4 @@ const filterPatients = async (req, res) => {
   res.status(200).json(patients);
 };
 
-module.exports = {
-  getAllPatients,
-  getSinglePatient,
-  updatePatient,
-  deletePatient,
-  addNewPatient,
-  filterPatients,
-};
-
-export {};
+export { getAllPatients, getSinglePatient, updatePatient, deletePatient, addNewPatient, filterPatients };

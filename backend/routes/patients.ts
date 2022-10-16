@@ -1,14 +1,8 @@
-const express = require('express');
+import express from 'express';
+import requireAuth from '../middleware/requireAuth';
+import { getAllPatients, getSinglePatient, addNewPatient, deletePatient, updatePatient, filterPatients } from '../controllers/patientsController';
+
 const router = express.Router();
-const {
-  getAllPatients,
-  getSinglePatient,
-  addNewPatient,
-  deletePatient,
-  updatePatient,
-  filterPatients,
-} = require('../controllers/patientsController');
-const { requireAuth } = require('../middleware/requireAuth');
 
 router.use(requireAuth);
 
@@ -24,6 +18,6 @@ router.delete('/:id', deletePatient);
 
 router.patch('/:id', updatePatient);
 
-module.exports = router;
+export default router;
 
 export {};

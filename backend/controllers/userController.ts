@@ -1,9 +1,10 @@
+import jwt from 'jsonwebtoken';
+import { Request, Response } from 'express';
 const User = require('../models/UserModel');
-const jwt = require('jsonwebtoken');
 
-const createToken = (id) => jwt.sign({ _id: id }, process.env.JWT_SECRET, { expiresIn: '10d' });
+const createToken = (id: string) => jwt.sign({ _id: id }, process.env.JWT_SECRET || '', { expiresIn: '10d' });
 
-const loginUser = async (req, res) => {
+const loginUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   try {
@@ -15,7 +16,7 @@ const loginUser = async (req, res) => {
   }
 };
 
-const registerUser = async (req, res) => {
+const registerUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   try {
