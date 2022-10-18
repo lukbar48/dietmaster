@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { Request, Response } from 'express';
-const Patient = require('../models/PatientsModel');
+import Patient from '../models/PatientsModel';
+// import Patient from '../models/PatientsModel'
 
 const getAllPatients = async (req: Request, res: Response) => {
   const user_id = req.user._id;
@@ -84,9 +85,9 @@ const filterPatients = async (req: Request, res: Response) => {
       patients = patients.sort({ createdAt: -1 });
       break;
   }
-  patients = await patients.exec();
+  const foundPatients = await patients.exec();
 
-  res.status(200).json(patients);
+  res.status(200).json(foundPatients);
 };
 
 export { getAllPatients, getSinglePatient, updatePatient, deletePatient, addNewPatient, filterPatients };

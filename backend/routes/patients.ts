@@ -1,6 +1,6 @@
 import express from 'express';
+import { addNewPatient, deletePatient, filterPatients, getAllPatients, getSinglePatient, updatePatient } from '../controllers/patientsController';
 import requireAuth from '../middleware/requireAuth';
-import { getAllPatients, getSinglePatient, addNewPatient, deletePatient, updatePatient, filterPatients } from '../controllers/patientsController';
 
 const router = express.Router();
 
@@ -19,5 +19,3 @@ router.delete('/:id', deletePatient);
 router.patch('/:id', updatePatient);
 
 export default router;
-
-export {};

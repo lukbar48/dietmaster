@@ -1,6 +1,4 @@
-import mongoose from 'mongoose';
-
-const Schema = mongoose.Schema;
+import { Schema, model } from 'mongoose';
 
 const patientSchema = new Schema(
   {
@@ -87,6 +85,6 @@ const patientSchema = new Schema(
   { timestamps: true },
 );
 
-module.exports = mongoose.model('Patient', patientSchema);
+const Patient = model('Patient', patientSchema);
 
-export {};
+export default Patient;

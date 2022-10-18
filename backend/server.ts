@@ -1,8 +1,8 @@
+import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
-const cors = require('cors');
-const patientRoutes = require('./routes/patients');
-const userRoutes = require('./routes/user');
+import patientRoutes from './routes/patients';
+import userRoutes from './routes/user';
 require('dotenv').config();
 
 const app = express();

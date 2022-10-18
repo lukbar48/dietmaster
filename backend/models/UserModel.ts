@@ -1,10 +1,19 @@
-import mongoose from 'mongoose';
-const bcrypt = require('bcrypt');
-const validator = require('validator');
+import { Model, Schema, model } from 'mongoose';
+import validator from 'validator';
+import bcrypt from 'bcrypt';
 
-const Schema = mongoose.Schema;
+interface User {
+  email: string;
+  password: string;
+  _id: string;
+}
 
-const userSchema = new Schema({
+interface UserStatics extends Model<User> {
+  register: (email: string, password: string) => Promise<User>;
+  login: (email: string, password: string) => Promise<User>;
+}
+
+const userSchema = new Schema<User, UserStatics>({
   email: {
     type: String,
     required: true,
@@ -47,6 +56,5 @@ userSchema.statics.login = async function (email: string, password: string) {
   return foundUser;
 };
 
-module.exports = mongoose.model('User', userSchema);
-
-export {};
+const UserModel = model<User, UserStatics>('User', userSchema);
+export default UserModel;
