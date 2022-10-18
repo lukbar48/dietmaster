@@ -5,10 +5,9 @@ import { Wrapper } from './Main.styles';
 import { PatientType } from 'types/types';
 import { RootState } from 'store';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { updatePatientsList } from 'redux/patientsListSlice';
 import { filterPatientsList } from '../redux/patientsListSlice';
-import { restClient } from '../helpers/axiosInit';
 
 export type SortTermType = 'off' | 'desc' | 'asc' | 'male' | 'female';
 
@@ -20,7 +19,6 @@ const Main = () => {
   const patientsList = useAppSelector((state: RootState) => state.patientsList);
   const patient = useAppSelector((state: RootState) => state.patient);
   const dispatch = useAppDispatch();
-  const wasFirstRender = useRef(false);
 
   useEffect(() => {
     if (!!patient._id) dispatch(updatePatientsList(patient));
@@ -28,13 +26,9 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    if (wasFirstRender.current) dispatch(filterPatientsList({ searchTerm, sortTerm, page: page.toString() }));
-    wasFirstRender.current = true;
-
     const getPagesCount = async () => {
-      const response = await restClient.get<{ pagesCount: number }>('/patients');
-      const { pagesCount } = response.data;
-      setPagesCount(pagesCount);
+      const data = await dispatch(filterPatientsList({ searchTerm, sortTerm, page: page.toString() }));
+      if (data.payload?.pagesCount) setPagesCount(data.payload.pagesCount);
     };
     getPagesCount();
   }, [dispatch, page, searchTerm, sortTerm]);

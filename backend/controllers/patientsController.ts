@@ -98,15 +98,17 @@ const filterPatients = async (req: Request, res: Response) => {
       break;
   }
 
-  patients = patients.skip((patientsPerPage - 1) * Number(page));
-  patients = patients.limit(patientsPerPage);
-
   const foundPatients = await patients.exec();
 
-  const patientsCount = await Patient.find({ user_id }).count();
-  const pagesCount = patientsCount / patientsPerPage;
+  const startSlice = (patientsPerPage - 1) * Number(page);
+  const endSlice = (patientsPerPage - 1) * Number(page) + patientsPerPage;
 
-  res.status(200).json({ foundPatients, pagesCount });
+  let filterPatients = foundPatients.slice(startSlice, endSlice);
+
+  let pagesCount = foundPatients.length / patientsPerPage;
+  pagesCount = Math.trunc(pagesCount);
+
+  res.status(200).json({ foundPatients: filterPatients, pagesCount });
 };
 
 export { getAllPatients, getSinglePatient, updatePatient, deletePatient, addNewPatient, filterPatients };

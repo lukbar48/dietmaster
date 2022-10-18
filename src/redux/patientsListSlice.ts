@@ -8,7 +8,7 @@ const initialState: PatientType[] = [];
 export const fetchPatients = createAsyncThunk('patients/getPatientsList', async () => {
   try {
     const response = await restClient.get('/patients');
-    return response.data.foundPatients;
+    return response.data;
   } catch (err) {
     console.log(err);
   }
@@ -51,8 +51,7 @@ export const filterPatientsList = createAsyncThunk(
     });
     try {
       const response = await restClient.get(`/patients/search?${searchParams}`);
-      const { pagesCount } = response.data;
-      return response.data.foundPatients;
+      return response.data;
     } catch (err) {
       console.log(err);
     }
@@ -71,7 +70,7 @@ export const patientsListSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(fetchPatients.fulfilled, (state, action) => {
-      return action.payload;
+      return action.payload.foundPatients || [];
     });
     builder.addCase(removePatient.fulfilled, (state, action) => {
       return state.filter((patient) => patient._id !== action.payload._id);
@@ -80,7 +79,7 @@ export const patientsListSlice = createSlice({
       return [...state, action.payload];
     });
     builder.addCase(filterPatientsList.fulfilled, (state, action) => {
-      return action.payload || [];
+      return action.payload.foundPatients || [];
     });
   },
 });
