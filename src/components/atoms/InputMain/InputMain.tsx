@@ -6,7 +6,6 @@ export interface InputType {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
   value: string;
-  onKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const Input = styled.input`

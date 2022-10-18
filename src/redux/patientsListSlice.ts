@@ -8,7 +8,7 @@ const initialState: PatientType[] = [];
 export const fetchPatients = createAsyncThunk('patients/getPatientsList', async () => {
   try {
     const response = await restClient.get('/patients');
-    return response.data;
+    return response.data.foundPatients;
   } catch (err) {
     console.log(err);
   }
@@ -41,18 +41,23 @@ export const removePatient = createAsyncThunk('patient/removePatient', async (id
   }
 });
 
-export const filterPatientsList = createAsyncThunk('patients/filterPatients', async (query: { searchTerm: string; sortTerm: SortTermType }) => {
-  const searchParams = new URLSearchParams({
-    text: query.searchTerm,
-    sort: query.sortTerm,
-  });
-  try {
-    const response = await restClient.get(`/patients/search?${searchParams}`);
-    return response.data;
-  } catch (err) {
-    console.log(err);
-  }
-});
+export const filterPatientsList = createAsyncThunk(
+  'patients/filterPatients',
+  async (query: { searchTerm: string; sortTerm: SortTermType; page: string }) => {
+    const searchParams = new URLSearchParams({
+      text: query.searchTerm,
+      sort: query.sortTerm,
+      page: query.page,
+    });
+    try {
+      const response = await restClient.get(`/patients/search?${searchParams}`);
+      const { pagesCount } = response.data;
+      return response.data.foundPatients;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+);
 
 export const patientsListSlice = createSlice({
   name: 'patientsList',

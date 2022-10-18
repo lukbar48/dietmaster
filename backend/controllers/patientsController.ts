@@ -2,10 +2,23 @@ import mongoose from 'mongoose';
 import { Request, Response } from 'express';
 import Patient from '../models/PatientsModel';
 
+const patientsPerPage = 5;
+
 const getAllPatients = async (req: Request, res: Response) => {
   const user_id = req.user._id;
-  const patients = await Patient.find({ user_id }).sort({ createdAt: -1 });
-  res.status(200).json(patients);
+
+  let patients = Patient.find({ user_id }).sort({ createdAt: -1 });
+  const patientsCount = await Patient.find({ user_id }).count();
+  const pagesCount = Math.trunc(patientsCount / patientsPerPage);
+
+  const page = 1;
+
+  patients = patients.skip((patientsPerPage - 1) * page);
+  patients = patients.limit(patientsPerPage);
+
+  const foundPatients = await patients.exec();
+
+  res.status(200).json({ foundPatients, pagesCount });
 };
 
 const getSinglePatient = async (req: Request, res: Response) => {
@@ -50,14 +63,14 @@ const updatePatient = async (req: Request, res: Response) => {
   if (!mongoose.Types.ObjectId.isValid(patient_id)) {
     return res.status(404).json({ error: 'No patient found, wrong id' });
   }
-  const patient = await Patient.findOneAndUpdate({ _id: patient_id }, { ...req.body }, { returnDocument: 'after' });
+  const patient = await Patient.findOneAndUpdate({ _id: patient_id }, req.body, { returnDocument: 'after' });
 
   if (!patient) return res.status(404).json({ error: 'No patient found' });
   res.status(200).json(patient);
 };
 
 const filterPatients = async (req: Request, res: Response) => {
-  const { text, sort } = req.query;
+  const { text, sort, page } = req.query;
   const user_id = req.user._id;
 
   let patients = Patient.find({ user_id }).find({
@@ -84,9 +97,16 @@ const filterPatients = async (req: Request, res: Response) => {
       patients = patients.sort({ createdAt: -1 });
       break;
   }
+
+  patients = patients.skip((patientsPerPage - 1) * Number(page));
+  patients = patients.limit(patientsPerPage);
+
   const foundPatients = await patients.exec();
 
-  res.status(200).json(foundPatients);
+  const patientsCount = await Patient.find({ user_id }).count();
+  const pagesCount = patientsCount / patientsPerPage;
+
+  res.status(200).json({ foundPatients, pagesCount });
 };
 
 export { getAllPatients, getSinglePatient, updatePatient, deletePatient, addNewPatient, filterPatients };
