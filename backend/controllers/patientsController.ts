@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import { Request, Response } from 'express';
 import Patient from '../models/PatientsModel';
-// import Patient from '../models/PatientsModel'
 
 const getAllPatients = async (req: Request, res: Response) => {
   const user_id = req.user._id;

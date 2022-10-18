@@ -1,7 +1,10 @@
+import jwt from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
+import User from '../models/UserModel';
 
-const jwt = require('jsonwebtoken');
-const User = require('../models/UserModel');
+interface JwtPayload {
+  _id: string;
+}
 
 const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
@@ -11,8 +14,9 @@ const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
   const token = authorization.split(' ')[1];
 
   try {
-    const { _id } = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = await User.findOne({ _id }).select('_id');
+    const { _id } = jwt.verify(token, process.env.JWT_SECRET || '') as JwtPayload;
+    const user = await User.findOne({ _id }).select('_id');
+    if (user) req.user = user;
     next();
   } catch (error) {
     console.log(error);
