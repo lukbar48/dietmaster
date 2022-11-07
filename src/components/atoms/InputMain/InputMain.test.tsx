@@ -5,7 +5,7 @@ import { render } from '../../../test-utils';
 describe('Input', () => {
   it('Changes input', () => {
     const onChange = jest.fn();
-    render(<InputMain value="abc" placeholder="Search" onChange={onChange} handleOnSearchPress={() => {}} onKeyPress={() => {}} />);
+    render(<InputMain value="abc" placeholder="Search" onChange={onChange} />);
     //     const inputElement = screen.getByPlaceholderText('Search') as HTMLInputElement;
     //     fireEvent.change(inputElement, { target: { value: 'def' } });
     //     expect(inputElement.value).toEqual('def');
