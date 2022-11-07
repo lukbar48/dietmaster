@@ -1,6 +1,5 @@
 import useCalculate from 'hooks/useCalculate';
 import React, { useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
 import {
   Nutrient,
   CPMWrapper,
@@ -13,6 +12,7 @@ import {
   Sliders,
   SliderWrapper,
   Wrapper,
+  Text,
 } from './DietForm.styles';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { RootState } from 'store';
@@ -29,9 +29,9 @@ const DietForm = () => {
 
   useEffect(() => {
     if (patient) {
-      if (proteinValue.current) proteinValue.current.value = patient.protein;
-      if (carbsValue.current) carbsValue.current.value = patient.carbs;
-      if (fatValue.current) fatValue.current.value = patient.fat;
+      if (proteinValue.current) proteinValue.current.value = patient.protein || '0';
+      if (carbsValue.current) carbsValue.current.value = patient.carbs || '0';
+      if (fatValue.current) fatValue.current.value = patient.fat || '0';
       if (caloriesValue.current) caloriesValue.current.value = patient.calories;
     }
   }, [patient]);
@@ -45,20 +45,17 @@ const DietForm = () => {
     );
   };
 
-  // useEffect(() => {
-  //   if (patient) dispatch(updatePatient(patient));
-  // }, []);
-
   if (!patient) return null;
 
   const isBodyData = !!patient.bodymass && !!patient.age && !!patient.height;
+  const totalCalories = +calculateCPM() + +patient.calories;
 
   return (
     <Wrapper onChange={handleChange}>
       <CPMWrapper>
         <ShowCPM>
           <p>Recommended CPM</p>
-          <div>{patient.bodymass && patient.age && patient.height && `${calculateCPM()} kcal`}</div>
+          <div>{isBodyData && `${calculateCPM()} kcal`}</div>
         </ShowCPM>
         <ShowCPM>
           <p>Energy deficit / surplus</p>
@@ -66,29 +63,29 @@ const DietForm = () => {
         </ShowCPM>
         <ShowCPM>
           <p>Established CPM</p>
-          <div>{patient.bodymass && patient.age && patient.height && `${Number(calculateCPM()) + Number(patient.calories)} kcal`}</div>
+          <div>{isBodyData && `${totalCalories} kcal`}</div>
         </ShowCPM>
       </CPMWrapper>
       <Sliders>
         <SliderWrapper>
           <h4>Protein</h4>
           <SliderInput>
-            <div>{isBodyData && `${(((Number(calculateCPM()) + Number(patient.calories)) * Number(patient.protein)) / 400).toFixed()}g`}</div>
-            <input className="red" id="protein" name="protein" type="range" min="1" max="100" step="1" ref={proteinValue} />
+            <div>{isBodyData && `${((totalCalories * +patient.protein) / 400).toFixed()}g`}</div>
+            <input className="red" id="protein" name="protein" type="range" min="0" max="100" step="1" ref={proteinValue} />
           </SliderInput>
         </SliderWrapper>
         <SliderWrapper>
           <h4>Fat</h4>
           <SliderInput>
-            <div>{isBodyData && `${(((Number(calculateCPM()) + Number(patient.calories)) * Number(patient.fat)) / 900).toFixed()}g`}</div>
-            <input className="yellow" id="fat" name="fat" type="range" min="1" max="100" step="1" ref={fatValue} />
+            <div>{isBodyData && `${((totalCalories * +patient.fat) / 900).toFixed()}g`}</div>
+            <input className="yellow" id="fat" name="fat" type="range" min="0" max="100" step="1" ref={fatValue} />
           </SliderInput>
         </SliderWrapper>
         <SliderWrapper>
           <h4>Carbohydrates</h4>
           <SliderInput>
-            <div>{isBodyData && `${(((Number(calculateCPM()) + Number(patient.calories)) * Number(patient.carbs)) / 400).toFixed()}g`}</div>
-            <Input className="blue" id="carbs" name="carbs" type="range" min="1" max="100" step="1" ref={carbsValue} />
+            <div>{isBodyData && `${((totalCalories * +patient.carbs) / 400).toFixed()}g`}</div>
+            <Input className="blue" id="carbs" name="carbs" type="range" min="0" max="100" step="1" ref={carbsValue} />
           </SliderInput>
         </SliderWrapper>
         <SliderDesc>
@@ -96,6 +93,7 @@ const DietForm = () => {
           <p>100%</p>
         </SliderDesc>
       </Sliders>
+      {!isBodyData && <Text>Please provide body mass, height and age to get more info!</Text>}
       <MicronutrientsWrapper>
         <MicronutrientsColumn>
           <Nutrient>

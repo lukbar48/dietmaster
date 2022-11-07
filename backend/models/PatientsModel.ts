@@ -4,30 +4,24 @@ const patientSchema = new Schema(
   {
     name: {
       type: String,
-      // require: true,
     },
     surname: {
       type: String,
-      // require: true,
       default: '',
     },
     age: {
       type: String,
-      // require: true,
       default: '',
     },
     sex: {
       type: String,
-      // require: true,
     },
     bodymass: {
       type: String,
-      // require: true,
       default: '',
     },
     height: {
       type: String,
-      // require: true,
       default: '',
     },
     email: {
@@ -48,19 +42,19 @@ const patientSchema = new Schema(
     },
     calories: {
       type: String,
-      default: '3000',
+      default: '',
     },
     protein: {
       type: String,
-      default: '80',
+      default: '',
     },
     fat: {
       type: String,
-      default: '105',
+      default: '',
     },
     carbs: {
       type: String,
-      default: '260',
+      default: '',
     },
     allergens: {
       type: Array,

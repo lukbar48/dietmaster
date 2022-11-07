@@ -155,3 +155,11 @@ export const Nutrient = styled.div`
     border: none;
   }
 `;
+
+export const Text = styled.div`
+  margin: 8px 0 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
