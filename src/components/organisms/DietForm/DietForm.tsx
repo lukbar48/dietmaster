@@ -19,7 +19,6 @@ import { RootState } from 'store';
 import { updatePatient } from 'redux/patientSlice';
 
 const DietForm = () => {
-  const { id } = useParams();
   const patient = useAppSelector((state: RootState) => state.patient);
   const dispatch = useAppDispatch();
   const caloriesValue = useRef<HTMLInputElement>(null);
@@ -28,27 +27,12 @@ const DietForm = () => {
   const carbsValue = useRef<HTMLInputElement>(null);
   const { calculateCPM } = useCalculate(patient);
 
-  console.log(patient);
-
-  // useEffect(() => {
-  //   if (id && id !== patient._id) dispatch(fetchPatient(id));
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
   useEffect(() => {
     if (patient) {
-      if (proteinValue.current) {
-        proteinValue.current.value = patient.protein;
-      }
-      if (carbsValue.current) {
-        carbsValue.current.value = patient.carbs;
-      }
-      if (fatValue.current) {
-        fatValue.current.value = patient.fat;
-      }
-      if (caloriesValue.current) {
-        caloriesValue.current.value = patient.calories;
-      }
+      if (proteinValue.current) proteinValue.current.value = patient.protein;
+      if (carbsValue.current) carbsValue.current.value = patient.carbs;
+      if (fatValue.current) fatValue.current.value = patient.fat;
+      if (caloriesValue.current) caloriesValue.current.value = patient.calories;
     }
   }, [patient]);
 
@@ -61,9 +45,9 @@ const DietForm = () => {
     );
   };
 
-  useEffect(() => {
-    if (patient) dispatch(updatePatient(patient));
-  }, []);
+  // useEffect(() => {
+  //   if (patient) dispatch(updatePatient(patient));
+  // }, []);
 
   if (!patient) return null;
 

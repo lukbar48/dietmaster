@@ -26,33 +26,15 @@ const AboutForm = () => {
   }, []);
 
   useEffect(() => {
-    if (nameValue.current) {
-      nameValue.current.value = patient?.name || '';
-    }
-    if (surnameValue.current) {
-      surnameValue.current.value = patient?.surname || '';
-    }
-    if (ageValue.current) {
-      ageValue.current.value = patient?.age || '';
-    }
-    if (telephoneValue.current) {
-      telephoneValue.current.value = patient?.telephone || '';
-    }
-    if (emailValue.current) {
-      emailValue.current.value = patient?.email || '';
-    }
-    if (bodymassValue.current) {
-      bodymassValue.current.value = patient?.bodymass || '';
-    }
-    if (heightValue.current) {
-      heightValue.current.value = patient?.height || '';
-    }
-    if (notesValue.current) {
-      notesValue.current.value = patient?.notes || '';
-    }
-    if (activityValue.current) {
-      activityValue.current.value = patient?.activity || '';
-    }
+    if (nameValue.current) nameValue.current.value = patient?.name || '';
+    if (surnameValue.current) surnameValue.current.value = patient?.surname || '';
+    if (ageValue.current) ageValue.current.value = patient?.age || '';
+    if (telephoneValue.current) telephoneValue.current.value = patient?.telephone || '';
+    if (emailValue.current) emailValue.current.value = patient?.email || '';
+    if (bodymassValue.current) bodymassValue.current.value = patient?.bodymass || '';
+    if (heightValue.current) heightValue.current.value = patient?.height || '';
+    if (notesValue.current) notesValue.current.value = patient?.notes || '';
+    if (activityValue.current) activityValue.current.value = patient?.activity || '';
   }, [
     dispatch,
     id,
