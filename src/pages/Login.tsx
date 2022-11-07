@@ -6,7 +6,6 @@ import { Wrapper, Image, Form } from './Login.styles';
 import LoginInput from 'components/molecules/LoginInput/LoginInput';
 import ErrorMessage from 'components/molecules/ErrorMessage/ErrorMessage';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import { authorizeAxiosClient } from '../helpers/axiosInit';
 
 const Text = styled.div`
@@ -15,30 +14,33 @@ const Text = styled.div`
 `;
 
 const Login = () => {
-  const navigate = useNavigate();
-  const { register, handleSubmit } = useForm<{ email: string; password: string }>();
-  const { logIn, errMsg } = useAuthContext();
+  const { register, handleSubmit, reset } = useForm<{ email: string; password: string }>();
+  const { logIn, message, register: registerUser, isLoading } = useAuthContext();
 
-  const submit = async (data: { email: string; password: string }) => {
+  const submitLogin = async (data: { email: string; password: string }) => {
     const user = await logIn(data);
     if (user) authorizeAxiosClient(user.token);
+  };
+  const submitRegister = async (data: { email: string; password: string }) => {
+    const user = await registerUser(data);
+    if (user) reset();
   };
 
   return (
     <Wrapper>
       <Image src={logo} />
-      <Form onSubmit={handleSubmit(submit)}>
-        <Text>Log In</Text>
+      <Form>
         <LoginInput id="email" label="Email" type="email" {...register('email', { required: true })} />
         <LoginInput id="password" label="Password" type="password" {...register('password', { required: true })} />
-        <Button onClick={handleSubmit(submit)} type="submit">
+        <Button onClick={handleSubmit(submitLogin)} type="submit">
           Log in
         </Button>
-        <Button onClick={() => navigate(`/register`)} backgroundColor="#e55656">
+        <Button onClick={handleSubmit(submitRegister)} backgroundColor="#e55656">
           Register
         </Button>
+        {isLoading && <Text>loading...</Text>}
       </Form>
-      {errMsg ? <ErrorMessage /> : null}
+      {message && <ErrorMessage type={message.type} message={message.text} />}
     </Wrapper>
   );
 };

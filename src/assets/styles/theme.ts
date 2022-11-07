@@ -13,7 +13,7 @@ export const theme = {
     blue4: '#00A3D9',
     red: '#D90000',
     yellow: '#F8DA00',
-
+    green: '#32CD32',
   },
   fontSizes: {
     xxl: '34px',

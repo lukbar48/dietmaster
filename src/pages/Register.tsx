@@ -15,12 +15,12 @@ const Text = styled.div`
 
 const Register = () => {
   const navigate = useNavigate();
-  const { errMsg, register: registerUser } = useAuthContext();
+  const { message, register: registerUser } = useAuthContext();
   const { register, handleSubmit } = useForm<{ email: string; password: string }>();
 
   const submit = (data: { email: string; password: string }) => {
     registerUser(data);
-    if (!errMsg) navigate(`/login`);
+    if (!message) navigate(`/login`);
   };
 
   return (
@@ -34,7 +34,7 @@ const Register = () => {
           Register
         </Button>
       </Form>
-      {errMsg ? <ErrorMessage /> : null}
+      {message && <ErrorMessage type={message.type} message={message.text} />}
     </Wrapper>
   );
 };

@@ -3,10 +3,10 @@ import { Wrapper } from './ErrorMessage.styles';
 
 const defaultErrorMsg = 'Invalid email or password.';
 
-const ErrorMessage = ({ message = defaultErrorMsg }: { message?: string }) => {
+const ErrorMessage = ({ message = defaultErrorMsg, type }: { message: string; type: 'error' | 'success' }) => {
   return (
-    <Wrapper>
-      <h4>Error</h4>
+    <Wrapper type={type}>
+      <h4>{type.toLocaleUpperCase()}</h4>
       <p>{message}</p>
     </Wrapper>
   );
