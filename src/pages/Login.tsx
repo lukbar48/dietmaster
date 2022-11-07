@@ -23,7 +23,7 @@ const Login = () => {
   };
   const submitRegister = async (data: { email: string; password: string }) => {
     const user = await registerUser(data);
-    if (user) reset();
+    if (user.email) reset();
   };
 
   return (

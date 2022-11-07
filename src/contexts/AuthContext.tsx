@@ -2,6 +2,7 @@ import { createContext, ReactNode, useState, useContext, useEffect } from 'react
 import { unauthorizeAxiosClient, authorizeAxiosClient, restClient } from '../helpers/axiosInit';
 import { reset } from 'redux/patientsListSlice';
 import { useAppDispatch } from 'redux/hooks';
+import axios from 'axios';
 
 const InitialUserValues = { email: '', token: '' };
 
@@ -46,9 +47,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }): any => {
       const response = await restClient.post('/user/register', { email, password });
       setMessage({ type: 'success', text: 'Registered successfully! Feel free to log in.' });
       return response.data;
-    } catch (error: any) {
-      console.log(error.status);
-      setMessage({ type: 'error', text: 'Invalid email or password while registering.' });
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const resError = error.response?.data.error;
+        const backupError = 'Invalid email or password while login.';
+        setMessage({ type: 'error', text: resError || backupError });
+      } else {
+        setMessage({ type: 'error', text: 'An unexpected error occurred' });
+        return console.error('An unexpected error occurred');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -62,8 +69,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }): any => {
       setUser(response.data);
       return response.data;
     } catch (error) {
-      console.log(error);
-      setMessage({ type: 'error', text: 'Invalid email or password while login.' });
+      if (axios.isAxiosError(error)) {
+        const resError = error.response?.data.error;
+        const backupError = 'Invalid email or password while login.';
+        setMessage({ type: 'error', text: resError || backupError });
+        return error.message;
+      } else {
+        setMessage({ type: 'error', text: 'An unexpected error occurred' });
+        return console.error('An unexpected error occurred');
+      }
     } finally {
       setIsLoading(false);
     }
