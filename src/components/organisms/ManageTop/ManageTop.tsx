@@ -8,6 +8,7 @@ import InfoModal from '../Modal/InfoModal';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { RootState } from 'store';
 import { updatePatient } from 'redux/patientSlice';
+import { updatePatientsList } from 'redux/patientsListSlice';
 
 const ManageTop = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const ManageTop = () => {
   if (!patient) return null;
 
   const handleExitClick = () => {
+    dispatch(updatePatientsList(patient));
     dispatch(updatePatient(patient));
     // if (name && surname && bodymass && height && age) {
     // }
@@ -27,6 +29,7 @@ const ManageTop = () => {
   };
 
   const handleSaveClick = () => {
+    dispatch(updatePatientsList(patient));
     dispatch(updatePatient(patient));
   };
 

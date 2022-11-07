@@ -41,22 +41,18 @@ export const removePatient = createAsyncThunk('patient/removePatient', async (id
   }
 });
 
-export const filterPatientsList = createAsyncThunk(
-  'patients/filterPatients',
-  async (query: { searchTerm: string; sortTerm: SortTermType; page: string }) => {
-    const searchParams = new URLSearchParams({
-      text: query.searchTerm,
-      sort: query.sortTerm,
-      page: query.page,
-    });
-    try {
-      const response = await restClient.get(`/patients/search?${searchParams}`);
-      return response.data;
-    } catch (err) {
-      console.log(err);
-    }
-  },
-);
+export const filterPatientsList = createAsyncThunk('patients/filterPatients', async (query: { searchTerm: string; sortTerm: SortTermType }) => {
+  const searchParams = new URLSearchParams({
+    text: query.searchTerm,
+    sort: query.sortTerm,
+  });
+  try {
+    const response = await restClient.get(`/patients/search?${searchParams}`);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 export const patientsListSlice = createSlice({
   name: 'patientsList',
@@ -70,7 +66,7 @@ export const patientsListSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(fetchPatients.fulfilled, (state, action) => {
-      return action.payload.foundPatients || [];
+      return action.payload?.foundPatients || [];
     });
     builder.addCase(removePatient.fulfilled, (state, action) => {
       return state.filter((patient) => patient._id !== action.payload._id);
@@ -79,7 +75,7 @@ export const patientsListSlice = createSlice({
       return [...state, action.payload];
     });
     builder.addCase(filterPatientsList.fulfilled, (state, action) => {
-      return action.payload.foundPatients || [];
+      return action.payload?.foundPatients || [];
     });
   },
 });

@@ -59,23 +59,21 @@ const Page = styled.div<{ active: boolean }>`
 type MainBottomBarProps = {
   setSortTerm: React.Dispatch<React.SetStateAction<SortTermType>>;
   setPage: React.Dispatch<React.SetStateAction<number>>;
-  page: number;
-  pagesCount: number;
 };
 
-const MainBottomBar = ({ setSortTerm, setPage, page, pagesCount }: MainBottomBarProps) => {
+const MainBottomBar = ({ setSortTerm, setPage }: MainBottomBarProps) => {
   const { user } = useAuthContext();
 
   return (
     <Wrapper>
-      <TopSection>
+      {/* <TopSection>
         {pagesCount &&
           [...Array(pagesCount)].map((_, i) => (
             <Page onClick={() => setPage(i + 1)} key={i} active={i + 1 === page}>
               {i + 1}
             </Page>
           ))}
-      </TopSection>
+      </TopSection> */}
       <BottomSection>
         <div className="filterSex">
           <p>Sort</p>
