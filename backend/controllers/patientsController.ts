@@ -106,7 +106,7 @@ const filterPatients = async (req: Request, res: Response) => {
   let filterPatients = foundPatients.slice(startSlice, endSlice);
 
   let pagesCount = foundPatients.length / patientsPerPage;
-  pagesCount = Math.trunc(pagesCount);
+  pagesCount = Math.ceil(pagesCount);
 
   res.status(200).json({ foundPatients: filterPatients, pagesCount });
 };
