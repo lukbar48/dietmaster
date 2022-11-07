@@ -67,6 +67,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): any => {
       const response = await restClient.post('/user/login', { email, password });
       localStorage.setItem('user', JSON.stringify(response.data));
       setUser(response.data);
+      window.location.reload();
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
