@@ -31,9 +31,7 @@ const DiseasesForm = () => {
       <AllergensInput placeholder="" item={item} setItem={setItem} handleSubmit={handleSubmit} />
 
       {patient.diseases.length ? (
-        <>
-          <AllergensList deleteItem={deleteItem} allergensList={patient.diseases} />
-        </>
+        <AllergensList deleteItem={deleteItem} allergensList={patient.diseases} />
       ) : (
         <p>Patient doesn't have any diseases</p>
       )}

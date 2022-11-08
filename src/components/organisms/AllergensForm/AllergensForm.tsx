@@ -31,9 +31,7 @@ const AllergensForm = () => {
       <AllergensInput color="#D90000" placeholder="" item={item} setItem={setItem} handleSubmit={handleSubmit} />
 
       {patient.allergens.length ? (
-        <>
-          <AllergensList color="#D90000" deleteItem={deleteItem} allergensList={patient.allergens} />
-        </>
+        <AllergensList color="#D90000" deleteItem={deleteItem} allergensList={patient.allergens} />
       ) : (
         <p>Patient doesn't have any allergies</p>
       )}

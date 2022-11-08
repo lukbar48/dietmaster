@@ -31,9 +31,7 @@ const PreferencesForm = () => {
       <AllergensInput color="#F8DA00" placeholder="" item={item} setItem={setItem} handleSubmit={handleSubmit} />
 
       {patient.preferences.length ? (
-        <>
-          <AllergensList color="#F8DA00" deleteItem={deleteItem} allergensList={patient.preferences} />
-        </>
+        <AllergensList color="#F8DA00" deleteItem={deleteItem} allergensList={patient.preferences} />
       ) : (
         <p>Patient doesn't have any preferences</p>
       )}
