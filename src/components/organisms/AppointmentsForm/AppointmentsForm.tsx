@@ -1,14 +1,11 @@
 import AppointmentsFormBottomBar from 'components/molecules/AppointmentsFormBottomBar/AppointmentsFormBottomBar';
 import AppointmentsFormTopBar from 'components/molecules/AppointmentsFormTopBar/AppointmentsFormTopBar';
 import styled from 'styled-components';
-import { useParams } from 'react-router';
-import { PatientContext } from 'contexts/PatientContext';
-import { useContext, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import AppointmentsPatientInfo from 'components/molecules/AppointmentsPatientInfo/AppointmentsPatientInfo';
 import Modal from '../Modal/Modal';
 import AppointmentsModal from '../Modal/AppointmentsModal';
 import useModal from '../Modal/useModal';
+import { useAppSelector } from 'redux/hooks';
 
 const Wrapper = styled.div`
   display: flex;
@@ -19,27 +16,15 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.grey1};
 `;
 const AppointmentsForm = () => {
-  const { id } = useParams();
-  const { patient, setPatient } = useContext(PatientContext);
-  const patientsList = useSelector((state: any) => state.patientsList);
-
+  const patient = useAppSelector((state) => state.patient);
   const { isOpen, handleCloseModal, handleOpenModal } = useModal();
-
-  useEffect(() => {
-    if (id) {
-      const getPatient = patientsList.filter((patient: any) => patient.id === Number(id));
-      setPatient(getPatient[0]);
-    }
-  }, [id, patientsList, setPatient]);
 
   return (
     <Wrapper>
       <AppointmentsFormTopBar />
       <AppointmentsFormBottomBar handleOpenModal={handleOpenModal} />
-      {patient?.appointments &&
-        patient.appointments.map((patient, index) => {
-          return <AppointmentsPatientInfo index={index + 1} key={patient.bodymass} {...patient} />;
-        })}
+      {!!patient?.appointments.length &&
+        patient.appointments.map((patient, index) => <AppointmentsPatientInfo index={index + 1} key={patient.bodymass} {...patient} />)}
       <Modal handleCloseModal={handleCloseModal} isOpen={isOpen}>
         <AppointmentsModal handleCloseModal={handleCloseModal} />
       </Modal>

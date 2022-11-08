@@ -1,10 +1,8 @@
 import { Wrapper } from './AppointmentsPatientInfo.styles';
 import Button from 'components/atoms/Button/Button';
-import { useContext } from 'react';
 import { updatePatient } from 'redux/patientSlice';
-import { PatientContext } from 'contexts/PatientContext';
 import { MdDeleteOutline } from 'react-icons/md';
-import { useAppDispatch } from 'redux/hooks';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 export interface AppointmentsPatientInfoType {
   index: number;
   date: string;
@@ -15,15 +13,17 @@ export interface AppointmentsPatientInfoType {
 }
 
 const AppointmentsPatientInfo = ({ index, date, BMI, bodymass, hips, waist }: AppointmentsPatientInfoType) => {
-  const { setPatient, patient } = useContext(PatientContext);
   const dispatch = useAppDispatch();
+  const patient = useAppSelector((state) => state.patient);
 
-  if (!patient) return null;
-
-  const deleteAppointment = (bodymass: string) => {
-    const appointments = patient.appointments.filter((item) => item.bodymass !== bodymass);
-    setPatient({ ...patient, appointments });
-    dispatch(updatePatient({ appointments }));
+  const deleteAppointment = (type: string) => {
+    if (!patient) return;
+    const appointments = patient.appointments.filter((item) => item.bodymass !== type);
+    dispatch(
+      updatePatient({
+        appointments,
+      }),
+    );
   };
 
   return (

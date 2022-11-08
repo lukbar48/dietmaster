@@ -1,22 +1,18 @@
 import Button from 'components/atoms/Button/Button';
 import { ModalForm, ModalTop, Wrapper } from './TestsModal.styles';
-import { useContext, useEffect, useState } from 'react';
-import { PatientContext } from 'contexts/PatientContext';
+import { useState } from 'react';
 import { updatePatient } from 'redux/patientSlice';
-import { useAppDispatch } from 'redux/hooks';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { RootState } from 'store';
 
 const TestsModal = ({ handleCloseModal }: { handleCloseModal: () => void }) => {
-  const { patient, setPatient } = useContext(PatientContext);
+  const patient = useAppSelector((state: RootState) => state.patient);
   const dispatch = useAppDispatch();
   const [testRecord, setTestRecord] = useState({
     date: '',
     type: '',
     value: '',
   });
-
-  useEffect(() => {
-    if (patient) dispatch(updatePatient(patient));
-  }, [dispatch, patient]);
 
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
     setTestRecord({
@@ -28,10 +24,11 @@ const TestsModal = ({ handleCloseModal }: { handleCloseModal: () => void }) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (testRecord.date && testRecord.value && testRecord.type && patient) {
-      setPatient({
-        ...patient,
-        tests: [...patient.tests, testRecord],
-      });
+      dispatch(
+        updatePatient({
+          tests: [...patient.tests, testRecord],
+        }),
+      );
       handleCloseModal();
     } else {
       alert('Please provide all data');

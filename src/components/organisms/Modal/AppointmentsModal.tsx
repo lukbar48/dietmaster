@@ -1,12 +1,12 @@
 import Button from 'components/atoms/Button/Button';
 import { ModalForm, ModalTop, Wrapper } from './TestsModal.styles';
-import { useContext, useEffect, useState } from 'react';
-import { PatientContext } from 'contexts/PatientContext';
+import { useState } from 'react';
 import { updatePatient } from 'redux/patientSlice';
-import { useAppDispatch } from 'redux/hooks';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { RootState } from 'store';
 
 const AppointmentsModal = ({ handleCloseModal }: { handleCloseModal: () => void }) => {
-  const { patient, setPatient } = useContext(PatientContext);
+  const patient = useAppSelector((state: RootState) => state.patient);
   const dispatch = useAppDispatch();
   const [appointmentRecord, setAppointmentRecord] = useState({
     date: '',
@@ -15,12 +15,6 @@ const AppointmentsModal = ({ handleCloseModal }: { handleCloseModal: () => void 
     hips: 'no data',
     waist: 'no data',
   });
-
-  useEffect(() => {
-    if (patient) dispatch(updatePatient(patient));
-  }, [dispatch, patient]);
-
-  if (!patient) return null;
 
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
     setAppointmentRecord({
@@ -31,11 +25,12 @@ const AppointmentsModal = ({ handleCloseModal }: { handleCloseModal: () => void 
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (appointmentRecord.date && appointmentRecord.bodymass) {
-      setPatient({
-        ...patient,
-        appointments: [...patient.appointments, appointmentRecord],
-      });
+    if (appointmentRecord.date && appointmentRecord.bodymass && patient) {
+      dispatch(
+        updatePatient({
+          appointments: [...patient.appointments, appointmentRecord],
+        }),
+      );
       handleCloseModal();
     } else {
       alert('Please provide required data: date, body mass.');

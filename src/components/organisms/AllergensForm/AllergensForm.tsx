@@ -14,14 +14,14 @@ const AllergensForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (item) {
-      dispatch(updatePatient({ _id: patient._id, allergens: [...patient.allergens, item] }));
+      dispatch(updatePatient({ allergens: [...patient.allergens, item] }));
       setItem('');
     } else alert('Please enter value!');
   };
 
   const deleteItem = (choosedItem: string) => {
     const filteredList = patient.allergens.filter((item) => item !== choosedItem);
-    dispatch(updatePatient({ _id: patient._id, allergens: filteredList }));
+    dispatch(updatePatient({ allergens: filteredList }));
   };
 
   return (

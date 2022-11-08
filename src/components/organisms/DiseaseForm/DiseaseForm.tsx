@@ -14,14 +14,14 @@ const DiseasesForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (item) {
-      dispatch(updatePatient({ _id: patient._id, diseases: [...patient.diseases, item] }));
+      dispatch(updatePatient({ diseases: [...patient.diseases, item] }));
       setItem('');
     } else alert('Please enter value!');
   };
 
   const deleteItem = (choosedItem: string) => {
     const filteredList = patient.diseases.filter((item) => item !== choosedItem);
-    dispatch(updatePatient({ _id: patient._id, diseases: filteredList }));
+    dispatch(updatePatient({ diseases: filteredList }));
   };
 
   return (

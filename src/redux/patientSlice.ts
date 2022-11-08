@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { restClient } from 'helpers/axiosInit';
+import { store } from 'store';
 import { PatientType } from 'types/types';
 
 export const initialState: PatientType = {
@@ -34,9 +35,11 @@ export const fetchPatient = createAsyncThunk('patient/getPatient', async (id: st
   }
 });
 
-export const updatePatient = createAsyncThunk('patient/updatePatient', async (patient: Partial<PatientType>) => {
+export const updatePatient = createAsyncThunk('patient/updatePatient', async (patient: Partial<PatientType>, { getState }: { getState: any }) => {
+  const patientId = getState().patient._id;
+
   try {
-    const response = await restClient.patch(`/patients/${patient._id}`, patient);
+    const response = await restClient.patch(`/patients/${patientId}`, patient);
     return response.data;
   } catch (err) {
     console.log(err);

@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import Modal from '../Modal/Modal';
 import useModal from '../Modal/useModal';
 import TestsModal from '../Modal/TestsModal';
-import { RootState } from 'store';
 import { useAppSelector } from 'redux/hooks';
 
 const Wrapper = styled.div`
@@ -18,17 +17,14 @@ const Wrapper = styled.div`
 `;
 
 const BloodTestsForm = () => {
-  const patient = useAppSelector((state: RootState) => state.patient);
+  const patient = useAppSelector((state) => state.patient);
   const { isOpen, handleCloseModal, handleOpenModal } = useModal();
 
   return (
     <Wrapper>
       <BloodTestsFormTopBar />
       <BloodTestsFormBottomBar handleOpenModal={handleOpenModal} />
-      {patient?.tests &&
-        patient.tests.map((patient, index) => {
-          return <BloodTestPatientInfo index={index + 1} key={patient.type} {...patient} />;
-        })}
+      {patient?.tests.length > 0 && patient.tests.map((patient, index) => <BloodTestPatientInfo index={index + 1} key={patient.type} {...patient} />)}
       <Modal handleCloseModal={handleCloseModal} isOpen={isOpen}>
         <TestsModal handleCloseModal={handleCloseModal} />
       </Modal>
