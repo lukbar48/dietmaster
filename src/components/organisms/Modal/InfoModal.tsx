@@ -2,8 +2,8 @@ import Button from 'components/atoms/Button/Button';
 import { ModalForm, ModalTop, Wrapper } from './TestsModal.styles';
 import { ButtonsWrapper } from './DeleteModal.styles';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { removePatient } from 'redux/patientsListSlice';
+import { useAppDispatch } from 'redux/hooks';
 
 interface InfoModalType {
   handleCloseModal: () => void;
@@ -12,7 +12,7 @@ interface InfoModalType {
 
 const InfoModal = ({ handleCloseModal, patientID }: InfoModalType) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleDiscard = (id: string) => {
     dispatch(removePatient(id));

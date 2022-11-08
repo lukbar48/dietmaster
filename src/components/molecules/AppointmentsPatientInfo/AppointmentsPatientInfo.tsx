@@ -2,9 +2,9 @@ import { Wrapper } from './AppointmentsPatientInfo.styles';
 import Button from 'components/atoms/Button/Button';
 import { useContext } from 'react';
 import { updatePatient } from 'redux/patientSlice';
-import { useDispatch } from 'react-redux';
 import { PatientContext } from 'contexts/PatientContext';
 import { MdDeleteOutline } from 'react-icons/md';
+import { useAppDispatch } from 'redux/hooks';
 export interface AppointmentsPatientInfoType {
   index: number;
   date: string;
@@ -16,7 +16,7 @@ export interface AppointmentsPatientInfoType {
 
 const AppointmentsPatientInfo = ({ index, date, BMI, bodymass, hips, waist }: AppointmentsPatientInfoType) => {
   const { setPatient, patient } = useContext(PatientContext);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   if (!patient) return null;
 

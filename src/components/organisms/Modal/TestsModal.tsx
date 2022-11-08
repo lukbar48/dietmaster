@@ -2,12 +2,12 @@ import Button from 'components/atoms/Button/Button';
 import { ModalForm, ModalTop, Wrapper } from './TestsModal.styles';
 import { useContext, useEffect, useState } from 'react';
 import { PatientContext } from 'contexts/PatientContext';
-import { useDispatch } from 'react-redux';
 import { updatePatient } from 'redux/patientSlice';
+import { useAppDispatch } from 'redux/hooks';
 
 const TestsModal = ({ handleCloseModal }: { handleCloseModal: () => void }) => {
   const { patient, setPatient } = useContext(PatientContext);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [testRecord, setTestRecord] = useState({
     date: '',
     type: '',
@@ -18,8 +18,6 @@ const TestsModal = ({ handleCloseModal }: { handleCloseModal: () => void }) => {
     if (patient) dispatch(updatePatient(patient));
   }, [dispatch, patient]);
 
-  if (!patient) return <div />;
-
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
     setTestRecord({
       ...testRecord,
@@ -29,7 +27,7 @@ const TestsModal = ({ handleCloseModal }: { handleCloseModal: () => void }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (testRecord.date && testRecord.value && testRecord.type) {
+    if (testRecord.date && testRecord.value && testRecord.type && patient) {
       setPatient({
         ...patient,
         tests: [...patient.tests, testRecord],

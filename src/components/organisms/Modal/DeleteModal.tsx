@@ -1,8 +1,8 @@
 import Button from 'components/atoms/Button/Button';
 import { ModalForm, ModalTop, Wrapper } from './TestsModal.styles';
-import { useDispatch } from 'react-redux';
 import { ButtonsWrapper } from './DeleteModal.styles';
 import { removePatient } from 'redux/patientsListSlice';
+import { useAppDispatch } from 'redux/hooks';
 
 export interface DeleteModalType {
   handleCloseModal: () => void;
@@ -10,7 +10,7 @@ export interface DeleteModalType {
 }
 
 const DeleteModal = ({ handleCloseModal, patientID }: DeleteModalType) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleDelete = (id: string) => {
     dispatch(removePatient(id));

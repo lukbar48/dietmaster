@@ -2,12 +2,12 @@ import Button from 'components/atoms/Button/Button';
 import { ModalForm, ModalTop, Wrapper } from './TestsModal.styles';
 import { useContext, useEffect, useState } from 'react';
 import { PatientContext } from 'contexts/PatientContext';
-import { useDispatch } from 'react-redux';
 import { updatePatient } from 'redux/patientSlice';
+import { useAppDispatch } from 'redux/hooks';
 
 const AppointmentsModal = ({ handleCloseModal }: { handleCloseModal: () => void }) => {
   const { patient, setPatient } = useContext(PatientContext);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [appointmentRecord, setAppointmentRecord] = useState({
     date: '',
     bodymass: '',

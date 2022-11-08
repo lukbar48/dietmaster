@@ -2,15 +2,14 @@ import AllergensInput from 'components/molecules/AllergensInput/AllergensInput';
 import AllergensList from 'components/molecules/AllergensList/AllergensList';
 import React, { useState } from 'react';
 import { Wrapper } from '../AllergensForm/AllergensForm.styles';
-import { useDispatch } from 'react-redux';
 import { updatePatient } from 'redux/patientSlice';
 import { RootState } from 'store';
-import { useAppSelector } from 'redux/hooks';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 const PreferencesForm = () => {
   const patient = useAppSelector((state: RootState) => state.patient);
   const [item, setItem] = useState('');
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
